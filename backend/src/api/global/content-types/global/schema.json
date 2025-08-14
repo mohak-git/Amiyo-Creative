@@ -1,0 +1,45 @@
+{
+  "kind": "singleType",
+  "collectionName": "globals",
+  "info": {
+    "singularName": "global",
+    "pluralName": "globals",
+    "displayName": "Global"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "agencyName": {
+      "type": "string",
+      "maxLength": 100,
+      "required": true
+    },
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "phone": {
+      "type": "string",
+      "regex": "^\\\\+?[1-9]\\\\d{1,14}$"
+    },
+    "address": {
+      "type": "string",
+      "maxLength": 250
+    },
+    "socialLinks": {
+      "type": "component",
+      "component": "globals.social-links",
+      "repeatable": true
+    }
+  }
+}
