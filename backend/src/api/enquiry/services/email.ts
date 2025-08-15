@@ -8,7 +8,7 @@ const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
 if (apiKey)
     apiInstance.setApiKey(
         SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey,
-        apiKey,
+        apiKey
     );
 
 interface SendEmailPayload {
@@ -37,7 +37,7 @@ async function sendEmail(options: SendEmailPayload) {
             !process.env.BREVO_REPLY_TO_EMAIL
         ) {
             strapi.log.error(
-                "Cannot send email: BREVO_SENDER_EMAIL, BREVO_SENDER_NAME or BREVO_REPLY_TO_EMAIL not configured",
+                "Cannot send email: BREVO_SENDER_EMAIL, BREVO_SENDER_NAME or BREVO_REPLY_TO_EMAIL not configured"
             );
             return { success: false, error: "Sender email not configured" };
         }
@@ -69,7 +69,7 @@ async function sendEmail(options: SendEmailPayload) {
 }
 
 export default async function sendEnquiryConfirmationEmail(
-    data: EnquiryEmailData,
+    data: EnquiryEmailData
 ) {
     try {
         // Email-friendly HTML template with inline styles
@@ -333,8 +333,8 @@ export default async function sendEnquiryConfirmationEmail(
             ([placeholder, value]) =>
                 (htmlTemplate = htmlTemplate.replace(
                     new RegExp(placeholder, "g"),
-                    value,
-                )),
+                    value
+                ))
         );
 
         return sendEmail({

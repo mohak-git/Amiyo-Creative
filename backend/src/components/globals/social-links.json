@@ -1,29 +1,29 @@
 {
-  "collectionName": "components_globals_social_links",
-  "info": {
-    "displayName": "Social Links",
-    "icon": "link"
-  },
-  "options": {},
-  "attributes": {
-    "platform": {
-      "type": "enumeration",
-      "required": true,
-      "default": "Other",
-      "enum": [
-        "Facebook",
-        "Twitter",
-        "Instagram",
-        "LinkedIn",
-        "GitHub",
-        "Other"
-      ]
+    "collectionName": "components_globals_social_links",
+    "info": {
+        "displayName": "Social Links",
+        "icon": "link"
     },
-    "url": {
-      "type": "string",
-      "required": true,
-      "regex": "^(https?:\\\\/\\\\/)?([\\\\w.-]+)\\\\.([a-z\\\\.]{2,6})([\\\\/\\\\w .-]*)*\\\\/?$"
-    }
-  },
-  "config": {}
+    "options": {},
+    "attributes": {
+        "platform": {
+            "type": "enumeration",
+            "required": true,
+            "default": "Other",
+            "enum": [
+                "Facebook",
+                "Twitter",
+                "Instagram",
+                "LinkedIn",
+                "GitHub",
+                "Other"
+            ]
+        },
+        "url": {
+            "type": "string",
+            "required": true,
+            "regex": "^(https?://)?(www\\.)?([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,}(/[a-zA-Z0-9._-]+)*/?$"
+        }
+    },
+    "config": {}
 }

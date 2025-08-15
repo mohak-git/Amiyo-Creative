@@ -3,21 +3,7 @@ import sendBrevoEmail from "./api/enquiry/services/email";
 import sendTelegramNotification from "./api/enquiry/services/telegram";
 
 export default {
-    /**
-     * An asynchronous register function that runs before
-     * your application is initialized.
-     *
-     * This gives you an opportunity to extend code.
-     */
-    register(/* { strapi }: { strapi: Core.Strapi } */) {},
-
-    /**
-     * An asynchronous bootstrap function that runs before
-     * your application gets started.
-     *
-     * This gives you an opportunity to set up your data model,
-     * run jobs, or perform some special logic.
-     */
+    register() {},
 
     bootstrap({ strapi }: { strapi: Core.Strapi }) {
         strapi.db.lifecycles.subscribe({
@@ -36,7 +22,7 @@ export default {
                     if (!emailResult.success)
                         strapi.log.error(
                             "Failed to send email:",
-                            emailResult.error,
+                            emailResult.error
                         );
                 } catch (error) {
                     strapi.log.error("Failed to send enquiry email:", error);
@@ -53,13 +39,13 @@ export default {
                     if (!telegramResult.success) {
                         strapi.log.error(
                             "Failed to send notification:",
-                            telegramResult.error,
+                            telegramResult.error
                         );
                     }
                 } catch (error) {
                     strapi.log.error(
                         "Error sending Telegram notification:",
-                        error,
+                        error
                     );
                 }
             },

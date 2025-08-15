@@ -1,66 +1,62 @@
 {
-  "kind": "collectionType",
-  "collectionName": "projects",
-  "info": {
-    "singularName": "project",
-    "pluralName": "projects",
-    "displayName": "Project"
-  },
-  "options": {
-    "draftAndPublish": true
-  },
-  "pluginOptions": {},
-  "attributes": {
-    "title": {
-      "type": "string",
-      "minLength": 3,
-      "maxLength": 100,
-      "required": true
+    "kind": "collectionType",
+    "collectionName": "projects",
+    "info": {
+        "singularName": "project",
+        "pluralName": "projects",
+        "displayName": "Project"
     },
-    "slug": {
-      "type": "uid",
-      "targetField": "title",
-      "required": true
+    "options": {
+        "draftAndPublish": true
     },
-    "description": {
-      "type": "richtext",
-      "required": true,
-      "minLength": 50
-    },
-    "coverImage": {
-      "type": "media",
-      "multiple": false,
-      "required": true,
-      "allowedTypes": [
-        "images"
-      ]
-    },
-    "gallery": {
-      "type": "media",
-      "multiple": true,
-      "required": false,
-      "allowedTypes": [
-        "images"
-      ]
-    },
-    "projectUrl": {
-      "type": "string",
-      "regex": "^(https?:\\/\\/)?([\\w\\-])+\\.([\\w\\-]+)([\\w\\-.,@?^=%&:/~+#]*[\\w\\-@?^=%&/~+#])?$"
-    },
-    "technologies": {
-      "type": "json"
-    },
-    "clientName": {
-      "type": "string",
-      "maxLength": 100
-    },
-    "completionDate": {
-      "type": "date"
-    },
-    "features": {
-      "type": "component",
-      "component": "project.feature-item",
-      "repeatable": true
+    "pluginOptions": {},
+    "attributes": {
+        "title": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "required": true
+        },
+        "slug": {
+            "type": "uid",
+            "targetField": "title",
+            "required": true
+        },
+        "description": {
+            "type": "richtext",
+            "required": true,
+            "minLength": 50
+        },
+        "coverImage": {
+            "type": "media",
+            "multiple": false,
+            "required": true,
+            "allowedTypes": ["images"]
+        },
+        "gallery": {
+            "type": "media",
+            "multiple": true,
+            "required": false,
+            "allowedTypes": ["images"]
+        },
+        "projectUrl": {
+            "type": "string",
+            "regex": "^(https?:\\/\\/)?([\\w\\-])+\\.([\\w\\-]+)([\\w\\-.,@?^=%&:/~+#]*[\\w\\-@?^=%&/~+#])?$"
+        },
+        "technologies": {
+            "type": "json"
+        },
+        "clientName": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "completionDate": {
+            "type": "date"
+        },
+        "features": {
+            "type": "component",
+            "component": "project.feature-item",
+            "repeatable": true
+        }
     }
-  }
 }
