@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
-import CustomCursor from "@/components/ui/Cursor";
+import Cursor from "@/components/ui/Cursor";
+import ScrollBar from "@/components/ui/ScrollBar";
 import "./globals.css";
 
 export default function RootLayout({
@@ -10,12 +11,11 @@ export default function RootLayout({
     return (
         <html lang="en" suppressHydrationWarning>
             <body className="min-h-screen overflow-x-hidden">
-                <CustomCursor />
-
+                <ScrollBar />
+                <Cursor />
                 <Navbar />
-                <div className="h-[9vh]"></div>
 
-                {children}
+                <main className="pt-[13vh]">{children}</main>
             </body>
         </html>
     );

@@ -1,9 +1,10 @@
+import {
+    NavbarLeftPositionsDesktop,
+    NavbarLeftPositionsMobile,
+} from "@/constants/constants";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
-
-const leftPositionsMobile = [3, 95, 179, 263];
-const leftPositionsDesktop = [14, 103, 187, 277];
 
 interface NavItem {
     label: string;
@@ -96,14 +97,8 @@ const NavLinks: React.FC<NavProps> = ({
                 point.classList.add("point");
                 particle.appendChild(point);
                 element.appendChild(particle);
-                requestAnimationFrame(() => {
-                    element.classList.add("active");
-                });
-                setTimeout(() => {
-                    try {
-                        element.removeChild(particle);
-                    } catch {}
-                }, t);
+                requestAnimationFrame(() => element.classList.add("active"));
+                setTimeout(() => element.removeChild(particle), t);
             }, 30);
         }
     };
@@ -119,9 +114,10 @@ const NavLinks: React.FC<NavProps> = ({
             width: `${pos.width}px`,
             height: `${pos.height}px`,
             left: `${
-                (mode === "d" ? leftPositionsDesktop : leftPositionsMobile)[
-                    index
-                ] ?? pos.x - containerRect.x
+                (mode === "d"
+                    ? NavbarLeftPositionsDesktop
+                    : NavbarLeftPositionsMobile)[index] ??
+                pos.x - containerRect.x
             }px`,
             top: `${pos.y - containerRect.y - (mode === "d" ? 0 : 3)}px`,
         };
@@ -259,7 +255,7 @@ const NavLinks: React.FC<NavProps> = ({
                 .effect.filter::before {
                     content: "";
                     position: absolute;
-                    inset: -75px;
+                    inset: -55px;
                     z-index: -2;
                     background: black;
                 }
