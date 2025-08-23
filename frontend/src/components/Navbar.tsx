@@ -1,12 +1,12 @@
 "use client";
+import NavLinks from "@/components/ui/NavLinks";
+import SearchBar from "@/components/ui/SearchBar";
 import { NavItems } from "@/constants/constants";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { MdMenu } from "react-icons/md";
-import NavLinks from "./ui/NavLinks";
-import SearchBar from "./ui/SearchBar";
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -21,15 +21,15 @@ const Navbar = () => {
 
     return (
         <div
-            className={`fixed z-[1000] w-full transition-all duration-500 rounded-full shadow-[0px_0px_30px_60px_rgb(15,23,42)] ${
+            className={`fixed z-[1000] w-full transition-all duration-500 rounded-full shadow-[0px_0px_30px_70px_rgb(15,23,42)] ${
                 isScrolled
                     ? "scale-95 translate-y-6 px-6 sm:px-8 md:px-12 lg:px-14 bg-purple-800"
                     : "scale-[1.2] sm:scale-110 px-12 sm:px-14 md:px-26 lg:px-30 bg-slate-900"
             }`}
         >
             <div className="flex justify-between items-center py-3">
-                <div className="flex items-center cursor-target  justify-center">
-                    <Link href="/">
+                <div className="flex items-center cursor-target justify-center">
+                    <Link href="/" className="cursor-none">
                         <Image
                             src={"./logo.svg"}
                             alt="logo"

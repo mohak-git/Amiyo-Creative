@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 
 const ScrollBar: React.FC = () => {
-    const [scrollPercent, setScrollPercent] = useState(0);
+    const barRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -11,7 +11,8 @@ const ScrollBar: React.FC = () => {
             const docHeight =
                 document.documentElement.scrollHeight - window.innerHeight;
             const scrolled = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-            setScrollPercent(scrolled);
+
+            if (barRef.current) barRef.current.style.width = `${scrolled}%`;
         };
 
         window.addEventListener("scroll", handleScroll, { passive: true });
@@ -22,19 +23,19 @@ const ScrollBar: React.FC = () => {
 
     return (
         <div
+            ref={barRef}
             style={{
                 position: "fixed",
                 top: 0,
                 left: 0,
                 height: "2px",
-                width: `${scrollPercent}%`,
+                width: "0%",
                 background: "linear-gradient(90deg, #9b5de5, #845ec2, #d65db1)",
                 zIndex: 9999,
-                transition: "width 0.1s ease-out",
-                willChange: "width",
             }}
         />
     );
 };
 
 export default ScrollBar;
+//

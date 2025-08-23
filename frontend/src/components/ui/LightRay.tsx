@@ -1,4 +1,3 @@
-"use client";
 import { hexToRgb } from "@/constants/constants";
 import { Mesh, Program, Renderer, Triangle } from "ogl";
 import { useEffect, useRef, useState } from "react";
