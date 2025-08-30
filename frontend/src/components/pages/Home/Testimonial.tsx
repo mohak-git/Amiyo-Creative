@@ -1,4 +1,5 @@
-import { BgWave } from "@/components/elements/BgAssets";
+"use client";
+
 import { RatingStars } from "@/components/elements/Smol";
 import { Testimonials } from "@/constants/constants";
 import { TestimonialProps } from "@/constants/types";
@@ -96,6 +97,11 @@ const TestimonialRow: React.FC<{
                 .marquee-right {
                     animation: scroll-right linear infinite;
                 }
+
+                .marquee-left:hover,
+                .marquee-right:hover {
+                    animation-play-state: paused;
+                }
             `}</style>
         </div>
     );
@@ -107,8 +113,6 @@ const TestimonialSection: React.FC = () => {
 
     return (
         <div className="relative min-h-screen w-full bg-gradient-to-b via-purple-900/20 overflow-hidden">
-            <BgWave inverted={false} />
-
             {/* Background */}
             <div className="pointer-events-none absolute inset-0 -z-20">
                 <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl"></div>

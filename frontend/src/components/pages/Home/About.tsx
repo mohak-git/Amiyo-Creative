@@ -1,3 +1,5 @@
+"use client";
+
 import { Companies, HomeAboutValues } from "@/constants/constants";
 import { ValueItem } from "@/constants/types";
 import { motion, Variants } from "framer-motion";
@@ -97,8 +99,8 @@ const AboutSection: FC = () => {
             <div className="absolute -bottom-220 border-4 -left-20 h-80 w-80 rounded-full bg-fuchsia-500/30 blur-3xl" />
             <div className="relative min-h-[80vh] my-[10vh] w-full flex justify-center items-center flex-col rounded-t-4xl overflow-hidden shadow-[-5px_-3px_5px_0px_rgba(0,0,0,0.5)]">
                 {/* Background */}
-                <div className="absolute z-1 h-full w-full bg-radial-[at_50%_15%] from-purple-300 via-purple-600 to-slate-900 via-30% to-67%"></div>
-                <div className="absolute z-1 h-full w-full bg-slate-900/30"></div>
+                <div className="absolute z-1 h-full w-full bg-radial-[at_50%_15%] from-purple-300 via-purple-600 to-slate-950 via-30% to-67%"></div>
+                <div className="absolute z-1 h-full w-full bg-slate-950/30"></div>
 
                 {/* Main Content */}
                 <motion.div
@@ -183,13 +185,13 @@ const AboutSection: FC = () => {
 
                 {/* Logos */}
                 <motion.div
-                    className="relative w-full max-w-7xl py-4 md:py-6 lg:py-8 z-5 overflow-hidden bg-gradient-to-r from-transparent via-indigo-500/30 to-transparent backdrop-blur-lg"
+                    className="relative w-full max-w-7xl py-4 md:py-6 lg:py-8 z-5 overflow-hidden bg-gradient-to-r from-transparent via-indigo-700/30 to-transparent backdrop-blur-lg"
                     variants={logosVariants}
                     initial="hidden"
                     animate={hasAnimated ? "visible" : "hidden"}
                 >
-                    <div className="pointer-events-none absolute top-0 left-0 w-60 h-full bg-gradient-to-r from-gray-900 via-gray-900/60 to-transparent z-10"></div>
-                    <div className="pointer-events-none absolute top-0 right-0 w-60 h-full bg-gradient-to-l from-gray-900 via-gray-900/60 to-transparent z-10"></div>
+                    <div className="pointer-events-none absolute top-0 left-0 w-60 h-full bg-gradient-to-r from-gray-950 via-gray-950/60 to-transparent z-10"></div>
+                    <div className="pointer-events-none absolute top-0 right-0 w-60 h-full bg-gradient-to-l from-gray-950 via-gray-950/60 to-transparent z-10"></div>
 
                     <div className="scroll-wrapper flex space-x-4 md:space-x-8 lg:space-x-12">
                         {[...Companies, ...Companies].map((company, index) => (

@@ -1,3 +1,5 @@
+"use client";
+
 import Bento from "@/components/ui/Bento";
 import { ServicesData, SocialPlatforms } from "@/constants/constants";
 import { motion, Variants } from "framer-motion";

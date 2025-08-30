@@ -44,3 +44,31 @@ export const BgWave = ({ inverted }: { inverted: boolean }) => {
         </div>
     );
 };
+
+export const RoundedPolygon = ({ color }: { color: string }) => {
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+        >
+            <path
+                d="
+                    M0,0 H100 V100 H0 Z
+                    M5,0 
+                    H45 A5,5 0 0 1 50,5 
+                    V15 A5,5 0 0 0 55,20 
+                    H95 A5,5 0 0 1 100,25 
+                    V75 A5,5 0 0 1 95,80 
+                    H85 A5,5 0 0 0 80,85 
+                    V95 A5,5 0 0 1 75,100 
+                    H5 A5,5 0 0 1 0,95 
+                    V5 A5,5 0 0 1 5,0 
+                    Z
+                "
+                fill={color}
+                fillRule="evenodd"
+            />
+        </svg>
+    );
+};

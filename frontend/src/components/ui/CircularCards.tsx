@@ -1,3 +1,4 @@
+import { GalleryItem } from "@/constants/types";
 import {
     Camera,
     Mesh,
@@ -7,7 +8,7 @@ import {
     Texture,
     Transform,
 } from "ogl";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type GL = Renderer["gl"];
 
@@ -24,131 +25,6 @@ function debounce<T extends (...args: unknown[]) => void>(
 
 function lerp(p1: number, p2: number, t: number): number {
     return p1 + (p2 - p1) * t;
-}
-
-function autoBind<T extends object>(instance: T): void {
-    const proto = Object.getPrototypeOf(instance);
-    Object.getOwnPropertyNames(proto).forEach((key) => {
-        const value = (instance as Record<string, unknown>)[key];
-        if (key !== "constructor" && typeof value === "function")
-            (instance as Record<string, unknown>)[key] = value.bind(instance);
-    });
-}
-
-function getFontSize(font: string): number {
-    const match = font.match(/(\d+)px/);
-    return match ? parseInt(match[1], 10) : 30;
-}
-
-function createTextTexture(
-    gl: GL,
-    text: string,
-    font: string = "bold 30px monospace",
-    color: string = "black"
-): { texture: Texture; width: number; height: number } {
-    const canvas = document.createElement("canvas");
-    const context = canvas.getContext("2d");
-    if (!context) throw new Error("Could not get 2d context");
-
-    context.font = font;
-    const metrics = context.measureText(text);
-    const textWidth = Math.ceil(metrics.width);
-    const fontSize = getFontSize(font);
-    const textHeight = Math.ceil(fontSize * 1.2);
-
-    canvas.width = textWidth + 20;
-    canvas.height = textHeight + 20;
-
-    context.font = font;
-    context.fillStyle = color;
-    context.textBaseline = "middle";
-    context.textAlign = "center";
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    context.fillText(text, canvas.width / 2, canvas.height / 2);
-
-    const texture = new Texture(gl, { generateMipmaps: false });
-    texture.image = canvas;
-    return { texture, width: canvas.width, height: canvas.height };
-}
-
-interface TitleProps {
-    gl: GL;
-    plane: Mesh;
-    renderer: Renderer;
-    text: string;
-    textColor?: string;
-    font?: string;
-}
-
-class Title {
-    gl: GL;
-    plane: Mesh;
-    renderer: Renderer;
-    text: string;
-    textColor: string;
-    font: string;
-    mesh!: Mesh;
-
-    constructor({
-        gl,
-        plane,
-        renderer,
-        text,
-        textColor = "#545050",
-        font = "30px sans-serif",
-    }: TitleProps) {
-        autoBind(this);
-        this.gl = gl;
-        this.plane = plane;
-        this.renderer = renderer;
-        this.text = text;
-        this.textColor = textColor;
-        this.font = font;
-        this.createMesh();
-    }
-
-    createMesh() {
-        const { texture, width, height } = createTextTexture(
-            this.gl,
-            this.text,
-            this.font,
-            this.textColor
-        );
-        const geometry = new Plane(this.gl);
-        const program = new Program(this.gl, {
-            vertex: `
-        attribute vec3 position;
-        attribute vec2 uv;
-        uniform mat4 modelViewMatrix;
-        uniform mat4 projectionMatrix;
-        varying vec2 vUv;
-        void main() {
-          vUv = uv;
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-        }
-      `,
-            fragment: `
-        precision highp float;
-        uniform sampler2D tMap;
-        varying vec2 vUv;
-        void main() {
-          vec4 color = texture2D(tMap, vUv);
-          if (color.a < 0.1) discard;
-          gl_FragColor = color;
-        }
-      `,
-            uniforms: { tMap: { value: texture } },
-            transparent: true,
-        });
-        this.mesh = new Mesh(this.gl, { geometry, program });
-        const aspect = width / height;
-        const textHeightScaled = this.plane.scale.y * 0.15;
-        const textWidthScaled = textHeightScaled * aspect;
-        this.mesh.scale.set(textWidthScaled, textHeightScaled, 1);
-        this.mesh.position.y =
-            -this.plane.scale.y * 0.5 - textHeightScaled * 0.5 - 0.05;
-        this.mesh.setParent(this.plane);
-    }
 }
 
 interface ScreenSize {
@@ -170,12 +46,13 @@ interface MediaProps {
     renderer: Renderer;
     scene: Transform;
     screen: ScreenSize;
-    text: string;
     viewport: Viewport;
     bend: number;
     textColor: string;
     borderRadius?: number;
     font?: string;
+    heading: string;
+    subheading: string;
 }
 
 class Media {
@@ -188,7 +65,6 @@ class Media {
     renderer: Renderer;
     scene: Transform;
     screen: ScreenSize;
-    text: string;
     viewport: Viewport;
     bend: number;
     textColor: string;
@@ -196,7 +72,6 @@ class Media {
     font?: string;
     program!: Program;
     plane!: Mesh;
-    title!: Title;
     scale!: number;
     padding!: number;
     width!: number;
@@ -205,6 +80,8 @@ class Media {
     speed: number = 0;
     isBefore: boolean = false;
     isAfter: boolean = false;
+    heading: string;
+    subheading: string;
 
     constructor({
         geometry,
@@ -215,12 +92,13 @@ class Media {
         renderer,
         scene,
         screen,
-        text,
         viewport,
         bend,
         textColor,
         borderRadius = 0,
         font,
+        heading,
+        subheading,
     }: MediaProps) {
         this.geometry = geometry;
         this.gl = gl;
@@ -230,7 +108,8 @@ class Media {
         this.renderer = renderer;
         this.scene = scene;
         this.screen = screen;
-        this.text = text;
+        this.heading = heading;
+        this.subheading = subheading;
         this.viewport = viewport;
         this.bend = bend;
         this.textColor = textColor;
@@ -238,7 +117,6 @@ class Media {
         this.font = font;
         this.createShader();
         this.createMesh();
-        this.createTitle();
         this.onResize();
     }
 
@@ -246,58 +124,62 @@ class Media {
         const texture = new Texture(this.gl, {
             generateMipmaps: true,
         });
+
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d")!;
+
         this.program = new Program(this.gl, {
             depthTest: false,
             depthWrite: false,
             vertex: `
-        precision highp float;
-        attribute vec3 position;
-        attribute vec2 uv;
-        uniform mat4 modelViewMatrix;
-        uniform mat4 projectionMatrix;
-        uniform float uTime;
-        uniform float uSpeed;
-        varying vec2 vUv;
-        void main() {
-          vUv = uv;
-          vec3 p = position;
-          p.z = (sin(p.x * 4.0 + uTime) * 1.5 + cos(p.y * 2.0 + uTime) * 1.5) * (0.1 + uSpeed * 0.5);
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
-        }
-      `,
+                    precision highp float;
+                    attribute vec3 position;
+                    attribute vec2 uv;
+                    uniform mat4 modelViewMatrix;
+                    uniform mat4 projectionMatrix;
+                    uniform float uTime;
+                    uniform float uSpeed;
+                    varying vec2 vUv;
+                    void main() {
+                    vUv = uv;
+                    vec3 p = position;
+                    p.z = (sin(p.x * 4.0 + uTime) * 1.5 + cos(p.y * 2.0 + uTime) * 1.5) * (0.1 + uSpeed * 0.5);
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
+                    }
+                `,
             fragment: `
-        precision highp float;
-        uniform vec2 uImageSizes;
-        uniform vec2 uPlaneSizes;
-        uniform sampler2D tMap;
-        uniform float uBorderRadius;
-        varying vec2 vUv;
-        
-        float roundedBoxSDF(vec2 p, vec2 b, float r) {
-          vec2 d = abs(p) - b;
-          return length(max(d, vec2(0.0))) + min(max(d.x, d.y), 0.0) - r;
-        }
-        
-        void main() {
-          vec2 ratio = vec2(
-            min((uPlaneSizes.x / uPlaneSizes.y) / (uImageSizes.x / uImageSizes.y), 1.0),
-            min((uPlaneSizes.y / uPlaneSizes.x) / (uImageSizes.y / uImageSizes.x), 1.0)
-          );
-          vec2 uv = vec2(
-            vUv.x * ratio.x + (1.0 - ratio.x) * 0.5,
-            vUv.y * ratio.y + (1.0 - ratio.y) * 0.5
-          );
-          vec4 color = texture2D(tMap, uv);
-          
-          float d = roundedBoxSDF(vUv - 0.5, vec2(0.5 - uBorderRadius), uBorderRadius);
-          
-          // Smooth antialiasing for edges
-          float edgeSmooth = 0.002;
-          float alpha = 1.0 - smoothstep(-edgeSmooth, edgeSmooth, d);
-          
-          gl_FragColor = vec4(color.rgb, alpha);
-        }
-      `,
+                    precision highp float;
+                    uniform vec2 uImageSizes;
+                    uniform vec2 uPlaneSizes;
+                    uniform sampler2D tMap;
+                    uniform float uBorderRadius;
+                    varying vec2 vUv;
+                    
+                    float roundedBoxSDF(vec2 p, vec2 b, float r) {
+                    vec2 d = abs(p) - b;
+                    return length(max(d, vec2(0.0))) + min(max(d.x, d.y), 0.0) - r;
+                    }
+                    
+                    void main() {
+                    vec2 ratio = vec2(
+                        min((uPlaneSizes.x / uPlaneSizes.y) / (uImageSizes.x / uImageSizes.y), 1.0),
+                        min((uPlaneSizes.y / uPlaneSizes.x) / (uImageSizes.y / uImageSizes.x), 1.0)
+                    );
+                    vec2 uv = vec2(
+                        vUv.x * ratio.x + (1.0 - ratio.x) * 0.5,
+                        vUv.y * ratio.y + (1.0 - ratio.y) * 0.5
+                    );
+                    vec4 color = texture2D(tMap, uv);
+                    
+                    float d = roundedBoxSDF(vUv - 0.5, vec2(0.5 - uBorderRadius), uBorderRadius);
+                    
+                    // Smooth antialiasing for edges
+                    float edgeSmooth = 0.002;
+                    float alpha = 1.0 - smoothstep(-edgeSmooth, edgeSmooth, d);
+                    
+                    gl_FragColor = vec4(color.rgb, alpha);
+                    }
+                `,
             uniforms: {
                 tMap: { value: texture },
                 uPlaneSizes: { value: [0, 0] },
@@ -308,14 +190,37 @@ class Media {
             },
             transparent: true,
         });
+
         const img = new Image();
         img.crossOrigin = "anonymous";
         img.src = this.image;
         img.onload = () => {
-            texture.image = img;
+            canvas.width = img.naturalWidth;
+            canvas.height = img.naturalHeight;
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+            // // Main title
+            // ctx.font =
+            //     `bold 80px ${this.font?.split(" ")[2]}` ||
+            //     "bold 80px monospace";
+            // ctx.fillStyle = this.textColor || "white";
+            // ctx.textAlign = "center";
+            // ctx.textBaseline = "bottom";
+            // ctx.fillText(this.heading, canvas.width / 2, canvas.height - 100);
+
+            // // Subtitle
+            // ctx.font =
+            //     `bold 40px ${this.font?.split(" ")[2]}` ||
+            //     "bold 40px monospace";
+            // ctx.fillStyle = "rgba(255,255,255,0.8)";
+            // ctx.textAlign = "center";
+            // ctx.textBaseline = "bottom";
+            // ctx.fillText(this.subheading, canvas.width / 2, canvas.height - 40);
+
+            texture.image = canvas;
             this.program.uniforms.uImageSizes.value = [
-                img.naturalWidth,
-                img.naturalHeight,
+                canvas.width,
+                canvas.height,
             ];
         };
     }
@@ -326,17 +231,6 @@ class Media {
             program: this.program,
         });
         this.plane.setParent(this.scene);
-    }
-
-    createTitle() {
-        this.title = new Title({
-            gl: this.gl,
-            plane: this.plane,
-            renderer: this.renderer,
-            text: this.text,
-            textColor: this.textColor,
-            font: this.font,
-        });
     }
 
     update(
@@ -352,8 +246,10 @@ class Media {
             this.plane.position.y = 0;
             this.plane.rotation.z = 0;
         } else {
-            const B_abs = Math.abs(this.bend);
+            const normalizedBend = this.bend * (this.viewport.width / 50);
+            const B_abs = Math.abs(normalizedBend);
             const R = (H * H + B_abs * B_abs) / (2 * B_abs);
+
             const effectiveX = Math.min(Math.abs(x), H);
 
             const arc = R - Math.sqrt(R * R - effectiveX * effectiveX);
@@ -401,10 +297,14 @@ class Media {
             }
         }
         this.scale = this.screen.height / 1500;
-        this.plane.scale.y =
-            (this.viewport.height * (900 * this.scale)) / this.screen.height;
-        this.plane.scale.x =
-            (this.viewport.width * (700 * this.scale)) / this.screen.width;
+
+        // 60% on mobile, 30% on desktop
+        const cardWidthRatio = this.screen.width < 768 ? 0.6 : 0.3;
+        this.plane.scale.x = this.viewport.width * cardWidthRatio;
+
+        // maintain aspect ratio
+        this.plane.scale.y = this.plane.scale.x * 0.75;
+
         this.plane.program.uniforms.uPlaneSizes.value = [
             this.plane.scale.x,
             this.plane.scale.y,
@@ -414,10 +314,32 @@ class Media {
         this.widthTotal = this.width * this.length;
         this.x = this.width * this.index;
     }
+
+    getScreenPosition(camera: Camera, screen: ScreenSize) {
+        const wm = this.plane.worldMatrix;
+        const pos = {
+            x: wm[12],
+            y: wm[13],
+            z: wm[14],
+        };
+
+        const mvp = camera.projectionViewMatrix;
+        const x = pos.x * mvp[0] + pos.y * mvp[4] + pos.z * mvp[8] + mvp[12];
+        const y = pos.x * mvp[1] + pos.y * mvp[5] + pos.z * mvp[9] + mvp[13];
+        const w = pos.x * mvp[3] + pos.y * mvp[7] + pos.z * mvp[11] + mvp[15];
+
+        const ndcX = x / w;
+        const ndcY = y / w;
+
+        return {
+            x: (ndcX * 0.5 + 0.5) * screen.width,
+            y: (1 - (ndcY * 0.5 + 0.5)) * screen.height,
+        };
+    }
 }
 
 interface AppConfig {
-    items?: { image: string; text: string }[];
+    items?: GalleryItem[];
     bend?: number;
     textColor?: string;
     borderRadius?: number;
@@ -443,7 +365,7 @@ class App {
     scene!: Transform;
     planeGeometry!: Plane;
     medias: Media[] = [];
-    mediasImages: { image: string; text: string }[] = [];
+    mediasImages: GalleryItem[] = [];
     screen!: { width: number; height: number };
     viewport!: { width: number; height: number };
     raf: number = 0;
@@ -515,7 +437,7 @@ class App {
     }
 
     createMedias(
-        items: { image: string; text: string }[] | undefined,
+        items: GalleryItem[] | undefined,
         bend: number = 1,
         textColor: string,
         borderRadius: number,
@@ -523,56 +445,70 @@ class App {
     ) {
         const defaultItems = [
             {
-                image: `https://picsum.photos/seed/1/800/600?grayscale`,
-                text: "Bridge",
+                image: `https://picsum.photos/seed/1/800/600`,
+                heading: "Bridge",
+                subheading: "Subheading",
             },
             {
-                image: `https://picsum.photos/seed/2/800/600?grayscale`,
-                text: "Desk Setup",
+                image: `https://picsum.photos/seed/2/800/600`,
+                heading: "Desk Setup",
+                subheading: "Subheading",
             },
             {
-                image: `https://picsum.photos/seed/3/800/600?grayscale`,
-                text: "Waterfall",
+                image: `https://picsum.photos/seed/3/800/600`,
+                heading: "Waterfall",
+                subheading: "Subheading",
             },
             {
-                image: `https://picsum.photos/seed/4/800/600?grayscale`,
-                text: "Strawberries",
+                image: `https://picsum.photos/seed/4/800/600`,
+                heading: "Strawberries",
+                subheading: "Subheading",
             },
             {
-                image: `https://picsum.photos/seed/5/800/600?grayscale`,
-                text: "Deep Diving",
+                image: `https://picsum.photos/seed/5/800/600`,
+                subheading: "Subheading",
+                heading: "Deep Diving",
             },
             {
-                image: `https://picsum.photos/seed/16/800/600?grayscale`,
-                text: "Train Track",
+                image: `https://picsum.photos/seed/16/800/600`,
+                heading: "Train Track",
+                subheading: "Subheading",
             },
             {
-                image: `https://picsum.photos/seed/17/800/600?grayscale`,
-                text: "Santorini",
+                image: `https://picsum.photos/seed/17/800/600`,
+                heading: "Santorini",
+                subheading: "Subheading",
             },
             {
-                image: `https://picsum.photos/seed/8/800/600?grayscale`,
-                text: "Blurry Lights",
+                image: `https://picsum.photos/seed/8/800/600`,
+                heading: "Blurry Lights",
+                subheading: "Subheading",
             },
             {
-                image: `https://picsum.photos/seed/9/800/600?grayscale`,
-                text: "New York",
+                image: `https://picsum.photos/seed/9/800/600`,
+                heading: "New York",
+                subheading: "Subheading",
             },
             {
-                image: `https://picsum.photos/seed/10/800/600?grayscale`,
-                text: "Good Boy",
+                image: `https://picsum.photos/seed/10/800/600`,
+                heading: "Good Boy",
+                subheading: "Subheading",
             },
             {
-                image: `https://picsum.photos/seed/21/800/600?grayscale`,
-                text: "Coastline",
+                image: `https://picsum.photos/seed/21/800/600`,
+                heading: "Coastline",
+                subheading: "Subheading",
             },
             {
-                image: `https://picsum.photos/seed/12/800/600?grayscale`,
-                text: "Palm Trees",
+                image: `https://picsum.photos/seed/12/800/600`,
+                heading: "Palm Trees",
+                subheading: "Subheading",
             },
         ];
+
         const galleryItems = items && items.length ? items : defaultItems;
         this.mediasImages = galleryItems.concat(galleryItems);
+
         this.medias = this.mediasImages.map((data, index) => {
             return new Media({
                 geometry: this.planeGeometry,
@@ -583,7 +519,8 @@ class App {
                 renderer: this.renderer,
                 scene: this.scene,
                 screen: this.screen,
-                text: data.text,
+                heading: data.heading,
+                subheading: data.subheading,
                 viewport: this.viewport,
                 bend,
                 textColor,
@@ -591,6 +528,14 @@ class App {
                 font,
             });
         });
+    }
+
+    getOverlayData() {
+        return this.medias.map((media) => ({
+            heading: media.heading,
+            subheading: media.subheading,
+            position: media.getScreenPosition(this.camera, this.screen),
+        }));
     }
 
     onTouchDown(e: MouseEvent | TouchEvent) {
@@ -710,8 +655,14 @@ class App {
     }
 }
 
+interface OverlayItem {
+    heading: string;
+    subheading: string;
+    position: { x: number; y: number };
+}
+
 interface CircularGalleryProps {
-    items?: { image: string; text: string }[];
+    items?: GalleryItem[];
     bend?: number;
     textColor?: string;
     borderRadius?: number;
@@ -730,8 +681,11 @@ export default function CircularGallery({
     scrollSpeed = 2,
 }: CircularGalleryProps) {
     const containerRef = useRef<HTMLDivElement>(null);
+    const [overlayData, setOverlayData] = useState<OverlayItem[]>([]);
+
     useEffect(() => {
         if (!containerRef.current) return;
+
         const app = new App(containerRef.current, {
             items,
             bend,
@@ -742,13 +696,36 @@ export default function CircularGallery({
             scrollEase,
         });
 
-        return () => app.destroy();
+        let frame: number;
+        const loop = () => {
+            setOverlayData(app.getOverlayData());
+            frame = requestAnimationFrame(loop);
+        };
+        loop();
+
+        return () => {
+            cancelAnimationFrame(frame);
+            app.destroy();
+        };
     }, [items, bend, textColor, borderRadius, font, scrollSpeed, scrollEase]);
 
     return (
-        <div
-            className="w-full h-full overflow-hidden cursor-grab active:cursor-grabbing"
-            ref={containerRef}
-        />
+        <div className="relative w-full h-full overflow-hidden">
+            <div className="absolute inset-0" ref={containerRef} />
+
+            {overlayData.map((item, i) => (
+                <div
+                    key={i}
+                    className="absolute text-center pointer-events-none"
+                    style={{
+                        transform: `translate(-50%, -50%) translate(${item.position.x}px, ${item.position.y}px)`,
+                        color: textColor,
+                    }}
+                >
+                    <h2 className="text-xl font-bold">{item.heading}</h2>
+                    <p className="text-sm opacity-70">{item.subheading}</p>
+                </div>
+            ))}
+        </div>
     );
 }

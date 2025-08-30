@@ -1,3 +1,5 @@
+import { IconType } from "react-icons";
+
 export interface ValueItem {
     label: string;
     value: number;
@@ -46,4 +48,62 @@ export interface TestimonialProps {
     avatar: string;
     rating: number;
     content: string;
+}
+
+export interface GalleryItem {
+    image: string;
+    heading: string;
+    subheading: string;
+}
+
+export interface StrapiResponse<T> {
+    data: T;
+    meta: Record<string, unknown>;
+}
+
+export interface StrapiCollectionResponse<T> {
+    data: T[];
+    meta: {
+        pagination?: {
+            page: number;
+            pageSize: number;
+            pageCount: number;
+            total: number;
+        };
+    };
+}
+
+export interface StrapiMedia {
+    id: number;
+    documentId: string;
+    url: string;
+}
+
+export interface ProjectFeature {
+    id: number;
+    title: string;
+    description?: string;
+    icon?: StrapiMedia;
+}
+
+export interface Project {
+    id: number;
+    documentId: string;
+    title: string;
+    slug: string;
+    description: string;
+    category: string;
+    coverImage: StrapiMedia;
+    projectUrl?: string;
+    technologies?: string[];
+    clientName?: string;
+    completionDate?: string;
+    gallery?: StrapiMedia[];
+    features?: ProjectFeature[];
+}
+
+export interface AgencyServicesProps {
+    icon: IconType;
+    label: string;
+    angle: string;
 }

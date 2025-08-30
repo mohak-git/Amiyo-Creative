@@ -1,7 +1,12 @@
+import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import Toast from "@/components/Toaster";
+import ReactQuery from "@/components/providers/ReactQuery";
 import Cursor from "@/components/ui/Cursor";
+import GoToTop from "@/components/ui/GoToTop";
 import ScrollBar from "@/components/ui/ScrollBar";
 import { Montserrat_Alternates } from "next/font/google";
+import { ReactNode } from "react";
 import "./globals.css";
 
 const montserratAlternates = Montserrat_Alternates({
@@ -13,7 +18,7 @@ const montserratAlternates = Montserrat_Alternates({
 export default function RootLayout({
     children,
 }: Readonly<{
-    children: React.ReactNode;
+    children: ReactNode;
 }>) {
     return (
         <html
@@ -22,11 +27,17 @@ export default function RootLayout({
             className={`${montserratAlternates.variable}`}
         >
             <body className="min-h-screen overflow-x-hidden font-montserrat-alternates">
-                <ScrollBar />
-                <Cursor />
-                <Navbar />
+                <ReactQuery>
+                    <ScrollBar />
+                    <Cursor />
+                    <Navbar />
 
-                <main className="pt-[13vh]">{children}</main>
+                    {children}
+                    <Footer />
+
+                    <GoToTop />
+                    <Toast />
+                </ReactQuery>
             </body>
         </html>
     );

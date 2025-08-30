@@ -1,3 +1,5 @@
+"use client";
+
 import BgBeam from "@/components/ui/BgBeam";
 import LightRay from "@/components/ui/LightRay";
 import { motion, Variants } from "framer-motion";
@@ -86,7 +88,7 @@ const Hero: React.FC = () => {
                     initial="hidden"
                     animate="visible"
                     custom={0.3}
-                    className="absolute z-1 h-full w-full bg-radial-[at_50%_95%] from-white via-purple-700 to-slate-900 via-30% to-67%"
+                    className="absolute z-1 h-full w-full bg-radial-[at_50%_95%] from-white via-purple-700 to-slate-950 via-30% to-67%"
                 />
 
                 <motion.div

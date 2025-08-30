@@ -108,7 +108,7 @@ export default function PricingCard({
                 className="[transform-style:preserve-3d] h-full w-full flex justify-center items-center relative"
             >
                 <div
-                    className={`group relative h-fit w-full flex flex-col bg-black/10 rounded-2xl text-center p-8 backdrop-blur-2xl border transition-all duration-700 ease-out bg-gradient-to-br ${data.border} ${data.hoverGlow}`}
+                    className={`group relative h-full w-full flex flex-col bg-black/10 rounded-2xl text-center p-8 backdrop-blur-2xl border transition-all duration-700 ease-out bg-gradient-to-br ${data.border} ${data.hoverGlow}`}
                 >
                     {/* Content */}
                     <div className="relative z-10">

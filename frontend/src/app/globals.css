@@ -9,11 +9,22 @@
     --color-background: var(--background);
     --color-foreground: var(--foreground);
     --font-montserrat-alternates: "Montserrat Alternates", sans-serif;
+
+    @keyframes gridMove {
+        0% {
+            background-position: 0 0;
+        }
+        100% {
+            background-position: 40px 40px;
+        }
+    }
+
+    --animate-grid-move: gridMove 20s linear infinite;
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --background: #0f172a;
+        --background: #020618;
         --foreground: #ededed;
     }
 }

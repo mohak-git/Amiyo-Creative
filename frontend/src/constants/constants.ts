@@ -1,5 +1,8 @@
 import {
+    AgencyServicesProps,
+    GalleryItem,
     PricingDataProps,
+    Project,
     ServicesCardProps,
     SocialPlatformProps,
     TestimonialProps,
@@ -7,11 +10,15 @@ import {
 } from "@/constants/types";
 
 import {
+    FaCamera,
+    FaCode,
     FaGlobe,
     FaInstagram,
     FaLinkedin,
     FaMailBulk,
+    FaPalette,
     FaPhone,
+    FaPlay,
     FaTelegram,
     FaTwitter,
     FaWhatsapp,
@@ -25,7 +32,7 @@ export const NavItems = [
 ];
 
 export const NavbarLeftPositionsMobile = [3, 95, 179, 263];
-export const NavbarLeftPositionsDesktop = [14, 103, 187, 277];
+export const NavbarLeftPositionsDesktop = [14, 110, 198, 295];
 
 export const hexToRgb = (hex: string): [number, number, number] => {
     const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -469,4 +476,348 @@ export const Testimonials: TestimonialProps[] = [
         content:
             "They transformed our outdated brand into something fresh, modern, and impactful. The rebranding process was smooth, collaborative, and delivered beyond expectations.",
     },
+];
+
+export const GalleryItems: GalleryItem[] = [
+    {
+        image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773",
+        heading: "Creativity",
+        subheading:
+            "Fresh, unique, innovative ideas that don’t recycle the same Pinterest-board stuff.",
+    },
+    {
+        image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c",
+        heading: "Professionalism",
+        subheading:
+            "Clear, transparent communication and on-time delivery, every time.",
+    },
+    {
+        image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f",
+        heading: "Quality",
+        subheading:
+            "Industry-standard execution with zero shortcuts and no janky workarounds.",
+    },
+    {
+        image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2",
+        heading: "Client Focus",
+        subheading:
+            "We co-create with you—your goals drive the roadmap, not our ego.",
+    },
+    {
+        image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118",
+        heading: "Affordable Pricing",
+        subheading:
+            "Premium work without the premium bloat—packages that actually fit your budget.",
+    },
+];
+
+export const mockProjects: Project[] = [
+    {
+        id: 1,
+        documentId: "1",
+        title: "Ethereal Wedding Film",
+        slug: "ethereal-wedding-film",
+        description:
+            "Cinematic wedding storytelling with drone footage and intimate moments",
+        category: "Cinematography & Videography",
+        coverImage: {
+            id: 1,
+            documentId: "cover1",
+            url: "https://images.unsplash.com/photo-1519741497674-611481863552",
+        },
+        technologies: ["Wedding", "Drone", "Cinematic"],
+        clientName: "Private Client",
+        completionDate: "2023-06-15",
+        features: [
+            {
+                id: 1,
+                title: "Drone Footage",
+                description: "Aerial shots for cinematic effect",
+            },
+            {
+                id: 2,
+                title: "Storytelling",
+                description: "Emotional narrative editing",
+            },
+        ],
+    },
+    {
+        id: 2,
+        documentId: "2",
+        title: "Tech Startup Branding",
+        slug: "tech-startup-branding",
+        description: "Complete brand identity for innovative fintech company",
+        category: "Photography",
+        coverImage: {
+            id: 2,
+            documentId: "cover2",
+            url: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43",
+        },
+        technologies: ["Logo", "Brand", "Startup"],
+        clientName: "InnovateFin",
+        completionDate: "2023-09-20",
+        features: [
+            {
+                id: 1,
+                title: "Logo Design",
+                description: "Modern and scalable logo",
+            },
+            {
+                id: 2,
+                title: "Brand Guidelines",
+                description: "Comprehensive brand book",
+            },
+        ],
+    },
+    {
+        id: 3,
+        documentId: "3",
+        title: "Fashion Editorial Shoot",
+        slug: "fashion-editorial-shoot",
+        description: "High-fashion editorial photography for luxury magazine",
+        category: "Design & Branding",
+        coverImage: {
+            id: 3,
+            documentId: "cover3",
+            url: "https://images.unsplash.com/photo-1469334031218-e382a71b716b",
+        },
+        technologies: ["Editorial", "Fashion", "Studio"],
+        clientName: "Luxe Magazine",
+        completionDate: "2023-11-10",
+        features: [
+            {
+                id: 1,
+                title: "Studio Lighting",
+                description: "Professional lighting setup",
+            },
+            {
+                id: 2,
+                title: "Model Direction",
+                description: "Expert posing and expression guidance",
+            },
+        ],
+    },
+    {
+        id: 4,
+        documentId: "4",
+        title: "Brand Commercial VFX",
+        slug: "brand-commercial-vfx",
+        description:
+            "Visual effects and color grading for premium automobile commercial",
+        category: "Editing & Post-Production",
+        coverImage: {
+            id: 4,
+            documentId: "cover4",
+            url: "https://images.unsplash.com/photo-1485846234645-a62644f84728",
+        },
+        technologies: ["VFX", "Commercial"],
+        clientName: "AutoPremium",
+        completionDate: "2024-01-30",
+        features: [
+            {
+                id: 1,
+                title: "3D Effects",
+                description: "Custom 3D animations",
+            },
+            {
+                id: 2,
+                title: "Color Grading",
+                description: "Cinematic color palette",
+            },
+        ],
+    },
+    {
+        id: 5,
+        documentId: "5",
+        title: "E-commerce Platform",
+        slug: "e-commerce-platform",
+        description: "Modern e-commerce website with seamless user experience",
+        category: "Web & Digital Projects",
+        coverImage: {
+            id: 5,
+            documentId: "cover5",
+            url: "https://images.unsplash.com/photo-1460925895917-afdab827c52f",
+        },
+        technologies: ["E-commerce", "UX/UI", "React"],
+        clientName: "ShopEase",
+        completionDate: "2024-03-15",
+        projectUrl: "https://shopease.example.com",
+        features: [
+            {
+                id: 1,
+                title: "Responsive Design",
+                description: "Mobile-first approach",
+            },
+            {
+                id: 2,
+                title: "Checkout Flow",
+                description: "Optimized for conversions",
+            },
+        ],
+    },
+    {
+        id: 6,
+        documentId: "6",
+        title: "Product Photography Series",
+        slug: "product-photography-series",
+        description:
+            "Minimalist product photography for premium skincare brand",
+        category: "Cinematography & Videography",
+        coverImage: {
+            id: 6,
+            documentId: "cover6",
+            url: "https://images.unsplash.com/photo-1556228720-195a672e8a03",
+        },
+        technologies: ["Product", "Commercial"],
+        clientName: "GlowSkin",
+        completionDate: "2024-05-22",
+        features: [
+            {
+                id: 1,
+                title: "Lighting Setup",
+                description: "Softbox and reflector use",
+            },
+            {
+                id: 2,
+                title: "Retouching",
+                description: "High-end post-processing",
+            },
+        ],
+    },
+    {
+        id: 7,
+        documentId: "7",
+        title: "Music Video Production",
+        slug: "music-video-production",
+        description:
+            "Creative music video with artistic visuals and storytelling",
+        category: "Cinematography & Videography",
+        coverImage: {
+            id: 7,
+            documentId: "cover7",
+            url: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f",
+        },
+        technologies: ["Video", "Creative", "Narrative"],
+        clientName: "SoundWave Records",
+        completionDate: "2024-07-05",
+        features: [
+            {
+                id: 1,
+                title: "Storyboard",
+                description: "Detailed scene planning",
+            },
+            {
+                id: 2,
+                title: "Cinematography",
+                description: "Dynamic camera movements",
+            },
+        ],
+    },
+    {
+        id: 8,
+        documentId: "8",
+        title: "Restaurant Branding Suite",
+        slug: "restaurant-branding-suite",
+        description: "Complete brand package including menu design and signage",
+        category: "Cinematography & Videography",
+        coverImage: {
+            id: 8,
+            documentId: "cover8",
+            url: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0",
+        },
+        technologies: ["Restaurant", "Menu", "Signage"],
+        clientName: "Gourmet Bistro",
+        completionDate: "2024-08-18",
+        features: [
+            {
+                id: 1,
+                title: "Menu Design",
+                description: "Custom typography and layout",
+            },
+            {
+                id: 2,
+                title: "Signage",
+                description: "Exterior and interior branding",
+            },
+        ],
+    },
+    {
+        id: 8,
+        documentId: "8",
+        title: "Restaurant Branding Suite",
+        slug: "restaurant-branding-suite",
+        description: "Complete brand package including menu design and signage",
+        category: "Cinematography & Videography",
+        coverImage: {
+            id: 8,
+            documentId: "cover8",
+            url: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0",
+        },
+        technologies: ["Restaurant", "Menu Design", "Signage"],
+        clientName: "Gourmet Bistro",
+        completionDate: "2024-08-18",
+        features: [
+            {
+                id: 1,
+                title: "Menu Design",
+                description: "Custom typography and layout",
+            },
+            {
+                id: 2,
+                title: "Signage",
+                description: "Exterior and interior branding",
+            },
+        ],
+    },
+    {
+        id: 9,
+        documentId: "9",
+        title: "Motion Graphics Explainer",
+        slug: "motion-graphics-explainer",
+        description: "Animated explainer video with custom motion graphics",
+        category: "Photography",
+        coverImage: {
+            id: 9,
+            documentId: "cover9",
+            url: "https://images.unsplash.com/photo-1611224923853-80b023f02d71",
+        },
+        technologies: ["Graphics", "Animation", "Explainer"],
+        clientName: "EduTech",
+        completionDate: "2024-08-25",
+        features: [
+            {
+                id: 1,
+                title: "Scriptwriting",
+                description: "Engaging and clear narrative",
+            },
+            {
+                id: 2,
+                title: "Animation",
+                description: "Frame-by-frame custom graphics",
+            },
+        ],
+    },
+];
+
+export const categories = [
+    "Photography",
+    "Design & Branding",
+    "Web & Digital Projects",
+    "Editing & Post-Production",
+    "Cinematography & Videography",
+];
+
+export const categoryColors: Record<string, string> = {
+    Photography: "#38bdf8",
+    "Design & Branding": "#818cf8",
+    "Web & Digital Projects": "#06b6d4",
+    "Editing & Post-Production": "#a78bfa",
+    "Cinematography & Videography": "#e879f9",
+};
+
+export const AgencyServices: AgencyServicesProps[] = [
+    { icon: FaCamera, label: "Photography", angle: "rotate-12" },
+    { icon: FaPlay, label: "Video Production", angle: "-rotate-6" },
+    { icon: FaPalette, label: "Brand Design", angle: "rotate-3" },
+    { icon: FaCode, label: "Web Development", angle: "-rotate-12" },
 ];

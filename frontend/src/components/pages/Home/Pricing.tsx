@@ -1,3 +1,5 @@
+"use client";
+
 import { BgWave } from "@/components/elements/BgAssets";
 import PricingCard from "@/components/ui/PricingCard";
 import { PricingData } from "@/constants/constants";

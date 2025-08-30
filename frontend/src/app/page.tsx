@@ -1,5 +1,3 @@
-"use client";
-
 import About from "@/components/pages/Home/About";
 import Hero from "@/components/pages/Home/Hero";
 import Pricing from "@/components/pages/Home/Pricing";
@@ -10,13 +8,14 @@ import WhyUs from "@/components/pages/Home/WhyUs";
 export default function Home() {
     return (
         <>
-            <Hero />
-            <About />
-            <Services />
-            <Pricing />
-
-            <Testimonial />
-            <WhyUs />
+            <main className="pt-[13vh]">
+                <Hero />
+                <About />
+                <Services />
+                <Pricing />
+                <WhyUs />
+                <Testimonial />
+            </main>
         </>
     );
 }

@@ -21,10 +21,10 @@ const Navbar = () => {
 
     return (
         <div
-            className={`fixed z-[1000] w-full transition-all duration-500 rounded-full shadow-[0px_0px_30px_70px_rgb(15,23,42)] ${
+            className={`fixed z-[1000] w-full transition-all duration-500 rounded-full shadow-[0px_0px_30px_70px_rgb(2,6,24)] ${
                 isScrolled
                     ? "scale-95 translate-y-6 px-6 sm:px-8 md:px-12 lg:px-14 bg-purple-800"
-                    : "scale-[1.2] sm:scale-110 px-12 sm:px-14 md:px-26 lg:px-30 bg-slate-900"
+                    : "scale-[1.2] sm:scale-110 px-12 sm:px-14 md:px-26 lg:px-30 bg-slate-950"
             }`}
         >
             <div className="flex justify-between items-center py-3">
