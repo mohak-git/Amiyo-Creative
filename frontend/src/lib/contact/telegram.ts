@@ -1,14 +1,15 @@
 async function sendTelegramMessage(text: string) {
     try {
         const botToken = process.env.TELEGRAM_BOT_TOKEN;
+
         if (!botToken) {
-            strapi.log.error("TELEGRAM_BOT_TOKEN not configured");
+            console.error("TELEGRAM_BOT_TOKEN not configured");
             return { success: false, error: "Bot token not configured" };
         }
 
         const chatIdsEnv = process.env.TELEGRAM_CHAT_IDS;
         if (!chatIdsEnv) {
-            strapi.log.error("TELEGRAM_CHAT_IDS not configured.");
+            console.error("TELEGRAM_CHAT_IDS not configured.");
             return { success: false, error: "Chat IDs not configured" };
         }
 
@@ -26,11 +27,12 @@ async function sendTelegramMessage(text: string) {
                     }),
                 });
 
-                const data: any = await response.json();
+                const data = await response.json();
 
                 if (data.ok) return { chatId, success: true, data };
                 else return { chatId, success: false, error: data.description };
             } catch (error) {
+                console.log(error);
                 return {
                     chatId,
                     success: false,
@@ -54,7 +56,7 @@ async function sendTelegramMessage(text: string) {
                   "Failed to send message to all chat IDs",
         };
     } catch (error) {
-        strapi.log.error("Error sending Telegram message:", error);
+        console.error("Error sending Telegram message:", error);
         return {
             success: false,
             error: error instanceof Error ? error.message : "Unknown error",

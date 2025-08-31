@@ -1,7 +1,7 @@
 import * as SibApiV3Sdk from "@getbrevo/brevo";
 
 const apiKey = process.env.BREVO_API_KEY!;
-if (!apiKey) strapi.log.error("BREVO_API_KEY environment variable is not set!");
+if (!apiKey) console.error("BREVO_API_KEY environment variable is not set!");
 
 const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
 
@@ -27,7 +27,7 @@ interface EnquiryEmailData {
 async function sendEmail(options: SendEmailPayload) {
     try {
         if (!process.env.BREVO_API_KEY) {
-            strapi.log.error("Cannot send email: BREVO_API_KEY not configured");
+            console.error("Cannot send email: BREVO_API_KEY not configured");
             return { success: false, error: "API key not configured" };
         }
 
@@ -36,7 +36,7 @@ async function sendEmail(options: SendEmailPayload) {
             !process.env.BREVO_SENDER_NAME ||
             !process.env.BREVO_REPLY_TO_EMAIL
         ) {
-            strapi.log.error(
+            console.error(
                 "Cannot send email: BREVO_SENDER_EMAIL, BREVO_SENDER_NAME or BREVO_REPLY_TO_EMAIL not configured"
             );
             return { success: false, error: "Sender email not configured" };
@@ -59,11 +59,11 @@ async function sendEmail(options: SendEmailPayload) {
 
         const data = await apiInstance.sendTransacEmail(sendSmtpEmail);
 
-        strapi.log.info(`Email sent successfully to ${options.to[0].email}}`);
+        console.info(`Email sent successfully to ${options.to[0].email}`);
 
         return { success: true, data };
-    } catch (error: any) {
-        strapi.log.error("Error sending email:", error);
+    } catch (error) {
+        console.error("Error sending email:", error);
         return { success: false, error };
     }
 }
@@ -72,7 +72,6 @@ export default async function sendEnquiryConfirmationEmail(
     data: EnquiryEmailData
 ) {
     try {
-        // Email-friendly HTML template with inline styles
         let htmlTemplate = `<!DOCTYPE html>
 <html lang="en">
 
@@ -343,7 +342,7 @@ export default async function sendEnquiryConfirmationEmail(
             htmlContent: htmlTemplate,
         });
     } catch (error) {
-        strapi.log.error("Error sending enquiry confirmation email:", error);
+        console.error("Error sending enquiry confirmation email:", error);
         return { success: false, error };
     }
 }
