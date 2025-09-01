@@ -1,13 +1,9 @@
 "use client";
 
 import useMediaQuery from "@/hooks/useMediaQuery";
-import dynamic from "next/dynamic";
+import Spline from "@splinetool/react-spline";
 import Image from "next/image";
 import { useRef, useState } from "react";
-
-const Spline = dynamic(() => import("@splinetool/react-spline"), {
-    ssr: false,
-});
 
 type Props = {
     sceneUrl: string;

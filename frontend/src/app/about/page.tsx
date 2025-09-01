@@ -1,7 +1,7 @@
 "use client";
 
 import { AgencyServices } from "@/constants/constants";
-import { FC, JSX, useEffect, useState } from "react";
+import { FC, JSX } from "react";
 import { IconType } from "react-icons";
 import { FaAward, FaEye, FaHandSparkles, FaQuoteLeft } from "react-icons/fa";
 import { FaBoltLightning } from "react-icons/fa6";
@@ -97,17 +97,6 @@ const ValueCard: FC<{
 );
 
 const AboutPage: FC = () => {
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-    useEffect(() => {
-        const updateMousePosition = (e: MouseEvent) =>
-            setMousePosition({ x: e.clientX, y: e.clientY });
-
-        window.addEventListener("mousemove", updateMousePosition);
-        return () =>
-            window.removeEventListener("mousemove", updateMousePosition);
-    }, []);
-
     return (
         <main className="bg-slate-950 text-white overflow-x-hidden">
             {/* HERO */}
