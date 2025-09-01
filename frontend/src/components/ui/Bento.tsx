@@ -1,7 +1,7 @@
 import { ServicesCardProps } from "@/constants/types";
 import { gsap } from "gsap";
 import Image from "next/image";
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { CiLocationArrow1 } from "react-icons/ci";
 
 export interface BentoProps {
@@ -16,7 +16,7 @@ export interface BentoProps {
 }
 
 const DEFAULT_SPOTLIGHT_RADIUS = 300;
-const DEFAULT_GLOW_COLOR = "0, 215, 255";
+const DEFAULT_GLOW_COLOR = "0, 195, 255";
 
 const updateCardGlowProperties = (
     card: HTMLElement,
@@ -511,8 +511,8 @@ const Bento: React.FC<BentoProps> = ({
                                     className="absolute w-full h-full object-cover group-hover:brightness-25 transition-all duration-500"
                                 />
 
-                                <div className="cta-overlay absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100">
-                                    <span className="px-2 cursor-target py-2 rounded-full backdrop-blur-md bg-white/10 border border-white/20 flex justify-center items-center text-cyan-500 text-sm font-bold tracking-wide shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(0,215,255,0.7)]">
+                                <div className="cta-overlay absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:scale-105">
+                                    <span className="px-2 cursor-target py-2 rounded-full backdrop-blur-md bg-white/2 border border-white/20 flex justify-center items-center text-white text-sm font-bold tracking-wide shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(255,215,255,0.7)]">
                                         <CiLocationArrow1 className="arrow-icon size-6 z-10 p-1" />
                                         {card.cta}
                                     </span>

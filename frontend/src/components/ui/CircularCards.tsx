@@ -723,7 +723,7 @@ export default function CircularGallery({
                     }}
                 >
                     <h2 className="text-xl font-bold">{item.heading}</h2>
-                    <p className="text-sm opacity-70">{item.subheading}</p>
+                    <p className="text-sm opacity-70 max-w-80">{item.subheading}</p>
                 </div>
             ))}
         </div>

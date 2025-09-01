@@ -141,7 +141,7 @@ const Footer = () => {
 
             <div className="mx-auto relative z-10 px-6 sm:px-10">
                 <motion.div
-                    className="grid md:grid-cols-4 place-items-center gap-8 mb-8"
+                    className="grid md:grid-cols-4  gap-8 mb-8"
                     variants={childVariants}
                 >
                     {/* About */}
