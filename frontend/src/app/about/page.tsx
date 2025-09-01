@@ -1,9 +1,15 @@
 "use client";
 
-import { AgencyServices } from "@/constants/constants";
+import { AgencyServices, FAQs } from "@/constants/constants";
 import { FC, JSX } from "react";
 import { IconType } from "react-icons";
-import { FaAward, FaEye, FaHandSparkles, FaQuoteLeft } from "react-icons/fa";
+import {
+    FaAward,
+    FaChevronDown,
+    FaEye,
+    FaHandSparkles,
+    FaQuoteLeft,
+} from "react-icons/fa";
 import { FaBoltLightning } from "react-icons/fa6";
 import { FiTarget } from "react-icons/fi";
 
@@ -234,6 +240,29 @@ const AboutPage: FC = () => {
                     </div>
                 </div>
             </section>
+
+          <section className="py-24 max-w-7xl mx-auto px-6 lg:px-8">
+  <SectionHeading title="FAQs" />
+  <div className="space-y-6">
+    {FAQs.map((item, i) => (
+      <details
+        key={i}
+        className="group bg-gradient-to-r from-slate-800/40 to-purple-900/20 backdrop-blur-sm border border-slate-700/50 hover:border-purple-500/40 rounded-2xl transition-all duration-300 overflow-hidden"
+      >
+        <summary className="flex justify-between items-center cursor-pointer p-5 text-lg font-medium text-white group-open:text-purple-300">
+          {item.q}
+          <FaChevronDown className="transition-transform duration-300 group-open:rotate-180" />
+        </summary>
+        <div
+          className="px-5 pb-5 text-slate-300 leading-relaxed transition-all duration-300 max-h-0 group-open:max-h-[500px]"
+        >
+          {item.a}
+        </div>
+      </details>
+    ))}
+  </div>
+</section>
+
         </main>
     );
 };

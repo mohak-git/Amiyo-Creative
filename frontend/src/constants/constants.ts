@@ -833,3 +833,38 @@ export const AgencyServices: AgencyServicesProps[] = [
     { icon: FaPalette, label: "Brand Design", angle: "rotate-0" },
     { icon: FaCode, label: "Web Development", angle: "-rotate-0" },
 ];
+
+export const FAQs: { q: string; a: string }[] = [
+    {
+        q: "How can I book your services?",
+        a: "Booking is flexible! You can reach us through WhatsApp, Instagram, LinkedIn, Twitter, Telegram, Email, Phone, or directly on our Website.",
+    },
+    {
+        q: "Do you work outside Kolkata?",
+        a: "Absolutely. We provide services across India and internationally.",
+    },
+    {
+        q: "Do you collaborate with influencers?",
+        a: "Yes, we work with influencers, creators, and public figures to produce engaging and professional content.",
+    },
+    {
+        q: "Can you handle both small and large projects?",
+        a: "100%. From a personal photoshoot to a full-scale brand campaign, every project gets the same dedication.",
+    },
+    {
+        q: "Do you provide customized packages?",
+        a: "Yes. Every project is unique, and we create packages based on your goals, vision, and budget.",
+    },
+    {
+        q: "Do you provide remote/online services?",
+        a: "Yes, for services like design, branding, editing, marketing & strategy — we collaborate online with clients worldwide.",
+    },
+    {
+        q: "What makes Amiyo Creative different from others?",
+        a: "Our all-in-one approach. Instead of hiring separate teams for film, design, web, and marketing — we provide it all under one roof, ensuring consistency and quality.",
+    },
+    {
+        q: "Do you offer long-term partnerships?",
+        a: "Yes, we work on both one-time projects and long-term retainers with brands, agencies, and influencers.",
+    },
+];
