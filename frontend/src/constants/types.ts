@@ -19,7 +19,6 @@ export interface ServicesCardProps {
 export interface SocialPlatformProps {
     name: string;
     icon: React.ComponentType<{ className?: string }>;
-    bgColor: string;
     borderColor: string;
     textColor: string;
     url: string;
@@ -48,6 +47,14 @@ export interface TestimonialProps {
     avatar: string;
     rating: number;
     content: string;
+}
+
+export type TestimonialVariant = "text" | "video";
+
+export interface VideoTestimonialProps {
+    id: string;
+    videoUrl: string;
+    title?: string;
 }
 
 export interface GalleryItem {

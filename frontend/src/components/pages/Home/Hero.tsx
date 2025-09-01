@@ -1,9 +1,9 @@
 "use client";
 
 import BgBeam from "@/components/ui/BgBeam";
+import SplineScene from "@/components/ui/Camera3D";
 import LightRay from "@/components/ui/LightRay";
 import { motion, Variants } from "framer-motion";
-import Image from "next/image";
 
 const fadeUp: Variants = {
     hidden: { opacity: 0, y: 50 },
@@ -54,7 +54,7 @@ const fadeRight: Variants = {
 const Hero: React.FC = () => {
     return (
         <motion.div
-            className="px-4 sm:px-10 h-[87vh] w-full"
+            className="px-4 sm:px-10 pb-6 w-full"
             variants={fadeUp}
             initial="hidden"
             animate="visible"
@@ -88,7 +88,7 @@ const Hero: React.FC = () => {
                     initial="hidden"
                     animate="visible"
                     custom={0.3}
-                    className="absolute z-1 h-full w-full bg-radial-[at_50%_95%] from-white via-purple-700 to-slate-950 via-30% to-67%"
+                    className="absolute z-1 h-full w-full bg-radial-[at_50%_180%] from-white via-purple-700 to-slate-950 via-30% to-67%"
                 />
 
                 <motion.div
@@ -104,7 +104,7 @@ const Hero: React.FC = () => {
                     initial="hidden"
                     animate="visible"
                     custom={0.5}
-                    className="absolute z-1 bottom-0 right-0 w-1/12 h-2/5 bg-gradient-to-r to-purple-700/70 blur-3xl"
+                    className="absolute z-1 bottom-0 right-0 w-1/12 h-2/5 bg-gradient-to-r to-purple-700 blur-3xl"
                 />
 
                 {/* Main */}
@@ -116,7 +116,7 @@ const Hero: React.FC = () => {
                             initial="hidden"
                             animate="visible"
                             custom={1.4}
-                            className="text-cyan-200 font-semibold text-xs sm:text-sm md:text-base tracking-wide bg-purple-600/20 rounded-full px-2 py-0.5"
+                            className="text-cyan-200 font-semibold text-[8px] sm:text-sm md:text-base tracking-wide bg-purple-600/20 rounded-full px-2 py-0.5"
                         >
                             Where Innovation Meets Perfection
                         </motion.span>
@@ -126,14 +126,13 @@ const Hero: React.FC = () => {
                             initial="hidden"
                             animate="visible"
                             custom={0.6}
-                            className="font-bold text-cyan-200 leading-tight text-3xl sm:text-4xl md:text-5xl lg:text-6xl"
+                            className="font-bold text-white leading-tight text-3xl sm:text-4xl md:text-5xl lg:text-6xl"
                         >
-                            <span className="bg-gradient-to-r from-blue-600 via-purple-700 to-purple-600 bg-clip-text text-transparent">
-                                Creative Visuals
+                            <span className="uppercase">Creative Visuals</span>{" "}
+                            <br />
+                            <span className="text-blue-300">
+                                for Every Story
                             </span>
-                            <br />
-                            for Every Story
-                            <br />
                         </motion.h1>
 
                         <motion.p
@@ -166,7 +165,7 @@ const Hero: React.FC = () => {
                         </motion.div>
                     </div>
 
-                    {/* Image */}
+                    {/* Model/Image */}
                     <motion.div
                         variants={fadeRight}
                         initial="hidden"
@@ -174,13 +173,7 @@ const Hero: React.FC = () => {
                         custom={0.8}
                         className="flex justify-center items-center w-full md:w-2/5"
                     >
-                        <Image
-                            src="https://creative-ball-1259652514.media.strapiapp.com/Screenshot_2025_08_15_113453_10a07a9d62.png"
-                            alt="Digital workspace"
-                            className="rounded-2xl shadow-lg w-full h-auto object-cover"
-                            width="500"
-                            height="500"
-                        />
+                        <SplineScene sceneUrl="https://prod.spline.design/FT9uTU8FxfSgTMtl/scene.splinecode" />
                     </motion.div>
                 </div>
             </div>

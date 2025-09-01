@@ -15,31 +15,8 @@ export interface BentoProps {
     data: ServicesCardProps[];
 }
 
-const DEFAULT_PARTICLE_COUNT = 5;
 const DEFAULT_SPOTLIGHT_RADIUS = 300;
 const DEFAULT_GLOW_COLOR = "0, 215, 255";
-
-const createParticleElement = (
-    x: number,
-    y: number,
-    color: string = DEFAULT_GLOW_COLOR
-): HTMLDivElement => {
-    const el = document.createElement("div");
-    el.className = "particle";
-    el.style.cssText = `
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: rgba(${color}, 1);
-    box-shadow: 0 0 6px rgba(${color}, 0.6);
-    pointer-events: none;
-    z-index: 100;
-    left: ${x}px;
-    top: ${y}px;
-  `;
-    return el;
-};
 
 const updateCardGlowProperties = (
     card: HTMLElement,
@@ -62,7 +39,6 @@ const ParticleCard: React.FC<{
     children: React.ReactNode;
     className?: string;
     style?: React.CSSProperties;
-    particleCount?: number;
     glowColor?: string;
     clickEffect?: boolean;
     enableMagnetism?: boolean;
@@ -70,102 +46,23 @@ const ParticleCard: React.FC<{
     children,
     className = "",
     style,
-    particleCount = DEFAULT_PARTICLE_COUNT,
     glowColor = DEFAULT_GLOW_COLOR,
     clickEffect = true,
     enableMagnetism = true,
 }) => {
     const cardRef = useRef<HTMLDivElement>(null);
-    const particlesRef = useRef<HTMLDivElement[]>([]);
     const isHoveredRef = useRef(false);
-    const memoizedParticles = useRef<HTMLDivElement[]>([]);
-    const particlesInitialized = useRef(false);
     const magnetismAnimationRef = useRef<gsap.core.Tween | null>(null);
-
-    const initializeParticles = useCallback(() => {
-        if (particlesInitialized.current || !cardRef.current) return;
-
-        const { width, height } = cardRef.current.getBoundingClientRect();
-        memoizedParticles.current = Array.from({ length: particleCount }, () =>
-            createParticleElement(
-                Math.random() * width,
-                Math.random() * height,
-                glowColor
-            )
-        );
-        particlesInitialized.current = true;
-    }, [particleCount, glowColor]);
-
-    const clearAllParticles = useCallback(() => {
-        magnetismAnimationRef.current?.kill();
-        magnetismAnimationRef.current = null;
-
-        particlesRef.current.forEach((particle) => {
-            gsap.to(particle, {
-                scale: 0,
-                opacity: 0,
-                duration: 0.3,
-                ease: "back.in",
-                onComplete: () => {
-                    particle.remove();
-                },
-            });
-        });
-        particlesRef.current = [];
-    }, []);
-
-    const animateParticles = useCallback(() => {
-        if (!cardRef.current || !isHoveredRef.current) return;
-
-        if (!particlesInitialized.current) initializeParticles();
-
-        memoizedParticles.current.forEach((particle, index) => {
-            const clone = particle.cloneNode(true) as HTMLDivElement;
-            cardRef.current?.appendChild(clone);
-            particlesRef.current.push(clone);
-            gsap.fromTo(
-                clone,
-                { scale: 0, opacity: 0 },
-                {
-                    scale: 1,
-                    opacity: 1,
-                    duration: 0.3,
-                    ease: "back.out(1.7)",
-                    delay: index * 0.05,
-                }
-            );
-
-            gsap.to(clone, {
-                x: (Math.random() - 0.5) * 100,
-                y: (Math.random() - 0.5) * 100,
-                rotation: Math.random() * 360,
-                duration: 2 + Math.random() * 2,
-                repeat: -1,
-                yoyo: true,
-            });
-
-            gsap.to(clone, {
-                opacity: 0.3,
-                duration: 1.5,
-                repeat: -1,
-                yoyo: true,
-            });
-        });
-    }, [initializeParticles]);
 
     useEffect(() => {
         if (!cardRef.current) return;
 
         const element = cardRef.current;
 
-        const handleMouseEnter = () => {
-            isHoveredRef.current = true;
-            animateParticles();
-        };
+        const handleMouseEnter = () => (isHoveredRef.current = true);
 
         const handleMouseLeave = () => {
             isHoveredRef.current = false;
-            clearAllParticles();
 
             if (enableMagnetism)
                 gsap.to(element, { x: 0, y: 0, duration: 0.1 });
@@ -246,15 +143,8 @@ const ParticleCard: React.FC<{
             element.removeEventListener("mouseleave", handleMouseLeave);
             element.removeEventListener("mousemove", handleMouseMove);
             element.removeEventListener("click", handleClick);
-            clearAllParticles();
         };
-    }, [
-        animateParticles,
-        clearAllParticles,
-        enableMagnetism,
-        clickEffect,
-        glowColor,
-    ]);
+    }, [enableMagnetism, clickEffect, glowColor]);
 
     return (
         <div
@@ -440,7 +330,6 @@ const Bento: React.FC<BentoProps> = ({
     enableSpotlight = true,
     enableBorderGlow = true,
     spotlightRadius = DEFAULT_SPOTLIGHT_RADIUS,
-    particleCount = DEFAULT_PARTICLE_COUNT,
     glowColor = DEFAULT_GLOW_COLOR,
     clickEffect = true,
     enableMagnetism = true,
@@ -610,7 +499,6 @@ const Bento: React.FC<BentoProps> = ({
                                 key={index}
                                 className={`${baseClassName} group`}
                                 style={cardStyle}
-                                particleCount={particleCount}
                                 glowColor={glowColor}
                                 clickEffect={clickEffect}
                                 enableMagnetism={enableMagnetism}

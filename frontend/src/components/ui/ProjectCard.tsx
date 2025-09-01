@@ -18,6 +18,7 @@ const ProjectCard: FC<{ project: Project; color: string }> = ({
                     alt={`${project.slug}-cover-image`}
                     className="w-full h-full object-cover"
                 />
+
                 <div className="absolute inset-0 w-[100.1%] h-full pointer-events-none">
                     <RoundedPolygon color={color} />
                 </div>

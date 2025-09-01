@@ -1,6 +1,10 @@
 "use client";
 
-import { NavItems, SocialPlatforms } from "@/constants/constants";
+import {
+    AgencyServices,
+    NavItems,
+    SocialPlatforms,
+} from "@/constants/constants";
 import { motion, Variants } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -29,31 +33,7 @@ const childVariants: Variants = {
 };
 
 const Footer = () => {
-    const titleRef = useRef<HTMLHeadingElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
-
-    useEffect(() => {
-        if (titleRef.current) {
-            const chars = Array.from(titleRef.current.children);
-            gsap.fromTo(
-                chars,
-                { y: 100, opacity: 0 },
-                {
-                    y: 0,
-                    opacity: 1,
-                    stagger: 0.05,
-                    duration: 1,
-                    ease: "power4.out",
-                    scrollTrigger: {
-                        trigger: titleRef.current,
-                        start: "top 90%",
-                        end: "bottom 60%",
-                        scrub: 1,
-                    },
-                }
-            );
-        }
-    }, []);
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -146,7 +126,7 @@ const Footer = () => {
 
     return (
         <motion.footer
-            className="relative bg-gradient-to-b border-t border-purple-300/50 from-slate-950 via-purple-950 to-slate-900 text-white pt-16 pb-8 px-4 sm:px-10 overflow-hidden"
+            className="relative bg-gradient-to-b border-t border-purple-300/50 from-slate-950 via-purple-950/30 to-slate-900 text-white pt-16 pb-8 px-4 sm:px-10 overflow-hidden"
             variants={footerVariants}
             initial="hidden"
             whileInView="visible"
@@ -161,63 +141,11 @@ const Footer = () => {
 
             <div className="mx-auto relative z-10 px-6 sm:px-10">
                 <motion.div
-                    className="text-center mb-16"
-                    variants={childVariants}
-                >
-                    <motion.h2
-                        ref={titleRef}
-                        className="text-6xl md:text-8xl font-black mb-4 bg-gradient-to-r from-purple-400 to-purple-700 bg-clip-text text-transparent"
-                        style={{
-                            textShadow: "0 0 30px rgba(139, 92, 246, 0.5)",
-                        }}
-                    >
-                        <span>C</span>
-                        <span>R</span>
-                        <span>E</span>
-                        <span>A</span>
-                        <span>T</span>
-                        <span>E</span>
-                    </motion.h2>
-                    <motion.p
-                        className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto font-light tracking-wide"
-                        variants={childVariants}
-                    >
-                        Amiyo Creative - Your Partner for Visuals, Stories &
-                        Digital Growth
-                    </motion.p>
-
-                    {/* CTA Section */}
-                    <motion.div
-                        className="mt-6 flex flex-col sm:flex-row gap-6 justify-center items-center"
-                        variants={childVariants}
-                    >
-                        <motion.button
-                            className="cursor-target cursor-none group relative px-8 py-4 bg-gradient-to-r from-purple-600 to-purple-700 rounded-full text-white font-semibold overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/50"
-                            whileHover={{ scale: 1.05, y: -2 }}
-                            whileTap={{ scale: 0.95 }}
-                        >
-                            <span className="relative z-10">
-                                Start Your Project
-                            </span>
-                            <div className="absolute inset-0 bg-gradient-to-r from-pink-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                        </motion.button>
-
-                        <motion.button
-                            className="cursor-target cursor-none px-8 py-4 border-2 border-purple-400 text-purple-400 rounded-full font-semibold hover:bg-purple-800 hover:text-white transition-all duration-300"
-                            whileHover={{ scale: 1.05, y: -2 }}
-                            whileTap={{ scale: 0.95 }}
-                        >
-                            View Portfolio
-                        </motion.button>
-                    </motion.div>
-                </motion.div>
-
-                <motion.div
                     className="grid md:grid-cols-4 place-items-center gap-8 mb-8"
                     variants={childVariants}
                 >
                     {/* About */}
-                    <div className="flex flex-col justify-center md:col-span-2 gap-6 p-6 rounded-2xl bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm border border-white/20">
+                    <div className="flex flex-col justify-center md:col-span-2 gap-6 p-6 rounded-2xl backdrop-blur-sm bg-white/5">
                         <div className="flex items-center space-x-3">
                             <div className="w-12 h-12 rounded-xl flex items-center justify-center">
                                 <Image
@@ -227,34 +155,34 @@ const Footer = () => {
                                     alt="logo"
                                 />
                             </div>
-                            <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                                Amiyo Creative
-                            </h3>
+                            <div>
+                                <h3 className="text-3xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
+                                    Amiyo Creative
+                                </h3>
+                                <p className="text-white leading-relaxed text-lg">
+                                    Creative Visuals for Every Story
+                                </p>
+                            </div>
                         </div>
-                        <p className="text-gray-300 leading-relaxed">
+                        <p className="text-gray-300/90 leading-relaxed">
                             Transforming brands through compelling visual
                             stories and cutting-edge digital experiences.
                         </p>
                         <div className="flex flex-wrap gap-2">
-                            {[
-                                "Video Production",
-                                "Brand Design",
-                                "Digital Marketing",
-                                "Web Development",
-                            ].map((service) => (
+                            {AgencyServices.map((service, idx) => (
                                 <span
-                                    key={service}
-                                    className="px-3 py-1 bg-purple-600/30 text-purple-300 rounded-full text-xs font-medium"
+                                    key={idx}
+                                    className="px-3 py-1 bg-purple-600/30 rounded-full text-xs font-medium"
                                 >
-                                    {service}
+                                    {service.label}
                                 </span>
                             ))}
                         </div>
                     </div>
 
                     {/* Navigation */}
-                    <div className="flex flex-col gap-6 p-6 w-full rounded-2xl bg-gradient-to-br from-cyan-500/10 to-blue-600/10 backdrop-blur-sm border border-cyan-400/20">
-                        <h4 className="font-bold text-cyan-400 text-lg flex items-center">
+                    <div className="flex flex-col gap-6 p-6 w-full rounded-2xl bg-gradient-to-br from-cyan-500/5 to-blue-600/5 backdrop-blur-sm">
+                        <h4 className=" text-cyan-400 text-lg flex items-center">
                             <span className="w-2 h-2 bg-cyan-400 rounded-full mr-3 animate-pulse"></span>
                             Quick Links
                         </h4>
@@ -272,7 +200,6 @@ const Footer = () => {
                                         href={item.href}
                                         className="text-gray-300 hover:text-cyan-400 transition-colors duration-300 flex items-center group cursor-target cursor-none w-fit px-2"
                                     >
-                                        <span className="w-0 h-px bg-cyan-400 transition-all duration-300 group-hover:w-4 mr-0 group-hover:mr-2" />
                                         {item.label}
                                     </Link>
                                 </motion.li>
@@ -281,30 +208,37 @@ const Footer = () => {
                     </div>
 
                     {/* Socials */}
-                    <div className="w-full flex flex-col gap-6 p-6 rounded-2xl bg-gradient-to-br from-yellow-500/10 to-orange-600/10 backdrop-blur-sm border border-yellow-400/20">
-                        <h4 className="font-bold text-yellow-400 text-lg flex items-center">
+                    <div className="w-full flex flex-col gap-6 p-6 rounded-2xl bg-gradient-to-br from-yellow-500/5 to-orange-600/5 backdrop-blur-sm">
+                        <h4 className="text-yellow-400 text-lg flex items-center">
                             <span className="w-2 h-2 bg-yellow-400 rounded-full mr-3 animate-pulse" />
                             Connect
                         </h4>
-                        <div className="grid grid-cols-3 gap-3 place-items-center">
+                        <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full">
                             {SocialPlatforms.map((platform, index) => (
-                                <motion.a
+                                <motion.li
                                     key={index}
-                                    href={platform.url}
-                                    target={platform.target || "_self"}
-                                    rel={
-                                        platform.target
-                                            ? "noopener noreferrer"
-                                            : undefined
-                                    }
-                                    className={`group cursor-target cursor-none relative w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 overflow-hidden ${platform.bgColor} ${platform.borderColor} ${platform.textColor}`}
-                                    whileTap={{ scale: 0.95 }}
+                                    whileHover={{ x: 10 }}
+                                    transition={{
+                                        type: "spring",
+                                        stiffness: 300,
+                                    }}
                                 >
-                                    <platform.icon className="w-5 h-5 relative z-10 transition-colors duration-300" />
-                                    <div className="absolute inset-0 bg-gradient-to-br from-purple-600 to-pink-600 opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
-                                </motion.a>
+                                    <Link
+                                        href={platform.url}
+                                        target={platform.target || "_self"}
+                                        rel={
+                                            platform.target
+                                                ? "noopener noreferrer"
+                                                : undefined
+                                        }
+                                        className="text-gray-300 hover:text-yellow-400 transition-colors duration-300 flex items-center group cursor-target cursor-none w-fit px-2"
+                                    >
+                                        <span className="w-0 h-px bg-yellow-400 transition-all duration-300 group-hover:w-4 mr-0 group-hover:mr-2" />
+                                        {platform.name}
+                                    </Link>
+                                </motion.li>
                             ))}
-                        </div>
+                        </ul>
                     </div>
                 </motion.div>
 

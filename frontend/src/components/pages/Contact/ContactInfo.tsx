@@ -27,7 +27,7 @@ const ContactInfo = () => {
                 className="flex flex-col justify-center items-center p-2"
                 variants={itemVariants}
             >
-                <h1 className="text-3xl font-black mb-4 bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
+                <h1 className="text-3xl font-black mb-4 bg-gradient-to-r from-purple-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
                     Get In Touch
                 </h1>
                 <p className="text-base text-gray-400 leading-relaxed text-center">
@@ -40,7 +40,7 @@ const ContactInfo = () => {
                 className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-4 shadow-lg"
                 variants={itemVariants}
             >
-                <h3 className="text-2xl text-center font-bold mt-2 mb-4 bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
+                <h3 className="text-2xl text-center font-bold mt-2 mb-4 bg-gradient-to-r from-purple-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
                     Let&apos;s Connect
                 </h3>
 
@@ -49,7 +49,7 @@ const ContactInfo = () => {
                         className="flex items-center space-x-4 p-2 rounded-xl hover:bg-white/10 transition-all"
                         variants={itemVariants}
                     >
-                        <FaMapMarkerAlt className="w-6 h-6 text-cyan-400" />
+                        <FaMapMarkerAlt className="w-6 h-6 text-purple-400" />
                         <p className="text-gray-400 text-sm">
                             123 Creative Street
                             <br /> Digital District, CD 12345
@@ -60,7 +60,7 @@ const ContactInfo = () => {
                         className="flex items-center space-x-4 p-2 rounded-xl hover:bg-white/10 transition-all"
                         variants={itemVariants}
                     >
-                        <FaPhone className="w-6 h-6 text-cyan-400" />
+                        <FaPhone className="w-6 h-6 text-purple-400" />
                         <p className="text-gray-400 text-sm">
                             +1 (555) 123-4567
                         </p>
@@ -70,7 +70,7 @@ const ContactInfo = () => {
                         className="flex items-center space-x-4 p-2 rounded-xl hover:bg-white/10 transition-all"
                         variants={itemVariants}
                     >
-                        <FaEnvelope className="w-6 h-6 text-cyan-400" />
+                        <FaEnvelope className="w-6 h-6 text-purple-400" />
                         <p className="text-gray-400 text-sm">
                             hello@amiyocreative.com
                         </p>
@@ -80,7 +80,7 @@ const ContactInfo = () => {
                         className="flex items-center space-x-4 p-2 rounded-xl hover:bg-white/10 transition-all"
                         variants={itemVariants}
                     >
-                        <FaClock className="w-6 h-6 text-cyan-400" />
+                        <FaClock className="w-6 h-6 text-purple-400" />
                         <p className="text-gray-400 text-sm">
                             Mon - Fri: 9:00 AM - 6:00 PM
                             <br /> Weekends: By appointment

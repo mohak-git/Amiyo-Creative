@@ -3,7 +3,11 @@
 import Carousel from "@/components/ui/Carousel";
 import ProjectCard from "@/components/ui/ProjectCard";
 import ScrollStack, { ScrollStackItem } from "@/components/ui/ScrollStack";
-import { categories, mockProjects } from "@/constants/constants";
+import {
+    categories,
+    categoryColors,
+    mockProjects,
+} from "@/constants/constants";
 import Image from "next/image";
 import { useMemo } from "react";
 import { FaChevronDown } from "react-icons/fa";
@@ -28,7 +32,7 @@ const Work = () => {
                 className="absolute blur-lg"
             />
 
-            <div className="relative h-[87vh] w-full flex flex-col gap-10 px-4 sm:px-10 mb-[13vh]">
+            <div className="relative h-[88vh] w-full flex flex-col gap-10 px-4 sm:px-10 mb-[12vh]">
                 <ScrollStack>
                     {/* Heading */}
                     <div className="pt-6 flex flex-col justify-around text-center items-center gap-6">
@@ -60,7 +64,10 @@ const Work = () => {
                         <ScrollStackItem
                             key={cat}
                             id={`category-${cat}`}
-                            className="bg-neutral-900 backdrop-blur-lg text-white flex flex-col gap-8 px-6 py-12 scroll-mt-40"
+                            className="backdrop-blur-md text-white flex flex-col gap-8 px-6 py-12 scroll-mt-40"
+                            // style={{
+                            //     background: categoryColors[cat] ?? "#171717",
+                            // }}
                         >
                             <h2 className="relative text-4xl font-extrabold text-center tracking-wide drop-shadow-[0_0_20px_rgba(139,92,246,0.7)]">
                                 {cat}
@@ -72,7 +79,7 @@ const Work = () => {
                                     <ProjectCard
                                         key={project.id}
                                         project={project}
-                                        color={"#171717"}
+                                        color={categoryColors[cat] ?? "#171717"}
                                     />
                                 )}
                             />

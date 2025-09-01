@@ -8,8 +8,6 @@
 @theme inline {
     --color-background: var(--background);
     --color-foreground: var(--foreground);
-    --font-montserrat-alternates: "Montserrat Alternates", sans-serif;
-
     @keyframes gridMove {
         0% {
             background-position: 0 0;

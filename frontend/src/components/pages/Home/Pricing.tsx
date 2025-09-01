@@ -26,14 +26,14 @@ const childVariants: Variants = {
 const Pricing = () => {
     return (
         <motion.div
-            className="relative min-h-screen w-full overflow-hidden py-16"
+            className="relative min-h-screen w-full overflow-hidden pt-16 pb-4"
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
         >
             {/* Blobs */}
             <motion.div
-                className="absolute -top-20 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-indigo-500/30 blur-3xl"
+                className="absolute -top-20 left-1/2 h-66 w-66 -translate-x-1/2 rounded-full bg-indigo-500/30 blur-3xl"
                 variants={childVariants}
             />
             <motion.div

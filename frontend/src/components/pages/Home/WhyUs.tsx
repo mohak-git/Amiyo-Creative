@@ -17,7 +17,7 @@ const WhyUs = () => {
             <BgWave inverted={false} />
 
             <div
-                className={`relative mx-auto w-full h-full flex flex-col gap-10 px-4 py-16 sm:px-10 ${montserrat.className}`}
+                className={`relative mx-auto w-full h-full flex flex-col gap-10 px-4 pt-16 pb-4 sm:px-10 ${montserrat.className}`}
             >
                 <div className="text-center">
                     <motion.div

@@ -7,6 +7,7 @@ import {
     SocialPlatformProps,
     TestimonialProps,
     ValueItem,
+    VideoTestimonialProps,
 } from "@/constants/types";
 
 import {
@@ -23,6 +24,7 @@ import {
     FaTwitter,
     FaWhatsapp,
 } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 export const NavItems = [
     { label: "Home", href: "/" },
@@ -226,7 +228,6 @@ export const SocialPlatforms: SocialPlatformProps[] = [
     {
         name: "Email",
         icon: FaMailBulk,
-        bgColor: "bg-gray-500/10",
         borderColor: "border-gray-400/30",
         textColor: "text-gray-300",
         url: "mailto:hello@digicraft.one",
@@ -235,63 +236,56 @@ export const SocialPlatforms: SocialPlatformProps[] = [
     {
         name: "Phone",
         icon: FaPhone,
-        bgColor: "bg-teal-500/10",
-        borderColor: "border-teal-500/30",
-        textColor: "text-teal-300",
+        borderColor: "border-gray-500/30",
+        textColor: "text-gray-300",
         url: "tel:+918299797516",
         target: "_self",
     },
     {
         name: "WhatsApp",
         icon: FaWhatsapp,
-        bgColor: "bg-green-500/10",
         borderColor: "border-green-500/30",
-        textColor: "text-green-300",
+        textColor: "text-green-400",
         url: "https://wa.me/+918299797516",
         target: "_blank",
     },
     {
         name: "Instagram",
         icon: FaInstagram,
-        bgColor: "bg-pink-500/10",
         borderColor: "border-pink-500/30",
-        textColor: "text-pink-300",
+        textColor: "text-pink-400",
         url: "https://www.instagram.com/digicraft_technologies/",
         target: "_blank",
     },
     {
         name: "LinkedIn",
         icon: FaLinkedin,
-        bgColor: "bg-blue-500/10",
         borderColor: "border-blue-500/30",
-        textColor: "text-blue-300",
+        textColor: "text-blue-400",
         url: "https://www.linkedin.com/company/digicraft-one/",
         target: "_blank",
     },
     {
-        name: "Twitter",
-        icon: FaTwitter,
-        bgColor: "bg-sky-500/10",
-        borderColor: "border-sky-500/30",
-        textColor: "text-sky-300",
+        name: "X",
+        icon: FaXTwitter,
+        borderColor: "border-white/30",
+        textColor: "text-white",
         url: "https://twitter.com/digicrafttechnologies",
         target: "_blank",
     },
     {
         name: "Telegram",
         icon: FaTelegram,
-        bgColor: "bg-cyan-500/10",
         borderColor: "border-cyan-500/30",
-        textColor: "text-cyan-300",
+        textColor: "text-cyan-500",
         url: "https://t.me/digicrafttechnologies",
         target: "_blank",
     },
     {
         name: "Website",
         icon: FaGlobe,
-        bgColor: "bg-purple-600/10",
         borderColor: "border-purple-600/30",
-        textColor: "text-purple-300",
+        textColor: "text-purple-400",
         url: "https://www.digicraft.one/",
         target: "_blank",
     },
@@ -368,9 +362,9 @@ export const PricingData: PricingDataProps[] = [
             "Dedicated Account Manager",
         ],
         popular: false,
-        primary: "from-amber-400 to-yellow-300",
-        accent: "text-amber-400",
-        border: "border-amber-400/60",
+        primary: "from-orange-400 to-amber-700",
+        accent: "text-orange-400",
+        border: "border-orange-400/60",
         hoverGlow: "hover:shadow-[0_24px_40px_-8px_rgba(245,158,11,0.4)]",
     },
 ];
@@ -475,6 +469,24 @@ export const Testimonials: TestimonialProps[] = [
         rating: 5,
         content:
             "They transformed our outdated brand into something fresh, modern, and impactful. The rebranding process was smooth, collaborative, and delivered beyond expectations.",
+    },
+];
+
+export const VideoTestimonials: VideoTestimonialProps[] = [
+    {
+        id: "v1",
+        videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        title: "Client Story - AgileWorks",
+    },
+    {
+        id: "v2",
+        videoUrl: "https://www.youtube.com/embed/tgbNymZ7vqY",
+        title: "Case Study - NextGen Solutions",
+    },
+    {
+        id: "v3",
+        videoUrl: "https://www.youtube.com/embed/oHg5SJYRHA0",
+        title: "Success Journey - TechVision",
     },
 ];
 
@@ -808,16 +820,16 @@ export const categories = [
 ];
 
 export const categoryColors: Record<string, string> = {
-    Photography: "#38bdf8",
-    "Design & Branding": "#818cf8",
-    "Web & Digital Projects": "#06b6d4",
-    "Editing & Post-Production": "#a78bfa",
-    "Cinematography & Videography": "#e879f9",
+    Photography: "#38b",
+    "Design & Branding": "#818",
+    "Web & Digital Projects": "#06b",
+    "Editing & Post-Production": "#a78",
+    "Cinematography & Videography": "#e87",
 };
 
 export const AgencyServices: AgencyServicesProps[] = [
-    { icon: FaCamera, label: "Photography", angle: "rotate-12" },
-    { icon: FaPlay, label: "Video Production", angle: "-rotate-6" },
-    { icon: FaPalette, label: "Brand Design", angle: "rotate-3" },
-    { icon: FaCode, label: "Web Development", angle: "-rotate-12" },
+    { icon: FaCamera, label: "Photography", angle: "rotate-0" },
+    { icon: FaPlay, label: "Video Production", angle: "-rotate-0" },
+    { icon: FaPalette, label: "Brand Design", angle: "rotate-0" },
+    { icon: FaCode, label: "Web Development", angle: "-rotate-0" },
 ];

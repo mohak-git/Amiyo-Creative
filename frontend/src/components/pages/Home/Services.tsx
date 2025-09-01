@@ -44,7 +44,7 @@ const Services = () => {
                 <div className="absolute -bottom-20 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-indigo-500/30 blur-3xl" />
             </div>
 
-            <div className="relative mx-auto flex w-full flex-col gap-10 px-4 py-16 sm:px-10">
+            <div className="relative mx-auto flex w-full flex-col gap-10 px-4 pt-16 pb-4 sm:px-10">
                 {/* Text */}
                 <motion.section
                     className="mx-auto w-full"
@@ -54,29 +54,29 @@ const Services = () => {
                     viewport={{ once: true, amount: 0.3 }}
                 >
                     <motion.div
-                        className="mx-auto max-w-3xl text-center"
+                        className="mx-auto max-w-5xl text-center"
                         variants={fadeUp}
                     >
                         <h1 className="bg-gradient-to-r from-fuchsia-400 via-violet-300 to-indigo-300 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent sm:text-5xl">
                             Our Services
                         </h1>
-                        <p className="mx-auto mt-5 max-w-2xl text-balance text-base leading-relaxed text-white/80 sm:text-lg">
+                        <p className="mx-auto mt-5 max-w-6xl text-balance text-base leading-relaxed text-white/80 sm:text-lg">
                             At{" "}
                             <span className="font-semibold text-white">
                                 Amiyo Creative
                             </span>
                             , we partner with brands, startups, influencers, and
-                            individuals—across India and worldwide. Booking us
+                            individuals — across India and worldwide. Booking us
                             is simple: reach out via WhatsApp, Instagram,
                             LinkedIn, Twitter, Telegram, Email, Phone, or
                             directly through our Website.
                         </p>
                         <p className="mx-auto mt-4 max-w-3xl text-balance text-base leading-relaxed text-white/75 sm:text-lg">
-                            We don’t box ourselves into categories. We assemble
-                            the right squad—cinematographers, photographers,
-                            designers, editors, developers, marketers, and
-                            strategists—to deliver end-to-end outcomes that
-                            actually move the needle.
+                            We don&apos;t box ourselves into categories. We
+                            assemble the right squad — cinematographers,
+                            photographers, designers, editors, developers,
+                            marketers, and strategists — to deliver end-to-end
+                            outcomes that actually move the needle.
                         </p>
                     </motion.div>
 
@@ -95,10 +95,10 @@ const Services = () => {
                                         ? "noopener noreferrer"
                                         : undefined
                                 }
-                                className={`inline-flex cursor-none cursor-target items-center gap-2 rounded-full border px-3 py-1.5 text-sm backdrop-blur transition-all duration-200 hover:scale-105 hover:border-opacity-50 ${platform.bgColor} ${platform.borderColor} ${platform.textColor}`}
+                                className={`inline-flex cursor-none cursor-target items-center gap-2 rounded-full border p-3 text-sm backdrop-blur transition-all duration-200 hover:scale-105 hover:border-opacity-50 ${platform.borderColor} ${platform.textColor}`}
                             >
-                                <platform.icon className="h-4 w-4" />{" "}
-                                {platform.name}
+                                <platform.icon className="h-6 w-6" />{" "}
+                                {/* {platform.name} */}
                             </a>
                         ))}
                     </motion.div>

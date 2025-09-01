@@ -62,7 +62,7 @@ const ContactForm = () => {
                 className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-8 shadow-xl"
                 variants={itemVariants}
             >
-                <h2 className="text-3xl font-bold mb-8 bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
+                <h2 className="text-3xl font-bold mb-8 bg-gradient-to-r from-purple-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
                     Start a Project
                 </h2>
 
@@ -75,12 +75,12 @@ const ContactForm = () => {
                         <motion.div className="group" variants={itemVariants}>
                             <label
                                 htmlFor="name"
-                                className="block text-sm font-medium text-gray-300 mb-2"
+                                className="cursor-none block text-sm font-medium text-gray-300 mb-2"
                             >
                                 Full Name *
                             </label>
                             <div className="relative">
-                                <FaUser className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 group-focus-within:text-cyan-400 transition-colors" />
+                                <FaUser className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 group-focus-within:text-purple-400 transition-colors" />
                                 <input
                                     id="name"
                                     type="text"
@@ -95,12 +95,12 @@ const ContactForm = () => {
                         <motion.div className="group" variants={itemVariants}>
                             <label
                                 htmlFor="email"
-                                className="block text-sm font-medium text-gray-300 mb-2"
+                                className="cursor-none block text-sm font-medium text-gray-300 mb-2"
                             >
                                 Email Address *
                             </label>
                             <div className="relative">
-                                <FaEnvelope className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 group-focus-within:text-cyan-400 transition-colors" />
+                                <FaEnvelope className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 group-focus-within:text-purple-400 transition-colors" />
                                 <input
                                     id="email"
                                     type="email"
@@ -116,12 +116,12 @@ const ContactForm = () => {
                     <motion.div className="group" variants={itemVariants}>
                         <label
                             htmlFor="phone"
-                            className="block text-sm font-medium text-gray-300 mb-2"
+                            className="cursor-none block text-sm font-medium text-gray-300 mb-2"
                         >
                             Phone Number *
                         </label>
                         <div className="relative">
-                            <FaPhone className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 group-focus-within:text-cyan-400 transition-colors" />
+                            <FaPhone className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 group-focus-within:text-purple-400 transition-colors" />
                             <input
                                 id="phone"
                                 type="tel"
@@ -136,7 +136,7 @@ const ContactForm = () => {
                     <motion.div className="group" variants={itemVariants}>
                         <label
                             htmlFor="message"
-                            className="block text-sm font-medium text-gray-300 mb-2"
+                            className="cursor-none block text-sm font-medium text-gray-300 mb-2"
                         >
                             Message *
                         </label>
@@ -153,7 +153,7 @@ const ContactForm = () => {
                     <motion.button
                         type="submit"
                         disabled={isPending}
-                        className="cursor-none cursor-target w-full bg-gradient-to-r from-cyan-600 to-indigo-600 text-white font-semibold py-3 px-8 rounded-xl flex items-center justify-center space-x-2 disabled:opacity-50"
+                        className="cursor-none cursor-target w-full bg-gradient-to-r from-purple-700 to-purple-600 text-white font-semibold py-3 px-8 rounded-xl flex items-center justify-center space-x-2 disabled:opacity-50"
                         whileHover={{ scale: 1.02, y: -2 }}
                         whileTap={{ scale: 0.98 }}
                     >

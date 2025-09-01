@@ -1,14 +1,18 @@
 "use client";
 
 import { RatingStars } from "@/components/elements/Smol";
-import { Testimonials } from "@/constants/constants";
-import { TestimonialProps } from "@/constants/types";
+import { Testimonials, VideoTestimonials } from "@/constants/constants";
+import {
+    TestimonialProps,
+    TestimonialVariant,
+    VideoTestimonialProps,
+} from "@/constants/types";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import React, { useMemo } from "react";
+import { FC, useMemo } from "react";
 import { FaQuoteLeft } from "react-icons/fa";
 
-const TestimonialCard: React.FC<{ t: TestimonialProps }> = ({ t }) => {
+const TestimonialCard: FC<{ t: TestimonialProps }> = ({ t }) => {
     return (
         <div className="relative h-fit bg-gray-900/40 backdrop-blur-sm border border-purple-500/20 rounded-2xl p-2 mx-4 min-w-[450px] max-w-[500px] hover:border-purple-400/40 transition-all duration-300">
             {/* Glow */}
@@ -49,11 +53,45 @@ const TestimonialCard: React.FC<{ t: TestimonialProps }> = ({ t }) => {
     );
 };
 
-const TestimonialRow: React.FC<{
-    testimonials: TestimonialProps[];
+const VideoTestimonialCard: FC<{ t: VideoTestimonialProps }> = ({ t }) => {
+    return (
+        <div className="relative h-fit bg-gray-900/40 backdrop-blur-sm border border-purple-500/20 rounded-2xl p-2 mx-4 min-w-[450px] max-w-[500px] hover:border-purple-400/40 transition-all duration-300">
+            {/* Glow */}
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-2xl blur opacity-50"></div>
+
+            <div className="relative bg-gray-900/60 rounded-2xl p-4">
+                <div className="aspect-video w-full overflow-hidden rounded-xl border border-purple-500/30">
+                    <iframe
+                        src={t.videoUrl}
+                        title={t.title || "Testimonial Video"}
+                        className="w-full h-full rounded-xl"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                    />
+                </div>
+                {t.title && (
+                    <h4 className="text-white font-semibold text-sm mt-4">
+                        {t.title}
+                    </h4>
+                )}
+            </div>
+        </div>
+    );
+};
+
+interface TestimonialRowProps<T> {
+    testimonials: T[];
     speed?: number;
     direction?: "left" | "right";
-}> = ({ testimonials, speed = 40, direction = "left" }) => {
+    variant: TestimonialVariant;
+}
+
+const TestimonialRow = <T extends TestimonialProps | VideoTestimonialProps>({
+    testimonials,
+    speed = 40,
+    direction = "left",
+    variant,
+}: TestimonialRowProps<T>) => {
     return (
         <div className="relative overflow-hidden w-full">
             <div
@@ -62,13 +100,33 @@ const TestimonialRow: React.FC<{
                 }`}
                 style={{ animationDuration: `${speed}s` }}
             >
-                {testimonials.map((t, i) => (
-                    <TestimonialCard key={`a-${i}`} t={t} />
-                ))}
+                {testimonials.map((t, i) =>
+                    variant === "text" ? (
+                        <TestimonialCard
+                            key={`a-${i}`}
+                            t={t as TestimonialProps}
+                        />
+                    ) : (
+                        <VideoTestimonialCard
+                            key={`a-${i}`}
+                            t={t as VideoTestimonialProps}
+                        />
+                    )
+                )}
 
-                {testimonials.map((t, i) => (
-                    <TestimonialCard key={`b-${i}`} t={t} />
-                ))}
+                {testimonials.map((t, i) =>
+                    variant === "text" ? (
+                        <TestimonialCard
+                            key={`a-${i}`}
+                            t={t as TestimonialProps}
+                        />
+                    ) : (
+                        <VideoTestimonialCard
+                            key={`a-${i}`}
+                            t={t as VideoTestimonialProps}
+                        />
+                    )
+                )}
             </div>
 
             <div className="pointer-events-none absolute top-0 left-0 w-40 h-full bg-gradient-to-r from-gray-900 via-gray-900/60 to-transparent z-10"></div>
@@ -108,8 +166,8 @@ const TestimonialRow: React.FC<{
 };
 
 const TestimonialSection: React.FC = () => {
-    const firstRowTestimonials = useMemo(() => Testimonials.slice(0, 5), []);
-    const secondRowTestimonials = useMemo(() => Testimonials.slice(5, 10), []);
+    const textTestimonials = useMemo(() => Testimonials, []);
+    const videoTestimonials = useMemo(() => VideoTestimonials, []);
 
     return (
         <div className="relative min-h-screen w-full bg-gradient-to-b via-purple-900/20 overflow-hidden">
@@ -147,8 +205,9 @@ const TestimonialSection: React.FC = () => {
                         viewport={{ once: true }}
                     >
                         <TestimonialRow
-                            testimonials={firstRowTestimonials}
+                            testimonials={textTestimonials}
                             direction="left"
+                            variant="text"
                         />
                     </motion.div>
 
@@ -159,8 +218,9 @@ const TestimonialSection: React.FC = () => {
                         viewport={{ once: true }}
                     >
                         <TestimonialRow
-                            testimonials={secondRowTestimonials}
+                            testimonials={videoTestimonials}
                             direction="right"
+                            variant="video"
                         />
                     </motion.div>
                 </div>
