@@ -35,7 +35,7 @@ export default function SplineScene({
         <div ref={containerRef} className="relative w-full" style={{ height }}>
             {!loaded && (
                 <div className="absolute inset-0 flex items-center justify-center text-white">
-                    Loading 3D…
+                    Setting up the perfect shot...
                 </div>
             )}
             <Spline scene={sceneUrl} onLoad={() => setLoaded(true)} />

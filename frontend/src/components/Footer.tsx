@@ -6,29 +6,29 @@ import {
     SocialPlatforms,
 } from "@/constants/constants";
 import { motion, Variants } from "framer-motion";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 
-gsap.registerPlugin(ScrollTrigger);
-
 const footerVariants: Variants = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 0, y: 30 },
     visible: {
         opacity: 1,
         y: 0,
-        transition: { duration: 0.8, ease: "easeOut", staggerChildren: 0.2 },
+        transition: {
+            duration: 0.6,
+            ease: "easeOut",
+            staggerChildren: 0.1,
+        },
     },
 };
 
-const childVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
+const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 15 },
     visible: {
         opacity: 1,
         y: 0,
-        transition: { duration: 0.6, ease: "easeOut" },
+        transition: { duration: 0.5, ease: "easeOut" },
     },
 };
 
@@ -126,13 +126,12 @@ const Footer = () => {
 
     return (
         <motion.footer
-            className="relative bg-gradient-to-b border-t border-purple-300/50 from-slate-950 via-purple-950/30 to-slate-900 text-white pt-16 pb-8 px-4 sm:px-10 overflow-hidden"
+            className="relative bg-slate-950 border-t border-slate-800 text-gray-300"
             variants={footerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
         >
-            {/* Canvas */}
             <canvas
                 ref={canvasRef}
                 className="absolute inset-0 w-full h-full opacity-60"
@@ -140,147 +139,199 @@ const Footer = () => {
             />
 
             <div className="mx-auto relative z-10 px-6 sm:px-10">
-                <motion.div
-                    className="grid md:grid-cols-4  gap-8 mb-8"
-                    variants={childVariants}
-                >
-                    {/* About */}
-                    <div className="flex flex-col justify-center md:col-span-2 gap-6 p-6 rounded-2xl backdrop-blur-sm bg-white/5">
-                        <div className="flex items-center space-x-3">
-                            <div className="w-12 h-12 rounded-xl flex items-center justify-center">
+                {/* Main Footer Content */}
+                <div className="w-full mx-auto py-12 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+                    {/* Company Info */}
+                    <motion.div
+                        className="lg:col-span-6"
+                        variants={itemVariants}
+                    >
+                        <div className="flex items-center mb-4">
+                            <Link
+                                href="/"
+                                target="_self"
+                                rel="noopener noreferrer"
+                                className="w-10 h-10 mr-3 cursor-none cursor-target"
+                            >
                                 <Image
                                     src="logo.svg"
-                                    width={100}
-                                    height={100}
-                                    alt="logo"
+                                    width={40}
+                                    height={40}
+                                    alt="Amiyo Creative Logo"
+                                    className="w-full h-full"
                                 />
-                            </div>
+                            </Link>
                             <div>
-                                <h3 className="text-3xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
+                                <h3 className="text-xl font-semibold text-white">
                                     Amiyo Creative
                                 </h3>
-                                <p className="text-white leading-relaxed text-lg">
+                                <p className="text-sm text-gray-400">
                                     Creative Visuals for Every Story
                                 </p>
                             </div>
                         </div>
-                        <p className="text-gray-300/90 leading-relaxed">
-                            Transforming brands through compelling visual
-                            stories and cutting-edge digital experiences.
-                        </p>
-                        <div className="flex flex-wrap gap-2">
-                            {AgencyServices.map((service, idx) => (
-                                <span
-                                    key={idx}
-                                    className="px-3 py-1 bg-purple-600/30 rounded-full text-xs font-medium"
-                                >
-                                    {service.label}
-                                </span>
-                            ))}
-                        </div>
-                    </div>
 
-                    {/* Navigation */}
-                    <div className="flex flex-col gap-6 p-6 w-full rounded-2xl bg-gradient-to-br from-cyan-500/5 to-blue-600/5 backdrop-blur-sm">
-                        <h4 className=" text-cyan-400 text-lg flex items-center">
-                            <span className="w-2 h-2 bg-cyan-400 rounded-full mr-3 animate-pulse"></span>
-                            Quick Links
+                        <p className="text-gray-400 mb-6 leading-relaxed max-w-lg">
+                            Transforming brands through compelling visual
+                            stories and cutting-edge digital experiences. We
+                            bring your vision to life with creativity and
+                            precision.
+                        </p>
+
+                        {/* Contact Info */}
+                        <div className="space-y-2 text-sm">
+                            <p className="text-gray-400">
+                                <span className="text-white font-medium">
+                                    Email:
+                                </span>{" "}
+                                <a
+                                    href="mailto:hello@digicraft.one"
+                                    className="cursor-none cursor-target px-2"
+                                >
+                                    hello@digicraft.one
+                                </a>
+                            </p>
+                            <p className="text-gray-400">
+                                <span className="text-white font-medium">
+                                    Phone:
+                                </span>{" "}
+                                <a
+                                    href="tel:+918299797516"
+                                    className="cursor-none cursor-target px-2"
+                                >
+                                    +91 82997 97516
+                                </a>
+                            </p>
+                        </div>
+                    </motion.div>
+
+                    {/* Navigation Links */}
+                    <motion.div
+                        className="lg:col-span-2"
+                        variants={itemVariants}
+                    >
+                        <h4 className="text-white font-semibold mb-4 text-sm uppercase tracking-wide">
+                            Navigation
                         </h4>
                         <ul className="space-y-3">
                             {NavItems.map((item, index) => (
-                                <motion.li
-                                    key={index}
-                                    whileHover={{ x: 10 }}
-                                    transition={{
-                                        type: "spring",
-                                        stiffness: 300,
-                                    }}
-                                >
+                                <li key={index}>
                                     <Link
                                         href={item.href}
-                                        className="text-gray-300 hover:text-cyan-400 transition-colors duration-300 flex items-center group cursor-target cursor-none w-fit px-2"
+                                        className="text-gray-400 hover:text-white transition-colors duration-200 text-sm cursor-none cursor-target px-2 py-1"
                                     >
                                         {item.label}
                                     </Link>
-                                </motion.li>
+                                </li>
                             ))}
                         </ul>
-                    </div>
+                    </motion.div>
 
-                    {/* Socials */}
-                    <div className="w-full flex flex-col gap-6 p-6 rounded-2xl bg-gradient-to-br from-yellow-500/5 to-orange-600/5 backdrop-blur-sm">
-                        <h4 className="text-yellow-400 text-lg flex items-center">
-                            <span className="w-2 h-2 bg-yellow-400 rounded-full mr-3 animate-pulse" />
-                            Connect
+                    {/* Services */}
+                    <motion.div
+                        className="lg:col-span-2"
+                        variants={itemVariants}
+                    >
+                        <h4 className="text-white font-semibold mb-4 text-sm uppercase tracking-wide">
+                            Services
                         </h4>
-                        <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full">
-                            {SocialPlatforms.map((platform, index) => (
-                                <motion.li
-                                    key={index}
-                                    whileHover={{ x: 10 }}
-                                    transition={{
-                                        type: "spring",
-                                        stiffness: 300,
-                                    }}
-                                >
+
+                        <ul className="space-y-3">
+                            {AgencyServices.map((service, index) => (
+                                <li key={index}>
                                     <Link
-                                        href={platform.url}
-                                        target={platform.target || "_self"}
-                                        rel={
-                                            platform.target
-                                                ? "noopener noreferrer"
-                                                : undefined
-                                        }
-                                        className="text-gray-300 hover:text-yellow-400 transition-colors duration-300 flex items-center group cursor-target cursor-none w-fit px-2"
+                                        href={`/work#${service.label}`}
+                                        className="text-gray-400 hover:text-white transition-colors duration-200 text-sm cursor-none cursor-target px-2 py-1"
                                     >
-                                        <span className="w-0 h-px bg-yellow-400 transition-all duration-300 group-hover:w-4 mr-0 group-hover:mr-2" />
-                                        {platform.name}
+                                        {service.label}
                                     </Link>
-                                </motion.li>
+                                </li>
                             ))}
                         </ul>
-                    </div>
-                </motion.div>
+                    </motion.div>
 
+                    {/* Social Media */}
+                    <motion.div
+                        className="lg:col-span-2"
+                        variants={itemVariants}
+                    >
+                        <h4 className="text-white font-semibold mb-4 text-sm uppercase tracking-wide">
+                            Follow Us
+                        </h4>
+                        <ul className="space-y-3">
+                            {SocialPlatforms.slice(2, 7).map(
+                                (platform, index) => (
+                                    <li key={index}>
+                                        <Link
+                                            href={platform.url}
+                                            target={platform.target || "_self"}
+                                            rel={
+                                                platform.target
+                                                    ? "noopener noreferrer"
+                                                    : undefined
+                                            }
+                                            className="max-w-30 text-gray-400 hover:text-white transition-colors duration-200 text-sm flex items-center group gap-2 cursor-none cursor-target"
+                                        >
+                                            <platform.icon
+                                                className={`h-4 w-4 ${platform.textColor}`}
+                                            />
+
+                                            {platform.name}
+                                        </Link>
+                                    </li>
+                                )
+                            )}
+                        </ul>
+                    </motion.div>
+                </div>
+
+                {/* Bottom Bar */}
                 <motion.div
-                    className="border-t border-gradient-to-r from-transparent via-gray-700 to-transparent pt-4"
-                    variants={childVariants}
+                    className="border-t border-slate-800 bg-slate-950"
+                    variants={itemVariants}
                 >
-                    <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-                        <div className="flex items-center space-x-4">
-                            <p className="text-gray-400 text-sm">
-                                &copy; 2025 Amiyo Creative. All Rights Reserved
+                    <div className="w-full mx-auto py-6 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                        <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4 text-sm text-gray-500">
+                            <p>
+                                &copy; 2025 Amiyo Creative. All rights reserved.
                             </p>
+                            <div className="flex space-x-4">
+                                <Link
+                                    href="/privacy"
+                                    className="cursor-none cursor-target px-2 hover:text-gray-300 transition-colors duration-200"
+                                >
+                                    Privacy Policy
+                                </Link>
+                                <Link
+                                    href="/terms"
+                                    className="cursor-none cursor-target px-2 hover:text-gray-300 transition-colors duration-200"
+                                >
+                                    Terms of Service
+                                </Link>
+                                <Link
+                                    href="/cookies"
+                                    className="cursor-none cursor-target px-2 hover:text-gray-300 transition-colors duration-200"
+                                >
+                                    Cookie Policy
+                                </Link>
+                            </div>
                         </div>
 
-                        <div className="flex items-center space-x-6 text-sm text-gray-400">
+                        <div className="flex items-center text-sm text-gray-500">
+                            <span className="mr-2">Crafted by</span>
                             <Link
-                                href="/privacy"
-                                className="hover:text-purple-400 transition-colors duration-300 p-1 cursor-none cursor-target"
+                                href="https://www.digicraft.one"
+                                className="flex items-center hover:text-gray-300 transition-colors duration-200 cursor-none cursor-target px-1"
                             >
-                                Privacy Policy
+                                <Image
+                                    src="logo.svg"
+                                    width={20}
+                                    height={20}
+                                    alt="DigiCraft Logo"
+                                    className="mr-1"
+                                />
+                                DigiCraft
                             </Link>
-                            <Link
-                                href="/terms"
-                                className="hover:text-purple-400 transition-colors duration-300 p-1 cursor-none cursor-target"
-                            >
-                                Terms & Conditions
-                            </Link>
-                            <span className="w-1 h-1 bg-purple-400 rounded-full animate-pulse"></span>
-                            <span className="justify-center items-center text-purple-400 font-medium flex">
-                                Crafted by{" "}
-                                <Link
-                                    href={"https://www.digicraft.one"}
-                                    className="cursor-none cursor-target"
-                                >
-                                    <Image
-                                        src="logo.svg"
-                                        width={30}
-                                        height={30}
-                                        alt="logo"
-                                    />
-                                </Link>
-                            </span>
                         </div>
                     </div>
                 </motion.div>

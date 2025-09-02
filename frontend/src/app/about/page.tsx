@@ -241,6 +241,7 @@ const AboutPage: FC = () => {
                 </div>
             </section>
 
+            {/* FAWQ */}
             <section className="py-24 max-w-7xl mx-auto px-6 lg:px-8">
                 <SectionHeading title="FAQs" />
                 <div className="space-y-6">

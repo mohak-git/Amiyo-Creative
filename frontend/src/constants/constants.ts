@@ -281,14 +281,6 @@ export const SocialPlatforms: SocialPlatformProps[] = [
         url: "https://t.me/digicrafttechnologies",
         target: "_blank",
     },
-    {
-        name: "Website",
-        icon: FaGlobe,
-        borderColor: "border-purple-600/30",
-        textColor: "text-purple-400",
-        url: "https://www.digicraft.one/",
-        target: "_blank",
-    },
 ];
 
 export const PricingData: PricingDataProps[] = [
