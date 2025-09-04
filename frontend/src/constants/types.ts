@@ -1,27 +1,35 @@
+import { Url } from "next/dist/shared/lib/router/router";
+import { ComponentType } from "react";
 import { IconType } from "react-icons";
 
 export interface ValueItem {
     label: string;
     value: number;
-    suffix: string;
 }
 
+export type ServicesTypes =
+    | "Cinematography-and-Videography"
+    | "Photography"
+    | "Design-and-Branding"
+    | "Post-Production"
+    | "Web-and-Digital"
+    | "Marketing";
+
 export interface ServicesCardProps {
-    color?: string;
     title: string;
     description: string;
-    services: string[];
-    tags: string[];
+    service: ServicesTypes;
     image: string;
     cta: string;
 }
 
 export interface SocialPlatformProps {
     name: string;
-    icon: React.ComponentType<{ className?: string }>;
+    icon: ComponentType<{ className?: string }>;
     borderColor: string;
     textColor: string;
     url: string;
+    value: string;
     target?: "_blank" | "_self" | "_parent" | "_top";
 }
 
@@ -39,6 +47,8 @@ export interface PricingDataProps {
     hoverGlow: string;
 }
 
+export type TestimonialVariant = "text" | "video";
+
 export interface TestimonialProps {
     id: string;
     name: string;
@@ -48,8 +58,6 @@ export interface TestimonialProps {
     rating: number;
     content: string;
 }
-
-export type TestimonialVariant = "text" | "video";
 
 export interface VideoTestimonialProps {
     id: string;
@@ -99,9 +107,9 @@ export interface Project {
     title: string;
     slug: string;
     description: string;
-    category: string;
+    category: ServicesTypes;
     coverImage: StrapiMedia;
-    projectUrl?: string;
+    projectUrl?: Url;
     technologies?: string[];
     clientName?: string;
     completionDate?: string;
@@ -112,5 +120,6 @@ export interface Project {
 export interface AgencyServicesProps {
     icon: IconType;
     label: string;
-    angle: string;
+    service: ServicesTypes;
+    color: string;
 }

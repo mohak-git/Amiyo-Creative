@@ -648,7 +648,7 @@ class App {
             this.renderer.gl &&
             this.renderer.gl.canvas.parentNode
         ) {
-            this.renderer.gl.canvas.parentNode.removeChild(
+            this.renderer.gl.canvas.parentNode?.removeChild(
                 this.renderer.gl.canvas as HTMLCanvasElement
             );
         }
@@ -722,8 +722,12 @@ export default function CircularGallery({
                         color: textColor,
                     }}
                 >
-                    <h2 className="text-xl font-bold">{item.heading}</h2>
-                    <p className="text-sm opacity-70 max-w-80">{item.subheading}</p>
+                    <h2 className="text-xl 3xl:text-3xl font-bold">
+                        {item.heading}
+                    </h2>
+                    <p className="text-sm 3xl:text-xl opacity-70 max-w-80 3xl:max-w-96">
+                        {item.subheading}
+                    </p>
                 </div>
             ))}
         </div>

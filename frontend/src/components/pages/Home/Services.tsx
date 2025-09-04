@@ -29,7 +29,7 @@ const Services = () => {
     };
 
     return (
-        <div className="relative min-h-screen w-full overflow-hidden">
+        <div className="relative w-full overflow-hidden">
             {/* Background */}
             <div className="pointer-events-none absolute inset-0 -z-20">
                 <div className="absolute inset-0 bg-[radial-gradient(600px_400px_at_10%_80%,rgba(217,70,239,0.25),transparent_60%),radial-gradient(700px_500px_at_90%_70%,rgba(99,102,241,0.25),transparent_65%)]" />
@@ -57,10 +57,10 @@ const Services = () => {
                         className="mx-auto max-w-5xl text-center"
                         variants={fadeUp}
                     >
-                        <h1 className="bg-gradient-to-r from-fuchsia-400 via-violet-300 to-indigo-300 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent sm:text-5xl">
+                        <h1 className="bg-gradient-to-r from-fuchsia-400 via-violet-300 to-indigo-300 bg-clip-text text-4xl 3xl:text-6xl font-extrabold tracking-tight text-transparent sm:text-5xl">
                             Our Services
                         </h1>
-                        <p className="mx-auto mt-5 max-w-6xl text-balance text-base leading-relaxed text-white/80 sm:text-lg">
+                        <p className="mx-auto mt-5 max-w-6xl text-balance text-base leading-relaxed text-white/80 sm:text-lg 3xl:text-2xl">
                             At{" "}
                             <span className="font-semibold text-white">
                                 Amiyo Creative
@@ -71,7 +71,7 @@ const Services = () => {
                             LinkedIn, Twitter, Telegram, Email, Phone, or
                             directly through our Website.
                         </p>
-                        <p className="mx-auto mt-4 max-w-3xl text-balance text-base leading-relaxed text-white/75 sm:text-lg">
+                        <p className="mx-auto mt-4 max-w-3xl text-balance text-base leading-relaxed text-white/75 sm:text-lg 3xl:text-2xl">
                             We don&apos;t box ourselves into categories. We
                             assemble the right squad — cinematographers,
                             photographers, designers, editors, developers,
@@ -97,7 +97,7 @@ const Services = () => {
                                 }
                                 className={`inline-flex cursor-none cursor-target items-center gap-2 rounded-full border p-3 text-sm backdrop-blur transition-all duration-200 hover:scale-105 hover:border-opacity-50 ${platform.borderColor} ${platform.textColor}`}
                             >
-                                <platform.icon className="h-6 w-6" />{" "}
+                                <platform.icon className="size-6 3xl:size-8" />
                                 {/* {platform.name} */}
                             </a>
                         ))}

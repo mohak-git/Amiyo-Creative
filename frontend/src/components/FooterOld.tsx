@@ -126,7 +126,7 @@ const Footer = () => {
 
     return (
         <motion.footer
-            className="relative bg-gradient-to-b border-t border-purple-300/50 from-slate-950 via-purple-950/30 to-slate-900 text-white pt-16 pb-8 px-4 sm:px-10 overflow-hidden"
+            className="relative bg-gradient-to-b border-t border-purple-300/50 from-slate-950 via-purple-950/30 to-slate-900 text-white pt-16 pb-8 px-4 sm:px-10 3xl:px-30 overflow-hidden"
             variants={footerVariants}
             initial="hidden"
             whileInView="visible"

@@ -11,7 +11,7 @@ const SearchBar = () => {
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
-            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+            if ((e.ctrlKey || e.metaKey) && e.key?.toLowerCase() === "k") {
                 e.preventDefault();
                 toggleSearch();
             }

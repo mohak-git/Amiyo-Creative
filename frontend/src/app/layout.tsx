@@ -7,6 +7,14 @@ import GoToTop from "@/components/ui/GoToTop";
 import ScrollBar from "@/components/ui/ScrollBar";
 import { ReactNode } from "react";
 import "./globals.css";
+import { Inter } from "next/font/google";
+
+const inter = Inter({
+    subsets: ["latin"],
+    variable: "--font-inter",
+    display: "swap",
+    preload: true,
+});
 
 export default function RootLayout({
     children,
@@ -14,8 +22,12 @@ export default function RootLayout({
     children: ReactNode;
 }>) {
     return (
-        <html lang="en" suppressHydrationWarning>
-            <body className="min-h-screen overflow-x-hidden ">
+        <html
+            lang="en"
+            suppressHydrationWarning
+            className={`${inter.variable} `}
+        >
+            <body className="min-h-screen overflow-x-hidden">
                 <ReactQuery>
                     <ScrollBar />
                     <Cursor />

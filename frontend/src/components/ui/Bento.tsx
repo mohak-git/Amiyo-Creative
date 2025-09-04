@@ -1,6 +1,7 @@
 import { ServicesCardProps } from "@/constants/types";
 import { gsap } from "gsap";
 import Image from "next/image";
+import Link from "next/link";
 import React, { useEffect, useRef } from "react";
 import { CiLocationArrow1 } from "react-icons/ci";
 
@@ -484,8 +485,7 @@ const Bento: React.FC<BentoProps> = ({
                         }`;
 
                         const cardStyle = {
-                            backgroundColor:
-                                card.color || "var(--background-dark)",
+                            backgroundColor: "var(--background-dark)",
                             borderColor: "var(--border-color)",
                             color: "var(--white)",
                             "--glow-x": "50%",
@@ -511,18 +511,21 @@ const Bento: React.FC<BentoProps> = ({
                                     className="absolute w-full h-full object-cover group-hover:brightness-25 transition-all duration-500"
                                 />
 
-                                <div className="cta-overlay absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:scale-105">
+                                <Link
+                                    href={`/work#${card?.service?.toLowerCase()}`}
+                                    className="cta-overlay absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:scale-105"
+                                >
                                     <span className="px-2 cursor-target py-2 rounded-full backdrop-blur-md bg-white/2 border border-white/20 flex justify-center items-center text-white text-sm font-bold tracking-wide shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(255,215,255,0.7)]">
                                         <CiLocationArrow1 className="arrow-icon size-6 z-10 p-1" />
                                         {card.cta}
                                     </span>
-                                </div>
+                                </Link>
 
-                                <div className="group-hover:hidden flex flex-col justify-end h-full w-full relative text-white p-4 z-10">
-                                    <h3 className="w-fit font-normal text-base m-0 mb-1 bg-black/70 p-1 rounded-lg">
+                                <div className="group-hover:hidden flex flex-col justify-end h-full w-full relative text-white p-4 3xl:p-10 z-10">
+                                    <h3 className="w-fit font-normal text-base 3xl:text-2xl m-0 mb-1 bg-black/70 p-1 rounded-lg">
                                         {card.title}
                                     </h3>
-                                    <p className="w-fit text-xs leading-5 opacity-90">
+                                    <p className="w-fit text-xs 3xl:text-xl leading-5 opacity-90">
                                         {card.description}
                                     </p>
                                 </div>

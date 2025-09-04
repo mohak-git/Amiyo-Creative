@@ -6,7 +6,7 @@ export const BgWave = ({ inverted }: { inverted: boolean }) => {
             } blur-lg`}
         >
             <svg
-                className="absolute inset-x-0 -top-40 w-full opacity-70"
+                className="absolute inset-x-0 -top-40 w-full  opacity-70"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 1440 320"
             >

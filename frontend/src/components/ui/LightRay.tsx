@@ -103,8 +103,8 @@ const LightRay: React.FC<LightRayProps> = ({
             gl.canvas.style.height = "100%";
 
             while (containerRef.current.firstChild)
-                containerRef.current.removeChild(
-                    containerRef.current.firstChild
+                containerRef.current?.removeChild(
+                    containerRef.current?.firstChild
                 );
 
             containerRef.current.appendChild(gl.canvas);

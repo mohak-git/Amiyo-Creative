@@ -62,7 +62,7 @@ const ContactForm = () => {
                 className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-8 shadow-xl"
                 variants={itemVariants}
             >
-                <h2 className="text-3xl font-bold mb-8 bg-gradient-to-r from-purple-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
+                <h2 className="text-3xl 3xl:text-6xl leading-relaxed font-bold mb-8 bg-gradient-to-r from-purple-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
                     Start a Project
                 </h2>
 
@@ -75,7 +75,7 @@ const ContactForm = () => {
                         <motion.div className="group" variants={itemVariants}>
                             <label
                                 htmlFor="name"
-                                className="cursor-none block text-sm font-medium text-gray-300 mb-2"
+                                className="cursor-none block text-sm 3xl:text-xl font-medium text-gray-300 mb-2"
                             >
                                 Full Name *
                             </label>
@@ -85,7 +85,7 @@ const ContactForm = () => {
                                     id="name"
                                     type="text"
                                     {...register("name")}
-                                    className="cursor-none cursor-target w-full pl-12 pr-4 py-3 bg-gray-900/50 border border-gray-700 rounded-xl text-white"
+                                    className="3xl:text-lg cursor-none cursor-target w-full pl-12 pr-4 py-3 bg-gray-900/50 border border-gray-700 rounded-xl text-white"
                                     placeholder="John Doe"
                                 />
                             </div>
@@ -95,7 +95,7 @@ const ContactForm = () => {
                         <motion.div className="group" variants={itemVariants}>
                             <label
                                 htmlFor="email"
-                                className="cursor-none block text-sm font-medium text-gray-300 mb-2"
+                                className="cursor-none block text-sm 3xl:text-xl font-medium text-gray-300 mb-2"
                             >
                                 Email Address *
                             </label>
@@ -105,7 +105,7 @@ const ContactForm = () => {
                                     id="email"
                                     type="email"
                                     {...register("email")}
-                                    className="cursor-none cursor-target w-full pl-12 pr-4 py-3 bg-gray-900/50 border border-gray-700 rounded-xl text-white"
+                                    className="3xl:text-lg cursor-none cursor-target w-full pl-12 pr-4 py-3 bg-gray-900/50 border border-gray-700 rounded-xl text-white"
                                     placeholder="john@example.com"
                                 />
                             </div>
@@ -116,7 +116,7 @@ const ContactForm = () => {
                     <motion.div className="group" variants={itemVariants}>
                         <label
                             htmlFor="phone"
-                            className="cursor-none block text-sm font-medium text-gray-300 mb-2"
+                            className="cursor-none block text-sm 3xl:text-xl font-medium text-gray-300 mb-2"
                         >
                             Phone Number *
                         </label>
@@ -126,7 +126,7 @@ const ContactForm = () => {
                                 id="phone"
                                 type="tel"
                                 {...register("phone")}
-                                className="cursor-none cursor-target w-full pl-12 pr-4 py-3 bg-gray-900/50 border border-gray-700 rounded-xl text-white"
+                                className="3xl:text-lg cursor-none cursor-target w-full pl-12 pr-4 py-3 bg-gray-900/50 border border-gray-700 rounded-xl text-white"
                                 placeholder="+123456789"
                             />
                         </div>
@@ -136,7 +136,7 @@ const ContactForm = () => {
                     <motion.div className="group" variants={itemVariants}>
                         <label
                             htmlFor="message"
-                            className="cursor-none block text-sm font-medium text-gray-300 mb-2"
+                            className="cursor-none block text-sm 3xl:text-xl font-medium text-gray-300 mb-2"
                         >
                             Message *
                         </label>
@@ -144,7 +144,7 @@ const ContactForm = () => {
                             id="message"
                             {...register("message")}
                             rows={6}
-                            className="cursor-none cursor-target w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-xl text-white resize-none"
+                            className="3xl:text-lg cursor-none cursor-target w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-xl text-white resize-none"
                             placeholder="Tell us about your project..."
                         />
                     </motion.div>
@@ -153,7 +153,7 @@ const ContactForm = () => {
                     <motion.button
                         type="submit"
                         disabled={isPending}
-                        className="cursor-none cursor-target w-full bg-gradient-to-r from-purple-700 to-purple-600 text-white font-semibold py-3 px-8 rounded-xl flex items-center justify-center space-x-2 disabled:opacity-50"
+                        className="cursor-none 3xl:text-2xl cursor-target w-full bg-gradient-to-r from-purple-700 to-purple-600 text-white font-semibold py-3 px-8 rounded-xl flex items-center justify-center space-x-2 disabled:opacity-50"
                         whileHover={{ scale: 1.02, y: -2 }}
                         whileTap={{ scale: 0.98 }}
                     >

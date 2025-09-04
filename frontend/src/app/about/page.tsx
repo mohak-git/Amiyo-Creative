@@ -1,15 +1,11 @@
 "use client";
 
+import { FAQsComp } from "@/components/pages/About/FAQ";
 import { AgencyServices, FAQs } from "@/constants/constants";
+import Image from "next/image";
 import { FC, JSX } from "react";
 import { IconType } from "react-icons";
-import {
-    FaAward,
-    FaChevronDown,
-    FaEye,
-    FaHandSparkles,
-    FaQuoteLeft,
-} from "react-icons/fa";
+import { FaAward, FaEye, FaHandSparkles, FaQuoteLeft } from "react-icons/fa";
 import { FaBoltLightning } from "react-icons/fa6";
 import { FiTarget } from "react-icons/fi";
 
@@ -61,24 +57,23 @@ const AgencyValues = [
     },
 ];
 
-const SectionHeading: FC<{ title: string }> = ({ title }) => (
+export const SectionHeading: FC<{ title: string }> = ({ title }) => (
     <div className="flex items-center justify-center space-x-4 text-center mb-14">
         <div className="w-12 h-0.5 bg-gradient-to-r from-purple-500 to-blue-500" />
-        <h2 className="text-3xl font-bold text-white">{title}</h2>
+        <h2 className="text-3xl 3xl:text-5xl font-bold text-white">{title}</h2>
         <div className="w-12 h-0.5 bg-gradient-to-l from-purple-500 to-blue-500" />
     </div>
 );
 
-const ServiceBadge: FC<{ icon: IconType; label: string; angle: string }> = ({
+const ServiceBadge: FC<{ icon: IconType; label: string }> = ({
     icon: Icon,
     label,
-    angle,
 }) => (
     <div
-        className={`flex items-center space-x-3 bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-full px-4 py-2 hover:border-purple-500/50 transition-all duration-300 ${angle} hover:rotate-0`}
+        className={`flex items-center space-x-3 bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-full px-4 py-2 hover:border-purple-500/50 transition-all duration-300 hover:rotate-0`}
     >
         <Icon className="w-4 h-4 text-purple-400" />
-        <span className="text-sm text-slate-300">{label}</span>
+        <span className="text-sm 3xl:text-2xl text-slate-300">{label}</span>
     </div>
 );
 
@@ -88,13 +83,13 @@ const ValueCard: FC<{
     description: string;
     decoration?: JSX.Element;
 }> = ({ icon: Icon, title, description, decoration }) => (
-    <div className="group relative overflow-hidden rounded-3xl bg-slate-900/30 p-6">
+    <div className="group relative overflow-hidden rounded-3xl bg-slate-900/30 p-6 3xl:p-10">
         <div className="absolute inset-0 opacity-10">{decoration}</div>
         <div className="relative flex flex-col justify-between h-full">
-            <h3 className="text-xl flex gap-2 text-white mb-3 group-hover:text-purple-300 transition-colors duration-300">
+            <h3 className="text-xl 3xl:text-3xl flex gap-2 items-center text-white mb-3 group-hover:text-purple-300 transition-colors duration-300">
                 <Icon /> {title}
             </h3>
-            <p className="text-slate-300 leading-relaxed group-hover:text-slate-200 transition-colors duration-300">
+            <p className="3xl:text-2xl text-slate-300 leading-relaxed group-hover:text-slate-200 transition-colors duration-300">
                 {description}
             </p>
         </div>
@@ -104,46 +99,44 @@ const ValueCard: FC<{
 
 const AboutPage: FC = () => {
     return (
-        <main className="bg-slate-950 text-white overflow-x-hidden">
+        <main className="bg-slate-950 text-white overflow-x-hidden px-6 sm:px-10 md:px-20">
             {/* HERO */}
-            <section className="pt-32 pb-24 max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-center">
+            <section className="pt-20 md:pt-32 3xl:pt-50 pb-24 mx-auto px-6 sm:px-10 3xl:px-30 grid lg:grid-cols-2 gap-16 items-center">
                 {/* Left: Text */}
                 <div className="space-y-8">
-                    <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
-                        <span className="block text-3xl lg:text-4xl text-white mb-2">
+                    <h1 className="text-5xl lg:text-6xl 3xl:text-7xl font-bold leading-tight">
+                        <span className="block text-3xl lg:text-4xl 3xl:text-5xl text-white mb-2">
                             About
                         </span>
                         <span className="block bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
                             Amiyo Creative
                         </span>
                     </h1>
-                    <p className="text-base lg:text-xl text-slate-300 leading-relaxed max-w-2xl">
+                    <p className="text-base lg:text-xl 3xl:text-3xl text-slate-300 leading-relaxed max-w-2xl 3xl:max-w-6xl">
                         A Kolkata-based creative and digital solutions agency
                         offering services for brands, startups, influencers, and
                         individuals. From storytelling to strategy, from visuals
                         to technology, we merge imagination with execution.
                     </p>
                     <div className="hidden sm:flex flex-wrap gap-4 pt-6">
-                        {AgencyServices.map((s, i) => (
+                        {AgencyServices.slice(0, 4).map((s, i) => (
                             <ServiceBadge key={i} {...s} />
                         ))}
                     </div>
                 </div>
 
                 {/* Right: Vision */}
-                <div className="relative w-full aspect-square max-w-md mx-auto">
+                <div className="relative w-full aspect-square max-w-md 3xl:max-w-2xl mx-auto flex justify-center items-center">
                     <div className="absolute inset-0 border-2 border-purple-500/30 rounded-full" />
-                    <div className="absolute inset-8 flex flex-col items-center justify-center p-8 text-center bg-gradient-to-br from-slate-800/40 to-purple-900/20 backdrop-blur-xl border border-purple-500/20 rounded-3xl overflow-hidden">
-                        <FiTarget className="w-12 h-12 text-purple-400 mb-4" />
-                        <h3 className="text-lg font-semibold text-white mb-3">
-                            Our Vision
-                        </h3>
-                        <p className="text-slate-300 text-sm leading-relaxed">
-                            To become your trusted partner in creativity,
-                            storytelling, and digital growth.
-                        </p>
+                    <div className="relative w-4/5 aspect-square mx-auto rounded-3xl bg-gradient-to-br from-slate-800/40 to-purple-900/20 backdrop-blur-xl border border-purple-500/20 overflow-hidden">
+                        <Image
+                            src="/amiyo.jpg"
+                            alt="amiyo-image"
+                            fill
+                            className="object-cover object-center"
+                        />
                     </div>
-                    <div className="absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full animate-bounce"></div>
+                    <div className="absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full animate-bounce" />
                     <div
                         className="absolute -bottom-4 -left-4 w-6 h-6 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full animate-bounce"
                         style={{ animationDelay: "1s" }}
@@ -155,8 +148,19 @@ const AboutPage: FC = () => {
                 </div>
             </section>
 
+            {/* VISION */}
+            <section className="py-12 mx-auto px-6 sm:px-10 3xl:px-30 text-center max-w-4xl">
+                <SectionHeading title="Our Vision" />
+                <div className="space-y-6">
+                    <p className="text-slate-300 text-base lg:text-xl 3xl:text-3xl leading-relaxed">
+                        To become your trusted partner in creativity,
+                        storytelling, and digital growth.
+                    </p>
+                </div>
+            </section>
+
             {/* VALUES */}
-            <section className="py-24 max-w-7xl mx-auto px-6 lg:px-8">
+            <section className="py-24 mx-auto px-6 sm:px-10 3xl:px-30">
                 <SectionHeading title="Our Values" />
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {AgencyValues.map((v, i) => (
@@ -166,20 +170,20 @@ const AboutPage: FC = () => {
             </section>
 
             {/* FOUNDER */}
-            <section className="py-24 max-w-7xl mx-auto px-6 lg:px-8 space-y-8">
+            <section className="py-24 mx-auto px-6 sm:px-10 3xl:px-30 space-y-8">
                 <div className=" grid lg:grid-cols-5 gap-16 items-start">
                     {/* Founder Card */}
                     <div className="lg:col-span-2 relative">
                         <div className="relative bg-gradient-to-br from-slate-800/60 to-purple-900/30 backdrop-blur-xl border border-purple-500/20 rounded-3xl overflow-hidden">
-                            <div className="flex items-center space-x-4 px-6 py-4 border-b border-slate-700/50">
-                                <div className="w-15 h-15 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center">
+                            <div className="flex items-center space-x-4 px-6 py-4  border-b border-slate-700/50">
+                                <div className="size-15 3xl:size-28 3xl:text-3xl bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center">
                                     AP
                                 </div>
                                 <div>
-                                    <h4 className="text-lg font-semibold text-white">
+                                    <h4 className="text-lg 3xl:text-3xl font-semibold text-white">
                                         Amiyo Panda
                                     </h4>
-                                    <p className="text-purple-400 text-sm">
+                                    <p className="text-purple-400 text-sm 3xl:text-xl">
                                         Founder & CEO
                                     </p>
                                 </div>
@@ -192,10 +196,10 @@ const AboutPage: FC = () => {
                                     { label: "Ideas", value: "∞" },
                                 ].map((stat, i) => (
                                     <div key={i} className="text-center">
-                                        <div className="text-2xl font-bold text-white mb-1">
+                                        <div className="text-2xl 3xl:text-4xl font-bold text-white mb-1">
                                             {stat.value}
                                         </div>
-                                        <div className="text-xs text-slate-400">
+                                        <div className="text-xs 3xl:text-xl text-slate-400">
                                             {stat.label}
                                         </div>
                                     </div>
@@ -212,7 +216,7 @@ const AboutPage: FC = () => {
                     {/* Founder Note */}
                     <div className="lg:col-span-3 space-y-10">
                         <SectionHeading title="Founder's Note" />
-                        <div className="space-y-6 text-slate-300 leading-relaxed">
+                        <div className="space-y-6 text-slate-300 3xl:text-2xl leading-relaxed">
                             <p>
                                 Amiyo Panda, the Founder & CEO of Amiyo
                                 Creative, started this journey with pure passion
@@ -229,37 +233,22 @@ const AboutPage: FC = () => {
                     </div>
                 </div>
 
-                <div className="relative max-w-3xl mx-auto group bg-gradient-to-r from-slate-800/40 to-purple-800/20 backdrop-blur-sm border-l-4 border-purple-500 rounded-r-2xl p-6 hover:from-slate-800/60 hover:to-purple-800/30 transition-all duration-300">
+                <div className="relative max-w-3xl 3xl:max-w-7xl mx-auto group bg-gradient-to-r from-slate-800/40 to-purple-800/20 backdrop-blur-sm border-l-4 border-purple-500 rounded-r-2xl p-6 hover:from-slate-800/60 hover:to-purple-800/30 transition-all duration-300">
                     <FaQuoteLeft className="w-6 h-6 text-purple-400 mb-4 group-hover:scale-110 transition-transform duration-300" />
-                    <blockquote className="text-lg text-white font-medium italic mb-4 leading-relaxed">
+                    <blockquote className="text-lg 3xl:text-4xl text-white font-medium italic mb-4 leading-relaxed">
                         No story is too small, and no dream is too big to be
                         told through visuals.
                     </blockquote>
-                    <div className="text-purple-300 font-medium">
+                    <div className="text-purple-300 3xl:text-2xl font-medium">
                         — Amiyo Panda
                     </div>
                 </div>
             </section>
 
-            {/* FAWQ */}
-            <section className="py-24 max-w-7xl mx-auto px-6 lg:px-8">
+            {/* FAQ */}
+            <section className="py-24 mx-auto px-6 sm:px-10 3xl:px-30">
                 <SectionHeading title="FAQs" />
-                <div className="space-y-6">
-                    {FAQs.map((item, i) => (
-                        <details
-                            key={i}
-                            className="group bg-gradient-to-r from-slate-800/40 to-purple-900/20 backdrop-blur-sm border border-slate-700/50 hover:border-purple-500/40 rounded-2xl transition-all duration-300 overflow-hidden"
-                        >
-                            <summary className="flex justify-between items-center cursor-pointer p-5 text-lg font-medium text-white group-open:text-purple-300">
-                                {item.q}
-                                <FaChevronDown className="transition-transform duration-300 group-open:rotate-180" />
-                            </summary>
-                            <div className="px-5 pb-5 text-slate-300 leading-relaxed transition-all duration-300 max-h-0 group-open:max-h-[500px]">
-                                {item.a}
-                            </div>
-                        </details>
-                    ))}
-                </div>
+                <FAQsComp items={FAQs} />
             </section>
         </main>
     );

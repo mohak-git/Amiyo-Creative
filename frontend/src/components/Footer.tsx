@@ -138,12 +138,12 @@ const Footer = () => {
                 style={{ mixBlendMode: "screen" }}
             />
 
-            <div className="mx-auto relative z-10 px-6 sm:px-10">
+            <div className="mx-auto relative z-10 px-6 sm:px-10 3xl:px-30">
                 {/* Main Footer Content */}
-                <div className="w-full mx-auto py-12 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+                <div className="w-full mx-auto py-12 grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12">
                     {/* Company Info */}
                     <motion.div
-                        className="lg:col-span-6"
+                        className="lg:col-span-2"
                         variants={itemVariants}
                     >
                         <div className="flex items-center mb-4">
@@ -151,7 +151,7 @@ const Footer = () => {
                                 href="/"
                                 target="_self"
                                 rel="noopener noreferrer"
-                                className="w-10 h-10 mr-3 cursor-none cursor-target"
+                                className="size-10 3xl:size-16 mr-3 cursor-none cursor-target"
                             >
                                 <Image
                                     src="logo.svg"
@@ -162,55 +162,29 @@ const Footer = () => {
                                 />
                             </Link>
                             <div>
-                                <h3 className="text-xl font-semibold text-white">
+                                <h3 className="text-xl 3xl:text-4xl font-semibold text-white">
                                     Amiyo Creative
                                 </h3>
-                                <p className="text-sm text-gray-400">
+                                <p className="text-sm 3xl:text-2xl text-gray-400">
                                     Creative Visuals for Every Story
                                 </p>
                             </div>
                         </div>
 
-                        <p className="text-gray-400 mb-6 leading-relaxed max-w-lg">
+                        <p className="text-gray-400 mb-6 leading-relaxed max-w-lg 3xl:max-w-2xl 3xl:text-2xl">
                             Transforming brands through compelling visual
                             stories and cutting-edge digital experiences. We
                             bring your vision to life with creativity and
                             precision.
                         </p>
-
-                        {/* Contact Info */}
-                        <div className="space-y-2 text-sm">
-                            <p className="text-gray-400">
-                                <span className="text-white font-medium">
-                                    Email:
-                                </span>{" "}
-                                <a
-                                    href="mailto:hello@digicraft.one"
-                                    className="cursor-none cursor-target px-2"
-                                >
-                                    hello@digicraft.one
-                                </a>
-                            </p>
-                            <p className="text-gray-400">
-                                <span className="text-white font-medium">
-                                    Phone:
-                                </span>{" "}
-                                <a
-                                    href="tel:+918299797516"
-                                    className="cursor-none cursor-target px-2"
-                                >
-                                    +91 82997 97516
-                                </a>
-                            </p>
-                        </div>
                     </motion.div>
 
                     {/* Navigation Links */}
                     <motion.div
-                        className="lg:col-span-2"
+                        className="lg:col-span-1"
                         variants={itemVariants}
                     >
-                        <h4 className="text-white font-semibold mb-4 text-sm uppercase tracking-wide">
+                        <h4 className="text-white font-semibold mb-4 text-sm 3xl:text-2xl uppercase tracking-wide">
                             Navigation
                         </h4>
                         <ul className="space-y-3">
@@ -218,7 +192,7 @@ const Footer = () => {
                                 <li key={index}>
                                     <Link
                                         href={item.href}
-                                        className="text-gray-400 hover:text-white transition-colors duration-200 text-sm cursor-none cursor-target px-2 py-1"
+                                        className="text-gray-400 hover:text-white transition-colors duration-200 text-sm 3xl:text-2xl cursor-none cursor-target px-2 py-1"
                                     >
                                         {item.label}
                                     </Link>
@@ -229,10 +203,10 @@ const Footer = () => {
 
                     {/* Services */}
                     <motion.div
-                        className="lg:col-span-2"
+                        className="lg:col-span-1"
                         variants={itemVariants}
                     >
-                        <h4 className="text-white font-semibold mb-4 text-sm uppercase tracking-wide">
+                        <h4 className="text-white font-semibold mb-4 text-sm 3xl:text-2xl uppercase tracking-wide">
                             Services
                         </h4>
 
@@ -240,8 +214,8 @@ const Footer = () => {
                             {AgencyServices.map((service, index) => (
                                 <li key={index}>
                                     <Link
-                                        href={`/work#${service.label}`}
-                                        className="text-gray-400 hover:text-white transition-colors duration-200 text-sm cursor-none cursor-target px-2 py-1"
+                                        href={`/work#${service?.service?.toLowerCase()}`}
+                                        className="text-gray-400 hover:text-white transition-colors duration-200 text-sm 3xl:text-2xl cursor-none cursor-target px-2 py-1"
                                     >
                                         {service.label}
                                     </Link>
@@ -252,35 +226,33 @@ const Footer = () => {
 
                     {/* Social Media */}
                     <motion.div
-                        className="lg:col-span-2"
+                        className="lg:col-span-1"
                         variants={itemVariants}
                     >
-                        <h4 className="text-white font-semibold mb-4 text-sm uppercase tracking-wide">
-                            Follow Us
+                        <h4 className="text-white font-semibold mb-4 text-sm 3xl:text-2xl uppercase tracking-wide">
+                            Contact Us
                         </h4>
-                        <ul className="space-y-3">
-                            {SocialPlatforms.slice(2, 7).map(
-                                (platform, index) => (
-                                    <li key={index}>
-                                        <Link
-                                            href={platform.url}
-                                            target={platform.target || "_self"}
-                                            rel={
-                                                platform.target
-                                                    ? "noopener noreferrer"
-                                                    : undefined
-                                            }
-                                            className="max-w-30 text-gray-400 hover:text-white transition-colors duration-200 text-sm flex items-center group gap-2 cursor-none cursor-target"
-                                        >
-                                            <platform.icon
-                                                className={`h-4 w-4 ${platform.textColor}`}
-                                            />
+                        <ul className="space-y-3 w-fit">
+                            {SocialPlatforms.map((platform, index) => (
+                                <li key={index}>
+                                    <Link
+                                        href={platform.url}
+                                        target={platform.target || "_self"}
+                                        rel={
+                                            platform.target
+                                                ? "noopener noreferrer"
+                                                : undefined
+                                        }
+                                        className="max-w-80 text-gray-400 hover:text-white transition-colors duration-200 text-sm 3xl:text-2xl flex items-center group gap-2 cursor-none cursor-target"
+                                    >
+                                        <platform.icon
+                                            className={`size-4 3xl:size-6 ${platform.textColor}`}
+                                        />
 
-                                            {platform.name}
-                                        </Link>
-                                    </li>
-                                )
-                            )}
+                                        {platform.value}
+                                    </Link>
+                                </li>
+                            ))}
                         </ul>
                     </motion.div>
                 </div>
@@ -291,7 +263,7 @@ const Footer = () => {
                     variants={itemVariants}
                 >
                     <div className="w-full mx-auto py-6 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-                        <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4 text-sm text-gray-500">
+                        <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4 text-sm 3xl:text-2xl text-gray-500">
                             <p>
                                 &copy; 2025 Amiyo Creative. All rights reserved.
                             </p>
@@ -317,7 +289,7 @@ const Footer = () => {
                             </div>
                         </div>
 
-                        <div className="flex items-center text-sm text-gray-500">
+                        <div className="flex items-center text-sm 3xl:text-2xl text-gray-500">
                             <span className="mr-2">Crafted by</span>
                             <Link
                                 href="https://www.digicraft.one"
@@ -328,7 +300,7 @@ const Footer = () => {
                                     width={20}
                                     height={20}
                                     alt="DigiCraft Logo"
-                                    className="mr-1"
+                                    className="mr-1 3xl:size-10"
                                 />
                                 DigiCraft
                             </Link>

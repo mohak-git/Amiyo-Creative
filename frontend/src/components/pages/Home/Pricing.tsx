@@ -26,7 +26,7 @@ const childVariants: Variants = {
 const Pricing = () => {
     return (
         <motion.div
-            className="relative min-h-screen w-full overflow-hidden pt-16 pb-4"
+            className="relative w-full overflow-hidden pt-16 pb-4"
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
@@ -49,17 +49,17 @@ const Pricing = () => {
             <BgWave inverted={true} />
 
             <motion.div
-                className="relative w-full h-full flex flex-col gap-10 px-4 sm:px-10"
+                className="relative w-full h-full flex flex-col gap-10 px-4 sm:px-10 3xl:px-30"
                 variants={containerVariants}
             >
                 <motion.div
                     className="text-center w-full"
                     variants={childVariants}
                 >
-                    <h1 className="bg-gradient-to-r from-fuchsia-400 via-violet-300 to-indigo-300 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent sm:text-5xl py-1">
+                    <h1 className="bg-gradient-to-r 3xl:text-6xl leading-relaxed from-fuchsia-400 via-violet-300 to-indigo-300 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent sm:text-5xl py-1">
                         Pricing
                     </h1>
-                    <p className="mt-4 text-base sm:text-lg text-white/80">
+                    <p className="mt-4 text-base sm:text-lg 3xl:text-2xl text-white/80">
                         Choose a plan that matches your goals.
                     </p>
                 </motion.div>

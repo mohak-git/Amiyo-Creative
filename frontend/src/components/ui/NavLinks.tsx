@@ -1,7 +1,3 @@
-import {
-    NavbarLeftPositionsDesktop,
-    NavbarLeftPositionsMobile,
-} from "@/constants/constants";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
@@ -19,7 +15,8 @@ export interface NavProps {
     particleR?: number;
     timeVariance?: number;
     colors?: number[];
-    mode: "m" | "d";
+    mobile?: boolean;
+    onItemClick?: () => void;
 }
 
 const NavLinks: React.FC<NavProps> = ({
@@ -30,7 +27,8 @@ const NavLinks: React.FC<NavProps> = ({
     particleR = 100,
     timeVariance = 300,
     colors = [1, 2, 3, 1, 2, 3, 1, 4],
-    mode = "d",
+    mobile = false,
+    onItemClick,
 }) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const navRef = useRef<HTMLUListElement>(null);
@@ -98,12 +96,11 @@ const NavLinks: React.FC<NavProps> = ({
                 particle.appendChild(point);
                 element.appendChild(particle);
                 requestAnimationFrame(() => element.classList.add("active"));
-                setTimeout(() => element.removeChild(particle), t);
             }, 30);
         }
     };
 
-    const updateEffectPosition = (element: HTMLElement, index: number) => {
+    const updateEffectPosition = (element: HTMLElement) => {
         if (!containerRef.current || !filterRef.current || !textRef.current)
             return;
 
@@ -111,19 +108,19 @@ const NavLinks: React.FC<NavProps> = ({
         const containerRect = containerRef.current.getBoundingClientRect();
 
         const styles = {
+            left: `${pos.x - containerRect.x}px`,
+            top: `${pos.y - containerRect.y}px`,
             width: `${pos.width}px`,
             height: `${pos.height}px`,
-            left: `${
-                (mode === "d"
-                    ? NavbarLeftPositionsDesktop
-                    : NavbarLeftPositionsMobile)[index] ??
-                pos.x - containerRect.x
-            }px`,
-            top: `${pos.y - containerRect.y - (mode === "d" ? 0 : 3)}px`,
         };
 
         Object.assign(filterRef.current.style, styles);
         Object.assign(textRef.current.style, styles);
+
+        const elementStyle = window.getComputedStyle(element);
+        textRef.current.style.fontSize = elementStyle.fontSize;
+        textRef.current.style.lineHeight = elementStyle.lineHeight;
+
         textRef.current.innerText = element.innerText;
     };
 
@@ -135,7 +132,7 @@ const NavLinks: React.FC<NavProps> = ({
         if (activeIndex === index) return;
 
         setActiveIndex(index);
-        updateEffectPosition(liEl, index);
+        updateEffectPosition(liEl);
         if (filterRef.current) {
             const particles = filterRef.current.querySelectorAll(".particle");
             particles.forEach((p) => filterRef.current!.removeChild(p));
@@ -147,22 +144,9 @@ const NavLinks: React.FC<NavProps> = ({
             textRef.current.classList.add("active");
         }
         if (filterRef.current) makeParticles(filterRef.current);
-    };
 
-    const handleKeyDown = (
-        e: React.KeyboardEvent<HTMLAnchorElement>,
-        index: number
-    ) => {
-        if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            const liEl = e.currentTarget.parentElement;
-            if (liEl)
-                handleClick(
-                    {
-                        currentTarget: liEl,
-                    } as React.MouseEvent<HTMLAnchorElement>,
-                    index
-                );
+        if (mobile && onItemClick) {
+            onItemClick();
         }
     };
 
@@ -174,7 +158,7 @@ const NavLinks: React.FC<NavProps> = ({
         ] as HTMLElement;
 
         if (activeLi) {
-            updateEffectPosition(activeLi, activeIndex);
+            updateEffectPosition(activeLi);
             textRef.current?.classList.add("active");
 
             if (filterRef.current) makeParticles(filterRef.current);
@@ -184,13 +168,36 @@ const NavLinks: React.FC<NavProps> = ({
             const currentActiveLi = navRef.current?.querySelectorAll("li")[
                 activeIndex
             ] as HTMLElement;
-            if (currentActiveLi)
-                updateEffectPosition(currentActiveLi, activeIndex);
+            if (currentActiveLi) updateEffectPosition(currentActiveLi);
         });
 
         resizeObserver.observe(containerRef.current);
         return () => resizeObserver.disconnect();
     }, []);
+
+    useEffect(() => {
+        if (!navRef.current || !containerRef.current) return;
+
+        const newIndex = items.findIndex((item) => item.href === pathname);
+        if (newIndex !== -1 && newIndex !== activeIndex) {
+            setActiveIndex(newIndex);
+
+            const newActiveLi = navRef.current.querySelectorAll("li")[
+                newIndex
+            ] as HTMLElement;
+            if (newActiveLi) {
+                updateEffectPosition(newActiveLi);
+                textRef.current?.classList.add("active");
+
+                if (filterRef.current) {
+                    const particles =
+                        filterRef.current.querySelectorAll(".particle");
+                    particles.forEach((p) => filterRef.current!.removeChild(p));
+                    makeParticles(filterRef.current);
+                }
+            }
+        }
+    }, [pathname]);
 
     return (
         <>
@@ -387,16 +394,17 @@ const NavLinks: React.FC<NavProps> = ({
                     z-index: -1;
                 }`}
             </style>
-            <div className="relative w-full text-sm" ref={containerRef}>
+
+            <div className="relative mx-auto text-md " ref={containerRef}>
                 <nav
                     className="flex w-full relative"
                     style={{ transform: "translate3d(0, 0, 0.01px)" }}
                 >
                     <ul
                         ref={navRef}
-                        className={`flex w-full ${
-                            mode === "d" ? "gap-6" : "gap-2"
-                        } list-none p-0 px-4 m-0 relative z-[3]`}
+                        className={`flex list-none p-0 px-4 m-0 text-center relative z-[3] ${
+                            mobile ? "flex-col gap-2" : "gap-8"
+                        }`}
                         style={{
                             color: "white",
                             textShadow: "0 1px 1px hsl(205deg 30% 10% / 0.2)",
@@ -405,14 +413,13 @@ const NavLinks: React.FC<NavProps> = ({
                         {items.map((item, index) => (
                             <li
                                 key={index}
-                                className={`rounded-full w-full relative cursor-target transition-[background-color_color_box-shadow] duration-300 ease shadow-[0_0_0.5px_1.5px_transparent] text-white ${
+                                className={`rounded-full w-full 3xl:text-2xl relative cursor-target transition-[background-color_color_box-shadow] duration-300 ease shadow-[0_0_0.5px_1.5px_transparent] text-white ${
                                     activeIndex === index ? "active" : ""
                                 }`}
                             >
                                 <Link
                                     href={item.href}
                                     onClick={(e) => handleClick(e, index)}
-                                    onKeyDown={(e) => handleKeyDown(e, index)}
                                     className="outline-none py-[0.4em] px-[1em] inline-block cursor-none"
                                 >
                                     {item.label}

@@ -1,6 +1,7 @@
 import { RoundedPolygon } from "@/components/elements/BgAssets";
 import { Project } from "@/constants/types";
 import Image from "next/image";
+import Link from "next/link";
 import { FC } from "react";
 import { FaArrowRight } from "react-icons/fa";
 
@@ -10,7 +11,7 @@ const ProjectCard: FC<{ project: Project; color: string }> = ({
 }) => {
     return (
         <li className="w-full h-full">
-            <div className="relative aspect-square max-h-72">
+            <div className="relative aspect-square max-h-72 mx-auto 3xl:max-h-120">
                 <Image
                     height={5000}
                     width={5000}
@@ -23,15 +24,22 @@ const ProjectCard: FC<{ project: Project; color: string }> = ({
                     <RoundedPolygon color={color} />
                 </div>
 
-                <div className="absolute right-0.25 bottom-0 bg-foreground rounded-full p-2 cursor-target">
-                    <FaArrowRight className="size-5 text-background" />
-                </div>
+                {project.projectUrl && (
+                    <Link
+                        href={project.projectUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="absolute right-0.25 bottom-0 bg-foreground rounded-full p-2 cursor-target"
+                    >
+                        <FaArrowRight className="size-5 3xl:size-8 text-background" />
+                    </Link>
+                )}
 
                 <ul className="absolute top-3 right-0 flex gap-2">
                     {project.technologies?.slice(0, 2).map((tag, index) => {
                         return (
                             <div
-                                className="bg-white/30 px-2 py-1 rounded-lg text-[10px] backdrop-blur-3xl"
+                                className="bg-white/30 px-2 py-1 rounded-lg text-[10px] backdrop-blur-3xl 3xl:text-xl"
                                 key={index}
                             >
                                 {tag}
@@ -41,7 +49,9 @@ const ProjectCard: FC<{ project: Project; color: string }> = ({
                 </ul>
             </div>
 
-            <h2 className="mt-2">{project.title}</h2>
+            <h2 className="mt-2 3xl:text-3xl leading-relaxed">
+                {project.title}
+            </h2>
         </li>
     );
 };

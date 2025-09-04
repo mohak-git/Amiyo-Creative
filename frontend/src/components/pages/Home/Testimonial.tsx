@@ -14,16 +14,18 @@ import { FaQuoteLeft } from "react-icons/fa";
 
 const TestimonialCard: FC<{ t: TestimonialProps }> = ({ t }) => {
     return (
-        <div className="relative h-fit bg-gray-900/40 backdrop-blur-sm border border-purple-500/20 rounded-2xl p-2 mx-4 min-w-[450px] max-w-[500px] hover:border-purple-400/40 transition-all duration-300">
+        <div className="relative h-fit bg-gray-900/40 backdrop-blur-sm border border-purple-500/20 rounded-2xl p-2 mx-4 min-w-[450px] max-w-[500px] 3xl:max-w-[800px] hover:border-purple-400/40 transition-all duration-300">
             {/* Glow */}
             <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-2xl blur opacity-50"></div>
 
             <div className="relative bg-gray-900/60 rounded-2xl p-6">
                 <div className="absolute -top-2 -left-2 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full p-2">
-                    <FaQuoteLeft className="w-4 h-4 text-white" />
+                    <FaQuoteLeft className="size-4 3xl:size-6 text-white" />
                 </div>
 
-                <h3 className="mb-6 text-sm leading-relaxed">{t.content}</h3>
+                <h4 className="mb-6 text-sm 3xl:text-2xl leading-relaxed">
+                    {t.content}
+                </h4>
 
                 <div className="flex items-center justify-between">
                     <div className="flex gap-4 justify-center items-center">
@@ -36,11 +38,15 @@ const TestimonialCard: FC<{ t: TestimonialProps }> = ({ t }) => {
                         />
 
                         <div>
-                            <h4 className="text-white font-semibold text-sm">
+                            <h4 className="text-white font-semibold text-sm 3xl:text-2xl">
                                 {t.name}
                             </h4>
-                            <p className="text-purple-300 text-xs">{t.role}</p>
-                            <p className="text-gray-400 text-xs">{t.company}</p>
+                            <p className="text-purple-300 text-xs 3xl:text-xl">
+                                {t.role}
+                            </p>
+                            <p className="text-gray-400 text-xs 3xl:text-xl">
+                                {t.company}
+                            </p>
                         </div>
                     </div>
 
@@ -55,7 +61,7 @@ const TestimonialCard: FC<{ t: TestimonialProps }> = ({ t }) => {
 
 const VideoTestimonialCard: FC<{ t: VideoTestimonialProps }> = ({ t }) => {
     return (
-        <div className="relative h-fit bg-gray-900/40 backdrop-blur-sm border border-purple-500/20 rounded-2xl p-2 mx-4 min-w-[450px] max-w-[500px] hover:border-purple-400/40 transition-all duration-300">
+        <div className="relative h-fit bg-gray-900/40 backdrop-blur-sm border border-purple-500/20 rounded-2xl p-2 mx-4 min-w-[450px] max-w-[500px] 3xl:max-w-[800px] hover:border-purple-400/40 transition-all duration-300">
             {/* Glow */}
             <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-2xl blur opacity-50"></div>
 
@@ -70,7 +76,7 @@ const VideoTestimonialCard: FC<{ t: VideoTestimonialProps }> = ({ t }) => {
                     />
                 </div>
                 {t.title && (
-                    <h4 className="text-white font-semibold text-sm mt-4">
+                    <h4 className="text-white font-semibold text-sm 3xl:text-2xl mt-4">
                         {t.title}
                     </h4>
                 )}
@@ -170,7 +176,7 @@ const TestimonialSection: React.FC = () => {
     const videoTestimonials = useMemo(() => VideoTestimonials, []);
 
     return (
-        <div className="relative min-h-screen w-full bg-gradient-to-b via-purple-900/20 overflow-hidden">
+        <div className="relative w-full bg-gradient-to-b via-purple-900/20 overflow-hidden">
             {/* Background */}
             <div className="pointer-events-none absolute inset-0 -z-20">
                 <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl"></div>
@@ -187,10 +193,10 @@ const TestimonialSection: React.FC = () => {
                         transition={{ duration: 0.8 }}
                         viewport={{ once: true }}
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent mb-4">
+                        <h2 className="text-4xl md:text-5xl 3xl:text-6xl font-extrabold leading-relaxed bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent mb-4">
                             Testimonials
                         </h2>
-                        <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+                        <p className="text-gray-400 text-lg 3xl:text-2xl max-w-2xl mx-auto">
                             See what our clients are saying about us
                         </p>
                     </motion.div>

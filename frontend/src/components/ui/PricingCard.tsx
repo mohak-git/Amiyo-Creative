@@ -120,22 +120,22 @@ export default function PricingCard({
                             </span>
                         )}
 
-                        <h3 className="text-xl font-bold text-white mb-2">
+                        <h3 className="text-xl 3xl:text-3xl font-bold text-white mb-2">
                             {tier}
                         </h3>
-                        <p className="text-xs mb-4 opacity-80">
+                        <p className="text-xs 3xl:text-xl mb-4 opacity-80">
                             {data.tagline}
                         </p>
 
                         <p
-                            className={`my-3 text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r ${
+                            className={`my-3 text-3xl 3xl:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r ${
                                 data.primary
                             } ${tier === "Custom" && "animate-pulse"}
                             `}
                         >
                             {data.price}
                             {tier !== "Custom" && (
-                                <span className="text-xs text-white/60 font-light">
+                                <span className="text-xs 3xl:text-xl text-white/60 font-light">
                                     {" "}
                                     / month
                                 </span>
@@ -143,7 +143,7 @@ export default function PricingCard({
                         </p>
 
                         <motion.ul
-                            className="flex flex-col gap-3 text-sm text-left text-white/90 mb-8"
+                            className="flex flex-col gap-3 text-sm 3xl:text-2xl text-left text-white/90 mb-8"
                             variants={listVariants}
                             initial="hidden"
                             whileInView="show"
@@ -164,11 +164,11 @@ export default function PricingCard({
                         </motion.ul>
 
                         <button
-                            className={`w-full cursor-target cursor-none py-3 px-6 outline-none border-0 rounded-xl font-semibold text-white bg-gradient-to-r ${data.primary} shadow-lg hover:shadow-xl transition-all duration-300 border border-white/10 hover:border-white/200`}
+                            className={`w-full 3xl:text-2xl cursor-target cursor-none py-3 px-6 outline-none border-0 rounded-xl font-semibold text-white bg-gradient-to-r ${data.primary} shadow-lg hover:shadow-xl transition-all duration-300 border border-white/10 hover:border-white/200`}
                         >
                             {tier === "Custom"
                                 ? "Contact Sales"
-                                : "Get Started"}
+                                : "Choose " + tier}
                         </button>
                     </div>
 

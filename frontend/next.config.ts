@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
         remotePatterns: [
             new URL("https://creative-ball-1259652514.media.strapiapp.com/**"),
             new URL("https://upload.wikimedia.org/**"),
-            new URL("https://images.unsplash.com/**"),
+            new URL("https://**.unsplash.com/**"),
             new URL("https://picsum.photos/**"),
         ],
     },

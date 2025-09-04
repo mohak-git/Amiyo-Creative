@@ -3,7 +3,7 @@
 import { HomeAboutValues } from "@/constants/constants";
 import { ValueItem } from "@/constants/types";
 import { motion, Variants } from "framer-motion";
-import { FC, useEffect, useMemo, useRef, useState } from "react";
+import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 const AboutSection: FC = () => {
     const [counts, setCounts] = useState<number[]>([0, 0, 0, 0]);
@@ -21,7 +21,7 @@ const AboutSection: FC = () => {
     const easeOutExpo = (t: number): number =>
         t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
 
-    const animateCount = (targetValue: number, index: number) => {
+    const animateCount = useCallback((targetValue: number, index: number) => {
         let startTime: number | null = null;
         const duration = 2000;
 
@@ -42,7 +42,7 @@ const AboutSection: FC = () => {
         };
 
         requestAnimationFrame(animate);
-    };
+    }, []);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -63,7 +63,7 @@ const AboutSection: FC = () => {
                 setTimeout(() => animateCount(item.value, index), index * 100)
             );
         }
-    }, [hasAnimated, values]);
+    }, [hasAnimated, values, animateCount]);
 
     const containerVariants: Variants = {
         hidden: {},
@@ -88,24 +88,24 @@ const AboutSection: FC = () => {
     return (
         <div
             ref={sectionRef}
-            className="w-full flex justify-center py-6 items-center text-5xl font-bold gap-4 px-4 sm:px-10"
+            className="w-full flex justify-center py-6 items-center text-5xl gap-4 px-4 sm:px-10 3xl:px-30"
         >
             <div className="absolute -bottom-220 border-4 -left-20 h-80 w-80 rounded-full bg-fuchsia-500/30 blur-3xl" />
             <div className="relative w-full flex justify-center py-10 items-center flex-col rounded-t-4xl overflow-hidden shadow-[-5px_-3px_5px_0px_rgba(0,0,0,0.5)]">
                 {/* Background */}
-                <div className="absolute z-1 h-full w-full bg-radial-[at_50%_-60%] from-purple-300 via-purple-600 to-slate-950 via-30% to-67%"></div>
+                <div className="absolute z-1 h-full w-full bg-radial-[at_50%_-60%] from-purple-700 via-purple-950 to-slate-950 via-30% to-67%"></div>
                 <div className="absolute z-1 h-full w-full bg-slate-950/30"></div>
 
                 {/* Main Content */}
                 <motion.div
-                    className="flex-1 flex flex-col justify-center px-8 py-10 lg:px-16 relative z-3"
+                    className="flex-1 flex flex-col  px-8 py-10 lg:px-16 relative z-3 w-full"
                     variants={containerVariants}
                     initial="hidden"
                     animate={hasAnimated ? "visible" : "hidden"}
                 >
-                    <div className="max-w-7xl mx-auto w-full grid md:grid-cols-2 gap-6 md:gap-16 items-center">
+                    <div className="mx-auto w-full grid md:grid-cols-2 gap-6 md:gap-16 items-center justify-center ">
                         {/* Values */}
-                        <div className="grid grid-cols-2 grid-rows-5 h-full w-full place-items-center gap-1">
+                        <div className="grid grid-cols-2 grid-rows-5 h-full w-full max-w-2xl place-items-center mx-auto gap-1">
                             {values.map((item, index) => (
                                 <motion.div
                                     key={index}
@@ -121,11 +121,10 @@ const AboutSection: FC = () => {
 
                                     {/* Content */}
                                     <div className="text-center relative z-10">
-                                        <div className="text-4xl font-bold text-white mb-2 group-hover:scale-110 transition-transform duration-300">
-                                            {counts[index]}
-                                            {item.suffix}
+                                        <div className="text-4xl 3xl:text-5xl font-bold text-white mb-2 group-hover:scale-110 transition-transform duration-300">
+                                            {counts[index]}+
                                         </div>
-                                        <div className="text-gray-300 text-sm font-medium">
+                                        <div className="text-gray-300 text-sm 3xl:text-xl font-medium">
                                             {item.label}
                                         </div>
                                     </div>
@@ -141,7 +140,7 @@ const AboutSection: FC = () => {
                             animate={hasAnimated ? "visible" : "hidden"}
                         >
                             <motion.div variants={textFadeUp}>
-                                <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+                                <h2 className="text-4xl md:text-5xl 3xl:text-6xl font-bold text-white mb-6 leading-tight">
                                     About{" "}
                                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
                                         Our Story
@@ -150,7 +149,7 @@ const AboutSection: FC = () => {
                             </motion.div>
 
                             <motion.div variants={textFadeUp}>
-                                <p className="text-sm sm:text-base md:text-lg text-gray-300 leading-relaxed">
+                                <p className="text-sm sm:text-base md:text-lg 3xl:text-2xl text-gray-300 leading-relaxed">
                                     At Amiyo Creative, we don&apos;t just create
                                     content — we craft experiences. From
                                     designing your brand identity to capturing
@@ -162,10 +161,10 @@ const AboutSection: FC = () => {
                             </motion.div>
 
                             <motion.div variants={textFadeUp}>
-                                <h3 className="text-2xl md:text-3xl font-semibold text-white mb-4">
+                                <h3 className="text-2xl md:text-3xl 3xl:text-6xl font-semibold text-white mb-4">
                                     Our Mission
                                 </h3>
-                                <p className="text-sm sm:text-base md:text-lg text-gray-400 leading-relaxed">
+                                <p className="text-sm sm:text-base md:text-lg 3xl:text-2xl text-gray-300 leading-relaxed">
                                     Deliver premium visuals and impactful
                                     digital solutions that inspire, engage, and
                                     grow.

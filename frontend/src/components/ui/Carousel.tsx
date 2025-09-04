@@ -55,7 +55,7 @@ const Carousel = <T,>({ items, renderItem }: CarouselProps<T>) => {
             {current > 0 && (
                 <button
                     onClick={handlePrev}
-                    className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white"
+                    className="absolute cursor-none cursor-target left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white 3xl:text-5xl"
                 >
                     <FaChevronLeft />
                 </button>
@@ -64,7 +64,7 @@ const Carousel = <T,>({ items, renderItem }: CarouselProps<T>) => {
             {current < maxIndex && (
                 <button
                     onClick={handleNext}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white"
+                    className="absolute cursor-none cursor-target right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white 3xl:text-5xl"
                 >
                     <FaChevronRight />
                 </button>

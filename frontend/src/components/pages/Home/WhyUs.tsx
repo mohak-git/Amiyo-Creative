@@ -13,11 +13,11 @@ const montserrat = Montserrat_Alternates({
 
 const WhyUs = () => {
     return (
-        <div className="relative overflow-hidden h-screen">
+        <div className="relative overflow-hidden h-[40vh] lg:h-[50vh] xl:h-screen 3xl:h-[80vh] ">
             <BgWave inverted={false} />
 
             <div
-                className={`relative mx-auto w-full h-full flex flex-col gap-10 px-4 pt-16 pb-4 sm:px-10 ${montserrat.className}`}
+                className={`relative mx-auto w-full h-full flex flex-col gap-10 px-4 pt-16 pb-4 sm:px-10`}
             >
                 <div className="text-center">
                     <motion.div
@@ -26,10 +26,10 @@ const WhyUs = () => {
                         transition={{ duration: 0.8 }}
                         viewport={{ once: true }}
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent mb-4">
+                        <h2 className="text-4xl md:text-5xl 3xl:text-6xl font-extrabold leading-relaxed bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent mb-4">
                             Why Choose Us
                         </h2>
-                        <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+                        <p className="text-gray-400 text-lg 3xl:text-2xl mx-auto">
                             Because average isn&apos;t our language (&gt;ᴗ•)
                         </p>
                     </motion.div>

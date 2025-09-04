@@ -21,33 +21,37 @@ const Navbar = () => {
 
     return (
         <div
-            className={`fixed z-[1000] w-full transition-all duration-500 rounded-full shadow-[0px_0px_30px_70px_rgb(2,6,24)] ${
+            className={`fixed z-[1000] 3xl:py-4 w-full transition-all duration-500 sm:shadow-[0px_0px_30px_60px_rgb(2,6,24)] ${
                 isScrolled
-                    ? "scale-95 translate-y-6 px-6 sm:px-8 md:px-12 lg:px-14 bg-purple-800"
-                    : "scale-[1.2] sm:scale-110 px-12 sm:px-14 md:px-26 lg:px-30 bg-slate-950"
+                    ? "translate-y-6 px-6 sm:px-8 md:px-12 lg:px-14 3xl:px-30 bg-purple-950 rounded-full"
+                    : "px-2 sm:px-14 md:px-26 lg:px-30 3xl:px-52 bg-slate-950"
             }`}
         >
             <div className="flex justify-between items-center py-3">
                 <div className="flex items-center cursor-target justify-center">
-                    <Link href="/" className="cursor-none">
+                    <Link
+                        href="/"
+                        className="cursor-none max-w-10 3xl:max-w-18"
+                    >
                         <Image
+                            priority
                             src={"./logo.svg"}
                             alt="logo"
-                            width={40}
-                            height={40}
+                            width={400}
+                            height={400}
                         />
                     </Link>
                 </div>
 
                 <div className="hidden md:block">
-                    <NavLinks items={NavItems} mode="d" />
+                    <NavLinks items={NavItems} />
                 </div>
 
                 <div className="hidden md:flex justify-end items-center gap-2">
                     <SearchBar />
                 </div>
 
-                <div className="md:hidden flex items-center">
+                <div className="md:hidden flex items-center z-20">
                     <button onClick={() => setIsOpen(!isOpen)}>
                         {isOpen ? <FaTimes size={20} /> : <MdMenu size={20} />}
                     </button>
@@ -56,10 +60,13 @@ const Navbar = () => {
 
             {isOpen && (
                 <div
-                    className={`md:hidden absolute flex flex-col justify-between gap-4 pb-3 transition-all duration-500 rounded-lg bg-purple-800/40 w-full top-[3vh] pt-12 left-0 -z-1 ${
-                        !isScrolled ? "px-6" : ""
-                    }`}
+                    className={`md:hidden absolute flex flex-col justify-between gap-4 pb-3 transition-all duration-500 rounded-lg bg-purple-950 w-full top-0 pt-12 left-0 z-10`}
                 >
+                    <NavLinks
+                        items={NavItems}
+                        mobile={true}
+                        onItemClick={() => setIsOpen(false)}
+                    />
                     <SearchBar />
                 </div>
             )}
