@@ -57,7 +57,7 @@ const AgencyValues = [
     },
 ];
 
-export const SectionHeading: FC<{ title: string }> = ({ title }) => (
+const SectionHeading: FC<{ title: string }> = ({ title }) => (
     <div className="flex items-center justify-center space-x-4 text-center mb-14">
         <div className="w-12 h-0.5 bg-gradient-to-r from-purple-500 to-blue-500" />
         <h2 className="text-3xl 3xl:text-5xl font-bold text-white">{title}</h2>
