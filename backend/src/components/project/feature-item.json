@@ -1,26 +1,10 @@
 {
-    "collectionName": "components_project_feature_items",
-    "info": {
-        "displayName": "Feature Item",
-        "icon": "information"
-    },
-    "options": {},
-    "attributes": {
-        "title": {
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 80,
-            "required": true
-        },
-        "description": {
-            "type": "text",
-            "maxLength": 300
-        },
-        "icon": {
-            "type": "media",
-            "multiple": false,
-            "allowedTypes": ["images"]
-        }
-    },
-    "config": {}
+  "collectionName": "components_project_feature_items",
+  "info": {
+    "displayName": "Feature Item",
+    "icon": "information"
+  },
+  "options": {},
+  "attributes": {},
+  "config": {}
 }

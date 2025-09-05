@@ -13,7 +13,7 @@ const montserrat = Montserrat_Alternates({
 
 const WhyUs = () => {
     return (
-        <div className="relative overflow-hidden h-[40vh] lg:h-[50vh] xl:h-screen 3xl:h-[80vh] ">
+        <div className="relative overflow-hidden h-[70vh] md:h-[40vh] lg:h-[50vh] xl:h-screen 3xl:h-[80vh] ">
             <BgWave inverted={false} />
 
             <div

@@ -21,13 +21,13 @@ export function FAQsComp({ items }: { items: { q: string; a: string }[] }) {
                     >
                         <button
                             onClick={() => toggle(i)}
-                            className="w-full flex justify-between items-center cursor-pointer text-lg 3xl:text-3xl text-white"
+                            className="w-full flex justify-between items-center cursor-none text-lg 3xl:text-3xl text-white"
                         >
                             <span className={isOpen ? "text-purple-300" : ""}>
                                 {item.q}
                             </span>
                             <FaChevronDown
-                                className={`transition-transform duration-300 ${
+                                className={`transition-transform duration-300 cursor-target p-1 size-6 3xl:size-8 ${
                                     isOpen ? "rotate-180 text-purple-300" : ""
                                 }`}
                             />

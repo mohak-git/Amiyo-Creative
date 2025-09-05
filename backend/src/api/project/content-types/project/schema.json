@@ -1,62 +1,52 @@
 {
-    "kind": "collectionType",
-    "collectionName": "projects",
-    "info": {
-        "singularName": "project",
-        "pluralName": "projects",
-        "displayName": "Project"
+  "kind": "collectionType",
+  "collectionName": "projects",
+  "info": {
+    "singularName": "project",
+    "pluralName": "projects",
+    "displayName": "Project"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 100,
+      "required": true
     },
-    "options": {
-        "draftAndPublish": true
+    "coverImage": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
     },
-    "pluginOptions": {},
-    "attributes": {
-        "title": {
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 100,
-            "required": true
-        },
-        "slug": {
-            "type": "uid",
-            "targetField": "title",
-            "required": true
-        },
-        "description": {
-            "type": "richtext",
-            "required": true,
-            "minLength": 50
-        },
-        "coverImage": {
-            "type": "media",
-            "multiple": false,
-            "required": true,
-            "allowedTypes": ["images"]
-        },
-        "gallery": {
-            "type": "media",
-            "multiple": true,
-            "required": false,
-            "allowedTypes": ["images"]
-        },
-        "projectUrl": {
-            "type": "string",
-            "regex": "^(https?:\\/\\/)?([\\w\\-])+\\.([\\w\\-]+)([\\w\\-.,@?^=%&:/~+#]*[\\w\\-@?^=%&/~+#])?$"
-        },
-        "technologies": {
-            "type": "json"
-        },
-        "clientName": {
-            "type": "string",
-            "maxLength": 100
-        },
-        "completionDate": {
-            "type": "date"
-        },
-        "features": {
-            "type": "component",
-            "component": "project.feature-item",
-            "repeatable": true
-        }
+    "projectUrl": {
+      "type": "string",
+      "default": "https://amiyo-creative.vercel.app",
+      "required": true,
+      "regex": "^(https?:\\/\\/)?([\\w\\-])+\\.([\\w\\-]+)([\\w\\-.,@?^=%&:/~+#]*[\\w\\-@?^=%&/~+#])?$"
+    },
+    "tags": {
+      "type": "json",
+      "required": true
+    },
+    "category": {
+      "type": "enumeration",
+      "required": true,
+      "default": "Cinematography-and-Videography",
+      "enum": [
+        "Cinematography-and-Videography",
+        "Photography",
+        "Design-and-Branding",
+        "Post-Production",
+        "Web-and-Digital",
+        "Marketing"
+      ]
     }
+  }
 }

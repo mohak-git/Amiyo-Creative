@@ -5,16 +5,9 @@ import ReactQuery from "@/components/providers/ReactQuery";
 import Cursor from "@/components/ui/Cursor";
 import GoToTop from "@/components/ui/GoToTop";
 import ScrollBar from "@/components/ui/ScrollBar";
-import { ReactNode } from "react";
+import { ReactNode, Suspense } from "react";
+import Loader from "@/app/loading";
 import "./globals.css";
-import { Inter } from "next/font/google";
-
-const inter = Inter({
-    subsets: ["latin"],
-    variable: "--font-inter",
-    display: "swap",
-    preload: true,
-});
 
 export default function RootLayout({
     children,
@@ -22,22 +15,20 @@ export default function RootLayout({
     children: ReactNode;
 }>) {
     return (
-        <html
-            lang="en"
-            suppressHydrationWarning
-            className={`${inter.variable} `}
-        >
+        <html lang="en" suppressHydrationWarning>
             <body className="min-h-screen overflow-x-hidden">
                 <ReactQuery>
-                    <ScrollBar />
-                    <Cursor />
-                    <Navbar />
+                    <Suspense fallback={<Loader />}>
+                        <ScrollBar />
+                        <Cursor />
+                        <Navbar />
 
-                    {children}
-                    <Footer />
+                        {children}
+                        <Footer />
 
-                    <GoToTop />
-                    <Toast />
+                        <GoToTop />
+                        <Toast />
+                    </Suspense>
                 </ReactQuery>
             </body>
         </html>

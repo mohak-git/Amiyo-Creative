@@ -47,9 +47,9 @@ const Navbar = () => {
                     <NavLinks items={NavItems} />
                 </div>
 
-                <div className="hidden md:flex justify-end items-center gap-2">
+                {/* <div className="hidden md:flex justify-end items-center gap-2">
                     <SearchBar />
-                </div>
+                </div> */}
 
                 <div className="md:hidden flex items-center z-20">
                     <button onClick={() => setIsOpen(!isOpen)}>
@@ -67,7 +67,7 @@ const Navbar = () => {
                         mobile={true}
                         onItemClick={() => setIsOpen(false)}
                     />
-                    <SearchBar />
+                    {/* <SearchBar /> */}
                 </div>
             )}
         </div>

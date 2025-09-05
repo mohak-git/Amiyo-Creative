@@ -124,7 +124,7 @@ const AboutSection: FC = () => {
                                         <div className="text-4xl 3xl:text-5xl font-bold text-white mb-2 group-hover:scale-110 transition-transform duration-300">
                                             {counts[index]}+
                                         </div>
-                                        <div className="text-gray-300 text-sm 3xl:text-xl font-medium">
+                                        <div className="text-gray-400 text-sm 3xl:text-xl font-medium">
                                             {item.label}
                                         </div>
                                     </div>
@@ -141,15 +141,12 @@ const AboutSection: FC = () => {
                         >
                             <motion.div variants={textFadeUp}>
                                 <h2 className="text-4xl md:text-5xl 3xl:text-6xl font-bold text-white mb-6 leading-tight">
-                                    About{" "}
-                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
-                                        Our Story
-                                    </span>
+                                    About Our Story
                                 </h2>
                             </motion.div>
 
                             <motion.div variants={textFadeUp}>
-                                <p className="text-sm sm:text-base md:text-lg 3xl:text-2xl text-gray-300 leading-relaxed">
+                                <p className="text-sm sm:text-base md:text-lg 3xl:text-2xl text-gray-400 leading-relaxed">
                                     At Amiyo Creative, we don&apos;t just create
                                     content — we craft experiences. From
                                     designing your brand identity to capturing
@@ -164,7 +161,7 @@ const AboutSection: FC = () => {
                                 <h3 className="text-2xl md:text-3xl 3xl:text-6xl font-semibold text-white mb-4">
                                     Our Mission
                                 </h3>
-                                <p className="text-sm sm:text-base md:text-lg 3xl:text-2xl text-gray-300 leading-relaxed">
+                                <p className="text-sm sm:text-base md:text-lg 3xl:text-2xl text-gray-400 leading-relaxed">
                                     Deliver premium visuals and impactful
                                     digital solutions that inspire, engage, and
                                     grow.

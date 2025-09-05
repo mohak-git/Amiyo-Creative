@@ -22,19 +22,7 @@ export interface ProjectFeatureItem extends Struct.ComponentSchema {
     displayName: 'Feature Item';
     icon: 'information';
   };
-  attributes: {
-    description: Schema.Attribute.Text &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 300;
-      }>;
-    icon: Schema.Attribute.Media<'images'>;
-    title: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 80;
-        minLength: 3;
-      }>;
-  };
+  attributes: {};
 }
 
 declare module '@strapi/strapi' {

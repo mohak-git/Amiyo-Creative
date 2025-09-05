@@ -94,27 +94,14 @@ export interface StrapiMedia {
     url: string;
 }
 
-export interface ProjectFeature {
-    id: number;
-    title: string;
-    description?: string;
-    icon?: StrapiMedia;
-}
-
 export interface Project {
     id: number;
     documentId: string;
     title: string;
-    slug: string;
-    description: string;
     category: ServicesTypes;
     coverImage: StrapiMedia;
-    projectUrl?: Url;
-    technologies?: string[];
-    clientName?: string;
-    completionDate?: string;
-    gallery?: StrapiMedia[];
-    features?: ProjectFeature[];
+    projectUrl: string;
+    tags: string[];
 }
 
 export interface AgencyServicesProps {

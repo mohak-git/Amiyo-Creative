@@ -20,6 +20,7 @@ import {
     FaMailBulk,
     FaPalette,
     FaPhone,
+    FaPhoneAlt,
     FaPlay,
     FaTelegram,
     FaWhatsapp,
@@ -187,7 +188,7 @@ export const SocialPlatforms: SocialPlatformProps[] = [
     },
     {
         name: "Phone",
-        icon: FaPhone,
+        icon: FaPhoneAlt,
         borderColor: "border-gray-500/30",
         textColor: "text-gray-300",
         url: "tel:+918299797516",
@@ -561,9 +562,6 @@ export const mockProjects: Project[] = [
         id: 1,
         documentId: "1",
         title: "Ethereal Wedding Film",
-        slug: "ethereal-wedding-film",
-        description:
-            "Cinematic wedding storytelling with drone footage and intimate moments",
         category: "Cinematography-and-Videography",
         coverImage: {
             id: 1,
@@ -571,28 +569,12 @@ export const mockProjects: Project[] = [
             url: "https://images.unsplash.com/photo-1519741497674-611481863552",
         },
         projectUrl: "https://etherealweddingfilm.com",
-        technologies: ["Wedding", "Drone", "Cinematic"],
-        clientName: "Private Client",
-        completionDate: "2023-06-15",
-        features: [
-            {
-                id: 1,
-                title: "Drone Footage",
-                description: "Aerial shots for cinematic effect",
-            },
-            {
-                id: 2,
-                title: "Storytelling",
-                description: "Emotional narrative editing",
-            },
-        ],
+        tags: ["Wedding", "Drone", "Cinematic"],
     },
     {
         id: 2,
         documentId: "2",
         title: "Tech Startup Branding",
-        slug: "tech-startup-branding",
-        description: "Complete brand identity for innovative fintech company",
         category: "Photography",
         coverImage: {
             id: 2,
@@ -600,28 +582,12 @@ export const mockProjects: Project[] = [
             url: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43",
         },
         projectUrl: "https://techstartup.com",
-        technologies: ["Logo", "Brand", "Startup"],
-        clientName: "InnovateFin",
-        completionDate: "2023-09-20",
-        features: [
-            {
-                id: 1,
-                title: "Logo Design",
-                description: "Modern and scalable logo",
-            },
-            {
-                id: 2,
-                title: "Brand Guidelines",
-                description: "Comprehensive brand book",
-            },
-        ],
+        tags: ["Logo", "Brand", "Startup"],
     },
     {
         id: 3,
         documentId: "3",
         title: "Fashion Editorial Shoot",
-        slug: "fashion-editorial-shoot",
-        description: "High-fashion editorial photography for luxury magazine",
         category: "Design-and-Branding",
         coverImage: {
             id: 3,
@@ -629,29 +595,12 @@ export const mockProjects: Project[] = [
             url: "https://images.unsplash.com/photo-1469334031218-e382a71b716b",
         },
         projectUrl: "https://luxefashion.com",
-        technologies: ["Editorial", "Fashion", "Studio"],
-        clientName: "Luxe Magazine",
-        completionDate: "2023-11-10",
-        features: [
-            {
-                id: 1,
-                title: "Studio Lighting",
-                description: "Professional lighting setup",
-            },
-            {
-                id: 2,
-                title: "Model Direction",
-                description: "Expert posing and expression guidance",
-            },
-        ],
+        tags: ["Editorial", "Fashion", "Studio"],
     },
     {
         id: 4,
         documentId: "4",
         title: "Brand Commercial VFX",
-        slug: "brand-commercial-vfx",
-        description:
-            "Visual effects and color grading for premium automobile commercial",
         category: "Post-Production",
         coverImage: {
             id: 4,
@@ -659,54 +608,25 @@ export const mockProjects: Project[] = [
             url: "https://images.unsplash.com/photo-1485846234645-a62644f84728",
         },
         projectUrl: "https://autopremium.com",
-        technologies: ["VFX", "Commercial"],
-        clientName: "AutoPremium",
-        completionDate: "2024-01-30",
-        features: [
-            { id: 1, title: "3D Effects", description: "Custom 3D animations" },
-            {
-                id: 2,
-                title: "Color Grading",
-                description: "Cinematic color palette",
-            },
-        ],
+        tags: ["VFX", "Commercial"],
     },
     {
         id: 5,
         documentId: "5",
         title: "E-commerce Platform",
-        slug: "e-commerce-platform",
-        description: "Modern e-commerce website with seamless user experience",
         category: "Web-and-Digital",
         coverImage: {
             id: 5,
             documentId: "cover5",
             url: "https://images.unsplash.com/photo-1460925895917-afdab827c52f",
         },
-        technologies: ["E-commerce", "UX/UI", "React"],
-        clientName: "ShopEase",
-        completionDate: "2024-03-15",
+        tags: ["E-commerce", "UX/UI", "React"],
         projectUrl: "https://shopease.example.com",
-        features: [
-            {
-                id: 1,
-                title: "Responsive Design",
-                description: "Mobile-first approach",
-            },
-            {
-                id: 2,
-                title: "Checkout Flow",
-                description: "Optimized for conversions",
-            },
-        ],
     },
     {
         id: 6,
         documentId: "6",
         title: "Product Photography Series",
-        slug: "product-photography-series",
-        description:
-            "Minimalist product photography for premium skincare brand",
         category: "Photography",
         coverImage: {
             id: 6,
@@ -714,29 +634,12 @@ export const mockProjects: Project[] = [
             url: "https://images.unsplash.com/photo-1556228720-195a672e8a03",
         },
         projectUrl: "https://skincarepremium.com",
-        technologies: ["Product", "Commercial"],
-        clientName: "GlowSkin",
-        completionDate: "2024-05-22",
-        features: [
-            {
-                id: 1,
-                title: "Lighting Setup",
-                description: "Softbox and reflector use",
-            },
-            {
-                id: 2,
-                title: "Retouching",
-                description: "High-end post-processing",
-            },
-        ],
+        tags: ["Product", "Commercial"],
     },
     {
         id: 7,
         documentId: "7",
         title: "Music Video Production",
-        slug: "music-video-production",
-        description:
-            "Creative music video with artistic visuals and storytelling",
         category: "Cinematography-and-Videography",
         coverImage: {
             id: 7,
@@ -744,28 +647,12 @@ export const mockProjects: Project[] = [
             url: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f",
         },
         projectUrl: "https://musicvideo.example.com",
-        technologies: ["Video", "Creative", "Narrative"],
-        clientName: "SoundWave Records",
-        completionDate: "2024-07-05",
-        features: [
-            {
-                id: 1,
-                title: "Storyboard",
-                description: "Detailed scene planning",
-            },
-            {
-                id: 2,
-                title: "Cinematography",
-                description: "Dynamic camera movements",
-            },
-        ],
+        tags: ["Video", "Creative", "Narrative"],
     },
     {
         id: 8,
         documentId: "8",
         title: "Restaurant Branding Suite",
-        slug: "restaurant-branding-suite",
-        description: "Complete brand package including menu design and signage",
         category: "Design-and-Branding",
         coverImage: {
             id: 8,
@@ -773,28 +660,12 @@ export const mockProjects: Project[] = [
             url: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0",
         },
         projectUrl: "https://gourmetbistro.com",
-        technologies: ["Restaurant", "Menu", "Signage"],
-        clientName: "Gourmet Bistro",
-        completionDate: "2024-08-18",
-        features: [
-            {
-                id: 1,
-                title: "Menu Design",
-                description: "Custom typography and layout",
-            },
-            {
-                id: 2,
-                title: "Signage",
-                description: "Exterior and interior branding",
-            },
-        ],
+        tags: ["Restaurant", "Menu", "Signage"],
     },
     {
         id: 9,
         documentId: "9",
         title: "Motion Graphics Explainer",
-        slug: "motion-graphics-explainer",
-        description: "Animated explainer video with custom motion graphics",
         category: "Post-Production",
         coverImage: {
             id: 9,
@@ -802,20 +673,6 @@ export const mockProjects: Project[] = [
             url: "https://images.unsplash.com/photo-1611224923853-80b023f02d71",
         },
         projectUrl: "https://explainervideo.example.com",
-        technologies: ["Graphics", "Animation", "Explainer"],
-        clientName: "EduTech",
-        completionDate: "2024-08-25",
-        features: [
-            {
-                id: 1,
-                title: "Scriptwriting",
-                description: "Engaging and clear narrative",
-            },
-            {
-                id: 2,
-                title: "Animation",
-                description: "Frame-by-frame custom graphics",
-            },
-        ],
+        tags: ["Graphics", "Animation", "Explainer"],
     },
 ];

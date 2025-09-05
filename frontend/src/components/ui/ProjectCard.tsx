@@ -16,7 +16,7 @@ const ProjectCard: FC<{ project: Project; color: string }> = ({
                     height={5000}
                     width={5000}
                     src={project.coverImage.url}
-                    alt={`${project.slug}-cover-image`}
+                    alt={`${project.id}-cover-image`}
                     className="w-full h-full object-cover"
                 />
 
@@ -36,7 +36,7 @@ const ProjectCard: FC<{ project: Project; color: string }> = ({
                 )}
 
                 <ul className="absolute top-3 right-0 flex gap-2">
-                    {project.technologies?.slice(0, 2).map((tag, index) => {
+                    {project.tags?.slice(0, 2).map((tag, index) => {
                         return (
                             <div
                                 className="bg-white/30 px-2 py-1 rounded-lg text-[10px] backdrop-blur-3xl 3xl:text-xl"

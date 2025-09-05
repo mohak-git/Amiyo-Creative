@@ -57,12 +57,12 @@ const Services = () => {
                         className="mx-auto max-w-5xl text-center"
                         variants={fadeUp}
                     >
-                        <h1 className="bg-gradient-to-r from-fuchsia-400 via-violet-300 to-indigo-300 bg-clip-text text-4xl 3xl:text-6xl font-extrabold tracking-tight text-transparent sm:text-5xl">
+                        <h1 className="text-4xl 3xl:text-6xl font-extrabold tracking-tight  sm:text-5xl">
                             Our Services
                         </h1>
-                        <p className="mx-auto mt-5 max-w-6xl text-balance text-base leading-relaxed text-white/80 sm:text-lg 3xl:text-2xl">
+                        <p className="mx-auto mt-5 max-w-4xl 3xl:max-w-6xl text-balance text-base leading-relaxed text-white/80 sm:text-lg 3xl:text-2xl">
                             At{" "}
-                            <span className="font-semibold text-white">
+                            <span className="font-semibold text-gray">
                                 Amiyo Creative
                             </span>
                             , we partner with brands, startups, influencers, and
@@ -71,7 +71,7 @@ const Services = () => {
                             LinkedIn, Twitter, Telegram, Email, Phone, or
                             directly through our Website.
                         </p>
-                        <p className="mx-auto mt-4 max-w-3xl text-balance text-base leading-relaxed text-white/75 sm:text-lg 3xl:text-2xl">
+                        <p className="mx-auto mt-4 max-w-3xl text-balance text-base leading-relaxed text-gray-400 sm:text-lg 3xl:text-2xl">
                             We don&apos;t box ourselves into categories. We
                             assemble the right squad — cinematographers,
                             photographers, designers, editors, developers,

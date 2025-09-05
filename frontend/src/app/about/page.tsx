@@ -108,11 +108,11 @@ const AboutPage: FC = () => {
                         <span className="block text-3xl lg:text-4xl 3xl:text-5xl text-white mb-2">
                             About
                         </span>
-                        <span className="block bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                        <span className="block bg-gradient-to-br from-purple-400 via-white bg-clip-text text-transparent">
                             Amiyo Creative
                         </span>
                     </h1>
-                    <p className="text-base lg:text-xl 3xl:text-3xl text-slate-300 leading-relaxed max-w-2xl 3xl:max-w-6xl">
+                    <p className="text-base lg:text-xl 3xl:text-3xl text-gray-400 leading-relaxed max-w-2xl 3xl:max-w-6xl">
                         A Kolkata-based creative and digital solutions agency
                         offering services for brands, startups, influencers, and
                         individuals. From storytelling to strategy, from visuals

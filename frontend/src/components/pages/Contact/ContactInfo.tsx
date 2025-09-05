@@ -27,7 +27,7 @@ const ContactInfo = () => {
                 className="flex flex-col justify-center items-center p-2"
                 variants={itemVariants}
             >
-                <h1 className="text-3xl 3xl:text-5xl font-black mb-4 bg-gradient-to-r from-purple-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
+                <h1 className="text-3xl leading-normal 3xl:text-5xl font-black mb-4 bg-gradient-to-br from-purple-400 via-white bg-clip-text text-transparent">
                     Get In Touch
                 </h1>
                 <p className="text-base 3xl:text-2xl text-gray-400 leading-relaxed text-center">
@@ -40,7 +40,7 @@ const ContactInfo = () => {
                 className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-4 shadow-lg"
                 variants={itemVariants}
             >
-                <h3 className="text-2xl 3xl:text-4xl text-center font-bold mt-2 mb-4 bg-gradient-to-r from-purple-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
+                <h3 className="text-2xl 3xl:text-4xl text-center font-bold mt-2 mb-4 bg-gradient-to-r from-purple-400 via-white bg-clip-text text-transparent">
                     Let&apos;s Connect
                 </h3>
 

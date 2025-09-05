@@ -62,7 +62,7 @@ const ContactForm = () => {
                 className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-8 shadow-xl"
                 variants={itemVariants}
             >
-                <h2 className="text-3xl 3xl:text-6xl leading-relaxed font-bold mb-8 bg-gradient-to-r from-purple-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
+                <h2 className="text-3xl 3xl:text-6xl leading-relaxed font-bold mb-8 bg-gradient-to-br from-purple-400 via-white bg-clip-text text-transparent">
                     Start a Project
                 </h2>
 

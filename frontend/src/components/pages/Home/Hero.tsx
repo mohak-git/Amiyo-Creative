@@ -117,7 +117,7 @@ const Hero: React.FC = () => {
                             initial="hidden"
                             animate="visible"
                             custom={1.4}
-                            className="text-gray-300 font-semibold text-[8px] sm:text-sm md:text-base 3xl:text-2xl tracking-wide bg-purple-600/20 rounded-full px-2 py-0.5"
+                            className="text-gray-400 font-semibold text-[8px] sm:text-sm md:text-base 3xl:text-2xl tracking-wide bg-purple-600/20 rounded-full px-2 py-0.5"
                         >
                             Where Innovation Meets Perfection
                         </motion.span>
@@ -131,7 +131,7 @@ const Hero: React.FC = () => {
                         >
                             <span className="uppercase">Creative Visuals</span>{" "}
                             <br />
-                            <span className="text-blue-300">
+                            <span className="bg-gradient-to-br bg-clip-text text-transparent from-purple-400 via-white">
                                 for Every Story
                             </span>
                         </motion.h1>
@@ -141,7 +141,7 @@ const Hero: React.FC = () => {
                             initial="hidden"
                             animate="visible"
                             custom={1.6}
-                            className="text-white text-sm sm:text-base md:text-lg lg:text-xl 3xl:text-3xl"
+                            className="text-gray-400 text-sm sm:text-base md:text-lg lg:text-xl 3xl:text-3xl"
                         >
                             Transform your ideas into stunning digital
                             realities. We build premium web experiences that
@@ -158,14 +158,14 @@ const Hero: React.FC = () => {
                         >
                             <Link
                                 href={"/contact"}
-                                className="cursor-target 3xl:text-2xl outline-none cursor-none px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-purple-600 to-purple-700 text-white font-semibold rounded-full hover:from-purple-700 hover:to-purple-800 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
+                                className="cursor-target text-sm 3xl:text-2xl text-center outline-none cursor-none px-6 sm:px-8 py-2 sm:py-4 bg-gradient-to-r from-purple-600 to-purple-700 text-white font-semibold rounded-full hover:from-purple-700 hover:to-purple-800 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
                             >
                                 Let&apos;s Work Together
                             </Link>
 
                             <Link
                                 href={"/work"}
-                                className="cursor-target 3xl:text-2xl outline-none cursor-none px-6 sm:px-8 py-3 sm:py-4 bg-white/90 text-purple-600 font-semibold rounded-full hover:bg-white transform hover:scale-105 transition-all duration-200"
+                                className="cursor-target text-sm 3xl:text-2xl text-center outline-none cursor-none px-6 sm:px-8 py-2 sm:py-4 bg-white/90 text-purple-600 font-semibold rounded-full hover:bg-white transform hover:scale-105 transition-all duration-200"
                             >
                                 View Our Work
                             </Link>
