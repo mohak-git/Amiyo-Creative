@@ -106,7 +106,7 @@ const Services = () => {
 
                 {/* Cards */}
                 <motion.section
-                    className="relative rounded-lg p-4 sm:p-10 backdrop-blur-3xl border shadow-xl bg-black/20 border-white/10"
+                    className="relative rounded-lg sm:p-10 backdrop-blur-3xl border shadow-xl bg-black/20 border-white/10"
                     variants={fadeUp}
                     initial="hidden"
                     whileInView="visible"

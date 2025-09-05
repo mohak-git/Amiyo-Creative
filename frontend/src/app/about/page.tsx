@@ -58,7 +58,7 @@ const AgencyValues = [
 ];
 
 const SectionHeading: FC<{ title: string }> = ({ title }) => (
-    <div className="flex items-center justify-center space-x-4 text-center mb-14">
+    <div className="flex items-center justify-center space-x-4 text-center mb-4">
         <div className="w-12 h-0.5 bg-gradient-to-r from-purple-500 to-blue-500" />
         <h2 className="text-3xl 3xl:text-5xl font-bold text-white">{title}</h2>
         <div className="w-12 h-0.5 bg-gradient-to-l from-purple-500 to-blue-500" />
@@ -73,7 +73,7 @@ const ServiceBadge: FC<{ icon: IconType; label: string }> = ({
         className={`flex items-center space-x-3 bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-full px-4 py-2 hover:border-purple-500/50 transition-all duration-300 hover:rotate-0`}
     >
         <Icon className="w-4 h-4 text-purple-400" />
-        <span className="text-sm 3xl:text-2xl text-slate-300">{label}</span>
+        <span className="text-sm 3xl:text-2xl text-gray-400">{label}</span>
     </div>
 );
 
@@ -89,7 +89,7 @@ const ValueCard: FC<{
             <h3 className="text-xl 3xl:text-3xl flex gap-2 items-center text-white mb-3 group-hover:text-purple-300 transition-colors duration-300">
                 <Icon /> {title}
             </h3>
-            <p className="3xl:text-2xl text-slate-300 leading-relaxed group-hover:text-slate-200 transition-colors duration-300">
+            <p className="3xl:text-2xl text-gray-400 leading-relaxed group-hover:text-slate-200 transition-colors duration-300">
                 {description}
             </p>
         </div>
@@ -99,9 +99,9 @@ const ValueCard: FC<{
 
 const AboutPage: FC = () => {
     return (
-        <main className="bg-slate-950 text-white overflow-x-hidden px-6 sm:px-10 md:px-20">
+        <main className="bg-slate-950 text-white overflow-x-hidden sm:px-10 md:px-20">
             {/* HERO */}
-            <section className="pt-20 md:pt-32 3xl:pt-50 pb-24 mx-auto px-6 sm:px-10 3xl:px-30 grid lg:grid-cols-2 gap-16 items-center">
+            <section className="pt-20 md:pt-32 3xl:pt-50 pb-12 sm:pb-20 mx-auto px-6 sm:px-10 3xl:px-30 grid lg:grid-cols-2 gap-8 sm:gap-16 items-center">
                 {/* Left: Text */}
                 <div className="space-y-8">
                     <h1 className="text-5xl lg:text-6xl 3xl:text-7xl font-bold leading-tight">
@@ -125,7 +125,7 @@ const AboutPage: FC = () => {
                     </div>
                 </div>
 
-                {/* Right: Vision */}
+                {/* Right: Image */}
                 <div className="relative w-full aspect-square max-w-md 3xl:max-w-2xl mx-auto flex justify-center items-center">
                     <div className="absolute inset-0 border-2 border-purple-500/30 rounded-full" />
                     <div className="relative w-4/5 aspect-square mx-auto rounded-3xl bg-gradient-to-br from-slate-800/40 to-purple-900/20 backdrop-blur-xl border border-purple-500/20 overflow-hidden">
@@ -149,18 +149,16 @@ const AboutPage: FC = () => {
             </section>
 
             {/* VISION */}
-            <section className="py-12 mx-auto px-6 sm:px-10 3xl:px-30 text-center max-w-4xl">
+            <section className="py-12 sm:py-20 mx-auto px-6 sm:px-10 3xl:px-30 text-center max-w-4xl">
                 <SectionHeading title="Our Vision" />
-                <div className="space-y-6">
-                    <p className="text-slate-300 text-base lg:text-xl 3xl:text-3xl leading-relaxed">
-                        To become your trusted partner in creativity,
-                        storytelling, and digital growth.
-                    </p>
-                </div>
+                <p className="text-gray-400 text-base lg:text-xl 3xl:text-3xl leading-relaxed">
+                    To become your trusted partner in creativity, storytelling,
+                    and digital growth.
+                </p>
             </section>
 
             {/* VALUES */}
-            <section className="py-24 mx-auto px-6 sm:px-10 3xl:px-30">
+            <section className="py-12 sm:py-20 mx-auto px-6 sm:px-10 3xl:px-30">
                 <SectionHeading title="Our Values" />
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {AgencyValues.map((v, i) => (
@@ -170,15 +168,19 @@ const AboutPage: FC = () => {
             </section>
 
             {/* FOUNDER */}
-            <section className="py-24 mx-auto px-6 sm:px-10 3xl:px-30 space-y-8">
+            <section className="py-12 sm:py-20 mx-auto px-6 sm:px-10 3xl:px-30 space-y-8">
                 <div className=" grid lg:grid-cols-5 gap-16 items-start">
                     {/* Founder Card */}
                     <div className="lg:col-span-2 relative">
                         <div className="relative bg-gradient-to-br from-slate-800/60 to-purple-900/30 backdrop-blur-xl border border-purple-500/20 rounded-3xl overflow-hidden">
                             <div className="flex items-center space-x-4 px-6 py-4  border-b border-slate-700/50">
-                                <div className="size-15 3xl:size-28 3xl:text-3xl bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center">
-                                    AP
-                                </div>
+                                <Image
+                                    src={"/amiyo.jpg"}
+                                    alt="amiyo-image"
+                                    width={120}
+                                    height={120}
+                                    className="size-16 sm:size-20 3xl:size-28 rounded-full aspect-square object-cover"
+                                />
                                 <div>
                                     <h4 className="text-lg 3xl:text-3xl font-semibold text-white">
                                         Amiyo Panda
@@ -188,12 +190,15 @@ const AboutPage: FC = () => {
                                     </p>
                                 </div>
                             </div>
-                            <div className="px-6 py-4 grid grid-cols-2 gap-4">
+                            <div className="px-6 py-4 grid grid-cols-3 gap-4">
                                 {[
-                                    { label: "Years", value: "3+" },
+                                    { label: "Years", value: "7+" },
                                     { label: "Projects", value: "50+" },
                                     { label: "Clients", value: "25+" },
+                                    { label: "Services", value: "10+" },
+                                    { label: "Support", value: "24/7" },
                                     { label: "Ideas", value: "∞" },
+
                                 ].map((stat, i) => (
                                     <div key={i} className="text-center">
                                         <div className="text-2xl 3xl:text-4xl font-bold text-white mb-1">
@@ -216,7 +221,7 @@ const AboutPage: FC = () => {
                     {/* Founder Note */}
                     <div className="lg:col-span-3 space-y-10">
                         <SectionHeading title="Founder's Note" />
-                        <div className="space-y-6 text-slate-300 3xl:text-2xl leading-relaxed">
+                        <div className="space-y-6 text-gray-400 3xl:text-2xl leading-relaxed">
                             <p>
                                 Amiyo Panda, the Founder & CEO of Amiyo
                                 Creative, started this journey with pure passion
@@ -246,7 +251,7 @@ const AboutPage: FC = () => {
             </section>
 
             {/* FAQ */}
-            <section className="py-24 mx-auto px-6 sm:px-10 3xl:px-30">
+            <section className="py-12 sm:py-20 mx-auto px-6 sm:px-10 3xl:px-30">
                 <SectionHeading title="FAQs" />
                 <FAQsComp items={FAQs} />
             </section>

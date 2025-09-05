@@ -14,7 +14,7 @@ import { FaQuoteLeft } from "react-icons/fa";
 
 const TestimonialCard: FC<{ t: TestimonialProps }> = ({ t }) => {
     return (
-        <div className="relative h-fit bg-gray-900/40 backdrop-blur-sm border border-purple-500/20 rounded-2xl p-2 mx-4 min-w-[450px] max-w-[500px] 3xl:max-w-[800px] hover:border-purple-400/40 transition-all duration-300">
+        <div className="relative h-fit bg-gray-900/40 backdrop-blur-sm border border-purple-500/20 rounded-2xl p-2 mx-4 max-w-[300px] sm:min-w-[450px] sm:max-w-[500px] 3xl:max-w-[800px] hover:border-purple-400/40 transition-all duration-300">
             {/* Glow */}
             <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-2xl blur opacity-50"></div>
 
@@ -61,7 +61,7 @@ const TestimonialCard: FC<{ t: TestimonialProps }> = ({ t }) => {
 
 const VideoTestimonialCard: FC<{ t: VideoTestimonialProps }> = ({ t }) => {
     return (
-        <div className="relative h-fit bg-gray-900/40 backdrop-blur-sm border border-purple-500/20 rounded-2xl p-2 mx-4 min-w-[450px] max-w-[500px] 3xl:max-w-[800px] hover:border-purple-400/40 transition-all duration-300">
+        <div className="relative h-fit bg-gray-900/40 backdrop-blur-sm border border-purple-500/20 rounded-2xl p-2 mx-4 max-w-[300px] sm:min-w-[450px] sm:max-w-[500px] 3xl:max-w-[800px] hover:border-purple-400/40 transition-all duration-300">
             {/* Glow */}
             <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-2xl blur opacity-50"></div>
 
@@ -203,7 +203,7 @@ const TestimonialSection: React.FC = () => {
                 </div>
 
                 {/* Rows */}
-                <div className="space-y-8 h-full w-full rounded-4xl overflow-hidden">
+                <div className="space-y-8 h-full w-full sm:rounded-4xl overflow-hidden">
                     <motion.div
                         initial={{ opacity: 0, x: -100 }}
                         whileInView={{ opacity: 1, x: 0 }}

@@ -94,7 +94,7 @@ const Work = () => {
                             <ScrollStackItem
                                 key={idx}
                                 id={ser.service.toLowerCase()}
-                                className="backdrop-blur-md text-white flex flex-col gap-8 px-6 py-12 scroll-mt-40"
+                                className="backdrop-blur-md text-white flex flex-col gap-8 px-6 py-6 sm:px-6 sm:py-12 scroll-mt-40"
                                 style={{ background: bgColor }}
                             >
                                 <h2 className="relative text-2xl sm:text-4xl 3xl:text-5xl font-extrabold text-center tracking-wide drop-shadow-[0_0_20px_rgba(139,92,246,0.7)]">

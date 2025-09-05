@@ -10,7 +10,7 @@ export async function fetchProjects(): Promise<
         `${API_URL}/api/projects?fields=title,projectUrl,category,tags&populate[coverImage][fields]=url`,
         {
             headers: { "Content-Type": "application/json" },
-            next: { revalidate: 24 * 60 * 60 },
+            next: { revalidate: 60 * 5 },
         }
     );
 

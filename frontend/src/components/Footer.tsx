@@ -262,8 +262,8 @@ const Footer = () => {
                     className="border-t border-slate-800 bg-slate-950"
                     variants={itemVariants}
                 >
-                    <div className="w-full mx-auto py-6 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-                        <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4 text-sm 3xl:text-2xl text-gray-500">
+                    <div className="w-full mx-auto py-6 flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0">
+                        <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4 text-sm 3xl:text-2xl text-gray-500">
                             <p>
                                 &copy; 2025 Amiyo Creative. All rights reserved.
                             </p>

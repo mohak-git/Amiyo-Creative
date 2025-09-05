@@ -21,7 +21,7 @@ export function FAQsComp({ items }: { items: { q: string; a: string }[] }) {
                     >
                         <button
                             onClick={() => toggle(i)}
-                            className="w-full flex justify-between items-center cursor-none text-lg 3xl:text-3xl text-white"
+                            className="w-full flex text-left justify-between items-center cursor-none text-lg 3xl:text-3xl text-white"
                         >
                             <span className={isOpen ? "text-purple-300" : ""}>
                                 {item.q}

@@ -4,12 +4,6 @@ import { BgWave } from "@/components/elements/BgAssets";
 import CircularGallery from "@/components/ui/CircularCards";
 import { GalleryItems } from "@/constants/constants";
 import { motion } from "framer-motion";
-import { Montserrat_Alternates } from "next/font/google";
-
-const montserrat = Montserrat_Alternates({
-    subsets: ["latin"],
-    weight: ["400", "600", "700"],
-});
 
 const WhyUs = () => {
     return (
@@ -36,7 +30,7 @@ const WhyUs = () => {
                 </div>
                 <CircularGallery
                     items={GalleryItems}
-                    font={`bold 30px ${montserrat.style.fontFamily}`}
+                    font={`bold 30px Figtree`}
                 />
             </div>
         </div>

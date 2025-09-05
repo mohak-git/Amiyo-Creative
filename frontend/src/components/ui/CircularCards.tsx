@@ -198,25 +198,7 @@ class Media {
             canvas.width = img.naturalWidth;
             canvas.height = img.naturalHeight;
             ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-            // // Main title
-            // ctx.font =
-            //     `bold 80px ${this.font?.split(" ")[2]}` ||
-            //     "bold 80px monospace";
-            // ctx.fillStyle = this.textColor || "white";
-            // ctx.textAlign = "center";
-            // ctx.textBaseline = "bottom";
-            // ctx.fillText(this.heading, canvas.width / 2, canvas.height - 100);
-
-            // // Subtitle
-            // ctx.font =
-            //     `bold 40px ${this.font?.split(" ")[2]}` ||
-            //     "bold 40px monospace";
-            // ctx.fillStyle = "rgba(255,255,255,0.8)";
-            // ctx.textAlign = "center";
-            // ctx.textBaseline = "bottom";
-            // ctx.fillText(this.subheading, canvas.width / 2, canvas.height - 40);
-
+            
             texture.image = canvas;
             this.program.uniforms.uImageSizes.value = [
                 canvas.width,
@@ -722,10 +704,10 @@ export default function CircularGallery({
                         color: textColor,
                     }}
                 >
-                    <h2 className="text-xl 3xl:text-3xl font-bold">
+                    <h2 className="text-lg sm:text-xl 3xl:text-3xl font-bold">
                         {item.heading}
                     </h2>
-                    <p className="text-sm 3xl:text-xl opacity-70 max-w-80 3xl:max-w-96">
+                    <p className="text-xs sm:text-sm 3xl:text-2xl opacity-70 max-w-60 sm:max-w-80 3xl:max-w-96">
                         {item.subheading}
                     </p>
                 </div>

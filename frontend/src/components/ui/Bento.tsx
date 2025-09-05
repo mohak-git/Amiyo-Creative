@@ -455,9 +455,8 @@ const Bento: React.FC<BentoProps> = ({
                     @media (max-width: 599px) {
                       .card-responsive {
                         grid-template-columns: 1fr;
-                        width: 90%;
+                        width: 100%;
                         margin: 0 auto;
-                        padding: 0.5rem;
                       }
                             
                       .card-responsive .card {
