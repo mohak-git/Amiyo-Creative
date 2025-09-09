@@ -7,47 +7,47 @@ type ProxyParams = { slug: string[] };
 
 export async function GET(
     request: NextRequest,
-    { params }: { params: ProxyParams }
+    context: { params: Promise<ProxyParams> }
 ) {
-    return proxyRequest(request, params);
+    return proxyRequest(request, context.params);
 }
 
 export async function POST(
     request: NextRequest,
-    { params }: { params: ProxyParams }
+    context: { params: Promise<ProxyParams> }
 ) {
-    return proxyRequest(request, params);
+    return proxyRequest(request, context.params);
 }
 
 export async function PUT(
     request: NextRequest,
-    { params }: { params: ProxyParams }
+    context: { params: Promise<ProxyParams> }
 ) {
-    return proxyRequest(request, params);
+    return proxyRequest(request, context.params);
 }
 
 export async function DELETE(
     request: NextRequest,
-    { params }: { params: ProxyParams }
+    context: { params: Promise<ProxyParams> }
 ) {
-    return proxyRequest(request, params);
+    return proxyRequest(request, context.params);
 }
 
 async function proxyRequest(
     request: NextRequest,
-    params: ProxyParams
+    params: Promise<ProxyParams>
 ): Promise<NextResponse> {
     try {
         const { slug } = await params;
 
-        if (!slug || slug.length === 0)
+        if (!slug || slug.length === 0) {
             return NextResponse.json(
                 { error: "Invalid path" },
                 { status: 400 }
             );
+        }
 
         const path = slug.join("/");
-
         const url = new URL(`${API_URL}/api/${path}`);
 
         const requestUrl = new URL(request.url);
@@ -61,14 +61,16 @@ async function proxyRequest(
             body = jsonBody ? JSON.stringify(jsonBody) : null;
         }
 
+        const headers = new Headers(request.headers);
+        headers.set("Content-Type", "application/json");
+
         const strapiResponse = await fetch(url.href, {
             method: request.method,
-            headers: { "Content-Type": "application/json" },
+            headers,
             body,
         });
 
-        const data: unknown = await strapiResponse.json();
-
+        const data = await strapiResponse.json();
         return NextResponse.json(data, { status: strapiResponse.status });
     } catch (error) {
         console.error("Proxy error:", error);
