@@ -1,9 +1,6 @@
 import { StrapiResponse } from "@/constants/types";
 import z from "zod";
 
-const API_URL = process.env.NEXT_PUBLIC_STRAPI_URL!;
-if (!API_URL) throw new Error("API_URL environment variable is not set!");
-
 export const ContactFormSchema = z.object({
     name: z
         .string()
@@ -37,7 +34,7 @@ export interface ContactFormResponse {
 export async function sendContactMessage(
     data: ContactFormPayload
 ): Promise<StrapiResponse<ContactFormResponse>> {
-    const res = await fetch(`${API_URL}/api/enquiries`, {
+    const res = await fetch(`api/proxy/enquiries`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ data }),

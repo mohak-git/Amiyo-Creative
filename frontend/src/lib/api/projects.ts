@@ -7,7 +7,7 @@ export async function fetchProjects(): Promise<
     StrapiCollectionResponse<Project>
 > {
     const res = await fetch(
-        `${API_URL}/api/projects?fields=title,projectUrl,category,tags&populate[coverImage][fields]=url`,
+        `/api/proxy/projects?fields=title,projectUrl,category,tags&populate[coverImage][fields]=url`,
         {
             headers: { "Content-Type": "application/json" },
             next: { revalidate: 60 * 5 },
