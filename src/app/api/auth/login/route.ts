@@ -43,6 +43,7 @@ export async function POST(request: Request) {
             { status: 401 }
         );
     } catch (error) {
+        console.error(error);
         return NextResponse.json(
             { success: false, data: null, message: "Internal server error" },
             { status: 500 }

@@ -21,6 +21,7 @@ export async function GET(request: NextRequest) {
             message: "Enquiries fetched successfully",
         });
     } catch (error) {
+        console.error(error);
         return NextResponse.json(
             {
                 success: false,
@@ -72,6 +73,7 @@ export async function POST(request: NextRequest) {
             message: "Enquiry submitted successfully",
         });
     } catch (error) {
+        console.error(error);
         return NextResponse.json(
             { success: false, data: null, message: "Failed to submit enquiry" },
             { status: 500 }
@@ -108,6 +110,7 @@ export async function DELETE(request: NextRequest) {
                 : "Enquiries deleted successfully",
         });
     } catch (error) {
+        console.error(error);
         return NextResponse.json(
             {
                 success: false,

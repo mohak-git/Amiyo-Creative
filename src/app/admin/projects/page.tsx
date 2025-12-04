@@ -36,8 +36,7 @@ const ProjectCard = ({
     onSelect: (id: number) => void;
     onEdit: (project: Project) => void;
 }) => {
-    const { id, title, coverImage, category, createdAt, tags, projectUrl } =
-        project;
+    const { id, title, coverImage, category, projectUrl } = project;
     const { mutateAsync: deleteProject } = useDeleteProject(id);
 
     const handleDelete = async () => {
@@ -47,6 +46,7 @@ const ProjectCard = ({
             await deleteProject();
             toast.success("Project deleted successfully");
         } catch (error) {
+            console.error(error);
             toast.error("Failed to delete project. Try again");
         }
     };
@@ -145,6 +145,7 @@ export default function AdminProjects() {
             toast.success(`Deleted ${selectedIds.length} projects`);
             setSelectedIds([]);
         } catch (error) {
+            console.error(error);
             toast.error(`Failed to delete ${selectedIds.length} projects`);
         }
     };
@@ -157,6 +158,7 @@ export default function AdminProjects() {
             toast.success("Deleted all projects");
             setSelectedIds([]);
         } catch (error) {
+            console.error(error);
             toast.error("Failed to delete all projects");
         }
     };
@@ -306,6 +308,7 @@ const CreateProjectForm = ({ onClose }: { onClose: () => void }) => {
             data = await uploadImage(imageFile);
             toast.success("Image uploaded");
         } catch (error) {
+            console.error(error);
             data = null;
             toast.error("Failed to upload image");
         }
@@ -334,6 +337,7 @@ const CreateProjectForm = ({ onClose }: { onClose: () => void }) => {
             toast.success("Project created");
             onClose();
         } catch (error) {
+            console.error(error);
             toast.error("Failed to create project");
         }
     };
@@ -485,6 +489,7 @@ const EditProjectForm = ({
             data = await uploadImage(imageFile);
             toast.success("Image uploaded");
         } catch (error) {
+            console.error(error);
             data = null;
             toast.error("Failed to upload image");
         }

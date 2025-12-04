@@ -23,6 +23,7 @@ export async function middleware(request: NextRequest) {
             await jwtVerify(token, JWT_SECRET);
             return NextResponse.next();
         } catch (error) {
+            console.error(error);
             return NextResponse.redirect(new URL("/admin/login", request.url));
         }
     }

@@ -35,6 +35,7 @@ export async function GET(
             message: "Project fetched successfully",
         });
     } catch (error) {
+        console.error(error);
         return NextResponse.json(
             { success: false, data: null, message: "Failed to fetch project" },
             { status: 500 }
@@ -105,6 +106,7 @@ export async function DELETE(
             message: "Project deleted successfully",
         });
     } catch (error) {
+        console.error(error);
         return NextResponse.json(
             { success: false, data: null, message: "Failed to delete project" },
             { status: 500 }
@@ -152,7 +154,7 @@ export async function PUT(
                 { status: 400 }
             );
 
-        let {
+        const {
             title,
             coverImage,
             coverImagePublicId,

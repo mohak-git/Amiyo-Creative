@@ -7,7 +7,6 @@ import { FC, JSX } from "react";
 import { IconType } from "react-icons";
 import { FaAward, FaEye, FaHandSparkles, FaQuoteLeft } from "react-icons/fa";
 import { FaBoltLightning } from "react-icons/fa6";
-import { FiTarget } from "react-icons/fi";
 
 const AgencyValues = [
     {
@@ -70,8 +69,7 @@ const ServiceBadge: FC<{ icon: IconType; label: string }> = ({
     label,
 }) => (
     <div
-        className={`flex items-center space-x-3 bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-full px-4 py-2 hover:border-purple-500/50 transition-all duration-300 hover:rotate-0`}
-    >
+        className={`flex items-center space-x-3 bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-full px-4 py-2 hover:border-purple-500/50 transition-all duration-300 hover:rotate-0`}>
         <Icon className="w-4 h-4 text-purple-400" />
         <span className="text-sm 3xl:text-2xl text-gray-400">{label}</span>
     </div>
@@ -198,7 +196,6 @@ const AboutPage: FC = () => {
                                     { label: "Services", value: "10+" },
                                     { label: "Support", value: "24/7" },
                                     { label: "Ideas", value: "∞" },
-
                                 ].map((stat, i) => (
                                     <div key={i} className="text-center">
                                         <div className="text-2xl 3xl:text-4xl font-bold text-white mb-1">

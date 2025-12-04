@@ -41,6 +41,7 @@ export async function GET(
             message: "Enquiry fetched successfully",
         });
     } catch (error) {
+        console.error(error);
         return NextResponse.json(
             { success: false, data: null, message: "Failed to fetch enquiry" },
             { status: 500 }
@@ -92,6 +93,7 @@ export async function PATCH(
             message: "Enquiry updated successfully",
         });
     } catch (error) {
+        console.error(error);
         return NextResponse.json(
             { success: false, data: null, message: "Failed to update enquiry" },
             { status: 500 }
@@ -129,6 +131,7 @@ export async function DELETE(
             message: "Enquiry deleted successfully",
         });
     } catch (error) {
+        console.error(error);
         return NextResponse.json(
             { success: false, data: null, message: "Failed to delete enquiry" },
             { status: 500 }

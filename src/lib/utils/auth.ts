@@ -23,6 +23,7 @@ export const verifyToken = async (request: Request) => {
         await jwtVerify(token, JWT_SECRET);
         return true;
     } catch (error) {
+        console.error(error);
         return false;
     }
 };

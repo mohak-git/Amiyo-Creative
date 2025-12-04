@@ -127,8 +127,7 @@ const BgBeam: React.FC<BgBeamProps> = ({
     return (
         <div
             ref={containerRef}
-            className="relative w-full h-full bg-transparent overflow-hidden rounded-lg"
-        >
+            className="relative w-full h-full bg-transparent overflow-hidden rounded-lg">
             {beams.map((beam) => (
                 <div
                     key={beam.id}
@@ -156,8 +155,7 @@ const BgBeam: React.FC<BgBeamProps> = ({
                             left: `${explosion.x}%`,
                             bottom: "0px",
                             transform: "translateX(-50%)",
-                        }}
-                    >
+                        }}>
                         <div
                             className="absolute w-2 h-2 bg-gradient-to-r from-transparent via-cyan-400 to-transparent blur-sm"
                             style={{

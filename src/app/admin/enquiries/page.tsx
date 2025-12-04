@@ -36,6 +36,7 @@ const EnquiryRow = ({
             await deleteEnquiry();
             toast.success("Enquiry deleted successfully");
         } catch (error) {
+            console.error(error);
             toast.error("Failed to delete enquiry. Try again");
         }
     };
@@ -45,6 +46,7 @@ const EnquiryRow = ({
             await updateStatus(status);
             toast.success("Status updated");
         } catch (error) {
+            console.error(error);
             toast.error("Failed to update status. Try again.");
         }
     };
@@ -130,6 +132,7 @@ export default function AdminEnquiries() {
             toast.success(`Deleted ${selectedIds.length} enquiries`);
             setSelectedIds([]);
         } catch (error) {
+            console.error(error);
             toast.error(`Failed to delete ${selectedIds.length} enquiries`);
         }
     };
@@ -142,6 +145,7 @@ export default function AdminEnquiries() {
             toast.success("Deleted all enquiries");
             setSelectedIds([]);
         } catch (error) {
+            console.error(error);
             toast.error("Failed to delete all enquiries");
         }
     };
