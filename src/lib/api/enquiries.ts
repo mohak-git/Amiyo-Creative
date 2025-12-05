@@ -37,7 +37,7 @@ export async function createEnquiry(
     return data;
 }
 
-export async function deleteEnquiries(ids: number[]): Promise<void> {
+export async function deleteEnquiries(ids: string[]): Promise<void> {
     const res = await fetch("/api/enquiries", {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
@@ -63,7 +63,7 @@ export async function deleteAllEnquiries(): Promise<void> {
     if (!success) throw new Error(message || "Failed to delete all enquiries");
 }
 
-export async function fetchEnquiry(id: number): Promise<Enquiry> {
+export async function fetchEnquiry(id: string): Promise<Enquiry> {
     const res = await fetch(`/api/enquiries/${id}`, {
         headers: { "Content-Type": "application/json" },
         next: { revalidate: 60 * 5 },
@@ -78,7 +78,7 @@ export async function fetchEnquiry(id: number): Promise<Enquiry> {
 }
 
 export async function updateEnquiryStatus(
-    id: number,
+    id: string,
     status: string
 ): Promise<Enquiry> {
     const res = await fetch(`/api/enquiries/${id}`, {
@@ -95,7 +95,7 @@ export async function updateEnquiryStatus(
     return data;
 }
 
-export async function deleteEnquiry(id: number): Promise<void> {
+export async function deleteEnquiry(id: string): Promise<void> {
     const res = await fetch(`/api/enquiries/${id}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },

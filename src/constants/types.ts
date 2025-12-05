@@ -77,7 +77,7 @@ export interface APIResponse<T> {
 }
 
 export interface Project {
-    id: number;
+    _id: string;
     title: string;
     category: ServicesTypes;
     coverImage: string;
@@ -88,13 +88,15 @@ export interface Project {
     updatedAt: string;
 }
 
+export type EnquiryStatus = "new" | "in-progress" | "closed";
+
 export interface Enquiry {
-    id: number;
+    _id: string;
     name: string;
     email: string;
     phone: string;
     message: string;
-    status: "new" | "in-progress" | "closed";
+    status: EnquiryStatus;
     createdAt: string;
     updatedAt: string;
 }

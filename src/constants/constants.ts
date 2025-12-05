@@ -558,7 +558,7 @@ export const FAQs: { q: string; a: string }[] = [
 
 export const mockProjects: Project[] = [
     {
-        id: 1,
+        id: "1",
         title: "Ethereal Wedding Film",
         category: "Cinematography-and-Videography",
         coverImage:
@@ -570,7 +570,7 @@ export const mockProjects: Project[] = [
         updatedAt: "",
     },
     {
-        id: 2,
+        id: "2",
         title: "Tech Startup Branding",
         category: "Photography",
         coverImage: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43",
@@ -581,7 +581,7 @@ export const mockProjects: Project[] = [
         updatedAt: "",
     },
     {
-        id: 3,
+        id: "3",
         title: "Fashion Editorial Shoot",
         category: "Design-and-Branding",
         coverImage:
@@ -593,7 +593,7 @@ export const mockProjects: Project[] = [
         updatedAt: "",
     },
     {
-        id: 4,
+        id: "4",
         title: "Brand Commercial VFX",
         category: "Post-Production",
         coverImage:
@@ -605,7 +605,7 @@ export const mockProjects: Project[] = [
         updatedAt: "",
     },
     {
-        id: 5,
+        id: "5",
         title: "E-commerce Platform",
         category: "Web-and-Digital",
         coverImage:
@@ -617,7 +617,7 @@ export const mockProjects: Project[] = [
         updatedAt: "",
     },
     {
-        id: 6,
+        id: "6",
         title: "Product Photography Series",
         category: "Photography",
         coverImage: "https://images.unsplash.com/photo-1556228720-195a672e8a03",
@@ -628,7 +628,7 @@ export const mockProjects: Project[] = [
         updatedAt: "",
     },
     {
-        id: 7,
+        id: "7",
         title: "Music Video Production",
         category: "Cinematography-and-Videography",
         coverImage:
@@ -640,7 +640,7 @@ export const mockProjects: Project[] = [
         updatedAt: "",
     },
     {
-        id: 8,
+        id: "8",
         title: "Restaurant Branding Suite",
         category: "Design-and-Branding",
         coverImage:
@@ -652,7 +652,7 @@ export const mockProjects: Project[] = [
         updatedAt: "",
     },
     {
-        id: 9,
+        id: "9",
         title: "Motion Graphics Explainer",
         category: "Post-Production",
         coverImage:

@@ -1,7 +1,7 @@
-import { db } from "@/lib/db/drizzle";
-import { enquiries } from "@/lib/db/schema";
+import { Enquiry } from "@/lib/db/models/Enquiry";
+import dbConnect from "@/lib/db/mongoose";
+import { parseObjectId } from "@/lib/db/util";
 import { verifyToken } from "@/lib/utils/auth";
-import { eq } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
@@ -23,11 +23,15 @@ export async function GET(
                 { status: 400 }
             );
 
-        const enquiry = await db
-            .select()
-            .from(enquiries)
-            .where(eq(enquiries.id, parseInt(id)))
-            .get();
+        const objectId = parseObjectId(id);
+        if (!objectId)
+            return NextResponse.json(
+                { success: false, data: null, message: "Invalid ID format" },
+                { status: 400 }
+            );
+
+        await dbConnect();
+        const enquiry = await Enquiry.findById(objectId);
 
         if (!enquiry)
             return NextResponse.json(
@@ -75,11 +79,19 @@ export async function PATCH(
                 { status: 400 }
             );
 
-        const enquiry = await db
-            .update(enquiries)
-            .set({ status })
-            .where(eq(enquiries.id, parseInt(id)))
-            .run();
+        const objectId = parseObjectId(id);
+        if (!objectId)
+            return NextResponse.json(
+                { success: false, data: null, message: "Invalid ID format" },
+                { status: 400 }
+            );
+
+        await dbConnect();
+        const enquiry = await Enquiry.findByIdAndUpdate(
+            objectId,
+            { status },
+            { new: true }
+        );
 
         if (!enquiry)
             return NextResponse.json(
@@ -120,10 +132,15 @@ export async function DELETE(
                 { status: 400 }
             );
 
-        await db
-            .delete(enquiries)
-            .where(eq(enquiries.id, parseInt(id)))
-            .run();
+        const objectId = parseObjectId(id);
+        if (!objectId)
+            return NextResponse.json(
+                { success: false, data: null, message: "Invalid ID format" },
+                { status: 400 }
+            );
+
+        await dbConnect();
+        await Enquiry.findByIdAndDelete(objectId);
 
         return NextResponse.json({
             success: true,

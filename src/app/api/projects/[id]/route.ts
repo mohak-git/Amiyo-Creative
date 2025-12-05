@@ -1,8 +1,8 @@
-import { db } from "@/lib/db/drizzle";
-import { projects } from "@/lib/db/schema";
+import { Project } from "@/lib/db/models/Project";
+import dbConnect from "@/lib/db/mongoose";
+import { parseObjectId } from "@/lib/db/util";
 import { verifyToken } from "@/lib/utils/auth";
 import { projectSchema } from "@/lib/utils/validation";
-import { eq } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
@@ -17,11 +17,15 @@ export async function GET(
                 { status: 400 }
             );
 
-        const project = await db
-            .select()
-            .from(projects)
-            .where(eq(projects.id, parseInt(id)))
-            .get();
+        const objectId = parseObjectId(id);
+        if (!objectId)
+            return NextResponse.json(
+                { success: false, data: null, message: "Invalid ID format" },
+                { status: 400 }
+            );
+
+        await dbConnect();
+        const project = await Project.findById(objectId);
 
         if (!project)
             return NextResponse.json(
@@ -62,11 +66,15 @@ export async function DELETE(
                 { status: 400 }
             );
 
-        const project = await db
-            .select()
-            .from(projects)
-            .where(eq(projects.id, parseInt(id)))
-            .get();
+        const objectId = parseObjectId(id);
+        if (!objectId)
+            return NextResponse.json(
+                { success: false, data: null, message: "Invalid ID format" },
+                { status: 400 }
+            );
+
+        await dbConnect();
+        const project = await Project.findById(objectId);
 
         if (!project)
             return NextResponse.json(
@@ -91,14 +99,11 @@ export async function DELETE(
 
             if (!deleteImageRes.ok)
                 console.error(
-                    `Failed to delete image for project ${project.id}`
+                    `Failed to delete image for project ${project._id}`
                 );
         }
 
-        await db
-            .delete(projects)
-            .where(eq(projects.id, parseInt(id)))
-            .run();
+        await Project.findByIdAndDelete(objectId);
 
         return NextResponse.json({
             success: true,
@@ -133,11 +138,15 @@ export async function PUT(
                 { status: 400 }
             );
 
-        const existingProject = await db
-            .select()
-            .from(projects)
-            .where(eq(projects.id, parseInt(id)))
-            .get();
+        const objectId = parseObjectId(id);
+        if (!objectId)
+            return NextResponse.json(
+                { success: false, data: null, message: "Invalid ID format" },
+                { status: 400 }
+            );
+
+        await dbConnect();
+        const existingProject = await Project.findById(objectId);
 
         if (!existingProject)
             return NextResponse.json(
@@ -192,29 +201,22 @@ export async function PUT(
                 );
         }
 
-        const updatedProject = await db
-            .update(projects)
-            .set({
+        const updatedProject = await Project.findByIdAndUpdate(
+            objectId,
+            {
                 title,
                 coverImage,
                 coverImagePublicId,
                 projectUrl,
                 category,
-                tags: JSON.stringify(tags),
-                updatedAt: new Date(),
-            })
-            .where(eq(projects.id, parseInt(id)))
-            .returning()
-            .get();
-
-        const formatted = {
-            ...updatedProject,
-            tags: JSON.parse(updatedProject.tags),
-        };
+                tags,
+            },
+            { new: true }
+        );
 
         return NextResponse.json({
             success: true,
-            data: formatted,
+            data: updatedProject,
             message: "Project updated successfully",
         });
     } catch (error) {

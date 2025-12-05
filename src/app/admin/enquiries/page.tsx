@@ -22,10 +22,10 @@ const EnquiryRow = ({
 }: {
     enquiry: Enquiry;
     selected: boolean;
-    onSelect: (id: number) => void;
+    onSelect: (id: string) => void;
     onView: (enquiry: Enquiry) => void;
 }) => {
-    const { id, name, email, phone, message, status, createdAt } = enquiry;
+    const { _id: id, name, email, phone, message, status, createdAt } = enquiry;
     const { mutateAsync: deleteEnquiry } = useDeleteEnquiry(id);
     const { mutateAsync: updateStatus } = useUpdateEnquiryStatus(id);
 
@@ -86,7 +86,7 @@ const EnquiryRow = ({
             </td>
 
             <td className="p-6">
-                <div className="flex justify-center items-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="flex justify-center items-center gap-4">
                     <button
                         onClick={() => onView(enquiry)}
                         className="text-zinc-400 hover:text-white transition-colors"
@@ -110,15 +110,15 @@ export default function AdminEnquiries() {
     const { mutateAsync: deleteEnquiries } = useDeleteEnquiries();
     const { mutateAsync: deleteAllEnquiries } = useDeleteAllEnquiries();
 
-    const [selectedIds, setSelectedIds] = useState<number[]>([]);
+    const [selectedIds, setSelectedIds] = useState<string[]>([]);
     const [viewingEnquiry, setViewingEnquiry] = useState<Enquiry | null>(null);
 
     const handleSelectAll = () => {
         if (selectedIds.length === enquiries.length) setSelectedIds([]);
-        else setSelectedIds(enquiries.map((e) => e.id));
+        else setSelectedIds(enquiries.map((e) => e._id));
     };
 
-    const handleSelect = (id: number) => {
+    const handleSelect = (id: string) => {
         if (selectedIds.includes(id))
             setSelectedIds(selectedIds.filter((sid) => sid !== id));
         else setSelectedIds([...selectedIds, id]);
@@ -219,9 +219,9 @@ export default function AdminEnquiries() {
                         <tbody className="divide-y divide-zinc-800 bg-black">
                             {enquiries.map((enquiry) => (
                                 <EnquiryRow
-                                    key={enquiry.id}
+                                    key={enquiry._id}
                                     enquiry={enquiry}
-                                    selected={selectedIds.includes(enquiry.id)}
+                                    selected={selectedIds.includes(enquiry._id)}
                                     onSelect={handleSelect}
                                     onView={setViewingEnquiry}
                                 />

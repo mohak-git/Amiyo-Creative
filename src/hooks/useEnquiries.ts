@@ -19,6 +19,7 @@ export function useEnquiries() {
         queryKey: ["enquiries"],
         queryFn: fetchEnquiries,
         staleTime: 1 * 60 * 60 * 1000,
+        retry: 3,
     });
 }
 
@@ -35,7 +36,7 @@ export function useCreateEnquiry() {
 export function useDeleteEnquiries() {
     const queryClient = useQueryClient();
 
-    return useMutation<void, Error, number[]>({
+    return useMutation<void, Error, string[]>({
         mutationFn: (ids) => deleteEnquiries(ids),
         onSuccess: () =>
             queryClient.invalidateQueries({ queryKey: ["enquiries"] }),
@@ -52,16 +53,17 @@ export function useDeleteAllEnquiries() {
     });
 }
 
-export function useEnquiry(id: number) {
+export function useEnquiry(id: string) {
     return useQuery<Enquiry, Error>({
         queryKey: ["enquiry", id],
         queryFn: () => fetchEnquiry(id),
         staleTime: 1 * 60 * 60 * 1000,
         enabled: !!id,
+        retry: 3,
     });
 }
 
-export function useUpdateEnquiryStatus(id: number) {
+export function useUpdateEnquiryStatus(id: string) {
     const queryClient = useQueryClient();
 
     return useMutation<Enquiry, Error, string>({
@@ -71,7 +73,7 @@ export function useUpdateEnquiryStatus(id: number) {
     });
 }
 
-export function useDeleteEnquiry(id: number) {
+export function useDeleteEnquiry(id: string) {
     const queryClient = useQueryClient();
 
     return useMutation<void, Error, void>({

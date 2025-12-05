@@ -24,7 +24,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
 
     return (
         <div className="flex h-screen bg-black text-zinc-100 font-sans">
-            <aside className="w-64 bg-zinc-950 border-r border-zinc-800 flex flex-col">
+            <aside className="w-56 bg-zinc-950 border-r border-zinc-800 flex flex-col">
                 <div className="p-6 border-b border-zinc-800">
                     <h1 className="text-xl font-bold tracking-tighter uppercase">
                         Amiyo Admin

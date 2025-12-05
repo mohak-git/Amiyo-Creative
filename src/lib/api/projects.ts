@@ -31,7 +31,7 @@ export async function createProject(
     return data;
 }
 
-export async function deleteProjects(ids: number[]): Promise<void> {
+export async function deleteProjects(ids: string[]): Promise<void> {
     const res = await fetch("/api/projects", {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
@@ -57,7 +57,7 @@ export async function deleteAllProjects(): Promise<void> {
     if (!success) throw new Error(message || "Failed to delete all projects");
 }
 
-export async function fetchProject(id: number): Promise<Project> {
+export async function fetchProject(id: string): Promise<Project> {
     const res = await fetch(`/api/projects/${id}`, {
         headers: { "Content-Type": "application/json" },
         next: { revalidate: 60 * 5 },
@@ -72,7 +72,7 @@ export async function fetchProject(id: number): Promise<Project> {
 }
 
 export async function updateProject(
-    id: number,
+    id: string,
     payload: Partial<Project>
 ): Promise<Project> {
     const res = await fetch(`/api/projects/${id}`, {
@@ -89,7 +89,7 @@ export async function updateProject(
     return data;
 }
 
-export async function deleteProject(id: number): Promise<void> {
+export async function deleteProject(id: string): Promise<void> {
     const res = await fetch(`/api/projects/${id}`, { method: "DELETE" });
     if (!res.ok)
         throw new Error((await res.text()) || "Failed to delete project");

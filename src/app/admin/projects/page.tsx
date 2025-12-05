@@ -33,7 +33,7 @@ const ProjectCard = ({
 }: {
     project: Project;
     selected: boolean;
-    onSelect: (id: number) => void;
+    onSelect: (id: string) => void;
     onEdit: (project: Project) => void;
 }) => {
     const { id, title, coverImage, category, projectUrl } = project;
@@ -124,14 +124,14 @@ export default function AdminProjects() {
 
     const [showModal, setShowModal] = useState(false);
     const [editingProject, setEditingProject] = useState<Project | null>(null);
-    const [selectedIds, setSelectedIds] = useState<number[]>([]);
+    const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
     const handleSelectAll = () => {
         if (selectedIds.length === projects.length) setSelectedIds([]);
         else setSelectedIds(projects.map((p) => p.id));
     };
 
-    const handleSelect = (id: number) => {
+    const handleSelect = (id: string) => {
         if (selectedIds.includes(id))
             setSelectedIds(selectedIds.filter((sid) => sid !== id));
         else setSelectedIds([...selectedIds, id]);
