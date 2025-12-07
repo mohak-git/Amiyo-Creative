@@ -1,6 +1,7 @@
 "use client";
 
-import Loader from "@/components/Loader";
+import Loader, { LoadingSpinner } from "@/components/Loader";
+import { ConfirmationModal } from "@/components/ui/ConfirmationModal";
 import { Enquiry } from "@/constants/types";
 import {
     useDeleteAllEnquiries,
@@ -26,19 +27,25 @@ const EnquiryRow = ({
     onView: (enquiry: Enquiry) => void;
 }) => {
     const { _id: id, name, email, phone, message, status, createdAt } = enquiry;
-    const { mutateAsync: deleteEnquiry } = useDeleteEnquiry(id);
-    const { mutateAsync: updateStatus } = useUpdateEnquiryStatus(id);
+    const { mutateAsync: deleteEnquiry, isPending: isDeleting } =
+        useDeleteEnquiry(id);
+    const { mutateAsync: updateStatus, isPending: isUpdating } =
+        useUpdateEnquiryStatus(id);
 
     const handleDelete = async () => {
-        if (!confirm("Delete this enquiry?")) return;
-
-        try {
-            await deleteEnquiry();
-            toast.success("Enquiry deleted successfully");
-        } catch (error) {
-            console.error(error);
-            toast.error("Failed to delete enquiry. Try again");
-        }
+        ConfirmationModal({
+            title: "Delete Enquiry?",
+            message: `This will permanently delete ${enquiry.name}'s enquiry`,
+            onConfirm: async () => {
+                try {
+                    await deleteEnquiry();
+                    toast.success("Enquiry deleted successfully");
+                } catch (error) {
+                    console.error(error);
+                    toast.error("Failed to delete enquiry");
+                }
+            },
+        });
     };
 
     const handleStatusChange = async (status: string) => {
@@ -50,6 +57,8 @@ const EnquiryRow = ({
             toast.error("Failed to update status. Try again.");
         }
     };
+
+    if (isDeleting) return <LoadingSpinner />;
 
     return (
         <tr
@@ -75,14 +84,18 @@ const EnquiryRow = ({
                 {new Date(createdAt).toLocaleDateString()}
             </td>
             <td className="p-6">
-                <select
-                    value={status}
-                    onChange={(e) => handleStatusChange(e.target.value)}
-                    className={`px-3 py-1 text-xs uppercase tracking-widest font-bold bg-zinc-950 border border-zinc-800 text-zinc-300 focus:border-white outline-none transition-colors appearance-none cursor-pointer hover:bg-zinc-900`}>
-                    <option value="new">New</option>
-                    <option value="in-progress">In Progress</option>
-                    <option value="closed">Closed</option>
-                </select>
+                {isUpdating ? (
+                    <LoadingSpinner />
+                ) : (
+                    <select
+                        value={status}
+                        onChange={(e) => handleStatusChange(e.target.value)}
+                        className={`px-3 py-1 text-xs uppercase tracking-widest font-bold bg-zinc-950 border border-zinc-800 text-zinc-300 focus:border-white outline-none transition-colors appearance-none cursor-pointer hover:bg-zinc-900`}>
+                        <option value="new">New</option>
+                        <option value="in-progress">In Progress</option>
+                        <option value="closed">Closed</option>
+                    </select>
+                )}
             </td>
 
             <td className="p-6">
@@ -106,9 +119,14 @@ const EnquiryRow = ({
 };
 
 export default function AdminEnquiries() {
-    const { data: enquiries = [], isLoading } = useEnquiries();
-    const { mutateAsync: deleteEnquiries } = useDeleteEnquiries();
-    const { mutateAsync: deleteAllEnquiries } = useDeleteAllEnquiries();
+    const { data: enquiries = [], isPending: isEnquiriesLoading } =
+        useEnquiries();
+    const { mutateAsync: deleteEnquiries, isPending: isDeletingEnquiries } =
+        useDeleteEnquiries();
+    const {
+        mutateAsync: deleteAllEnquiries,
+        isPending: isDeletingAllEnquiries,
+    } = useDeleteAllEnquiries();
 
     const [selectedIds, setSelectedIds] = useState<string[]>([]);
     const [viewingEnquiry, setViewingEnquiry] = useState<Enquiry | null>(null);
@@ -125,57 +143,71 @@ export default function AdminEnquiries() {
     };
 
     const handleBulkDelete = async () => {
-        if (!confirm(`Delete ${selectedIds.length} enquiries?`)) return;
-
-        try {
-            await deleteEnquiries(selectedIds);
-            toast.success(`Deleted ${selectedIds.length} enquiries`);
-            setSelectedIds([]);
-        } catch (error) {
-            console.error(error);
-            toast.error(`Failed to delete ${selectedIds.length} enquiries`);
-        }
+        ConfirmationModal({
+            title: "Delete Enquiries",
+            message: `This will permanently delete ${selectedIds.length} enquiries`,
+            onConfirm: async () => {
+                try {
+                    await deleteEnquiries(selectedIds);
+                    toast.success(`Deleted ${selectedIds.length} enquiries`);
+                    setSelectedIds([]);
+                } catch (error) {
+                    console.error(error);
+                    toast.error(
+                        `Failed to delete ${selectedIds.length} enquiries`
+                    );
+                }
+            },
+            onCancel: () => setSelectedIds([]),
+        });
     };
 
     const handleDeleteAll = async () => {
-        if (!confirm("DELETE ALL enquiries? This cannot be undone.")) return;
-
-        try {
-            await deleteAllEnquiries();
-            toast.success("Deleted all enquiries");
-            setSelectedIds([]);
-        } catch (error) {
-            console.error(error);
-            toast.error("Failed to delete all enquiries");
-        }
+        ConfirmationModal({
+            title: "Delete All Enquiries",
+            message: `This will permanently delete all enquiries`,
+            onConfirm: async () => {
+                try {
+                    await deleteAllEnquiries();
+                    toast.success("Deleted all enquiries");
+                    setSelectedIds([]);
+                } catch (error) {
+                    console.error(error);
+                    toast.error("Failed to delete all enquiries");
+                }
+            },
+            onCancel: () => setSelectedIds([]),
+        });
     };
 
-    if (isLoading) return <Loader />;
+    if (isEnquiriesLoading || isDeletingEnquiries || isDeletingAllEnquiries)
+        return <Loader />;
 
     return (
         <div>
-            <div className="flex justify-between items-end mb-12 border-b border-zinc-800 pb-6">
-                <div>
-                    <h1 className="text-4xl font-bold tracking-tighter uppercase text-white mb-2">
-                        Enquiries
-                    </h1>
-                    <p className="text-zinc-500 text-sm uppercase tracking-widest">
-                        Manage incoming messages
-                    </p>
-                </div>
+            <div className="flex justify-between items-center mb-8 border-b border-zinc-800 pb-4">
+                <h1 className="text-3xl font-bold tracking-tighter uppercase text-white">
+                    Enquiries
+                </h1>
                 <div className="flex gap-4">
                     {enquiries.length > 0 && (
                         <button
                             onClick={handleDeleteAll}
-                            className="bg-red-950/30 border border-red-900 text-red-400 hover:bg-red-900 hover:text-white px-6 py-3 text-sm uppercase tracking-widest font-medium transition-colors flex items-center gap-2">
-                            <FaTrash /> Delete All
+                            className="bg-red-950/30 border border-red-900 text-red-400 hover:bg-red-900 hover:text-white px-3 py-2 text-sm uppercase tracking-widest font-medium transition-colors flex items-center gap-2">
+                            <FaTrash />{" "}
+                            <span className="hidden md:inline">Delete All</span>
                         </button>
                     )}
+
                     {selectedIds.length > 0 && (
                         <button
                             onClick={handleBulkDelete}
-                            className="bg-zinc-900 border border-zinc-700 text-zinc-300 hover:bg-zinc-800 hover:text-white px-6 py-3 text-sm uppercase tracking-widest font-medium transition-colors flex items-center gap-2">
-                            <FaTrash /> Delete Selected ({selectedIds.length})
+                            className="bg-zinc-900 border border-zinc-700 text-zinc-300 hover:bg-zinc-800 hover:text-white px-3 py-2 text-sm uppercase tracking-widest font-medium transition-colors flex items-center gap-2">
+                            <FaTrash />{" "}
+                            <span className="hidden md:inline">
+                                Delete Selected{" "}
+                            </span>
+                            ({selectedIds.length})
                         </button>
                     )}
                 </div>
@@ -186,19 +218,19 @@ export default function AdminEnquiries() {
                     <table className="w-full text-center">
                         <thead className="bg-zinc-950 border-b border-zinc-800">
                             <tr>
-                                <th className="p-6 w-10">
-                                    <button
-                                        onClick={handleSelectAll}
-                                        className="text-zinc-600 hover:text-white transition-colors">
-                                        {enquiries.length > 0 &&
-                                        selectedIds.length ===
-                                            enquiries.length ? (
-                                            <FaCheckSquare />
-                                        ) : (
-                                            <FaSquare />
-                                        )}
-                                    </button>
-                                </th>
+                                {enquiries.length > 0 && (
+                                    <th className="p-3 w-10">
+                                        <input
+                                            type="checkbox"
+                                            checked={
+                                                selectedIds.length ===
+                                                enquiries.length
+                                            }
+                                            onChange={handleSelectAll}
+                                            className="text-zinc-600 hover:text-white transition-colors"
+                                        />
+                                    </th>
+                                )}
                                 {[
                                     "Name",
                                     "Email",
@@ -210,7 +242,7 @@ export default function AdminEnquiries() {
                                 ].map((header) => (
                                     <th
                                         key={header}
-                                        className="p-6 text-xs uppercase tracking-widest text-zinc-500 font-medium">
+                                        className="p-3 text-xs uppercase tracking-widest text-zinc-500 font-medium">
                                         {header}
                                     </th>
                                 ))}
@@ -231,8 +263,8 @@ export default function AdminEnquiries() {
                 </div>
 
                 {enquiries.length === 0 && (
-                    <div className="p-12 text-center text-zinc-600 uppercase tracking-widest">
-                        No enquiries found.
+                    <div className="p-6 text-center text-zinc-600 uppercase tracking-widest">
+                        No enquiries found
                     </div>
                 )}
             </div>
@@ -252,8 +284,8 @@ const EnquiryModal = ({
 }) => {
     return (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-            <div className="bg-zinc-950 border border-zinc-800 p-8 rounded-none w-full max-w-4xl h-auto max-h-[90vh] overflow-y-auto shadow-2xl">
-                <div className="w-full flex justify-between items-center mb-8 border-b border-zinc-800 pb-4">
+            <div className="bg-zinc-950 border border-zinc-800 px-8 py-4 w-full max-w-6xl max-h-[90vh] overflow-y-auto shadow-2xl">
+                <div className="w-full flex justify-between items-center mb-6 border-b border-zinc-800 pb-2">
                     <h2 className="text-2xl font-bold uppercase tracking-tighter text-white">
                         Enquiry Details
                     </h2>
@@ -263,36 +295,36 @@ const EnquiryModal = ({
                         <FaX size={20} />
                     </button>
                 </div>
-                <div className="space-y-8 grid grid-cols-2 gap-8">
+                <div className="space-y- grid grid-cols-2 gap-8">
                     <div className="col-span-1">
-                        <label className="block text-xs uppercase tracking-widest text-zinc-500 mb-2">
+                        <label className="block text-xs uppercase tracking-widest text-zinc-500">
                             Name
                         </label>
-                        <p className="text-lg font-medium text-white border-b border-zinc-800 pb-2">
+                        <p className="text-lg font-medium text-white border-b border-zinc-800 py-1">
                             {enquiry.name}
                         </p>
                     </div>
                     <div className="col-span-1">
-                        <label className="block text-xs uppercase tracking-widest text-zinc-500 mb-2">
+                        <label className="block text-xs uppercase tracking-widest text-zinc-500">
                             Email
                         </label>
-                        <p className="text-lg font-medium text-white border-b border-zinc-800 pb-2">
+                        <p className="text-lg font-medium text-white border-b border-zinc-800 py-1">
                             {enquiry.email}
                         </p>
                     </div>
                     <div className="col-span-1">
-                        <label className="block text-xs uppercase tracking-widest text-zinc-500 mb-2">
+                        <label className="block text-xs uppercase tracking-widest text-zinc-500">
                             Phone
                         </label>
-                        <p className="text-lg font-medium text-white border-b border-zinc-800 pb-2">
+                        <p className="text-lg font-medium text-white border-b border-zinc-800 py-1">
                             {enquiry.phone}
                         </p>
                     </div>
                     <div className="col-span-1">
-                        <label className="block text-xs uppercase tracking-widest text-zinc-500 mb-2">
+                        <label className="block text-xs uppercase tracking-widest text-zinc-500">
                             Status
                         </label>
-                        <p className="text-lg font-medium text-white border-b border-zinc-800 pb-2 uppercase">
+                        <p className="text-lg font-medium text-white border-b border-zinc-800 py-1 uppercase">
                             {enquiry.status}
                         </p>
                     </div>
@@ -301,7 +333,7 @@ const EnquiryModal = ({
                         <label className="block text-xs uppercase tracking-widest text-zinc-500 mb-4">
                             Message
                         </label>
-                        <div className="bg-zinc-900/50 border border-zinc-800 p-6 text-zinc-300 whitespace-pre-wrap leading-relaxed">
+                        <div className="bg-zinc-900/50 border border-zinc-800 px-3 py-2 text-zinc-300 whitespace-pre-wrap leading-relaxed">
                             {enquiry.message}
                         </div>
                     </div>

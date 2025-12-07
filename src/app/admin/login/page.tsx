@@ -1,44 +1,38 @@
 "use client";
 
-import { useState } from "react";
+import Loader from "@/components/Loader";
+import { useLogin } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export default function AdminLogin() {
+    const { mutateAsync: login, isPending } = useLogin();
+    const router = useRouter();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [loading, setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
-    const router = useRouter();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setLoading(true);
 
         try {
-            const res = await fetch("/api/auth/login", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, password }),
-            });
-
-            const data = await res.json();
-
-            if (res.ok) {
-                toast.success("Logged in successfully");
-                router.push("/admin");
-            } else {
-                toast.error(data.message || "Login failed");
-            }
+            await login({ email, password });
+            toast.success("Logged in successfully");
+            router.push("/admin");
         } catch (error) {
-            console.error(error);
-            toast.error("An error occurred");
-        } finally {
-            setLoading(false);
+            const errorMessage =
+                error instanceof Error
+                    ? error.message
+                    : "An unknown error occurred";
+
+            console.error("Login failed:", error);
+            toast.error(errorMessage);
         }
     };
 
+    if (isPending) return <Loader />;
     return (
         <div className="min-h-screen flex items-center justify-center bg-black text-white">
             <div className="bg-zinc-950 p-12 border border-zinc-800 w-full max-w-md shadow-2xl">
@@ -88,9 +82,9 @@ export default function AdminLogin() {
                     </div>
                     <button
                         type="submit"
-                        disabled={loading}
+                        disabled={isPending}
                         className="w-full bg-white text-black hover:bg-zinc-200 font-bold py-4 px-4 uppercase tracking-widest transition-colors disabled:opacity-50 mt-4">
-                        {loading ? "Authenticating..." : "Login"}
+                        {isPending ? "Authenticating..." : "Login"}
                     </button>
                 </form>
             </div>

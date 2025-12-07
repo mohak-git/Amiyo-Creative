@@ -7,26 +7,27 @@ const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET);
 export async function middleware(request: NextRequest) {
     const { pathname } = request.nextUrl;
 
-    if (pathname.startsWith("/admin")) {
-        const token = request.cookies.get("admin_token")?.value;
+    if (!pathname.startsWith("/admin")) return NextResponse.next();
 
-        if (pathname === "/admin/login") {
-            if (token)
-                return NextResponse.redirect(new URL("/admin", request.url));
-            return NextResponse.next();
-        }
+    const token = request.cookies.get("admin_token")?.value;
+    let isValid = false;
 
-        if (!token)
-            return NextResponse.redirect(new URL("/admin/login", request.url));
-
+    if (token)
         try {
             await jwtVerify(token, JWT_SECRET);
-            return NextResponse.next();
-        } catch (error) {
-            console.error(error);
-            return NextResponse.redirect(new URL("/admin/login", request.url));
+            isValid = true;
+        } catch {
+            isValid = false;
         }
+
+    if (pathname === "/admin/login") {
+        if (isValid)
+            return NextResponse.redirect(new URL("/admin", request.url));
+        return NextResponse.next();
     }
+
+    if (!isValid)
+        return NextResponse.redirect(new URL("/admin/login", request.url));
 
     return NextResponse.next();
 }

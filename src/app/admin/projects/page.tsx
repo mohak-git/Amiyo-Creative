@@ -1,6 +1,7 @@
 "use client";
 
-import Loader from "@/components/Loader";
+import Loader, { LoadingSpinner } from "@/components/Loader";
+import { ConfirmationModal } from "@/components/ui/ConfirmationModal";
 import { Project, ServicesTypes, UploadImageResponse } from "@/constants/types";
 import {
     useCreateProject,
@@ -36,20 +37,27 @@ const ProjectCard = ({
     onSelect: (id: string) => void;
     onEdit: (project: Project) => void;
 }) => {
-    const { id, title, coverImage, category, projectUrl } = project;
-    const { mutateAsync: deleteProject } = useDeleteProject(id);
+    const { _id: id, title, coverImage, category, projectUrl } = project;
+    const { mutateAsync: deleteProject, isPending: isProjectDeleting } =
+        useDeleteProject(id);
 
-    const handleDelete = async () => {
-        if (!confirm("Delete this project?")) return;
-
-        try {
-            await deleteProject();
-            toast.success("Project deleted successfully");
-        } catch (error) {
-            console.error(error);
-            toast.error("Failed to delete project. Try again");
-        }
+    const handleDelete = () => {
+        ConfirmationModal({
+            title: "Delete Project?",
+            message: `This will permanently delete "${project.title}"`,
+            onConfirm: async () => {
+                try {
+                    await deleteProject();
+                    toast.success("Project deleted");
+                } catch (error) {
+                    console.error(error);
+                    toast.error("Failed to delete project");
+                }
+            },
+        });
     };
+
+    if (isProjectDeleting) return <LoadingSpinner />;
 
     return (
         <div
@@ -66,7 +74,7 @@ const ProjectCard = ({
                         : "text-zinc-500 hover:text-white bg-black/50"
                 }`}>
                 {selected ? (
-                    <FaCheckSquare size={16} />
+                    <FaCheckSquare size={16} className="text-red-500" />
                 ) : (
                     <FaSquare size={16} />
                 )}
@@ -85,27 +93,27 @@ const ProjectCard = ({
                     <Link
                         href={projectUrl}
                         target="_blank"
-                        className="bg-white text-black p-3 hover:bg-zinc-200 transition-colors">
+                        className="bg-white text-black p-2 hover:bg-zinc-200 transition-colors">
                         <FiExternalLink />
                     </Link>
 
                     <button
                         onClick={() => onEdit(project)}
-                        className="bg-white text-black p-3 hover:bg-zinc-200 transition-colors"
+                        className="bg-white text-black p-2 hover:bg-zinc-200 transition-colors"
                         title="Edit">
                         <FaEdit />
                     </button>
 
                     <button
                         onClick={handleDelete}
-                        className="bg-red-600 text-white p-3 hover:bg-red-700 transition-colors"
+                        className="bg-red-600 text-white p-2 hover:bg-red-700 transition-colors"
                         title="Delete">
                         <FaTrash />
                     </button>
                 </div>
             </div>
 
-            <div className="p-6 border-t border-zinc-800">
+            <div className="px-4 py-2 border-t border-zinc-800">
                 <h3 className="font-bold text-lg mb-2 text-white tracking-tight">
                     {title}
                 </h3>
@@ -118,9 +126,11 @@ const ProjectCard = ({
 };
 
 export default function AdminProjects() {
-    const { data: projects = [], isLoading } = useProjects();
-    const { mutateAsync: deleteProjects } = useDeleteProjects();
-    const { mutateAsync: deleteAllProjects } = useDeleteAllProjects();
+    const { data: projects = [], isPending: isProjectsLoading } = useProjects();
+    const { mutateAsync: deleteProjects, isPending: isDeletingProjects } =
+        useDeleteProjects();
+    const { mutateAsync: deleteAllProjects, isPending: isDeletingAllProjects } =
+        useDeleteAllProjects();
 
     const [showModal, setShowModal] = useState(false);
     const [editingProject, setEditingProject] = useState<Project | null>(null);
@@ -128,7 +138,7 @@ export default function AdminProjects() {
 
     const handleSelectAll = () => {
         if (selectedIds.length === projects.length) setSelectedIds([]);
-        else setSelectedIds(projects.map((p) => p.id));
+        else setSelectedIds(projects.map((p) => p._id));
     };
 
     const handleSelect = (id: string) => {
@@ -137,30 +147,42 @@ export default function AdminProjects() {
         else setSelectedIds([...selectedIds, id]);
     };
 
-    const handleBulkDelete = async () => {
-        if (!confirm(`Delete ${selectedIds.length} projects?`)) return;
-
-        try {
-            await deleteProjects(selectedIds);
-            toast.success(`Deleted ${selectedIds.length} projects`);
-            setSelectedIds([]);
-        } catch (error) {
-            console.error(error);
-            toast.error(`Failed to delete ${selectedIds.length} projects`);
-        }
+    const handleBulkDelete = () => {
+        ConfirmationModal({
+            title: "Delete Projects?",
+            message: `This will permanently delete ${selectedIds.length} projects`,
+            onConfirm: async () => {
+                try {
+                    await deleteProjects(selectedIds);
+                    toast.success(`Deleted ${selectedIds.length} projects`);
+                    setSelectedIds([]);
+                } catch (error) {
+                    console.error(error);
+                    toast.error(
+                        `Failed to delete ${selectedIds.length} projects`
+                    );
+                }
+            },
+            onCancel: () => setSelectedIds([]),
+        });
     };
 
-    const handleDeleteAll = async () => {
-        if (!confirm("DELETE ALL projects? This cannot be undone.")) return;
-
-        try {
-            await deleteAllProjects();
-            toast.success("Deleted all projects");
-            setSelectedIds([]);
-        } catch (error) {
-            console.error(error);
-            toast.error("Failed to delete all projects");
-        }
+    const handleDeleteAll = () => {
+        ConfirmationModal({
+            title: "Delete All Projects?",
+            message: "This will permanently delete all projects.",
+            onConfirm: async () => {
+                try {
+                    await deleteAllProjects();
+                    toast.success("Deleted all projects");
+                    setSelectedIds([]);
+                } catch (error) {
+                    console.error(error);
+                    toast.error("Failed to delete all projects");
+                }
+            },
+            onCancel: () => setSelectedIds([]),
+        });
     };
 
     const openCreateModal = () => {
@@ -173,40 +195,42 @@ export default function AdminProjects() {
         setShowModal(true);
     };
 
-    if (isLoading) return <Loader />;
+    if (isProjectsLoading || isDeletingAllProjects || isDeletingProjects)
+        return <Loader />;
 
     return (
         <div>
-            <div className="flex justify-between items-end mb-12 border-b border-zinc-800 pb-6">
-                <div>
-                    <h1 className="text-4xl font-bold tracking-tighter uppercase text-white mb-2">
-                        Projects
-                    </h1>
-                    <p className="text-zinc-500 text-sm uppercase tracking-widest">
-                        Manage your portfolio
-                    </p>
-                </div>
+            <div className="flex justify-between items-center mb-8 border-b border-zinc-800 pb-4">
+                <h1 className="text-3xl font-bold tracking-tighter uppercase text-white">
+                    Projects
+                </h1>
                 <div className="flex gap-4">
                     {projects.length > 0 && (
                         <button
                             onClick={handleDeleteAll}
-                            className="bg-red-950/30 border border-red-900 text-red-400 hover:bg-red-900 hover:text-white px-6 py-3 text-sm uppercase tracking-widest font-medium transition-colors flex items-center gap-2">
-                            <FaTrash /> Delete All
+                            className="bg-red-950/30 border border-red-900 text-red-400 hover:bg-red-900 hover:text-white px-3 py-2 text-sm uppercase tracking-widest font-medium transition-colors flex items-center gap-2">
+                            <FaTrash />{" "}
+                            <span className="hidden md:inline">Delete All</span>
                         </button>
                     )}
 
                     {selectedIds.length > 0 && (
                         <button
                             onClick={handleBulkDelete}
-                            className="bg-zinc-900 border border-zinc-700 text-zinc-300 hover:bg-zinc-800 hover:text-white px-6 py-3 text-sm uppercase tracking-widest font-medium transition-colors flex items-center gap-2">
-                            <FaTrash /> Delete Selected ({selectedIds.length})
+                            className="bg-zinc-900 border border-zinc-700 text-zinc-300 hover:bg-zinc-800 hover:text-white px-3 py-2 text-sm uppercase tracking-widest font-medium transition-colors flex items-center gap-2">
+                            <FaTrash />{" "}
+                            <span className="hidden md:inline">
+                                Delete Selected
+                            </span>
+                            ({selectedIds.length})
                         </button>
                     )}
 
                     <button
                         onClick={openCreateModal}
-                        className="bg-white text-black hover:bg-zinc-200 px-6 py-3 text-sm uppercase tracking-widest font-bold transition-colors flex items-center gap-2">
-                        <FaPlus /> Add Project
+                        className="bg-white text-black hover:bg-zinc-200 px-3 py-2 text-sm uppercase tracking-widest font-bold transition-colors flex items-center gap-2">
+                        <FaPlus />{" "}
+                        <span className="hidden md:inline">Add Project</span>
                     </button>
                 </div>
             </div>
@@ -231,9 +255,9 @@ export default function AdminProjects() {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
                 {projects.map((project) => (
                     <ProjectCard
-                        key={project.id}
+                        key={project._id}
                         project={project}
-                        selected={selectedIds.includes(project.id)}
+                        selected={selectedIds.includes(project._id)}
                         onSelect={handleSelect}
                         onEdit={openEditModal}
                     />
@@ -265,8 +289,8 @@ const ProjectModal = ({
 }) => {
     return (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-            <div className="bg-zinc-950 border border-zinc-800 p-8 w-full max-w-6xl h-[90vh] overflow-y-auto shadow-2xl">
-                <div className="w-full flex justify-between items-center mb-8 border-b border-zinc-800 pb-4">
+            <div className="bg-zinc-950 border border-zinc-800 px-8 py-4 w-full max-w-6xl max-h-[90vh] overflow-y-auto shadow-2xl">
+                <div className="w-full flex justify-between items-center mb-6 border-b border-zinc-800 pb-2">
                     <h2 className="text-2xl font-bold uppercase tracking-tighter text-white">
                         {project ? "Edit Project" : "Add New Project"}
                     </h2>
@@ -287,8 +311,10 @@ const ProjectModal = ({
 };
 
 const CreateProjectForm = ({ onClose }: { onClose: () => void }) => {
-    const { mutateAsync: createProject, isPending } = useCreateProject();
-    const { mutateAsync: uploadImage } = useUploadImage();
+    const { mutateAsync: createProject, isPending: isProjectCreating } =
+        useCreateProject();
+    const { mutateAsync: uploadImage, isPending: isImageUploading } =
+        useUploadImage();
 
     const [projectFields, setProjectFields] = useState<Partial<Project>>({
         title: "",
@@ -344,10 +370,12 @@ const CreateProjectForm = ({ onClose }: { onClose: () => void }) => {
 
     const { title, category, projectUrl, tags } = projectFields;
 
+    if (isProjectCreating || isImageUploading) return <LoadingSpinner />;
+
     return (
         <form
             onSubmit={handleSubmit}
-            className="space-y-6 grid grid-cols-2 gap-8">
+            className="space-y-4 grid grid-cols-2 gap-8">
             <div className="col-span-1 space-y-6">
                 <div>
                     <label className="block text-xs uppercase tracking-widest text-zinc-500 mb-2">
@@ -362,7 +390,7 @@ const CreateProjectForm = ({ onClose }: { onClose: () => void }) => {
                                 title: e.target.value,
                             }))
                         }
-                        className="w-full p-4 bg-zinc-900 border border-zinc-800 text-white focus:border-white outline-none transition-colors"
+                        className="w-full p-3 bg-zinc-900 border border-zinc-800 text-white focus:border-white outline-none transition-colors"
                         placeholder="Project Title"
                     />
                 </div>
@@ -378,7 +406,7 @@ const CreateProjectForm = ({ onClose }: { onClose: () => void }) => {
                                 category: e.target.value as ServicesTypes,
                             }))
                         }
-                        className="w-full p-4 bg-zinc-900 border border-zinc-800 text-white focus:border-white outline-none transition-colors appearance-none">
+                        className="w-full p-3 bg-zinc-900 border border-zinc-800 text-white focus:border-white outline-none transition-colors appearance-none">
                         <option value="Cinematography-and-Videography">
                             Cinematography & Videography
                         </option>
@@ -405,7 +433,7 @@ const CreateProjectForm = ({ onClose }: { onClose: () => void }) => {
                                 projectUrl: e.target.value,
                             }))
                         }
-                        className="w-full p-4 bg-zinc-900 border border-zinc-800 text-white focus:border-white outline-none transition-colors"
+                        className="w-full p-3 bg-zinc-900 border border-zinc-800 text-white focus:border-white outline-none transition-colors"
                         placeholder="https://..."
                     />
                 </div>
@@ -427,7 +455,7 @@ const CreateProjectForm = ({ onClose }: { onClose: () => void }) => {
                                     .map((tag) => tag.trim()),
                             }))
                         }
-                        className="w-full p-4 bg-zinc-900 border border-zinc-800 text-white focus:border-white outline-none transition-colors"
+                        className="w-full p-3 bg-zinc-900 border border-zinc-800 text-white focus:border-white outline-none transition-colors"
                         placeholder="e.g. Corporate, Event"
                     />
                 </div>
@@ -442,17 +470,19 @@ const CreateProjectForm = ({ onClose }: { onClose: () => void }) => {
                         onChange={(e) =>
                             setImageFile(e.target.files?.[0] || null)
                         }
-                        className="w-full p-4 bg-zinc-900 border border-zinc-800 text-white focus:border-white outline-none transition-colors file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:bg-white file:text-black hover:file:bg-zinc-200"
+                        className="w-full p-2 bg-zinc-900 border border-zinc-800 text-white focus:border-white outline-none transition-colors file:mr-4 file:py-1.5 file:px-2 file:border-0 file:text-sm file:bg-white file:text-black hover:file:bg-zinc-200"
                     />
                 </div>
             </div>
 
-            <div className="col-span-2 flex justify-end gap-4 mt-8 pt-8 border-t border-zinc-800">
+            <div className="col-span-2 flex justify-end gap-4 pt-4 border-t border-zinc-800">
                 <button
                     type="submit"
-                    disabled={isPending}
-                    className="bg-white text-black hover:bg-zinc-200 px-8 py-4 text-sm uppercase tracking-widest font-bold transition-colors disabled:opacity-50">
-                    {isPending ? "Saving..." : "Save Project"}
+                    disabled={isProjectCreating || isImageUploading}
+                    className="bg-white text-black hover:bg-zinc-200 px-3 py-2 text-sm uppercase tracking-widest font-bold transition-colors disabled:opacity-50">
+                    {isProjectCreating || isImageUploading
+                        ? "Saving..."
+                        : "Save Project"}
                 </button>
             </div>
         </form>
@@ -466,10 +496,10 @@ const EditProjectForm = ({
     project: Project;
     onClose: () => void;
 }) => {
-    const { mutateAsync: updateProject, isPending } = useUpdateProject(
-        project.id
-    );
-    const { mutateAsync: uploadImage } = useUploadImage();
+    const { mutateAsync: updateProject, isPending: isProjectUpdating } =
+        useUpdateProject(project._id);
+    const { mutateAsync: uploadImage, isPending: isImageUploading } =
+        useUploadImage();
 
     const [projectFields, setProjectFields] = useState<Partial<Project>>({
         title: project.title,
@@ -533,10 +563,12 @@ const EditProjectForm = ({
 
     const { title, category, projectUrl, tags } = projectFields;
 
+    if (isProjectUpdating || isImageUploading) return <LoadingSpinner />;
+
     return (
         <form
             onSubmit={handleSubmit}
-            className="space-y-6 grid grid-cols-2 gap-8">
+            className="space-y-4 grid grid-cols-2 gap-8">
             <div className="col-span-1 space-y-6">
                 <div>
                     <label className="block text-xs uppercase tracking-widest text-zinc-500 mb-2">
@@ -551,7 +583,7 @@ const EditProjectForm = ({
                                 title: e.target.value,
                             }))
                         }
-                        className="w-full p-4 bg-zinc-900 border border-zinc-800 text-white focus:border-white outline-none transition-colors"
+                        className="w-full p-3 bg-zinc-900 border border-zinc-800 text-white focus:border-white outline-none transition-colors"
                     />
                 </div>
                 <div>
@@ -566,7 +598,7 @@ const EditProjectForm = ({
                                 category: e.target.value as ServicesTypes,
                             }))
                         }
-                        className="w-full p-4 bg-zinc-900 border border-zinc-800 text-white focus:border-white outline-none transition-colors appearance-none">
+                        className="w-full p-3 bg-zinc-900 border border-zinc-800 text-white focus:border-white outline-none transition-colors appearance-none">
                         <option value="Cinematography-and-Videography">
                             Cinematography & Videography
                         </option>
@@ -592,7 +624,7 @@ const EditProjectForm = ({
                                 projectUrl: e.target.value,
                             }))
                         }
-                        className="w-full p-4 bg-zinc-900 border border-zinc-800 text-white focus:border-white outline-none transition-colors"
+                        className="w-full p-3 bg-zinc-900 border border-zinc-800 text-white focus:border-white outline-none transition-colors"
                     />
                 </div>
             </div>
@@ -613,7 +645,7 @@ const EditProjectForm = ({
                                     .map((tag) => tag.trim()),
                             }))
                         }
-                        className="w-full p-4 bg-zinc-900 border border-zinc-800 text-white focus:border-white outline-none transition-colors"
+                        className="w-full p-3 bg-zinc-900 border border-zinc-800 text-white focus:border-white outline-none transition-colors"
                         placeholder="e.g. Corporate, Event"
                     />
                 </div>
@@ -627,23 +659,25 @@ const EditProjectForm = ({
                         onChange={(e) =>
                             setImageFile(e.target.files?.[0] || null)
                         }
-                        className="w-full p-4 bg-zinc-900 border border-zinc-800 text-white focus:border-white outline-none transition-colors file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:bg-white file:text-black hover:file:bg-zinc-200"
+                        className="w-full p-2 bg-zinc-900 border border-zinc-800 text-white focus:border-white outline-none transition-colors file:mr-4 file:py-1.5 file:px-2 file:border-0 file:text-sm file:bg-white file:text-black hover:file:bg-zinc-200"
                     />
                 </div>
             </div>
 
-            <div className="col-span-2 flex justify-end gap-4 mt-8 pt-8 border-t border-zinc-800">
+            <div className="col-span-2 flex justify-end gap-4 pt-4 border-t border-zinc-800">
                 <button
                     type="button"
                     onClick={onClose}
-                    className="px-8 py-4 border border-zinc-700 text-zinc-300 hover:bg-zinc-800 hover:text-white text-sm uppercase tracking-widest font-medium transition-colors">
+                    className="px-3 py-2 border border-zinc-700 text-zinc-300 hover:bg-zinc-800 hover:text-white text-sm uppercase tracking-widest font-medium transition-colors">
                     Cancel
                 </button>
                 <button
                     type="submit"
-                    disabled={isPending}
-                    className="bg-white text-black hover:bg-zinc-200 px-8 py-4 text-sm uppercase tracking-widest font-bold transition-colors disabled:opacity-50">
-                    {isPending ? "Saving..." : "Save Changes"}
+                    disabled={isProjectUpdating || isImageUploading}
+                    className="bg-white text-black hover:bg-zinc-200 px-3 py-2 text-sm uppercase tracking-widest font-bold transition-colors disabled:opacity-50">
+                    {isProjectUpdating || isImageUploading
+                        ? "Saving..."
+                        : "Save Changes"}
                 </button>
             </div>
         </form>

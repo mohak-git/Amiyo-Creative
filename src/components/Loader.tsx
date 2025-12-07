@@ -16,3 +16,11 @@ export default function Loader() {
         </div>
     );
 }
+
+export function LoadingSpinner() {
+    return (
+        <div className="flex items-center justify-center z-10">
+            <FaSpinner className="animate-spin text-blue-500 text-4xl" />
+        </div>
+    );
+}

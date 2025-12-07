@@ -1,5 +1,6 @@
 import {
     AgencyServicesProps,
+    APIResponse,
     GalleryItem,
     PricingDataProps,
     Project,
@@ -14,13 +15,16 @@ import {
     FaCamera,
     FaChartLine,
     FaCode,
+    FaEnvelope,
     FaFilm,
+    FaHome,
     FaInstagram,
     FaLinkedin,
     FaMailBulk,
     FaPalette,
     FaPhoneAlt,
     FaPlay,
+    FaProjectDiagram,
     FaTelegram,
     FaWhatsapp,
     FaYoutube,
@@ -34,6 +38,12 @@ export const NavItems = [
     { label: "Contact", href: "/contact" },
 ];
 
+export const AdminNavItems = [
+    { name: "Dashboard", href: "/admin", icon: FaHome },
+    { name: "Projects", href: "/admin/projects", icon: FaProjectDiagram },
+    { name: "Enquiries", href: "/admin/enquiries", icon: FaEnvelope },
+];
+
 export const hexToRgb = (hex: string): [number, number, number] => {
     const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return m
@@ -44,6 +54,26 @@ export const hexToRgb = (hex: string): [number, number, number] => {
           ]
         : [1, 1, 1];
 };
+
+export async function parseAPIResponse<T>(
+    res: Response,
+    fallbackMessage: string
+): Promise<T> {
+    const text = await res.text();
+    let json: unknown;
+
+    try {
+        json = JSON.parse(text);
+    } catch {
+        if (!res.ok) throw new Error(text.trim() || fallbackMessage);
+        throw new Error("Unexpected non-JSON response");
+    }
+
+    const { success, message, data } = json as APIResponse<T>;
+    if (!success) throw new Error(message || fallbackMessage);
+
+    return data;
+}
 
 export const HomeAboutValues: ValueItem[] = [
     { label: "Projects Completed", value: 150 },
@@ -558,7 +588,7 @@ export const FAQs: { q: string; a: string }[] = [
 
 export const mockProjects: Project[] = [
     {
-        id: "1",
+        _id: "1",
         title: "Ethereal Wedding Film",
         category: "Cinematography-and-Videography",
         coverImage:
@@ -570,7 +600,7 @@ export const mockProjects: Project[] = [
         updatedAt: "",
     },
     {
-        id: "2",
+        _id: "2",
         title: "Tech Startup Branding",
         category: "Photography",
         coverImage: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43",
@@ -581,7 +611,7 @@ export const mockProjects: Project[] = [
         updatedAt: "",
     },
     {
-        id: "3",
+        _id: "3",
         title: "Fashion Editorial Shoot",
         category: "Design-and-Branding",
         coverImage:
@@ -593,7 +623,7 @@ export const mockProjects: Project[] = [
         updatedAt: "",
     },
     {
-        id: "4",
+        _id: "4",
         title: "Brand Commercial VFX",
         category: "Post-Production",
         coverImage:
@@ -605,7 +635,7 @@ export const mockProjects: Project[] = [
         updatedAt: "",
     },
     {
-        id: "5",
+        _id: "5",
         title: "E-commerce Platform",
         category: "Web-and-Digital",
         coverImage:
@@ -617,7 +647,7 @@ export const mockProjects: Project[] = [
         updatedAt: "",
     },
     {
-        id: "6",
+        _id: "6",
         title: "Product Photography Series",
         category: "Photography",
         coverImage: "https://images.unsplash.com/photo-1556228720-195a672e8a03",
@@ -628,7 +658,7 @@ export const mockProjects: Project[] = [
         updatedAt: "",
     },
     {
-        id: "7",
+        _id: "7",
         title: "Music Video Production",
         category: "Cinematography-and-Videography",
         coverImage:
@@ -640,7 +670,7 @@ export const mockProjects: Project[] = [
         updatedAt: "",
     },
     {
-        id: "8",
+        _id: "8",
         title: "Restaurant Branding Suite",
         category: "Design-and-Branding",
         coverImage:
@@ -652,7 +682,7 @@ export const mockProjects: Project[] = [
         updatedAt: "",
     },
     {
-        id: "9",
+        _id: "9",
         title: "Motion Graphics Explainer",
         category: "Post-Production",
         coverImage:

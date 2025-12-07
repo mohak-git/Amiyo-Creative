@@ -1,4 +1,5 @@
-import { APIResponse, Enquiry } from "@/constants/types";
+import { parseAPIResponse } from "@/constants/constants";
+import { Enquiry } from "@/constants/types";
 import {
     EnquiryFormPayload,
     EnquiryFormResponse,
@@ -9,12 +10,11 @@ export async function fetchEnquiries(): Promise<Enquiry[]> {
         headers: { "Content-Type": "application/json" },
         next: { revalidate: 60 * 5 },
     });
-    if (!res.ok)
-        throw new Error((await res.text()) || "Failed to fetch enquiries");
 
-    const { data, success, message }: APIResponse<Enquiry[]> = await res.json();
-    if (!success) throw new Error(message || "Failed to receive enquiries");
-
+    const data = await parseAPIResponse<Enquiry[]>(
+        res,
+        "Failed to fetch enquiries"
+    );
     return data;
 }
 
@@ -27,13 +27,10 @@ export async function createEnquiry(
         body: JSON.stringify(payload),
     });
 
-    if (!res.ok)
-        throw new Error((await res.text()) || "Failed to create enquiry");
-
-    const { data, success, message }: APIResponse<EnquiryFormResponse> =
-        await res.json();
-    if (!success) throw new Error(message || "Failed to create enquiry");
-
+    const data = await parseAPIResponse<EnquiryFormResponse>(
+        res,
+        "Failed to create enquiry"
+    );
     return data;
 }
 
@@ -43,11 +40,7 @@ export async function deleteEnquiries(ids: string[]): Promise<void> {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ids }),
     });
-    if (!res.ok)
-        throw new Error((await res.text()) || "Failed to delete enquiries");
-
-    const { success, message }: APIResponse<void> = await res.json();
-    if (!success) throw new Error(message || "Failed to delete enquiries");
+    await parseAPIResponse<void>(res, "Failed to delete enquiries");
 }
 
 export async function deleteAllEnquiries(): Promise<void> {
@@ -56,11 +49,7 @@ export async function deleteAllEnquiries(): Promise<void> {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ deleteAll: true }),
     });
-    if (!res.ok)
-        throw new Error((await res.text()) || "Failed to delete all enquiries");
-
-    const { success, message }: APIResponse<void> = await res.json();
-    if (!success) throw new Error(message || "Failed to delete all enquiries");
+    await parseAPIResponse<void>(res, "Failed to delete all enquiries");
 }
 
 export async function fetchEnquiry(id: string): Promise<Enquiry> {
@@ -68,12 +57,11 @@ export async function fetchEnquiry(id: string): Promise<Enquiry> {
         headers: { "Content-Type": "application/json" },
         next: { revalidate: 60 * 5 },
     });
-    if (!res.ok)
-        throw new Error((await res.text()) || "Failed to fetch enquiry");
 
-    const { data, success, message }: APIResponse<Enquiry> = await res.json();
-    if (!success) throw new Error(message || "Failed to receive enquiry");
-
+    const data = await parseAPIResponse<Enquiry>(
+        res,
+        "Failed to fetch enquiry"
+    );
     return data;
 }
 
@@ -86,12 +74,11 @@ export async function updateEnquiryStatus(
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status }),
     });
-    if (!res.ok)
-        throw new Error((await res.text()) || "Failed to update status");
 
-    const { success, data, message }: APIResponse<Enquiry> = await res.json();
-    if (!success) throw new Error(message || "Failed to update enquiry");
-
+    const data = await parseAPIResponse<Enquiry>(
+        res,
+        "Failed to update enquiry"
+    );
     return data;
 }
 
@@ -100,9 +87,5 @@ export async function deleteEnquiry(id: string): Promise<void> {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
     });
-    if (!res.ok)
-        throw new Error((await res.text()) || "Failed to delete enquiry");
-
-    const { success, message }: APIResponse<void> = await res.json();
-    if (!success) throw new Error(message || "Failed to delete enquiry");
+    await parseAPIResponse<void>(res, "Failed to delete enquiry");
 }

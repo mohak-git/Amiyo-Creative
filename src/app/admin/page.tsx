@@ -12,23 +12,23 @@ export default function AdminDashboard() {
 
     return (
         <div>
-            <h1 className="text-4xl font-bold mb-12 tracking-tighter uppercase text-white">
+            <h1 className="text-3xl font-bold mb-8 tracking-tighter uppercase text-white">
                 Dashboard
             </h1>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="bg-zinc-900/30 p-8 border border-zinc-800 hover:border-zinc-600 transition-colors">
-                    <h2 className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-4">
+                <div className="bg-zinc-900/30 p-4 border border-zinc-800 hover:border-zinc-600 transition-colors my-auto">
+                    <h2 className="text-sm font-medium text-zinc-500 uppercase tracking-widest">
                         Total Projects
                     </h2>
-                    <p className="text-6xl font-bold text-white tracking-tighter">
+                    <p className="text-4xl font-bold text-white tracking-tighter">
                         {projects.length}
                     </p>
                 </div>
-                <div className="bg-zinc-900/30 p-8 border border-zinc-800 hover:border-zinc-600 transition-colors">
-                    <h2 className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-4">
+                <div className="bg-zinc-900/30 p-4 border border-zinc-800 hover:border-zinc-600 transition-colors my-auto">
+                    <h2 className="text-sm font-medium text-zinc-500 uppercase tracking-widest">
                         Total Enquiries
                     </h2>
-                    <p className="text-6xl font-bold text-white tracking-tighter">
+                    <p className="text-4xl font-bold text-white tracking-tighter">
                         {enquiries.length}
                     </p>
                 </div>
