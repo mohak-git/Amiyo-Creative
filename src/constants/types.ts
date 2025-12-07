@@ -35,7 +35,7 @@ export interface SocialPlatformProps {
 export type PricingTypes = "Starter" | "Growth" | "Premium" | "Custom";
 
 export interface PricingDataProps {
-    title: PricingTypes;
+    title: string;
     price: string;
     tagline: string;
     features: string[];
