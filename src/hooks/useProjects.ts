@@ -15,6 +15,7 @@ export function useProjects() {
         queryKey: ["projects"],
         queryFn: fetchProjects,
         staleTime: 1 * 60 * 60 * 1000,
+        retry: 3,
     });
 }
 
@@ -31,7 +32,7 @@ export function useCreateProject() {
 export function useDeleteProjects() {
     const queryClient = useQueryClient();
 
-    return useMutation<void, Error, number[]>({
+    return useMutation<void, Error, string[]>({
         mutationFn: (ids) => deleteProjects(ids),
         onSuccess: () =>
             queryClient.invalidateQueries({ queryKey: ["projects"] }),
@@ -48,16 +49,17 @@ export function useDeleteAllProjects() {
     });
 }
 
-export function useProject(id: number) {
+export function useProject(id: string) {
     return useQuery<Project, Error>({
         queryKey: ["project", id],
         queryFn: () => fetchProject(id),
         staleTime: 1 * 60 * 60 * 1000,
         enabled: !!id,
+        retry: 3,
     });
 }
 
-export function useUpdateProject(id: number) {
+export function useUpdateProject(id: string) {
     const queryClient = useQueryClient();
     return useMutation<Project, Error, Partial<Project>>({
         mutationFn: (data) => updateProject(id, data),
@@ -66,7 +68,7 @@ export function useUpdateProject(id: number) {
     });
 }
 
-export function useDeleteProject(id: number) {
+export function useDeleteProject(id: string) {
     const queryClient = useQueryClient();
     return useMutation<void, Error, void>({
         mutationFn: () => deleteProject(id),

@@ -1,4 +1,5 @@
-import { APIResponse, UploadImageResponse } from "@/constants/types";
+import { parseAPIResponse } from "@/constants/constants";
+import { UploadImageResponse } from "@/constants/types";
 
 export async function uploadImage(file: File): Promise<UploadImageResponse> {
     const formData = new FormData();
@@ -8,10 +9,10 @@ export async function uploadImage(file: File): Promise<UploadImageResponse> {
         method: "POST",
         body: formData,
     });
-    if (!res.ok) throw new Error((await res.text()) || "Image upload failed");
-    const { data, success, message }: APIResponse<UploadImageResponse> =
-        await res.json();
-    if (!success) throw new Error(message || "Image upload failed");
+    const data = await parseAPIResponse<UploadImageResponse>(
+        res,
+        "Image upload failed"
+    );
 
     return data;
 }

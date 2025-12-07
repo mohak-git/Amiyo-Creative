@@ -1,21 +1,17 @@
-import { db } from "@/lib/db/drizzle";
-import { projects } from "@/lib/db/schema";
+import dbConnect from "@/lib/db/mongoose";
+import { Project } from "@/lib/db/models/Project";
 import { verifyToken } from "@/lib/utils/auth";
 import { projectSchema } from "@/lib/utils/validation";
-import { inArray } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET() {
     try {
-        const allProjects = await db.select().from(projects).all();
-        const formatted = allProjects.map((p) => ({
-            ...p,
-            tags: JSON.parse(p.tags),
-        }));
+        await dbConnect();
+        const allProjects = await Project.find().sort({ createdAt: -1 });
 
         return NextResponse.json({
             success: true,
-            data: formatted,
+            data: allProjects,
             message: "Projects fetched successfully",
         });
     } catch (error) {
@@ -54,28 +50,20 @@ export async function POST(request: NextRequest) {
             category,
         } = parsed.data;
 
-        const newProject = await db
-            .insert(projects)
-            .values({
-                title,
-                coverImage,
-                coverImagePublicId,
-                projectUrl,
-                category,
-                tags: JSON.stringify(tags),
-            })
-            .returning()
-            .get();
-
-        const formatted = {
-            ...newProject,
-            tags: JSON.parse(newProject.tags),
-        };
+        await dbConnect();
+        const newProject = await Project.create({
+            title,
+            coverImage,
+            coverImagePublicId,
+            projectUrl,
+            category,
+            tags,
+        });
 
         return NextResponse.json(
             {
                 success: true,
-                data: formatted,
+                data: newProject,
                 message: "Project created successfully",
             },
             { status: 201 }
@@ -106,15 +94,11 @@ export async function DELETE(request: NextRequest) {
                 { status: 400 }
             );
 
+        await dbConnect();
+
         let projectsToDelete;
-        if (deleteAll)
-            projectsToDelete = await db.select().from(projects).all();
-        else
-            projectsToDelete = await db
-                .select()
-                .from(projects)
-                .where(inArray(projects.id, ids))
-                .all();
+        if (deleteAll) projectsToDelete = await Project.find({});
+        else projectsToDelete = await Project.find({ _id: { $in: ids } });
 
         if (projectsToDelete.length === 0)
             return NextResponse.json(
@@ -143,12 +127,12 @@ export async function DELETE(request: NextRequest) {
                 );
                 if (!deleteImageRes.ok)
                     console.error(
-                        `Failed to delete image for project ${project.id}`
+                        `Failed to delete image for project ${project._id}`
                     );
             }
 
-        if (deleteAll) await db.delete(projects).run();
-        else await db.delete(projects).where(inArray(projects.id, ids)).run();
+        if (deleteAll) await Project.deleteMany();
+        else await Project.deleteMany({ _id: { $in: ids } });
 
         return NextResponse.json({
             success: true,

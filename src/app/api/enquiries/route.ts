@@ -1,8 +1,7 @@
-import { db } from "@/lib/db/drizzle";
-import { enquiries } from "@/lib/db/schema";
+import { Enquiry } from "@/lib/db/models/Enquiry";
+import dbConnect from "@/lib/db/mongoose";
 import { verifyToken } from "@/lib/utils/auth";
 import { enquirySchema } from "@/lib/utils/validation";
-import { inArray } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
@@ -14,7 +13,9 @@ export async function GET(request: NextRequest) {
                 { status: 401 }
             );
 
-        const allEnquiries = await db.select().from(enquiries).all();
+        await dbConnect();
+        const allEnquiries = await Enquiry.find().sort({ createdAt: -1 });
+
         return NextResponse.json({
             success: true,
             data: allEnquiries,
@@ -35,13 +36,6 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
     try {
-        const auth = await verifyToken(request);
-        if (!auth)
-            return NextResponse.json(
-                { success: false, data: null, message: "Unauthorized" },
-                { status: 401 }
-            );
-
         const body = await request.json();
         const parsed = enquirySchema.safeParse(body);
 
@@ -53,11 +47,13 @@ export async function POST(request: NextRequest) {
 
         const { name, email, phone, message } = parsed.data;
 
-        const newEnquiry = await db
-            .insert(enquiries)
-            .values({ name, email, phone, message })
-            .returning()
-            .get();
+        await dbConnect();
+        const newEnquiry = await Enquiry.create({
+            name,
+            email,
+            phone,
+            message,
+        });
 
         void fetch(`${process.env.APP_URL}/api/notify`, {
             method: "POST",
@@ -99,8 +95,10 @@ export async function DELETE(request: NextRequest) {
                 { status: 400 }
             );
 
-        if (deleteAll) await db.delete(enquiries).run();
-        else await db.delete(enquiries).where(inArray(enquiries.id, ids)).run();
+        await dbConnect();
+
+        if (deleteAll) await Enquiry.deleteMany();
+        else await Enquiry.deleteMany({ _id: { $in: ids } });
 
         return NextResponse.json({
             success: true,
