@@ -21,10 +21,10 @@ const Navbar = () => {
 
     return (
         <div
-            className={`fixed z-[1000] 3xl:py-4 w-full transition-all duration-500 sm:shadow-[0px_0px_30px_60px_rgb(2,6,24)] ${
+            className={`fixed z-1000 3xl:py-4 w-full transition-all duration-500 sm:shadow-[0px_0px_30px_60px_rgb(2,6,24)] ${
                 isScrolled
-                    ? "translate-y-6 px-6 sm:px-8 md:px-12 lg:px-14 3xl:px-30 bg-purple-950 rounded-full"
-                    : "px-2 sm:px-14 md:px-26 lg:px-30 3xl:px-52 bg-slate-950"
+                    ? "translate-y-6 px-6 sm:px-8 md:px-12 lg:px-14 3xl:px-30 bg-purple-800 rounded-full"
+                    : "px-2 sm:px-14 md:px-20 lg:px-30 3xl:px-52 bg-slate-950"
             }`}>
             <div className="flex justify-between items-center py-3">
                 <div className="flex items-center cursor-target justify-center">

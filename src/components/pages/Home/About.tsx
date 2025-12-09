@@ -88,12 +88,11 @@ const AboutSection: FC = () => {
     return (
         <div
             ref={sectionRef}
-            className="w-full flex justify-center py-6 items-center text-5xl gap-4 px-4 sm:px-10 3xl:px-30"
-        >
+            className="relative w-full flex justify-center py-6 items-center text-5xl gap-4 px-4 sm:px-10 3xl:px-30 before:absolute before:top-0 before:left-4 before:w-1/4 before:h-1/4 before:-z-1 before:blur-3xl before:bg-red-500/40">
             <div className="absolute -bottom-220 border-4 -left-20 h-80 w-80 rounded-full bg-fuchsia-500/30 blur-3xl" />
             <div className="relative w-full flex justify-center py-10 items-center flex-col rounded-t-4xl overflow-hidden shadow-[-5px_-3px_5px_0px_rgba(0,0,0,0.5)]">
                 {/* Background */}
-                <div className="absolute z-1 h-full w-full bg-radial-[at_50%_-60%] from-purple-700 via-purple-950 to-slate-950 via-30% to-67%"></div>
+                <div className="absolute z-1 h-full w-full bg-radial-[at_50%_-60%] from-white via-purple-600/70 to-transparent via-30% to-67%"></div>
                 <div className="absolute z-1 h-full w-full bg-slate-950/30"></div>
 
                 {/* Main Content */}
@@ -101,8 +100,7 @@ const AboutSection: FC = () => {
                     className="flex-1 flex flex-col  px-8 py-10 lg:px-16 relative z-3 w-full"
                     variants={containerVariants}
                     initial="hidden"
-                    animate={hasAnimated ? "visible" : "hidden"}
-                >
+                    animate={hasAnimated ? "visible" : "hidden"}>
                     <div className="mx-auto w-full grid md:grid-cols-2 gap-6 md:gap-16 items-center justify-center ">
                         {/* Values */}
                         <div className="grid grid-cols-2 grid-rows-5 h-full w-full max-w-2xl place-items-center mx-auto gap-1">
@@ -110,8 +108,7 @@ const AboutSection: FC = () => {
                                 <motion.div
                                     key={index}
                                     className={`${rowClasses[index]} relative p-6 group w-full h-full flex items-center justify-center overflow-hidden transition-colors duration-500 hover:bg-cyan-200/20`}
-                                    variants={fadeInUp}
-                                >
+                                    variants={fadeInUp}>
                                     {/* Borders */}
                                     <span className="absolute inset-0 border-transparent group-hover:border-purple-400/60 transition-all duration-500"></span>
                                     <span className="absolute top-0 left-0 w-full h-[2px] scale-x-0 bg-cyan-400/30 group-hover:scale-x-100 origin-left transition-transform duration-500"></span>
@@ -137,11 +134,13 @@ const AboutSection: FC = () => {
                             className="space-y-8"
                             variants={textContainer}
                             initial="hidden"
-                            animate={hasAnimated ? "visible" : "hidden"}
-                        >
+                            animate={hasAnimated ? "visible" : "hidden"}>
                             <motion.div variants={textFadeUp}>
                                 <h2 className="text-4xl md:text-5xl 3xl:text-6xl font-bold text-white mb-6 leading-tight">
-                                    About Our Story
+                                    About Our{" "}
+                                    <span className="text-purple-500">
+                                        Story
+                                    </span>
                                 </h2>
                             </motion.div>
 

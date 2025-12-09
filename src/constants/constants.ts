@@ -35,6 +35,8 @@ export const NavItems = [
     { label: "Home", href: "/" },
     { label: "Work", href: "/work" },
     { label: "About", href: "/about" },
+    { label: "Pricing", href: "/pricing" },
+    { label: "Blog", href: "/blog" },
     { label: "Contact", href: "/contact" },
 ];
 
@@ -127,11 +129,6 @@ export const Companies: { title: string; imageLink: string }[] = [
         title: "IBM",
         imageLink:
             "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
-    },
-    {
-        title: "Samsung",
-        imageLink:
-            "https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg",
     },
     {
         title: "LinkedIn",

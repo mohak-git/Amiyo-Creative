@@ -33,7 +33,7 @@ const GoToTop: FC<GoToTopProps> = ({
         <button
             onClick={scrollToTop}
             aria-label="Scroll to top"
-            className="fixed bottom-6 right-6 z-50 p-3 rounded-full bg-gray-800 text-white text-lg opacity-70 hover:opacity-100 shadow-md transition"
+            className="fixed cursor-target cursor-none bottom-6 right-6 z-50 p-3 rounded-full bg-gray-800 text-white text-lg opacity-70 hover:opacity-100 shadow-md transition"
         >
             <GoMoveToTop />
         </button>

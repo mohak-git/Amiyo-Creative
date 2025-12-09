@@ -9,7 +9,7 @@ import MovingLogos from "@/components/ui/MovingLogos";
 export default function Home() {
     return (
         <>
-            <main className="md:pt-[13vh]">
+            <main className="pt-[7.5vh] md:pt-[13vh]">
                 <Hero />
                 <MovingLogos />
                 <About />
