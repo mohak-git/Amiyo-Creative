@@ -16,7 +16,7 @@ const ProjectCard: FC<{ project: Project; color: string }> = ({
                     height={5000}
                     width={5000}
                     src={project.coverImage}
-                    alt={`${project.id}-cover-image`}
+                    alt={`${project._id}-cover-image`}
                     className="w-full h-full object-cover"
                 />
 

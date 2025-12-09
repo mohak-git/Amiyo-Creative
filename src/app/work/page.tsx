@@ -106,7 +106,7 @@ const Work = () => {
                                     }
                                     renderItem={(project) => (
                                         <ProjectCard
-                                            key={project.id}
+                                            key={project._id}
                                             project={project}
                                             color={bgColor}
                                         />
