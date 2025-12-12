@@ -14,12 +14,12 @@ const projectFields = {
         ),
     tags: z.array(z.string()).min(1, "At least one tag is required"),
     category: z.enum([
-        "Cinematography-and-Videography",
         "Photography",
-        "Design-and-Branding",
-        "Post-Production",
-        "Web-and-Digital",
-        "Marketing",
+        "Video-Production",
+        "Video-Editing",
+        "Brand-Design",
+        "Web-Development",
+        "CGI-VFX",
     ]),
 };
 
