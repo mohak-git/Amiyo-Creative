@@ -319,7 +319,7 @@ const BentoCardGrid: React.FC<{
     gridRef?: React.RefObject<HTMLDivElement | null>;
 }> = ({ children, gridRef }) => (
     <div
-        className="bento-section grid gap-2 w-[100%] select-none relative"
+        className="bento-section grid gap-2 w-full select-none relative"
         style={{ fontSize: "clamp(1rem, 0.9rem + 0.5vw, 1.5rem)" }}
         ref={gridRef}
     >
@@ -521,10 +521,10 @@ const Bento: React.FC<BentoProps> = ({
                                 </Link>
 
                                 <div className="group-hover:hidden flex flex-col justify-end h-full w-full relative text-white p-4 3xl:p-10 z-10">
-                                    <h3 className="w-fit font-normal text-base 3xl:text-2xl m-0 mb-1 bg-black/70 p-1 rounded-lg">
+                                    <h3 className="w-fit font-normal text-base 3xl:text-3xl m-0 mb-1 bg-black/70 p-1 rounded-lg">
                                         {card.title}
                                     </h3>
-                                    <p className="w-fit text-xs 3xl:text-xl leading-5 opacity-90">
+                                    <p className="w-fit text-xs 3xl:text-2xl leading-5 3xl:leading-8 opacity-90">
                                         {card.description}
                                     </p>
                                 </div>

@@ -131,7 +131,7 @@ const BgBeam: React.FC<BgBeamProps> = ({
             {beams.map((beam) => (
                 <div
                     key={beam.id}
-                    className="absolute bg-gradient-to-b from-transparent via-cyan-500 to-transparent shadow-lg"
+                    className="absolute bg-linear-to-b from-transparent via-cyan-500 to-transparent shadow-lg"
                     style={{
                         left: `${beam.x}%`,
                         top: `${getCurrentBeamPosition(beam)}%`,
@@ -157,7 +157,7 @@ const BgBeam: React.FC<BgBeamProps> = ({
                             transform: "translateX(-50%)",
                         }}>
                         <div
-                            className="absolute w-2 h-2 bg-gradient-to-r from-transparent via-cyan-400 to-transparent blur-sm"
+                            className="absolute w-2 h-2 bg-linear-to-r from-transparent via-cyan-400 to-transparent blur-sm"
                             style={{
                                 opacity,
                                 transform: "translateX(-50%) translateY(-50%)",

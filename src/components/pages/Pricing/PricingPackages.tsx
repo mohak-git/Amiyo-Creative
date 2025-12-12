@@ -6,9 +6,9 @@ import { motion } from "framer-motion";
 
 export default function PricingPackages() {
     return (
-        <section className="w-full max-w-7xl mx-auto px-6 py-24">
+        <section className="w-full max-w-7xl mx-auto px-6 py-12">
             <div className="text-center mb-16">
-                <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+                <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-500">
                     Curated Packages
                 </h2>
                 <p className="text-foreground/60 text-lg">
@@ -24,9 +24,8 @@ export default function PricingPackages() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: idx * 0.1 }}
-                        className="h-full"
-                    >
-                        <PricingCard data={pkg} showTooltip={true} />
+                        className="h-full">
+                        <PricingCard data={pkg} />
                     </motion.div>
                 ))}
             </div>

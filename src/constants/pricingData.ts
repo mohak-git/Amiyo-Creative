@@ -2,23 +2,31 @@ import { PricingDataProps } from "./types";
 
 export const PRICING_HERO = {
     title: "Transparent & Flexible Pricing",
-    subtitle: "Professional creative services tailored to your budget. Choose a package or build your own custom solution.",
-    description: "From video editing to full-scale brand domination, we offer clear pricing with no hidden costs. Scale your content production with Amiyo Creative."
+    subtitle:
+        "Professional creative services tailored to your budget. Choose a package or build your own custom solution.",
+    description:
+        "From video editing to full-scale brand domination, we offer clear pricing with no hidden costs. Scale your content production with Amiyo Creative.",
 };
 
 export const SERVICES_PRICING = [
     {
         category: "Video Editing",
         items: [
-            { name: "Social Media Edits (Reels/Shorts)", price: "₹1,499 – ₹4,999" },
+            {
+                name: "Social Media Edits (Reels/Shorts)",
+                price: "₹1,499 – ₹4,999",
+            },
             { name: "YouTube Long Form", price: "₹6,999 – ₹14,999" },
             { name: "Commercial / Ad Films", price: "₹19,999 – ₹59,999" },
             { name: "Wedding Films Editing", price: "₹24,999 – ₹1,29,999" },
-            { name: "Corporate / Documentary Films", price: "₹39,999 – ₹1,49,999" },
+            {
+                name: "Corporate / Documentary Films",
+                price: "₹39,999 – ₹1,49,999",
+            },
             { name: "Product Videos", price: "₹7,999 – ₹24,999" },
             { name: "Fashion Videos", price: "₹14,999 – ₹44,999" },
-            { name: "Others", price: "Custom Quote" }
-        ]
+            { name: "Others", price: "Custom Quote" },
+        ],
     },
     {
         category: "Motion Graphics",
@@ -28,9 +36,12 @@ export const SERVICES_PRICING = [
             { name: "Trend Reels Motion", price: "₹2,999 – ₹7,999" },
             { name: "Lower Thirds", price: "₹1,499 – ₹3,999" },
             { name: "Explainer MG", price: "₹14,999 – ₹49,999" },
-            { name: "Advanced Custom Motion Graphics", price: "₹24,999 – ₹99,999" },
-            { name: "Others", price: "Custom Quote" }
-        ]
+            {
+                name: "Advanced Custom Motion Graphics",
+                price: "₹24,999 – ₹99,999",
+            },
+            { name: "Others", price: "Custom Quote" },
+        ],
     },
     {
         category: "Visual Effects (VFX)",
@@ -41,8 +52,8 @@ export const SERVICES_PRICING = [
             { name: "Object Removal", price: "₹2,499 – ₹9,999/shot" },
             { name: "Green Screen Keying", price: "₹799 – ₹2,499/shot" },
             { name: "CGI Integration", price: "₹9,999 – ₹39,999/shot" },
-            { name: "Others", price: "Custom Quote" }
-        ]
+            { name: "Others", price: "Custom Quote" },
+        ],
     },
     {
         category: "Color Grading",
@@ -50,8 +61,8 @@ export const SERVICES_PRICING = [
             { name: "Basic Correction", price: "₹499 – ₹999/min" },
             { name: "Cinematic Grade", price: "₹1,499 – ₹2,999/min" },
             { name: "Film Grade", price: "₹3,999 – ₹7,999/min" },
-            { name: "Others", price: "Custom Quote" }
-        ]
+            { name: "Others", price: "Custom Quote" },
+        ],
     },
     {
         category: "Sound Design & Voiceover",
@@ -61,8 +72,8 @@ export const SERVICES_PRICING = [
             { name: "Voiceover Support", price: "₹2,499 – ₹7,999" },
             { name: "Voice Enhancement", price: "₹1,499 – ₹3,999" },
             { name: "Mixing/mastering", price: "₹19,999 – ₹74,999" },
-            { name: "Others", price: "Custom Quote" }
-        ]
+            { name: "Others", price: "Custom Quote" },
+        ],
     },
     {
         category: "Graphic Design For Video",
@@ -72,8 +83,8 @@ export const SERVICES_PRICING = [
             { name: "Video Graphics Pack", price: "₹2,999 – ₹9,999" },
             { name: "End Screens / Outros", price: "₹1,499 – ₹4,999" },
             { name: "Campaign Visuals", price: "₹3,999 – ₹14,999" },
-            { name: "Others", price: "Custom Quote" }
-        ]
+            { name: "Others", price: "Custom Quote" },
+        ],
     },
     {
         category: "Photo Editing",
@@ -82,8 +93,8 @@ export const SERVICES_PRICING = [
             { name: "Beauty Retouch", price: "₹149 – ₹349/photo" },
             { name: "Commercial Portrait", price: "₹349 – ₹799/photo" },
             { name: "Product Cleanup", price: "₹79 – ₹249/photo" },
-            { name: "Others", price: "Custom Quote" }
-        ]
+            { name: "Others", price: "Custom Quote" },
+        ],
     },
     {
         category: "Graphic Design",
@@ -99,8 +110,8 @@ export const SERVICES_PRICING = [
             { name: "Catalog Graphics", price: "₹7,999 – ₹34,999" },
             { name: "Website Mockups", price: "₹7,999 – ₹24,999" },
             { name: "App Screen", price: "₹799 – ₹2,499 per screen" },
-            { name: "Others", price: "Custom Quote" }
-        ]
+            { name: "Others", price: "Custom Quote" },
+        ],
     },
     {
         category: "Videography",
@@ -110,8 +121,8 @@ export const SERVICES_PRICING = [
             { name: "Commercial Shoots", price: "₹49,999 – ₹2,99,999" },
             { name: "Product Shoots", price: "₹19,999 – ₹59,999" },
             { name: "Fashion Videos", price: "₹29,999 – ₹99,999" },
-            { name: "Others", price: "Custom Quote" }
-        ]
+            { name: "Others", price: "Custom Quote" },
+        ],
     },
     {
         category: "Photography",
@@ -120,8 +131,8 @@ export const SERVICES_PRICING = [
             { name: "Portrait Session", price: "₹4,999 – ₹14,999" },
             { name: "Product Photos", price: "₹499 – ₹4,999/photo" },
             { name: "Fashion Shoot", price: "₹14,999 – ₹49,999" },
-            { name: "Others", price: "Custom Quote" }
-        ]
+            { name: "Others", price: "Custom Quote" },
+        ],
     },
     {
         category: "Drone",
@@ -129,9 +140,9 @@ export const SERVICES_PRICING = [
             { name: "Aerial Shoot", price: "₹14,999 – ₹34,999" },
             { name: "Real Estate", price: "₹19,999 – ₹49,999" },
             { name: "Wedding Drone", price: "₹14,999 – ₹34,999" },
-            { name: "Others", price: "Custom Quote" }
-        ]
-    }
+            { name: "Others", price: "Custom Quote" },
+        ],
+    },
 ];
 
 export const PRICING_PACKAGES: PricingDataProps[] = [
@@ -145,13 +156,13 @@ export const PRICING_PACKAGES: PricingDataProps[] = [
             "10 Basic Photo Edits",
             "1 Thumbnail",
             "Basic Sound Cleanup",
-            "Basic Color Correction"
+            "Basic Color Correction",
         ],
         popular: false,
-        primary: "from-blue-400 to-blue-600",
-        accent: "text-blue-500",
-        border: "border-blue-500/20",
-        hoverGlow: "hover:shadow-blue-500/10"
+        primary: "from-slate-600 to-slate-400",
+        accent: "text-slate-400",
+        border: "border-slate-300/30",
+        hoverGlow: "hover:shadow-[0_12px_20px_-8px_rgba(148,163,184,0.4)]",
     },
     {
         title: "Growth Content Kit",
@@ -164,13 +175,13 @@ export const PRICING_PACKAGES: PricingDataProps[] = [
             "20 Advanced Photo Edits",
             "Motion Graphics (Basic Text MG)",
             "1 Advanced Color Grade",
-            "1 VO Support (Basic)"
+            "1 VO Support (Basic)",
         ],
         popular: true,
-        primary: "from-emerald-400 to-emerald-600",
-        accent: "text-emerald-500",
-        border: "border-emerald-500/20",
-        hoverGlow: "hover:shadow-emerald-500/10"
+        primary: "from-blue-500 to-cyan-400",
+        accent: "text-blue-400",
+        border: "border-blue-400/40",
+        hoverGlow: "hover:shadow-[0_16px_28px_-8px_rgba(59,130,246,0.6)]",
     },
     {
         title: "Business Content Suite",
@@ -184,13 +195,13 @@ export const PRICING_PACKAGES: PricingDataProps[] = [
             "30 Advanced Photo Edits",
             "Motion Graphics Pack",
             "Cinematic Color Grading",
-            "Basic VFX (5 shots)"
+            "Basic VFX (5 shots)",
         ],
         popular: false,
         primary: "from-purple-400 to-purple-600",
         accent: "text-purple-500",
         border: "border-purple-500/20",
-        hoverGlow: "hover:shadow-purple-500/10"
+        hoverGlow: "hover:shadow-purple-500/10",
     },
     {
         title: "Brand Premium Pro Kit",
@@ -205,13 +216,13 @@ export const PRICING_PACKAGES: PricingDataProps[] = [
             "Advanced Motion Graphics (Custom)",
             "10 VFX Shots",
             "Voiceover (Advanced)",
-            "Branding Mini Pack"
+            "Branding Mini Pack",
         ],
         popular: false,
-        primary: "from-orange-400 to-red-600",
-        accent: "text-orange-500",
-        border: "border-orange-500/20",
-        hoverGlow: "hover:shadow-orange-500/10"
+        primary: "from-purple-500 to-pink-500",
+        accent: "text-pink-400",
+        border: "border-pink-400/50",
+        hoverGlow: "hover:shadow-[0_20px_35px_-8px_rgba(236,72,153,0.4)]",
     },
     {
         title: "Full Brand Domination",
@@ -225,14 +236,14 @@ export const PRICING_PACKAGES: PricingDataProps[] = [
             "80 Photo Edits",
             "Advanced Motion Graphics & VFX",
             "Full Branding Kit",
-            "Production Support (Add-on)"
+            "Production Support (Add-on)",
         ],
         popular: false,
-        primary: "from-yellow-400 to-amber-600",
-        accent: "text-yellow-500",
-        border: "border-yellow-500/20",
-        hoverGlow: "hover:shadow-yellow-500/10"
-    }
+        primary: "from-orange-400 to-amber-700",
+        accent: "text-orange-400",
+        border: "border-orange-400/60",
+        hoverGlow: "hover:shadow-[0_24px_40px_-8px_rgba(245,158,11,0.4)]",
+    },
 ];
 
 export const DELIVERY_OPTIONS = [
@@ -240,26 +251,30 @@ export const DELIVERY_OPTIONS = [
         title: "Standard Delivery",
         cost: "Included",
         description: "Standard timelines based on service type.",
-        features: ["Standard Workflow", "Regular Updates"]
+        features: ["Standard Workflow", "Regular Updates"],
     },
     {
         title: "Fast Delivery (Priority)",
         cost: "+20%",
         description: "Work starts immediately. 2x faster delivery.",
-        features: ["Immediate Start", "2x Speed", "Priority Support"]
+        features: ["Immediate Start", "2x Speed", "Priority Support"],
     },
     {
         title: "Express Delivery",
         cost: "+40%",
         description: "Immediate execution with dedicated workflow.",
-        features: ["Next Day (where possible)", "Dedicated Team", "Full Priority"]
+        features: [
+            "Next Day (where possible)",
+            "Dedicated Team",
+            "Full Priority",
+        ],
     },
     {
         title: "Ultra Priority",
         cost: "+50%",
         description: "Overnight work. Weekend execution.",
-        features: ["Same Day / Overnight", "Emergency Tasks", "24/7 Ops"]
-    }
+        features: ["Same Day / Overnight", "Emergency Tasks", "24/7 Ops"],
+    },
 ];
 
 export const POLICIES = {
@@ -268,16 +283,16 @@ export const POLICIES = {
         details: [
             "1 free revision included (minor changes only)",
             "Additional revision: ₹999 – ₹4,999 per round",
-            "New requirements = new cost (script changes, new footage, etc.)"
-        ]
+            "New requirements = new cost (script changes, new footage, etc.)",
+        ],
     },
     cancellation: {
         title: "Cancellation / Reshoot",
         details: [
             "Shoot Cancellation (24 hrs notice): 25% charge",
             "Shoot Cancellation (< 24 hrs): 50% charge",
-            "Reshoot due to client-side issue: Full reshoot cost"
-        ]
+            "Reshoot due to client-side issue: Full reshoot cost",
+        ],
     },
     payment: {
         title: "Payment Policy",
@@ -285,19 +300,59 @@ export const POLICIES = {
             "50% Advance",
             "50% on Delivery",
             "Files released only after full payment",
-            "No refunds for digital work"
-        ]
-    }
+            "No refunds for digital work",
+        ],
+    },
 };
 
 export const CALCULATOR_ITEMS = [
-    { id: "v_reels", name: "Social Media Reel", price: 1499, category: "Video Editing" },
-    { id: "v_youtube", name: "YouTube Long Form", price: 6999, category: "Video Editing" },
-    { id: "v_ad", name: "Commercial / Ad Film", price: 19999, category: "Video Editing" },
-    { id: "m_logo", name: "Logo Animation", price: 7999, category: "Motion Graphics" },
-    { id: "m_explainer", name: "Explainer Motion Graphics", price: 14999, category: "Motion Graphics" },
-    { id: "g_thumb", name: "Thumbnail", price: 499, category: "Graphic Design" },
-    { id: "g_poster", name: "Poster / Creative", price: 599, category: "Graphic Design" },
+    {
+        id: "v_reels",
+        name: "Social Media Reel",
+        price: 1499,
+        category: "Video Editing",
+    },
+    {
+        id: "v_youtube",
+        name: "YouTube Long Form",
+        price: 6999,
+        category: "Video Editing",
+    },
+    {
+        id: "v_ad",
+        name: "Commercial / Ad Film",
+        price: 19999,
+        category: "Video Editing",
+    },
+    {
+        id: "m_logo",
+        name: "Logo Animation",
+        price: 7999,
+        category: "Motion Graphics",
+    },
+    {
+        id: "m_explainer",
+        name: "Explainer Motion Graphics",
+        price: 14999,
+        category: "Motion Graphics",
+    },
+    {
+        id: "g_thumb",
+        name: "Thumbnail",
+        price: 499,
+        category: "Graphic Design",
+    },
+    {
+        id: "g_poster",
+        name: "Poster / Creative",
+        price: 599,
+        category: "Graphic Design",
+    },
     { id: "g_logo", name: "Logo Design", price: 4999, category: "Branding" },
-    { id: "p_retouch", name: "Basic Photo Retouch", price: 79, category: "Photo Editing" }
+    {
+        id: "p_retouch",
+        name: "Basic Photo Retouch",
+        price: 79,
+        category: "Photo Editing",
+    },
 ];

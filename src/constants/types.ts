@@ -7,12 +7,12 @@ export interface ValueItem {
 }
 
 export type ServicesTypes =
-    | "Cinematography-and-Videography"
     | "Photography"
-    | "Design-and-Branding"
-    | "Post-Production"
-    | "Web-and-Digital"
-    | "Marketing";
+    | "Video-Production"
+    | "Video-Editing"
+    | "Brand-Design"
+    | "Web-Development"
+    | "CGI-VFX";
 
 export interface ServicesCardProps {
     title: string;

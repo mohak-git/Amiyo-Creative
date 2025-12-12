@@ -5,12 +5,12 @@ import { motion } from "framer-motion";
 
 export default function PricingHero() {
     return (
-        <section className="relative w-full py-24 md:py-32 px-6 flex flex-col items-center justify-center text-center z-10">
+        <section className="relative w-full py-12 md:py-16 px-6 flex flex-col items-center justify-center text-center z-10">
             <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 mb-6"
+                className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-linear-to-r from-blue-400 via-purple-500 to-pink-500 mb-6"
             >
                 {PRICING_HERO.title}
             </motion.h1>

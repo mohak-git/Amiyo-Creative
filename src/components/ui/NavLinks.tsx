@@ -402,7 +402,7 @@ const NavLinks: React.FC<NavProps> = ({
                 >
                     <ul
                         ref={navRef}
-                        className={`flex list-none p-0 px-4 m-0 text-center relative z-[3] ${
+                        className={`flex list-none p-0 px-4 m-0 text-center relative z-3 ${
                             mobile ? "flex-col gap-2" : "gap-4 lg:gap-8"
                         }`}
                         style={{

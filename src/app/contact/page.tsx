@@ -5,7 +5,7 @@ import Image from "next/image";
 const Contact = () => {
     return (
         <main className="md:pt-[10vh]">
-            <div className="pt-[6vh] px-6 sm:px-10 3xl:px-30 relative bg-gradient-to-b from-transparent to-slate-950 text-white overflow-hidden">
+            <div className="pt-[6vh] px-6 sm:px-10 3xl:px-30 relative bg-linear-to-b from-transparent to-slate-950 text-white overflow-hidden">
                 {/* --- Background --- */}
                 <div className="absolute -top-32 -left-32 w-[500px] h-[500px] bg-purple-500/20 rounded-full blur-3xl animate-pulse" />
                 <div className="absolute top-1/2 -right-32 w-[400px] h-[400px] bg-indigo-500/20 rounded-full blur-3xl animate-pulse" />
@@ -34,8 +34,7 @@ const Contact = () => {
                             allowFullScreen={true}
                             loading="lazy"
                             referrerPolicy="no-referrer-when-downgrade"
-                            className="rounded-lg shadow-lg"
-                        ></iframe>
+                            className="rounded-lg shadow-lg"></iframe>
                     </div>
                 </div>
             </div>

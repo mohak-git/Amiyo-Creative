@@ -5,6 +5,7 @@ import Loader from "@/components/Loader";
 import Carousel from "@/components/ui/Carousel";
 import ProjectCard from "@/components/ui/ProjectCard";
 import ScrollStack, { ScrollStackItem } from "@/components/ui/ScrollStack";
+import ServiceDetails from "@/components/work/ServiceDetails";
 import { AgencyServices } from "@/constants/constants";
 import { Project } from "@/constants/types";
 import { useProjects } from "@/hooks/useProjects";
@@ -56,7 +57,7 @@ const Work = () => {
     return (
         <>
             <div
-                className="absolute inset-0 blur-lg bg-cover bg-center -z-0 pointer-events-none"
+                className="absolute inset-0 blur-lg bg-cover bg-center z-0 pointer-events-none"
                 style={{ backgroundImage: "url(/aaabstract.webp)" }}
             />
 
@@ -64,15 +65,14 @@ const Work = () => {
                 <ScrollStack>
                     {/* Heading */}
                     <div className="pt-6 pb-10 flex flex-col justify-around text-center items-center gap-6">
-                        <h1 className="relative text-3xl sm:text-4xl md:text-5xl 3xl:text-6xl font-extrabold leading-snug max-w-4xl 3xl:max-w-5xl bg-gradient-to-br from-purple-400 via-white bg-clip-text text-transparent drop-shadow-lg">
+                        <h1 className="relative text-3xl sm:text-4xl md:text-5xl 3xl:text-6xl font-extrabold leading-snug max-w-4xl 3xl:max-w-5xl bg-linear-to-br from-purple-400 via-white bg-clip-text text-transparent drop-shadow-lg">
                             Every project we take on is a story waiting to be
                             told.
                         </h1>
 
                         <p className="relative text-base sm:text-lg 3xl:text-2xl text-gray-400 max-w-3xl 3xl:max-w-4xl">
-                            At Amiyo Creative, we don&apos;t just deliver
-                            “services” — we deliver experiences that last in
-                            memories and brands that stand out in markets.
+                            We offer a complete range of creative, digital, and
+                            production services — available 24/7
                         </p>
 
                         <div className="relative flex flex-wrap justify-center gap-3">
@@ -86,6 +86,8 @@ const Work = () => {
                             ))}
                         </div>
                     </div>
+
+                    <ServiceDetails />
 
                     {servicesWithProjects.map((ser, idx) => {
                         const bgColor = ser.color ?? "#171717";

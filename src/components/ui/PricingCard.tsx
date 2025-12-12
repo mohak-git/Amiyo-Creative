@@ -7,6 +7,7 @@ import {
     useSpring,
     Variants,
 } from "framer-motion";
+import Link from "next/link";
 import { useCallback, useRef, useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 
@@ -97,25 +98,21 @@ export default function PricingCard({
     return (
         <figure
             ref={ref}
-            className="w-full h-full [perspective:1000px] flex flex-col items-center justify-center"
+            className="w-full h-full perspective-[1000px] flex flex-col items-center justify-center"
             onMouseMove={handleMouse}
             onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-        >
+            onMouseLeave={handleMouseLeave}>
             {/* Card */}
             <motion.div
                 style={{ rotateX, rotateY, scale }}
-                className="[transform-style:preserve-3d] h-full w-full flex justify-center items-center relative"
-            >
+                className="transform-3d h-full w-full flex justify-center items-center relative">
                 <div
-                    className={`group relative h-full w-full flex flex-col bg-black/10 rounded-2xl text-center p-8 backdrop-blur-2xl border transition-all duration-700 ease-out bg-gradient-to-br ${data.border} ${data.hoverGlow}`}
-                >
+                    className={`group relative h-full w-full flex flex-col bg-black/10 rounded-2xl text-center p-8 backdrop-blur-2xl border transition-all duration-700 ease-out bg-linear-to-br ${data.border} ${data.hoverGlow}`}>
                     {/* Content */}
                     <div className="relative z-10">
                         {data.popular && (
                             <span
-                                className={`absolute -top-12 left-1/2 -translate-x-1/2 rounded-full px-4 py-1.5 text-xs font-semibold text-white shadow-xl bg-gradient-to-r ${data.primary} flex items-center gap-1.5`}
-                            >
+                                className={`absolute -top-12 left-1/2 -translate-x-1/2 rounded-full px-4 py-1.5 text-xs font-semibold text-white shadow-xl bg-linear-to-r ${data.primary} flex items-center gap-1.5`}>
                                 Most Popular
                             </span>
                         )}
@@ -128,11 +125,10 @@ export default function PricingCard({
                         </p>
 
                         <p
-                            className={`my-3 text-3xl 3xl:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r ${
+                            className={`my-3 text-3xl 3xl:text-5xl font-bold text-transparent bg-clip-text bg-linear-to-r ${
                                 data.primary
                             } ${tier === "Custom" && "animate-pulse"}
-                            `}
-                        >
+                            `}>
                             {data.price}
                             {tier !== "Custom" && (
                                 <span className="text-xs 3xl:text-xl text-white/60 font-light">
@@ -147,14 +143,12 @@ export default function PricingCard({
                             variants={listVariants}
                             initial="hidden"
                             whileInView="show"
-                            viewport={{ once: true, amount: 0.2 }}
-                        >
+                            viewport={{ once: true, amount: 0.2 }}>
                             {data.features.map((feature, i) => (
                                 <motion.li
                                     key={i}
                                     className="flex items-start gap-3"
-                                    variants={itemVariants}
-                                >
+                                    variants={itemVariants}>
                                     <FaCheckCircle
                                         className={`h-4 w-4 ${data.accent} shrink-0 mt-0.5`}
                                     />
@@ -163,13 +157,18 @@ export default function PricingCard({
                             ))}
                         </motion.ul>
 
-                        <button
-                            className={`w-full 3xl:text-2xl cursor-target cursor-none py-3 px-6 outline-none border-0 rounded-xl font-semibold text-white bg-gradient-to-r ${data.primary} shadow-lg hover:shadow-xl transition-all duration-300 border border-white/10 hover:border-white/200`}
-                        >
+                        <Link
+                            href={{
+                                pathname: "/contact",
+                                query: {
+                                    message: `I am interested in the ${tier} package (${data.price}).`,
+                                },
+                            }}
+                            className={`block w-full text-center 3xl:text-2xl cursor-target cursor-none py-3 px-6 outline-none border-0 rounded-xl font-semibold text-white bg-linear-to-r ${data.primary} shadow-lg hover:shadow-xl transition-all duration-300 border border-white/10 hover:border-white/200`}>
                             {tier === "Custom"
                                 ? "Contact Sales"
                                 : "Choose " + tier}
-                        </button>
+                        </Link>
                     </div>
 
                     {tier === "Custom" && isHovered && <RisingDots />}
@@ -179,9 +178,8 @@ export default function PricingCard({
             {/* Tooltip */}
             {showTooltip && (
                 <motion.figcaption
-                    className={`pointer-events-none absolute left-0 top-0 rounded-lg px-3 py-2 text-xs text-white font-medium opacity-0 z-[3] hidden sm:block backdrop-blur-xl border shadow-xl bg-gradient-to-r ${data.border} `}
-                    style={{ x, y, opacity }}
-                >
+                    className={`pointer-events-none absolute left-0 top-0 rounded-lg px-3 py-2 text-xs text-white font-medium opacity-0 z-3 hidden sm:block backdrop-blur-xl border shadow-xl bg-linear-to-r ${data.border} `}
+                    style={{ x, y, opacity }}>
                     {data.price}
                     <div className="text-xs opacity-70 mt-1">{tier}</div>
                 </motion.figcaption>

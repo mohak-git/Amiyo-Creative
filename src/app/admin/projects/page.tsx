@@ -320,7 +320,7 @@ const CreateProjectForm = ({ onClose }: { onClose: () => void }) => {
         title: "",
         coverImage: "",
         coverImagePublicId: "",
-        category: "Cinematography-and-Videography",
+        category: "Photography",
         projectUrl: "",
         tags: [],
     });

@@ -88,13 +88,13 @@ const AboutSection: FC = () => {
     return (
         <div
             ref={sectionRef}
-            className="relative w-full flex justify-center py-6 items-center text-5xl gap-4 px-4 sm:px-10 3xl:px-30 before:absolute before:top-0 before:left-4 before:w-1/4 before:h-1/4 before:-z-1 before:blur-3xl before:bg-red-500/40">
+            className="relative w-full flex justify-center pt-6 items-center text-5xl gap-4 px-4 sm:px-10 3xl:px-30 before:absolute before:top-0 before:left-4 before:w-1/4 before:h-1/4 before:-z-1 before:blur-3xl before:bg-red-500/40">
             <div className="absolute -bottom-220 border-4 -left-20 h-80 w-80 rounded-full bg-fuchsia-500/30 blur-3xl" />
             <div className="relative w-full flex justify-center py-10 items-center flex-col rounded-t-4xl overflow-hidden shadow-[-5px_-3px_5px_0px_rgba(0,0,0,0.5)]">
                 {/* Background */}
                 <div className="absolute z-1 h-full w-full bg-radial-[at_50%_-60%] from-white via-purple-600/70 to-transparent via-30% to-67%"></div>
                 <div className="absolute z-1 h-full w-full bg-slate-950/30"></div>
-
+                <div className="absolute -bottom-20 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-indigo-500/30 blur-3xl" />
                 {/* Main Content */}
                 <motion.div
                     className="flex-1 flex flex-col  px-8 py-10 lg:px-16 relative z-3 w-full"
@@ -137,22 +137,19 @@ const AboutSection: FC = () => {
                             animate={hasAnimated ? "visible" : "hidden"}>
                             <motion.div variants={textFadeUp}>
                                 <h2 className="text-4xl md:text-5xl 3xl:text-6xl font-bold text-white mb-6 leading-tight">
-                                    About Our{" "}
-                                    <span className="text-purple-500">
-                                        Story
-                                    </span>
+                                    What We
+                                    <span className="text-purple-500"> Do</span>
                                 </h2>
                             </motion.div>
 
                             <motion.div variants={textFadeUp}>
                                 <p className="text-sm sm:text-base md:text-lg 3xl:text-2xl text-gray-400 leading-relaxed">
                                     At Amiyo Creative, we don&apos;t just create
-                                    content — we craft experiences. From
-                                    designing your brand identity to capturing
-                                    once-in-a-lifetime memories, from building
-                                    digital platforms to scaling your online
-                                    presence — everything happens under one
-                                    roof.
+                                    content, we craft experiences. <br />
+                                    We provide full-scale creative, digital, and
+                                    production services for brands, businesses,
+                                    creators, and agencies worldwide — with
+                                    round-the-clock availability
                                 </p>
                             </motion.div>
 

@@ -13,8 +13,8 @@ import {
 
 import {
     FaCamera,
-    FaChartLine,
     FaCode,
+    FaEdit,
     FaEnvelope,
     FaFilm,
     FaHome,
@@ -29,13 +29,13 @@ import {
     FaWhatsapp,
     FaYoutube,
 } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
+import { FaThreads, FaXTwitter } from "react-icons/fa6";
 
 export const NavItems = [
     { label: "Home", href: "/" },
     { label: "Work", href: "/work" },
-    { label: "About", href: "/about" },
     { label: "Pricing", href: "/pricing" },
+    { label: "About", href: "/about" },
     { label: "Blog", href: "/blog" },
     { label: "Contact", href: "/contact" },
 ];
@@ -154,64 +154,56 @@ export const Companies: { title: string; imageLink: string }[] = [
 
 export const ServicesData: ServicesCardProps[] = [
     {
-        title: "Films & Visual Content",
+        title: "Photography (All Types)",
         description:
-            "Cinematic storytelling with international quality standards.",
-        service: "Cinematography-and-Videography",
-        image: "https://images.unsplash.com/photo-1518930107639-f4538ad82a00",
-        cta: "Explore Films",
-    },
-    {
-        title: "Photography Excellence",
-        description:
-            "Shoots designed to match brand and influencer aesthetics.",
+            "Product, model, fashion, e-commerce, lifestyle, events, food, interiors and more.",
         service: "Photography",
+        image: "https://images.unsplash.com/photo-1518930107639-f4538ad82a00",
+        cta: "Explore Photography",
+    },
+    {
+        title: "Video Production (All Types)",
+        description:
+            "Commercials, brand films, product videos, interviews, documentaries, events, weddings — complete production from planning to delivery",
+        service: "Video-Production",
         image: "https://images.unsplash.com/photo-1471341971476-ae15ff5dd4ea",
-        cta: "View Photography",
+        cta: "View Video Production",
     },
     {
-        title: "Creative Design & Branding",
+        title: "Video Editing (Complete Spectrum)",
         description:
-            "Global-standard brand identities, campaigns, and digital design.",
-        service: "Design-and-Branding",
-        image: "https://images.unsplash.com/photo-1621111848501-8d3634f82336",
-        cta: "See Branding Work",
-    },
-    {
-        title: "Post-Production Powerhouse",
-        description: "Studio-grade editing, sound, and motion design.",
-        service: "Post-Production",
+            "Reels, shorts, YouTube long-form, cinematic edits, ads, documentaries, corporate films, wedding edits, color grading —we edit every format and every style.",
+        service: "Video-Editing",
         image: "https://images.unsplash.com/photo-1574717025058-2f8737d2e2b7",
-        cta: "Post-Production Services",
+        cta: "View Video Editing",
     },
     {
-        title: "Web & Digital Strategy",
+        title: "Brand Design (Full Identity System)",
         description:
-            "Clean, responsive websites and growth-driven digital marketing.",
-        service: "Web-and-Digital",
+            "Logo design, brand identity, packaging, marketing creatives, banners, posters, social media kit — complete branding solutions.",
+        service: "Brand-Design",
+        image: "https://images.unsplash.com/photo-1621111848501-8d3634f82336",
+        cta: "View Brand Design",
+    },
+    {
+        title: "Web Development (All Solutions)",
+        description:
+            "Business websites, portfolios, e-commerce, landing pages, custom UI/UX.",
+        service: "Web-Development",
         image: "https://images.unsplash.com/photo-1547658719-da2b51169166",
-        cta: "Build Digital Strategy",
+        cta: "View Web Development",
     },
     {
-        title: "Social Media & Influencer Marketing",
+        title: "CGI & VFX (All Categories)",
         description:
-            "Daily content, reels, influencer tie-ups, and growth campaigns.",
-        service: "Marketing",
+            "3D product rendering, animations, motion graphics, compositing, cinematic VFX — simple to high-end visuals.",
+        service: "CGI-VFX",
         image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f",
-        cta: "Grow Your Socials",
+        cta: "View CGI & VFX",
     },
 ];
 
 export const SocialPlatforms: SocialPlatformProps[] = [
-    {
-        name: "Email",
-        icon: FaMailBulk,
-        borderColor: "border-gray-400/30",
-        textColor: "text-gray-300",
-        url: "mailto:hello@digicraft.one",
-        value: "hello@digicraft.one",
-        target: "_self",
-    },
     {
         name: "Phone",
         icon: FaPhoneAlt,
@@ -229,6 +221,15 @@ export const SocialPlatforms: SocialPlatformProps[] = [
         url: "https://wa.me/+918299797516",
         value: "+91 82997 97516",
         target: "_blank",
+    },
+    {
+        name: "Email",
+        icon: FaMailBulk,
+        borderColor: "border-gray-400/30",
+        textColor: "text-gray-300",
+        url: "mailto:hello@digicraft.one",
+        value: "hello@digicraft.one",
+        target: "_self",
     },
     {
         name: "Instagram",
@@ -273,6 +274,15 @@ export const SocialPlatforms: SocialPlatformProps[] = [
         textColor: "text-red-400",
         url: "https://www.youtube.com/c/digicraftone",
         value: "@digicraftone",
+        target: "_blank",
+    },
+    {
+        name: "Threads",
+        icon: FaThreads,
+        borderColor: "border-white/30",
+        textColor: "text-white",
+        url: "https://threads.net/@digicrafttechnologies",
+        value: "@digicrafttechnologies",
         target: "_blank",
     },
 ];
@@ -480,32 +490,32 @@ export const GalleryItems: GalleryItem[] = [
     {
         image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773",
         heading: "Creativity",
-        subheading:
-            "Fresh, unique, innovative ideas that don’t recycle the same Pinterest-board stuff.",
+        subheading: "Full creative & production team.",
     },
     {
         image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c",
-        heading: "Professionalism",
-        subheading:
-            "Clear, transparent communication and on-time delivery, every time.",
+        heading: "Expertise",
+        subheading: "Complete solutions in every service category.",
     },
     {
         image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f",
-        heading: "Quality",
-        subheading:
-            "Industry-standard execution with zero shortcuts and no janky workarounds.",
+        heading: "Availability",
+        subheading: "24/7 availability and support.",
     },
     {
         image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2",
-        heading: "Client Focus",
-        subheading:
-            "We co-create with you—your goals drive the roadmap, not our ego.",
+        heading: "Speed",
+        subheading: "Fast delivery without compromising quality.",
     },
     {
         image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118",
-        heading: "Affordable Pricing",
-        subheading:
-            "Premium work without the premium bloat—packages that actually fit your budget.",
+        heading: "Professionalism",
+        subheading: "Clear, professional communication.",
+    },
+    {
+        image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118",
+        heading: "Experience",
+        subheading: "Experience across multiple industries and countries.",
     },
 ];
 
@@ -519,31 +529,31 @@ export const AgencyServices: AgencyServicesProps[] = [
     {
         icon: FaPlay,
         label: "Video Production",
-        service: "Cinematography-and-Videography",
+        service: "Video-Production",
         color: "#5E6CE8",
     },
     {
         icon: FaPalette,
         label: "Brand Design",
-        service: "Design-and-Branding",
+        service: "Brand-Design",
         color: "#293BE0",
     },
     {
         icon: FaCode,
         label: "Web Development",
-        service: "Web-and-Digital",
+        service: "Web-Development",
         color: "#1929B3",
     },
     {
-        icon: FaChartLine,
-        label: "Social Media Management",
-        service: "Marketing",
+        icon: FaEdit,
+        label: "Video Editing",
+        service: "Video-Editing",
         color: "#121D7D",
     },
     {
         icon: FaFilm,
-        label: "Post Production",
-        service: "Post-Production",
+        label: "CGI & VFX",
+        service: "CGI-VFX",
         color: "#0A1045",
     },
 ];
@@ -587,7 +597,7 @@ export const mockProjects: Project[] = [
     {
         _id: "1",
         title: "Ethereal Wedding Film",
-        category: "Cinematography-and-Videography",
+        category: "Video-Production",
         coverImage:
             "https://images.unsplash.com/photo-1519741497674-611481863552",
         projectUrl: "https://etherealweddingfilm.com",
@@ -599,7 +609,7 @@ export const mockProjects: Project[] = [
     {
         _id: "2",
         title: "Tech Startup Branding",
-        category: "Photography",
+        category: "Brand-Design",
         coverImage: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43",
         projectUrl: "https://techstartup.com",
         tags: ["Logo", "Brand", "Startup"],
@@ -610,7 +620,7 @@ export const mockProjects: Project[] = [
     {
         _id: "3",
         title: "Fashion Editorial Shoot",
-        category: "Design-and-Branding",
+        category: "Video-Editing",
         coverImage:
             "https://images.unsplash.com/photo-1469334031218-e382a71b716b",
         projectUrl: "https://luxefashion.com",
@@ -622,7 +632,7 @@ export const mockProjects: Project[] = [
     {
         _id: "4",
         title: "Brand Commercial VFX",
-        category: "Post-Production",
+        category: "CGI-VFX",
         coverImage:
             "https://images.unsplash.com/photo-1485846234645-a62644f84728",
         projectUrl: "https://autopremium.com",
@@ -634,7 +644,7 @@ export const mockProjects: Project[] = [
     {
         _id: "5",
         title: "E-commerce Platform",
-        category: "Web-and-Digital",
+        category: "Web-Development",
         coverImage:
             "https://images.unsplash.com/photo-1460925895917-afdab827c52f",
         projectUrl: "https://shopease.example.com",
@@ -657,7 +667,7 @@ export const mockProjects: Project[] = [
     {
         _id: "7",
         title: "Music Video Production",
-        category: "Cinematography-and-Videography",
+        category: "Video-Production",
         coverImage:
             "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f",
         projectUrl: "https://musicvideo.example.com",
@@ -669,7 +679,7 @@ export const mockProjects: Project[] = [
     {
         _id: "8",
         title: "Restaurant Branding Suite",
-        category: "Design-and-Branding",
+        category: "Brand-Design",
         coverImage:
             "https://images.unsplash.com/photo-1414235077428-338989a2e8c0",
         projectUrl: "https://gourmetbistro.com",
@@ -681,7 +691,7 @@ export const mockProjects: Project[] = [
     {
         _id: "9",
         title: "Motion Graphics Explainer",
-        category: "Post-Production",
+        category: "Video-Editing",
         coverImage:
             "https://images.unsplash.com/photo-1611224923853-80b023f02d71",
         projectUrl: "https://explainervideo.example.com",

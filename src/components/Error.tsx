@@ -14,7 +14,7 @@ export default function Error({
                 Something went wrong
             </h1>
             <p className="text-gray-400 mb-6">
-                {message ?? "We couldn’t load your projects. Please try again."}
+                {message ?? "We couldn't load your projects. Please try again."}
             </p>
 
             {onRetry && (

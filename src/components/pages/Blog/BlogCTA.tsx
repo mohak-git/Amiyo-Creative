@@ -7,7 +7,7 @@ import { FaArrowRight } from "react-icons/fa";
 export default function BlogCTA() {
     return (
         <section className="w-full py-24 px-6 mt-12 relative overflow-hidden bg-[#020618] text-white">
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/80 z-0" />
+            <div className="absolute inset-0 bg-linear-to-b from-transparent to-black/80 z-0" />
 
             <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -28,12 +28,12 @@ export default function BlogCTA() {
                         {BLOG_CTA.buttonText}
                         <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
                     </span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-linear-to-r from-blue-400 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
                 </button>
             </motion.div>
 
-            {/* Background Gradients */}
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[300px] bg-gradient-to-t from-purple-900/20 to-transparent pointer-events-none" />
+            {/* Background linears */}
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[300px] bg-linear-to-t from-purple-900/20 to-transparent pointer-events-none" />
         </section>
     );
 }

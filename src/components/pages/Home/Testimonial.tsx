@@ -16,10 +16,10 @@ const TestimonialCard: FC<{ t: TestimonialProps }> = ({ t }) => {
     return (
         <div className="relative h-fit bg-gray-900/40 backdrop-blur-sm border border-purple-500/20 rounded-2xl p-2 mx-4 max-w-[300px] sm:min-w-[450px] sm:max-w-[500px] 3xl:max-w-[800px] hover:border-purple-400/40 transition-all duration-300">
             {/* Glow */}
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-2xl blur opacity-50"></div>
+            <div className="absolute -inset-0.5 bg-linear-to-r from-purple-600/20 to-pink-600/20 rounded-2xl blur opacity-50"></div>
 
             <div className="relative bg-gray-900/60 rounded-2xl p-6">
-                <div className="absolute -top-2 -left-2 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full p-2">
+                <div className="absolute -top-2 -left-2 bg-linear-to-br from-purple-500 to-pink-500 rounded-full p-2">
                     <FaQuoteLeft className="size-4 3xl:size-6 text-white" />
                 </div>
 
@@ -63,7 +63,7 @@ const VideoTestimonialCard: FC<{ t: VideoTestimonialProps }> = ({ t }) => {
     return (
         <div className="relative h-fit bg-gray-900/40 backdrop-blur-sm border border-purple-500/20 rounded-2xl p-2 mx-4 max-w-[300px] sm:min-w-[450px] sm:max-w-[500px] 3xl:max-w-[800px] hover:border-purple-400/40 transition-all duration-300">
             {/* Glow */}
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-2xl blur opacity-50"></div>
+            <div className="absolute -inset-0.5 bg-linear-to-r from-purple-600/20 to-pink-600/20 rounded-2xl blur opacity-50"></div>
 
             <div className="relative bg-gray-900/60 rounded-2xl p-4">
                 <div className="aspect-video w-full overflow-hidden rounded-xl border border-purple-500/30">
@@ -135,8 +135,8 @@ const TestimonialRow = <T extends TestimonialProps | VideoTestimonialProps>({
                 )}
             </div>
 
-            <div className="pointer-events-none absolute top-0 left-0 w-40 h-full bg-gradient-to-r from-gray-900 via-gray-900/60 to-transparent z-10"></div>
-            <div className="pointer-events-none absolute top-0 right-0 w-40 h-full bg-gradient-to-l from-gray-900 via-gray-900/60 to-transparent z-10"></div>
+            <div className="pointer-events-none absolute top-0 left-0 w-40 h-full bg-linear-to-r from-gray-900 via-gray-900/60 to-transparent z-10"></div>
+            <div className="pointer-events-none absolute top-0 right-0 w-40 h-full bg-linear-to-l from-gray-900 via-gray-900/60 to-transparent z-10"></div>
 
             <style jsx>{`
                 @keyframes scroll-left {
@@ -176,12 +176,12 @@ const TestimonialSection: React.FC = () => {
     const videoTestimonials = useMemo(() => VideoTestimonials, []);
 
     return (
-        <div className="relative w-full bg-gradient-to-b via-purple-900/20 overflow-hidden">
+        <div className="relative w-full bg-linear-to-b via-purple-900/20 overflow-hidden">
             {/* Background */}
             <div className="pointer-events-none absolute inset-0 -z-20">
                 <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl"></div>
                 <div className="absolute bottom-20 right-10 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl"></div>
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gradient-to-r from-purple-500/5 to-pink-500/5 rounded-full blur-3xl"></div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-linear-to-r from-purple-500/5 to-pink-500/5 rounded-full blur-3xl"></div>
             </div>
 
             <div className="relative mx-auto w-full h-full flex flex-col gap-10 px-4 py-16 sm:px-10">
@@ -193,7 +193,7 @@ const TestimonialSection: React.FC = () => {
                         transition={{ duration: 0.8 }}
                         viewport={{ once: true }}
                     >
-                        <h2 className="text-4xl md:text-5xl 3xl:text-6xl font-extrabold leading-relaxed bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent mb-4">
+                        <h2 className="text-4xl md:text-5xl 3xl:text-6xl font-extrabold leading-relaxed bg-linear-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent mb-4">
                             Testimonials
                         </h2>
                         <p className="text-gray-400 text-lg 3xl:text-2xl max-w-2xl mx-auto">

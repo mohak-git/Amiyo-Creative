@@ -4,6 +4,8 @@ import { useCreateEnquiry } from "@/hooks/useEnquiries";
 import { EnquiryFormPayload, EnquiryFormSchema } from "@/lib/utils/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion, Variants } from "framer-motion";
+import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 import { FieldErrors, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { FaEnvelope, FaPhone, FaUser } from "react-icons/fa";
@@ -26,9 +28,16 @@ const itemVariants: Variants = {
 };
 
 const ContactForm = () => {
-    const { register, handleSubmit, reset } = useForm<EnquiryFormPayload>({
-        resolver: zodResolver(EnquiryFormSchema),
-    });
+    const searchParams = useSearchParams();
+    const { register, handleSubmit, reset, setValue } =
+        useForm<EnquiryFormPayload>({
+            resolver: zodResolver(EnquiryFormSchema),
+        });
+
+    useEffect(() => {
+        const message = searchParams.get("message");
+        if (message) setValue("message", message);
+    }, [searchParams, setValue]);
 
     const { mutate, isPending } = useCreateEnquiry();
 
@@ -58,10 +67,10 @@ const ContactForm = () => {
             initial="hidden"
             animate="visible">
             <motion.div
-                className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-8 shadow-xl"
+                className="bg-linear-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-8 shadow-xl"
                 variants={itemVariants}>
-                <h2 className="text-3xl 3xl:text-6xl leading-relaxed font-bold mb-8 bg-gradient-to-br from-purple-400 via-white bg-clip-text text-transparent">
-                    Start a Project
+                <h2 className="text-3xl 3xl:text-6xl leading-relaxed font-bold mb-8 bg-linear-to-br from-purple-400 via-white bg-clip-text text-transparent">
+                    Start a Project with Amiyo Creative
                 </h2>
 
                 <form
@@ -146,7 +155,7 @@ const ContactForm = () => {
                     <motion.button
                         type="submit"
                         disabled={isPending}
-                        className="cursor-none 3xl:text-2xl cursor-target w-full bg-gradient-to-r from-purple-700 to-purple-600 text-white font-semibold py-3 px-8 rounded-xl flex items-center justify-center space-x-2 disabled:opacity-50"
+                        className="cursor-none 3xl:text-2xl cursor-target w-full bg-linear-to-r from-purple-700 to-purple-600 text-white font-semibold py-3 px-8 rounded-xl flex items-center justify-center space-x-2 disabled:opacity-50"
                         whileHover={{ scale: 1.02, y: -2 }}
                         whileTap={{ scale: 0.98 }}>
                         {isPending ? (

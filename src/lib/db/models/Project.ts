@@ -22,12 +22,12 @@ const ProjectSchema = new Schema(
         category: {
             type: String,
             enum: [
-                "Cinematography-and-Videography",
                 "Photography",
-                "Design-and-Branding",
-                "Post-Production",
-                "Web-and-Digital",
-                "Marketing",
+                "Video-Production",
+                "Video-Editing",
+                "Brand-Design",
+                "Web-Development",
+                "CGI-VFX",
             ],
             required: true,
         },

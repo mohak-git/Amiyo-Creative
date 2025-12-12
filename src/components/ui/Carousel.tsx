@@ -45,7 +45,7 @@ const Carousel = <T,>({ items, renderItem }: CarouselProps<T>) => {
                 {items.map((item, idx) => (
                     <ul
                         key={idx}
-                        className="flex-shrink-0 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 px-2"
+                        className="shrink-0 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 px-2"
                     >
                         {renderItem(item, idx)}
                     </ul>

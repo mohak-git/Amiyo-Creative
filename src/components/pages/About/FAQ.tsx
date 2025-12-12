@@ -13,7 +13,7 @@ export function FAQsComp({ items }: { items: { q: string; a: string }[] }) {
                 return (
                     <div
                         key={i}
-                        className={`group bg-gradient-to-r from-slate-800/40 to-purple-900/20 backdrop-blur-sm border ${
+                        className={`group bg-linear-to-r from-slate-800/40 to-purple-900/20 backdrop-blur-sm border ${
                             isOpen
                                 ? "border-purple-500/40"
                                 : "border-slate-700/50"

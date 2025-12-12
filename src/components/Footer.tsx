@@ -130,8 +130,7 @@ const Footer = () => {
             variants={footerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
-        >
+            viewport={{ once: true, amount: 0.1 }}>
             <canvas
                 ref={canvasRef}
                 className="absolute inset-0 w-full h-full opacity-60"
@@ -144,21 +143,19 @@ const Footer = () => {
                     {/* Company Info */}
                     <motion.div
                         className="lg:col-span-2"
-                        variants={itemVariants}
-                    >
+                        variants={itemVariants}>
                         <div className="flex items-center mb-4">
                             <Link
                                 href="/"
                                 target="_self"
                                 rel="noopener noreferrer"
-                                className="size-10 3xl:size-16 mr-3 cursor-none cursor-target"
-                            >
+                                className="h-10 w-24 3xl:h-14 3xl:w-36 mr-3 cursor-none cursor-target">
                                 <Image
-                                    src="logo.svg"
+                                    src="/logo.png"
                                     width={40}
                                     height={40}
                                     alt="Amiyo Creative Logo"
-                                    className="w-full h-full"
+                                    className="w-full h-full object-cover"
                                 />
                             </Link>
                             <div>
@@ -182,8 +179,7 @@ const Footer = () => {
                     {/* Navigation Links */}
                     <motion.div
                         className="lg:col-span-1"
-                        variants={itemVariants}
-                    >
+                        variants={itemVariants}>
                         <h4 className="text-white font-semibold mb-4 text-sm 3xl:text-2xl uppercase tracking-wide">
                             Navigation
                         </h4>
@@ -192,8 +188,7 @@ const Footer = () => {
                                 <li key={index}>
                                     <Link
                                         href={item.href}
-                                        className="text-gray-400 hover:text-white transition-colors duration-200 text-sm 3xl:text-2xl cursor-none cursor-target px-2 py-1"
-                                    >
+                                        className="text-gray-400 hover:text-white transition-colors duration-200 text-sm 3xl:text-2xl cursor-none cursor-target px-2 py-1">
                                         {item.label}
                                     </Link>
                                 </li>
@@ -204,8 +199,7 @@ const Footer = () => {
                     {/* Services */}
                     <motion.div
                         className="lg:col-span-1"
-                        variants={itemVariants}
-                    >
+                        variants={itemVariants}>
                         <h4 className="text-white font-semibold mb-4 text-sm 3xl:text-2xl uppercase tracking-wide">
                             Services
                         </h4>
@@ -215,8 +209,7 @@ const Footer = () => {
                                 <li key={index}>
                                     <Link
                                         href={`/work#${service?.service?.toLowerCase()}`}
-                                        className="text-gray-400 hover:text-white transition-colors duration-200 text-sm 3xl:text-2xl cursor-none cursor-target px-2 py-1"
-                                    >
+                                        className="text-gray-400 hover:text-white transition-colors duration-200 text-sm 3xl:text-2xl cursor-none cursor-target px-2 py-1">
                                         {service.label}
                                     </Link>
                                 </li>
@@ -227,13 +220,12 @@ const Footer = () => {
                     {/* Social Media */}
                     <motion.div
                         className="lg:col-span-1"
-                        variants={itemVariants}
-                    >
+                        variants={itemVariants}>
                         <h4 className="text-white font-semibold mb-4 text-sm 3xl:text-2xl uppercase tracking-wide">
                             Contact Us
                         </h4>
                         <ul className="space-y-3 w-fit">
-                            {SocialPlatforms.map((platform, index) => (
+                            {SocialPlatforms.slice(2).map((platform, index) => (
                                 <li key={index}>
                                     <Link
                                         href={platform.url}
@@ -243,8 +235,7 @@ const Footer = () => {
                                                 ? "noopener noreferrer"
                                                 : undefined
                                         }
-                                        className="max-w-80 text-gray-400 hover:text-white transition-colors duration-200 text-sm 3xl:text-2xl flex items-center group gap-2 cursor-none cursor-target"
-                                    >
+                                        className="max-w-80 text-gray-400 hover:text-white transition-colors duration-200 text-sm 3xl:text-2xl flex items-center group gap-2 cursor-none cursor-target">
                                         <platform.icon
                                             className={`size-4 3xl:size-6 ${platform.textColor}`}
                                         />
@@ -260,8 +251,7 @@ const Footer = () => {
                 {/* Bottom Bar */}
                 <motion.div
                     className="border-t border-slate-800 bg-slate-950"
-                    variants={itemVariants}
-                >
+                    variants={itemVariants}>
                     <div className="w-full mx-auto py-6 flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0">
                         <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4 text-sm 3xl:text-2xl text-gray-500">
                             <p>
@@ -270,31 +260,27 @@ const Footer = () => {
                             <div className="flex space-x-4">
                                 <Link
                                     href="/privacy"
-                                    className="cursor-none cursor-target px-2 hover:text-gray-300 transition-colors duration-200"
-                                >
+                                    className="cursor-none cursor-target px-2 hover:text-gray-300 transition-colors duration-200">
                                     Privacy Policy
                                 </Link>
                                 <Link
                                     href="/terms"
-                                    className="cursor-none cursor-target px-2 hover:text-gray-300 transition-colors duration-200"
-                                >
+                                    className="cursor-none cursor-target px-2 hover:text-gray-300 transition-colors duration-200">
                                     Terms of Service
                                 </Link>
                                 <Link
                                     href="/cookies"
-                                    className="cursor-none cursor-target px-2 hover:text-gray-300 transition-colors duration-200"
-                                >
+                                    className="cursor-none cursor-target px-2 hover:text-gray-300 transition-colors duration-200">
                                     Cookie Policy
                                 </Link>
                             </div>
                         </div>
 
-                        <div className="flex items-center text-sm 3xl:text-2xl text-gray-500">
+                        {/* <div className="flex items-center text-sm 3xl:text-2xl text-gray-500">
                             <span className="mr-2">Crafted by</span>
                             <Link
                                 href="https://www.digicraft.one"
-                                className="flex items-center hover:text-gray-300 transition-colors duration-200 cursor-none cursor-target px-1"
-                            >
+                                className="flex items-center hover:text-gray-300 transition-colors duration-200 cursor-none cursor-target px-1">
                                 <Image
                                     src="logo.svg"
                                     width={20}
@@ -304,7 +290,7 @@ const Footer = () => {
                                 />
                                 DigiCraft
                             </Link>
-                        </div>
+                        </div> */}
                     </div>
                 </motion.div>
             </div>

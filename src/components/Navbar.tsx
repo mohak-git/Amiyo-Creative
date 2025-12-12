@@ -30,10 +30,10 @@ const Navbar = () => {
                 <div className="flex items-center cursor-target justify-center">
                     <Link
                         href="/"
-                        className="cursor-none max-w-10 3xl:max-w-18">
+                        className="cursor-none max-w-20 3xl:max-w-36">
                         <Image
                             priority
-                            src={"./logo.svg"}
+                            src={"/logo.png"}
                             alt="logo"
                             width={400}
                             height={400}

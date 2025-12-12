@@ -1,6 +1,5 @@
 "use client";
 
-import { BgWave } from "@/components/elements/BgAssets";
 import PricingCard from "@/components/ui/PricingCard";
 import { PricingData } from "@/constants/constants";
 import { motion, Variants } from "framer-motion";
@@ -37,16 +36,16 @@ const Pricing = () => {
                 variants={childVariants}
             />
             <motion.div
-                className="absolute top-1/2 right-10 h-48 w-48 rounded-full bg-gradient-to-l from-cyan-400/10 to-blue-500/20 blur-2xl"
+                className="absolute top-1/2 right-10 h-48 w-48 rounded-full bg-linear-to-l from-cyan-400/10 to-blue-500/20 blur-2xl"
                 variants={childVariants}
             />
             <motion.div
-                className="absolute bottom-20 left-10 h-64 w-64 rounded-full bg-gradient-to-r from-purple-500/15 to-pink-500/25 blur-3xl"
+                className="absolute bottom-20 left-10 h-64 w-64 rounded-full bg-linear-to-r from-purple-500/15 to-pink-500/25 blur-3xl"
                 variants={childVariants}
             />
 
             {/* Background */}
-            <BgWave inverted={true} />
+            {/* <BgWave inverted={true} /> */}
 
             <motion.div
                 className="relative w-full h-full flex flex-col gap-10 px-4 sm:px-10 3xl:px-30"
@@ -56,7 +55,7 @@ const Pricing = () => {
                     className="text-center w-full"
                     variants={childVariants}
                 >
-                    <h1 className="bg-gradient-to-r 3xl:text-6xl leading-relaxed from-fuchsia-400 via-violet-300 to-indigo-300 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent sm:text-5xl py-1">
+                    <h1 className="bg-linear-to-r 3xl:text-6xl leading-relaxed from-fuchsia-400 via-violet-300 to-indigo-300 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent sm:text-5xl py-1">
                         Pricing
                     </h1>
                     <p className="mt-4 text-base sm:text-lg 3xl:text-2xl text-white/80">

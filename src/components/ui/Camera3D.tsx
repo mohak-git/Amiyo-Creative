@@ -1,35 +1,16 @@
 "use client";
 
-import useMediaQuery from "@/hooks/useMediaQuery";
 import Spline from "@splinetool/react-spline";
-import Image from "next/image";
 import { useRef, useState } from "react";
 
 type Props = {
     sceneUrl: string;
-    fallbackImg?: string;
     height?: string | number;
 };
 
-export default function SplineScene({
-    sceneUrl,
-    fallbackImg = "/logo.svg",
-    height = 500,
-}: Props) {
+export default function SplineScene({ sceneUrl, height = 500 }: Props) {
     const containerRef = useRef<HTMLDivElement | null>(null);
     const [loaded, setLoaded] = useState(false);
-    const isMobile = useMediaQuery("(max-width: 768px)");
-
-    if (isMobile)
-        return (
-            <Image
-                src={fallbackImg}
-                alt="Creative Visuals"
-                className="rounded-2xl w-full h-auto object-cover aspect-video"
-                width={2000}
-                height={2000}
-            />
-        );
 
     return (
         <div ref={containerRef} className="relative w-full" style={{ height }}>
@@ -38,6 +19,9 @@ export default function SplineScene({
                     Setting up the perfect shot...
                 </div>
             )}
+            <div className="absolute bg-linear-to-r text-xs flex justify-center items-center from-purple-950 to-slate-900 w-36 h-9 bottom-5 right-5 rounded-2xl z-20">
+                Founder <span className="text-white font-bold ">: Amiyo Panda</span>
+            </div>
             <Spline scene={sceneUrl} onLoad={() => setLoaded(true)} />
         </div>
     );

@@ -1,5 +1,6 @@
 "use client";
 
+import { BgWave } from "@/components/elements/BgAssets";
 import Bento from "@/components/ui/Bento";
 import { ServicesData, SocialPlatforms } from "@/constants/constants";
 import { motion, Variants } from "framer-motion";
@@ -32,6 +33,7 @@ const Services = () => {
         <div className="relative w-full overflow-hidden">
             {/* Background */}
             <div className="pointer-events-none absolute inset-0 -z-20">
+                <div className="absolute -top-20 left-1/2 h-66 w-66 -translate-x-1/2 rounded-full bg-indigo-500/30 blur-3xl" />
                 <div className="absolute inset-0 bg-[radial-gradient(600px_400px_at_10%_80%,rgba(217,70,239,0.25),transparent_60%),radial-gradient(700px_500px_at_90%_70%,rgba(99,102,241,0.25),transparent_65%)]" />
                 <div
                     className="absolute inset-0 opacity-[0.12] mix-blend-overlay"
@@ -41,7 +43,8 @@ const Services = () => {
                     }}
                 />
                 <div className="absolute top-40 -right-24 h-96 w-96 rounded-full bg-violet-500/25 blur-3xl" />
-                <div className="absolute -bottom-20 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-indigo-500/30 blur-3xl" />
+                {/* <div className="absolute -bottom-20 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-indigo-500/30 blur-3xl" /> */}
+                <BgWave inverted={true} />
             </div>
 
             <div className="relative mx-auto flex w-full flex-col gap-10 px-4 pt-16 pb-4 sm:px-10">
@@ -51,12 +54,10 @@ const Services = () => {
                     variants={staggerContainer}
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: true, amount: 0.3 }}
-                >
+                    viewport={{ once: true, amount: 0.3 }}>
                     <motion.div
                         className="mx-auto max-w-5xl text-center"
-                        variants={fadeUp}
-                    >
+                        variants={fadeUp}>
                         <h1 className="text-4xl 3xl:text-6xl font-extrabold tracking-tight  sm:text-5xl">
                             Our Services
                         </h1>
@@ -83,9 +84,8 @@ const Services = () => {
                     {/* Socials */}
                     <motion.div
                         className="mx-auto mt-7 flex w-full max-w-xl flex-wrap items-center justify-center gap-x-6 gap-y-4"
-                        variants={fadeIn}
-                    >
-                        {SocialPlatforms.map((platform) => (
+                        variants={fadeIn}>
+                        {SocialPlatforms.slice(2).map((platform) => (
                             <a
                                 key={platform.name}
                                 href={platform.url}
@@ -95,8 +95,7 @@ const Services = () => {
                                         ? "noopener noreferrer"
                                         : undefined
                                 }
-                                className={`inline-flex cursor-none cursor-target items-center gap-2 rounded-full border p-3 text-sm backdrop-blur transition-all duration-200 hover:scale-105 hover:border-opacity-50 ${platform.borderColor} ${platform.textColor}`}
-                            >
+                                className={`inline-flex cursor-none cursor-target items-center gap-2 rounded-full border p-3 text-sm backdrop-blur transition-all duration-200 hover:scale-105 hover:border-opacity-50 ${platform.borderColor} ${platform.textColor}`}>
                                 <platform.icon className="size-6 3xl:size-8" />
                                 {/* {platform.name} */}
                             </a>
@@ -110,8 +109,7 @@ const Services = () => {
                     variants={fadeUp}
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: true, amount: 0.2 }}
-                >
+                    viewport={{ once: true, amount: 0.2 }}>
                     <Bento data={ServicesData} />
                 </motion.section>
             </div>
