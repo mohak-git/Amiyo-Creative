@@ -1,6 +1,7 @@
 "use client";
 
 import { DELIVERY_OPTIONS, POLICIES } from "@/constants/pricingData";
+import { FaCheck, FaExclamation, FaRupeeSign } from "react-icons/fa";
 
 export default function PricingPolicies() {
     return (
@@ -57,9 +58,9 @@ export default function PricingPolicies() {
                             {POLICIES.revision.details.map((item, i) => (
                                 <li
                                     key={i}
-                                    className="text-foreground/70 text-sm leading-relaxed flex items-start gap-3">
+                                    className="text-foreground/70 text-sm leading-relaxed flex items-center gap-3">
                                     <span className="text-blue-500 mt-1">
-                                        ✔
+                                        <FaCheck />
                                     </span>
                                     {item}
                                 </li>
@@ -79,8 +80,10 @@ export default function PricingPolicies() {
                             {POLICIES.cancellation.details.map((item, i) => (
                                 <li
                                     key={i}
-                                    className="text-foreground/70 text-sm leading-relaxed flex items-start gap-3">
-                                    <span className="text-red-500 mt-1">⚠</span>
+                                    className="text-foreground/70 text-sm leading-relaxed flex items-center gap-3">
+                                    <span className="text-red-500 mt-1">
+                                        <FaExclamation />
+                                    </span>
                                     {item}
                                 </li>
                             ))}
@@ -99,9 +102,9 @@ export default function PricingPolicies() {
                             {POLICIES.payment.details.map((item, i) => (
                                 <li
                                     key={i}
-                                    className="text-foreground/70 text-sm leading-relaxed flex items-start gap-3">
+                                    className="text-foreground/70 text-sm leading-relaxed flex items-center gap-3">
                                     <span className="text-green-500 mt-1">
-                                        ₹
+                                        <FaRupeeSign />
                                     </span>
                                     {item}
                                 </li>

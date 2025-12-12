@@ -94,7 +94,7 @@ const AboutSection: FC = () => {
                 {/* Background */}
                 <div className="absolute z-1 h-full w-full bg-radial-[at_50%_-60%] from-white via-purple-600/70 to-transparent via-30% to-67%"></div>
                 <div className="absolute z-1 h-full w-full bg-slate-950/30"></div>
-                <div className="absolute -bottom-20 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-indigo-500/30 blur-3xl" />
+                {/* <div className="absolute -bottom-20 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-indigo-500/30 blur-3xl" /> */}
                 {/* Main Content */}
                 <motion.div
                     className="flex-1 flex flex-col  px-8 py-10 lg:px-16 relative z-3 w-full"

@@ -78,10 +78,10 @@ export async function parseAPIResponse<T>(
 }
 
 export const HomeAboutValues: ValueItem[] = [
-    { label: "Projects Completed", value: 150 },
+    { label: "Projects Completed", value: 987 },
     { label: "Happy Clients", value: 120 },
-    { label: "Years Experience", value: 8 },
-    { label: "Team Members", value: 25 },
+    { label: "Years Experience", value: 10 },
+    { label: "Team Members", value: 30 },
 ];
 
 export const Companies: { title: string; imageLink: string }[] = [

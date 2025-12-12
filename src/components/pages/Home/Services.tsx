@@ -33,7 +33,7 @@ const Services = () => {
         <div className="relative w-full overflow-hidden">
             {/* Background */}
             <div className="pointer-events-none absolute inset-0 -z-20">
-                <div className="absolute -top-20 left-1/2 h-66 w-66 -translate-x-1/2 rounded-full bg-indigo-500/30 blur-3xl" />
+                {/* <div className="absolute -top-20 left-1/2 h-66 w-66 -translate-x-1/2 rounded-full bg-indigo-500/30 blur-3xl" /> */}
                 <div className="absolute inset-0 bg-[radial-gradient(600px_400px_at_10%_80%,rgba(217,70,239,0.25),transparent_60%),radial-gradient(700px_500px_at_90%_70%,rgba(99,102,241,0.25),transparent_65%)]" />
                 <div
                     className="absolute inset-0 opacity-[0.12] mix-blend-overlay"

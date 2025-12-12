@@ -91,7 +91,7 @@ const ContactForm = () => {
                                     type="text"
                                     {...register("name")}
                                     className="3xl:text-lg cursor-none cursor-target w-full pl-12 pr-4 py-3 bg-gray-900/50 border border-gray-700 rounded-xl text-white"
-                                    placeholder="John Doe"
+                                    placeholder="Your Name"
                                 />
                             </div>
                         </motion.div>
@@ -110,7 +110,7 @@ const ContactForm = () => {
                                     type="email"
                                     {...register("email")}
                                     className="3xl:text-lg cursor-none cursor-target w-full pl-12 pr-4 py-3 bg-gray-900/50 border border-gray-700 rounded-xl text-white"
-                                    placeholder="john@example.com"
+                                    placeholder="Your Email"
                                 />
                             </div>
                         </motion.div>
@@ -130,7 +130,7 @@ const ContactForm = () => {
                                 type="tel"
                                 {...register("phone")}
                                 className="3xl:text-lg cursor-none cursor-target w-full pl-12 pr-4 py-3 bg-gray-900/50 border border-gray-700 rounded-xl text-white"
-                                placeholder="+123456789"
+                                placeholder="Your Phone Number(with country code)"
                             />
                         </div>
                     </motion.div>

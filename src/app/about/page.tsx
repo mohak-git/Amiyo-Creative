@@ -226,11 +226,11 @@ const AboutPage: FC = () => {
                             </div>
                             <div className="px-6 py-4 grid grid-cols-3 gap-4">
                                 {[
-                                    { label: "Years", value: "7+" },
-                                    { label: "Projects", value: "150+" },
-                                    { label: "Clients", value: "30+" },
+                                    { label: "Years", value: "10+" },
+                                    { label: "Projects", value: "987+" },
+                                    { label: "Clients", value: "130+" },
                                     { label: "Operations", value: "24/7" },
-                                    { label: "Countries", value: "8+" },
+                                    { label: "Countries", value: "Global" },
                                     { label: "Ideas", value: "∞" },
                                 ].map((stat, i) => (
                                     <div key={i} className="text-center">
