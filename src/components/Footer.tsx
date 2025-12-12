@@ -163,7 +163,7 @@ const Footer = () => {
                                     Amiyo Creative
                                 </h3>
                                 <p className="text-sm 3xl:text-2xl text-gray-400">
-                                    Creative Visuals for Every Story
+                                    Creative Visuals For Every Story
                                 </p>
                             </div>
                         </div>

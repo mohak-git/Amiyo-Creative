@@ -5,7 +5,7 @@ import { FC } from "react";
 
 const ContactButtons: FC = () => {
     return (
-        <div className="fixed bottom-4 left-4 z-50 flex flex-col gap-4 p-3 opacity-70 hover:opacity-100 transition">
+        <div className="fixed bottom-18 right-2 z-50 flex flex-col gap-4 p-3 opacity-70 hover:opacity-100 transition">
             {SocialPlatforms.slice(0, 2).map((platform) => (
                 <a
                     key={platform.name}
