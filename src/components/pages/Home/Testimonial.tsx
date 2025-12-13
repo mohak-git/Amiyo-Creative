@@ -7,7 +7,6 @@ import {
     TestimonialVariant,
     VideoTestimonialProps,
 } from "@/constants/types";
-import { motion } from "framer-motion";
 import Image from "next/image";
 import { FC, useMemo } from "react";
 import { FaQuoteLeft } from "react-icons/fa";
@@ -104,8 +103,7 @@ const TestimonialRow = <T extends TestimonialProps | VideoTestimonialProps>({
                 className={`flex w-max items-center justify-center ${
                     direction === "left" ? "marquee-left" : "marquee-right"
                 }`}
-                style={{ animationDuration: `${speed}s` }}
-            >
+                style={{ animationDuration: `${speed}s` }}>
                 {testimonials.map((t, i) =>
                     variant === "text" ? (
                         <TestimonialCard
@@ -187,48 +185,29 @@ const TestimonialSection: React.FC = () => {
             <div className="relative mx-auto w-full h-full flex flex-col gap-10 px-4 py-16 sm:px-10">
                 {/* Header */}
                 <div className="text-center">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
-                        viewport={{ once: true }}
-                    >
+                    <div>
                         <h2 className="text-4xl md:text-5xl 3xl:text-6xl font-extrabold leading-relaxed bg-linear-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent mb-4">
                             Testimonials
                         </h2>
                         <p className="text-gray-400 text-lg 3xl:text-2xl max-w-2xl mx-auto">
                             See what our clients are saying about us
                         </p>
-                    </motion.div>
+                    </div>
                 </div>
 
                 {/* Rows */}
                 <div className="space-y-8 h-full w-full sm:rounded-4xl overflow-hidden">
-                    <motion.div
-                        initial={{ opacity: 0, x: -100 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 1, delay: 0.2 }}
-                        viewport={{ once: true }}
-                    >
-                        <TestimonialRow
-                            testimonials={textTestimonials}
-                            direction="left"
-                            variant="text"
-                        />
-                    </motion.div>
+                    <TestimonialRow
+                        testimonials={textTestimonials}
+                        direction="left"
+                        variant="text"
+                    />
 
-                    <motion.div
-                        initial={{ opacity: 0, x: 100 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 1, delay: 0.4 }}
-                        viewport={{ once: true }}
-                    >
-                        <TestimonialRow
-                            testimonials={videoTestimonials}
-                            direction="right"
-                            variant="video"
-                        />
-                    </motion.div>
+                    <TestimonialRow
+                        testimonials={videoTestimonials}
+                        direction="right"
+                        variant="video"
+                    />
                 </div>
             </div>
         </div>

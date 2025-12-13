@@ -90,7 +90,7 @@ const ContactForm = () => {
                                     id="name"
                                     type="text"
                                     {...register("name")}
-                                    className="3xl:text-lg cursor-none cursor-target w-full pl-12 pr-4 py-3 bg-gray-900/50 border border-gray-700 rounded-xl text-white"
+                                    className="3xl:text-lg cursor-none cursor-target w-full pl-12 pr-4 py-3 bg-gray-900/50 border border-gray-700 rounded-xl text-white placeholder:text-sm sm:placeholder:text-base"
                                     placeholder="Your Name"
                                 />
                             </div>
@@ -109,7 +109,7 @@ const ContactForm = () => {
                                     id="email"
                                     type="email"
                                     {...register("email")}
-                                    className="3xl:text-lg cursor-none cursor-target w-full pl-12 pr-4 py-3 bg-gray-900/50 border border-gray-700 rounded-xl text-white"
+                                    className="3xl:text-lg cursor-none cursor-target w-full pl-12 pr-4 py-3 bg-gray-900/50 border border-gray-700 rounded-xl text-white placeholder:text-sm sm:placeholder:text-base"
                                     placeholder="Your Email"
                                 />
                             </div>
@@ -129,7 +129,7 @@ const ContactForm = () => {
                                 id="phone"
                                 type="tel"
                                 {...register("phone")}
-                                className="3xl:text-lg cursor-none cursor-target w-full pl-12 pr-4 py-3 bg-gray-900/50 border border-gray-700 rounded-xl text-white"
+                                className="3xl:text-lg cursor-none cursor-target w-full pl-12 pr-4 py-3 bg-gray-900/50 border border-gray-700 rounded-xl text-white placeholder:text-sm sm:placeholder:text-base"
                                 placeholder="Your Phone Number(with country code)"
                             />
                         </div>
@@ -146,7 +146,7 @@ const ContactForm = () => {
                             id="message"
                             {...register("message")}
                             rows={6}
-                            className="3xl:text-lg cursor-none cursor-target w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-xl text-white resize-none"
+                            className="3xl:text-lg cursor-none cursor-target w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-xl text-white resize-none placeholder:text-sm sm:placeholder:text-base"
                             placeholder="Tell us about your project..."
                         />
                     </motion.div>

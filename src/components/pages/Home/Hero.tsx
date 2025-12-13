@@ -2,7 +2,6 @@
 
 import SplineScene from "@/components/ui/Camera3D";
 import { DotBackground } from "@/components/ui/GridDotBg";
-import LightRay from "@/components/ui/LightRay";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import { motion, Variants } from "framer-motion";
 import Image from "next/image";
@@ -84,15 +83,17 @@ const Hero: React.FC = () => {
 
             <div className="relative w-full flex justify-center items-center border border-background rounded-b-4xl overflow-hidden shadow-[5px_2px_8px_0px_rgba(0,0,0,0.5)]">
                 {/* Elements */}
-                <motion.div
+                {/* <motion.div
                     variants={fadeUp}
                     initial="hidden"
                     animate="visible"
                     custom={0.5}
                     className="w-full z-3 h-full absolute top-0">
-                    <LightRay raysColor="#3c0366" />
-                    {/* <LightRay raysColor="#ff6b6b" /> */}
-                </motion.div>
+                    <LightRay
+                        raysColor="#3c0366"
+                        // "#ff6b6b"
+                    />
+                </motion.div> */}
 
                 {/* <motion.div
                     variants={fadeUp}
@@ -177,8 +178,11 @@ const Hero: React.FC = () => {
 
                                 <Link
                                     href={"/work"}
-                                    className="cursor-target flex justify-center items-center text-xs sm:text-sm 3xl:text-2xl text-center outline-none cursor-none px-6 sm:px-8 py-2 sm:py-4 text-white bg-linear-to-r from-purple-800 to-orange-800 font-semibold rounded-full hover:bg-white/20 transform hover:scale-105 transition-all duration-200 shadow-[inset_0px_2px_4px_rgb(255,255,255)] hover:shadow-xl">
-                                    Our Work
+                                    className="relative cursor-target flex justify-center hover:border-0 border-x border-t items-center text-xs sm:text-sm 3xl:text-2xl text-center outline-none cursor-none px-6 sm:px-8 py-2 sm:py-4 text-white font-semibold rounded-full hover:bg-white/20 transform hover:scale-105 transition-all duration-200 shadow-[inset_0px_2px_4px_rgb(255,255,255),0px_0px_20px_0px_rgba(0,0,0,0.5)] hover:shadow-xl overflow-hidden">
+                                    <div className="absolute inset-0 bg-linear-to-r from-purple-800 to-orange-800 rounded-full blur-md" />
+                                    <span className="relative z-10">
+                                        Our Work
+                                    </span>
                                 </Link>
                             </motion.div>
                         </div>
@@ -191,6 +195,7 @@ const Hero: React.FC = () => {
                                 className="rounded-2xl w-full md:max-w-86 md:pr-6 h-full max-h-36 object-cover aspect-video"
                                 width={50}
                                 height={50}
+                                loading="lazy"
                             />
                         ) : (
                             <motion.div
