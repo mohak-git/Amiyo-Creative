@@ -1,17 +1,13 @@
 "use client";
 
 import { RatingStars } from "@/components/elements/Smol";
-import { Testimonials, VideoTestimonials } from "@/constants/constants";
-import {
-    TestimonialProps,
-    TestimonialVariant,
-    VideoTestimonialProps,
-} from "@/constants/types";
+import { Testimonial } from "@/constants/types";
+import { useTestimonials } from "@/hooks/useTestimonials";
 import Image from "next/image";
 import { FC, useMemo } from "react";
 import { FaQuoteLeft } from "react-icons/fa";
 
-const TestimonialCard: FC<{ t: TestimonialProps }> = ({ t }) => {
+const TestimonialCard: FC<{ t: Testimonial }> = ({ t }) => {
     return (
         <div className="relative h-fit bg-gray-900/40 backdrop-blur-sm border border-purple-500/20 rounded-2xl p-2 mx-4 max-w-[300px] sm:min-w-[450px] sm:max-w-[500px] 3xl:max-w-[800px] hover:border-purple-400/40 transition-all duration-300">
             {/* Glow */}
@@ -31,9 +27,9 @@ const TestimonialCard: FC<{ t: TestimonialProps }> = ({ t }) => {
                         <Image
                             width={500}
                             height={500}
-                            src={t.avatar}
-                            alt={t.name}
-                            className="w-12 h-12 rounded-full border-2 border-purple-500/30"
+                            src={t.avatar || "/placeholder.png"}
+                            alt={t.name || "Avatar"}
+                            className="w-12 h-12 rounded-full border-2 border-purple-500/30 object-cover"
                         />
 
                         <div>
@@ -50,7 +46,7 @@ const TestimonialCard: FC<{ t: TestimonialProps }> = ({ t }) => {
                     </div>
 
                     <div className="flex">
-                        <RatingStars rating={t.rating} />
+                        <RatingStars rating={t.rating || 5} />
                     </div>
                 </div>
             </div>
@@ -58,7 +54,7 @@ const TestimonialCard: FC<{ t: TestimonialProps }> = ({ t }) => {
     );
 };
 
-const VideoTestimonialCard: FC<{ t: VideoTestimonialProps }> = ({ t }) => {
+const VideoTestimonialCard: FC<{ t: Testimonial }> = ({ t }) => {
     return (
         <div className="relative h-fit bg-gray-900/40 backdrop-blur-sm border border-purple-500/20 rounded-2xl p-2 mx-4 max-w-[300px] sm:min-w-[450px] sm:max-w-[500px] 3xl:max-w-[800px] hover:border-purple-400/40 transition-all duration-300">
             {/* Glow */}
@@ -68,15 +64,15 @@ const VideoTestimonialCard: FC<{ t: VideoTestimonialProps }> = ({ t }) => {
                 <div className="aspect-video w-full overflow-hidden rounded-xl border border-purple-500/30">
                     <iframe
                         src={t.videoUrl}
-                        title={t.title || "Testimonial Video"}
+                        title={t.videoTitle || "Testimonial Video"}
                         className="w-full h-full rounded-xl"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
                     />
                 </div>
-                {t.title && (
+                {t.videoTitle && (
                     <h4 className="text-white font-semibold text-sm 3xl:text-2xl mt-4">
-                        {t.title}
+                        {t.videoTitle}
                     </h4>
                 )}
             </div>
@@ -84,19 +80,19 @@ const VideoTestimonialCard: FC<{ t: VideoTestimonialProps }> = ({ t }) => {
     );
 };
 
-interface TestimonialRowProps<T> {
-    testimonials: T[];
+interface TestimonialRowProps {
+    testimonials: Testimonial[];
     speed?: number;
     direction?: "left" | "right";
-    variant: TestimonialVariant;
+    variant: "text" | "video";
 }
 
-const TestimonialRow = <T extends TestimonialProps | VideoTestimonialProps>({
+const TestimonialRow = ({
     testimonials,
     speed = 40,
     direction = "left",
     variant,
-}: TestimonialRowProps<T>) => {
+}: TestimonialRowProps) => {
     return (
         <div className="relative overflow-hidden w-full">
             <div
@@ -106,29 +102,17 @@ const TestimonialRow = <T extends TestimonialProps | VideoTestimonialProps>({
                 style={{ animationDuration: `${speed}s` }}>
                 {testimonials.map((t, i) =>
                     variant === "text" ? (
-                        <TestimonialCard
-                            key={`a-${i}`}
-                            t={t as TestimonialProps}
-                        />
+                        <TestimonialCard key={`a-${i}`} t={t} />
                     ) : (
-                        <VideoTestimonialCard
-                            key={`a-${i}`}
-                            t={t as VideoTestimonialProps}
-                        />
+                        <VideoTestimonialCard key={`a-${i}`} t={t} />
                     )
                 )}
 
                 {testimonials.map((t, i) =>
                     variant === "text" ? (
-                        <TestimonialCard
-                            key={`a-${i}`}
-                            t={t as TestimonialProps}
-                        />
+                        <TestimonialCard key={`b-${i}`} t={t} />
                     ) : (
-                        <VideoTestimonialCard
-                            key={`a-${i}`}
-                            t={t as VideoTestimonialProps}
-                        />
+                        <VideoTestimonialCard key={`b-${i}`} t={t} />
                     )
                 )}
             </div>
@@ -170,8 +154,23 @@ const TestimonialRow = <T extends TestimonialProps | VideoTestimonialProps>({
 };
 
 const TestimonialSection: React.FC = () => {
-    const textTestimonials = useMemo(() => Testimonials, []);
-    const videoTestimonials = useMemo(() => VideoTestimonials, []);
+    const { data: dbTestimonials = [], isPending } = useTestimonials();
+
+    const textTestimonials = useMemo(() => {
+        const dbText = dbTestimonials.filter((t) => !t.isVideo);
+        if (dbText.length > 0) return dbText;
+        return dbText;
+    }, [dbTestimonials]);
+
+    const videoTestimonials = useMemo(() => {
+        const dbVideo = dbTestimonials.filter((t) => t.isVideo);
+        return dbVideo;
+    }, [dbTestimonials]);
+
+    const showTextRow = textTestimonials.length > 0;
+    const showVideoRow = videoTestimonials.length > 0;
+
+    if (!isPending && !showTextRow && !showVideoRow) return null;
 
     return (
         <div className="relative w-full bg-linear-to-b via-purple-900/20 overflow-hidden">
@@ -196,18 +195,22 @@ const TestimonialSection: React.FC = () => {
                 </div>
 
                 {/* Rows */}
-                <div className="space-y-8 h-full w-full sm:rounded-4xl overflow-hidden">
-                    <TestimonialRow
-                        testimonials={textTestimonials}
-                        direction="left"
-                        variant="text"
-                    />
+                <div className="space-y-8 h-full w-full sm:rounded-4xl overflow-hidden min-h-[400px]">
+                    {showTextRow && (
+                        <TestimonialRow
+                            testimonials={textTestimonials}
+                            direction="left"
+                            variant="text"
+                        />
+                    )}
 
-                    <TestimonialRow
-                        testimonials={videoTestimonials}
-                        direction="right"
-                        variant="video"
-                    />
+                    {showVideoRow && (
+                        <TestimonialRow
+                            testimonials={videoTestimonials}
+                            direction="right"
+                            variant="video"
+                        />
+                    )}
                 </div>
             </div>
         </div>

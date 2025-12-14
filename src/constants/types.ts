@@ -64,6 +64,21 @@ export interface VideoTestimonialProps {
     title?: string;
 }
 
+export interface Testimonial {
+    _id: string;
+    isVideo: boolean;
+    name?: string;
+    role?: string;
+    company?: string;
+    avatar?: string;
+    rating?: number;
+    content?: string;
+    videoUrl?: string;
+    videoTitle?: string;
+    createdAt: string;
+    updatedAt: string;
+}
+
 export interface GalleryItem {
     image: string;
     heading: string;

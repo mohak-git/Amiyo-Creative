@@ -59,3 +59,17 @@ export type EnquiryFormResponse = EnquiryInput & {
     createdAt: string;
     updatedAt: string;
 };
+
+// Testimonials Schema
+export const testimonialSchema = z.object({
+    isVideo: z.boolean().default(false),
+    name: z.string().optional(),
+    role: z.string().optional(),
+    company: z.string().optional(),
+    avatar: z.string().optional(),
+    rating: z.number().min(1).max(5).optional(),
+    content: z.string().optional(),
+    videoUrl: z.string().optional(),
+    videoTitle: z.string().optional(),
+});
+export type TestimonialInput = z.infer<typeof testimonialSchema>;

@@ -25,6 +25,7 @@ import {
     FaPhoneAlt,
     FaPlay,
     FaProjectDiagram,
+    FaQuoteRight,
     FaTelegram,
     FaWhatsapp,
     FaYoutube,
@@ -44,6 +45,7 @@ export const AdminNavItems = [
     { name: "Dashboard", href: "/admin", icon: FaHome },
     { name: "Projects", href: "/admin/projects", icon: FaProjectDiagram },
     { name: "Enquiries", href: "/admin/enquiries", icon: FaEnvelope },
+    { name: "Testimonials", href: "/admin/testimonials", icon: FaQuoteRight },
 ];
 
 export const hexToRgb = (hex: string): [number, number, number] => {
