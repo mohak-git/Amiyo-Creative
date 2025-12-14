@@ -520,11 +520,11 @@ const Bento: React.FC<BentoProps> = ({
                                     </span>
                                 </Link>
 
-                                <div className="group-hover:hidden flex flex-col justify-end h-full w-full relative text-white p-4 3xl:p-10 z-10">
-                                    <h3 className="w-fit font-normal text-base 3xl:text-3xl m-0 mb-1 bg-black/70 p-1 rounded-lg">
+                                <div className="group-hover:hidden flex flex-col justify-end h-full w-full relative text-white 3xl:p-10 z-10">
+                                    <h3 className="w-fit font-normal text-base 3xl:text-3xl mb-1 bg-black/70 p-1 rounded-lg m-4">
                                         {card.title}
                                     </h3>
-                                    <p className="w-fit text-xs 3xl:text-2xl leading-5 3xl:leading-8 opacity-90">
+                                    <p className="w-fit text-xs 3xl:text-2xl leading-5 3xl:leading-8 opacity-90 pt-1 p-4 bg-linear-to-t from-black to-black/10">
                                         {card.description}
                                     </p>
                                 </div>
