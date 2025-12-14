@@ -67,6 +67,7 @@ export const testimonialSchema = z.object({
     role: z.string().optional(),
     company: z.string().optional(),
     avatar: z.string().optional(),
+    avatarPublicId: z.string().optional(),
     rating: z.number().min(1).max(5).optional(),
     content: z.string().optional(),
     videoUrl: z.string().optional(),

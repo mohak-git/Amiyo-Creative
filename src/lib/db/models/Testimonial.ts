@@ -6,6 +6,7 @@ export interface TestimonialDocument extends Document {
     role?: string;
     company?: string;
     avatar?: string;
+    avatarPublicId?: string;
     rating?: number;
     content?: string;
     videoUrl?: string;
@@ -21,6 +22,7 @@ const TestimonialSchema = new Schema(
         role: { type: String },
         company: { type: String },
         avatar: { type: String },
+        avatarPublicId: { type: String },
         rating: { type: Number, min: 1, max: 5 },
         content: { type: String },
         videoUrl: { type: String },

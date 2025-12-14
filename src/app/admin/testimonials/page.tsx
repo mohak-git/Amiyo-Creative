@@ -383,6 +383,7 @@ const CreateTestimonialForm = ({ onClose }: { onClose: () => void }) => {
                     const data = await handleImageUpload(imageFile);
                     if (!data) return;
                     payload.avatar = data.url;
+                    payload.avatarPublicId = data.public_id;
                 }
             }
 
@@ -605,6 +606,7 @@ const EditTestimonialForm = ({
         role: testimonial.role || "",
         company: testimonial.company || "",
         avatar: testimonial.avatar || "",
+        avatarPublicId: testimonial.avatarPublicId || "",
         rating: testimonial.rating || 5,
         content: testimonial.content || "",
         videoUrl: testimonial.videoUrl || "",
@@ -640,6 +642,7 @@ const EditTestimonialForm = ({
                     const data = await handleImageUpload(imageFile);
                     if (!data) return;
                     payload.avatar = data.url;
+                    payload.avatarPublicId = data.public_id;
                 }
             }
 

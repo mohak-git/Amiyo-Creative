@@ -71,6 +71,7 @@ export interface Testimonial {
     role?: string;
     company?: string;
     avatar?: string;
+    avatarPublicId?: string;
     rating?: number;
     content?: string;
     videoUrl?: string;

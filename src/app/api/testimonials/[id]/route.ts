@@ -94,6 +94,27 @@ export async function DELETE(
                 { status: 404 }
             );
 
+        if (!testimonial.isVideo && testimonial.avatarPublicId) {
+            const deleteImageRes = await fetch(
+                `${process.env.APP_URL}/api/upload`,
+                {
+                    method: "DELETE",
+                    body: JSON.stringify({
+                        public_id: testimonial.avatarPublicId,
+                    }),
+                    headers: {
+                        "Content-Type": "application/json",
+                        Cookie: request.headers.get("cookie")!,
+                    },
+                }
+            );
+
+            if (!deleteImageRes.ok)
+                console.error(
+                    `Failed to delete image for testimonial ${testimonial._id}`
+                );
+        }
+
         return NextResponse.json({
             success: true,
             data: null,
@@ -159,6 +180,33 @@ export async function PUT(
                 { success: false, data: null, message: "Invalid data" },
                 { status: 400 }
             );
+
+        const { avatar } = parsed.data;
+
+        if (
+            !existingTestimonial.isVideo &&
+            existingTestimonial.avatarPublicId &&
+            avatar !== existingTestimonial.avatar
+        ) {
+            const deleteImageRes = await fetch(
+                `${process.env.APP_URL}/api/upload`,
+                {
+                    method: "DELETE",
+                    body: JSON.stringify({
+                        public_id: existingTestimonial.avatarPublicId,
+                    }),
+                    headers: {
+                        "Content-Type": "application/json",
+                        Cookie: request.headers.get("cookie")!,
+                    },
+                }
+            );
+
+            if (!deleteImageRes.ok)
+                console.error(
+                    `Failed to delete old image for testimonial ${existingTestimonial._id}`
+                );
+        }
 
         const updatedTestimonial = await Testimonial.findByIdAndUpdate(
             objectId,

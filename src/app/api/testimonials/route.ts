@@ -124,6 +124,44 @@ export async function DELETE(request: NextRequest) {
 
         await dbConnect();
 
+        let testimonialsToDelete;
+        if (deleteAll) testimonialsToDelete = await Testimonial.find({});
+        else
+            testimonialsToDelete = await Testimonial.find({
+                _id: { $in: ids },
+            });
+
+        if (testimonialsToDelete.length === 0)
+            return NextResponse.json(
+                {
+                    success: false,
+                    data: null,
+                    message: "No testimonials found to delete",
+                },
+                { status: 404 }
+            );
+
+        for (const testimonial of testimonialsToDelete)
+            if (!testimonial.isVideo && testimonial.avatarPublicId) {
+                const deleteImageRes = await fetch(
+                    `${process.env.APP_URL}/api/upload`,
+                    {
+                        method: "DELETE",
+                        body: JSON.stringify({
+                            public_id: testimonial.avatarPublicId,
+                        }),
+                        headers: {
+                            "Content-Type": "application/json",
+                            Cookie: request.headers.get("cookie")!,
+                        },
+                    }
+                );
+                if (!deleteImageRes.ok)
+                    console.error(
+                        `Failed to delete image for testimonial ${testimonial._id}`
+                    );
+            }
+
         if (deleteAll) await Testimonial.deleteMany();
         else await Testimonial.deleteMany({ _id: { $in: ids } });
 
