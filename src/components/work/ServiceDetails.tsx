@@ -134,7 +134,7 @@ const ServiceDetails = () => {
                             {service.points.map((point, idx) => (
                                 <li
                                     key={idx}
-                                    className="group/item flex items-start gap-2 text-sm 3xl:text-xl text-gray-300">
+                                    className="group/item flex items-center gap-2 text-sm 3xl:text-xl text-gray-300">
                                     <span className="mt-2 block h-0.5 w-0 bg-cyan-400 transition-all duration-300 ease-in-out group-hover/item:w-2" />
                                     {point}
                                 </li>

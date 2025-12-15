@@ -82,7 +82,7 @@ export async function DELETE(
             );
 
         await dbConnect();
-        const testimonial = await Testimonial.findByIdAndDelete(objectId);
+        const testimonial = await Testimonial.findById(objectId);
 
         if (!testimonial)
             return NextResponse.json(
@@ -114,6 +114,8 @@ export async function DELETE(
                     `Failed to delete image for testimonial ${testimonial._id}`
                 );
         }
+
+        await Testimonial.findByIdAndDelete(objectId);
 
         return NextResponse.json({
             success: true,
@@ -181,12 +183,13 @@ export async function PUT(
                 { status: 400 }
             );
 
-        const { avatar } = parsed.data;
+        const { avatar, avatarPublicId } = parsed.data;
 
         if (
             !existingTestimonial.isVideo &&
             existingTestimonial.avatarPublicId &&
-            avatar !== existingTestimonial.avatar
+            avatar !== existingTestimonial.avatar &&
+            avatarPublicId !== existingTestimonial.avatarPublicId
         ) {
             const deleteImageRes = await fetch(
                 `${process.env.APP_URL}/api/upload`,
@@ -203,8 +206,13 @@ export async function PUT(
             );
 
             if (!deleteImageRes.ok)
-                console.error(
-                    `Failed to delete old image for testimonial ${existingTestimonial._id}`
+                return NextResponse.json(
+                    {
+                        success: false,
+                        data: null,
+                        message: "Failed to delete image from cloudinary",
+                    },
+                    { status: 500 }
                 );
         }
 

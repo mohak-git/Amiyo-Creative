@@ -19,13 +19,13 @@ const Contact = () => {
                     />
                 </div>
 
-                <div className="relative z-20 container mx-auto py-10 sm:py-0">
+                <div className="relative z-20 container mx-auto py-10 sm:py-0 mb-4">
                     <div className="grid lg:grid-cols-3 gap-12 mx-auto">
                         <ContactForm />
                         <ContactInfo />
                     </div>
 
-                    <div className="mx-auto rounded-2xl overflow-hidden shadow-lg border border-white/10 mt-12">
+                    {/* <div className="mx-auto rounded-2xl overflow-hidden shadow-lg border border-white/10 mt-12">
                         <iframe
                             src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d4410.511572528896!2d86.14727399711373!3d22.773433066386442!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2sin!4v1756824796327!5m2!1sen!2sin"
                             width="100%"
@@ -35,7 +35,7 @@ const Contact = () => {
                             loading="lazy"
                             referrerPolicy="no-referrer-when-downgrade"
                             className="rounded-lg shadow-lg"></iframe>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </main>

@@ -1,10 +1,29 @@
 "use client";
 
+import Error from "@/components/Error";
+import Loader from "@/components/Loader";
 import { Companies } from "@/constants/constants";
+import { useLogos } from "@/hooks/useLogos";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useMemo } from "react";
 
 function MovingLogos() {
+    const { data, isLoading, error } = useLogos();
+
+    const displayLogos = useMemo(
+        () =>
+            !data || data.length === 0
+                ? [...Companies, ...Companies]
+                : data.length < 5
+                ? [...data, ...data, ...data, ...data]
+                : [...data, ...data],
+        [data]
+    );
+
+    if (isLoading) return <Loader />;
+    if (error) return <Error message={error.message} />;
+
     return (
         <div className="w-full flex justify-center items-center px-4 sm:px-10 3xl:px-30">
             <motion.div
@@ -16,13 +35,13 @@ function MovingLogos() {
                 <div className="pointer-events-none absolute top-0 right-0 w-20 sm:w-60 h-full bg-linear-to-l from-gray-950 via-gray-950/60 to-transparent z-10"></div>
 
                 <div className="scroll-wrapper flex space-x-4 md:space-x-8 lg:space-x-12">
-                    {[...Companies, ...Companies].map((company, index) => (
+                    {displayLogos.map((logo) => (
                         <div
-                            key={index}
+                            key={logo._id}
                             className="flex items-center justify-center w-30 h-12">
                             <Image
-                                src={company.imageLink}
-                                alt="logo"
+                                src={logo.logo}
+                                alt={logo.title}
                                 width={30}
                                 height={30}
                             />

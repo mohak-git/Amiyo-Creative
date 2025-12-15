@@ -4,23 +4,32 @@ import { CALCULATOR_ITEMS } from "@/constants/pricingData";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { FaCheckCircle, FaTrash } from "react-icons/fa";
+import { FaMinus, FaPlus, FaTrash } from "react-icons/fa";
 
 export default function PricingCalculator() {
     const router = useRouter();
-    const [selectedItems, setSelectedItems] = useState<string[]>([]);
+    const [selectedItems, setSelectedItems] = useState<Record<string, number>>(
+        {}
+    );
 
-    const toggleItem = (id: string) => {
-        if (selectedItems.includes(id)) {
-            setSelectedItems(selectedItems.filter((item) => item !== id));
-        } else {
-            setSelectedItems([...selectedItems, id]);
-        }
+    const updateQuantity = (id: string, delta: number) => {
+        setSelectedItems((prev) => {
+            const currentQty = prev[id] || 0;
+            const newQty = Math.max(0, currentQty + delta);
+
+            const newItems = { ...prev };
+            if (newQty === 0) {
+                delete newItems[id];
+            } else {
+                newItems[id] = newQty;
+            }
+            return newItems;
+        });
     };
 
-    const total = selectedItems.reduce((acc, id) => {
+    const total = Object.entries(selectedItems).reduce((acc, [id, qty]) => {
         const item = CALCULATOR_ITEMS.find((i) => i.id === id);
-        return acc + (item ? item.price : 0);
+        return acc + (item ? item.price * qty : 0);
     }, 0);
 
     const formatCurrency = (amount: number) => {
@@ -48,19 +57,18 @@ export default function PricingCalculator() {
                 {/* Selection Area */}
                 <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4">
                     {CALCULATOR_ITEMS.map((item) => {
-                        const isSelected = selectedItems.includes(item.id);
+                        const quantity = selectedItems[item.id] || 0;
+                        const isSelected = quantity > 0;
+
                         return (
-                            <motion.button
+                            <motion.div
                                 key={item.id}
-                                onClick={() => toggleItem(item.id)}
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
                                 className={`flex items-center justify-between p-4 rounded-xl border transition-all duration-300 ${
                                     isSelected
                                         ? "bg-blue-500/20 border-blue-500/50"
                                         : "bg-white/5 border-white/10 hover:border-white/20"
                                 }`}>
-                                <div className="text-left">
+                                <div className="text-left flex-1">
                                     <h4
                                         className={`font-semibold ${
                                             isSelected
@@ -74,14 +82,38 @@ export default function PricingCalculator() {
                                     </span>
                                 </div>
 
-                                {isSelected ? (
-                                    <FaCheckCircle className="text-blue-500 text-xl" />
-                                ) : (
-                                    <span className="text-foreground/60 font-medium text-sm">
-                                        {formatCurrency(item.price)}
-                                    </span>
-                                )}
-                            </motion.button>
+                                <div className="flex items-center gap-3">
+                                    {isSelected ? (
+                                        <div className="flex items-center gap-3 bg-black/20 rounded-lg p-1">
+                                            <button
+                                                onClick={() =>
+                                                    updateQuantity(item.id, -1)
+                                                }
+                                                className="w-8 h-8 flex items-center justify-center rounded-md bg-white/10 hover:bg-white/20 text-foreground transition-colors">
+                                                <FaMinus className="size-2.5" />
+                                            </button>
+                                            <span className="font-bold w-4 text-center">
+                                                {quantity}
+                                            </span>
+                                            <button
+                                                onClick={() =>
+                                                    updateQuantity(item.id, 1)
+                                                }
+                                                className="w-8 h-8 flex items-center justify-center rounded-md bg-blue-500 hover:bg-blue-600 text-white transition-colors">
+                                                <FaPlus className="size-2.5" />
+                                            </button>
+                                        </div>
+                                    ) : (
+                                        <button
+                                            onClick={() =>
+                                                updateQuantity(item.id, 1)
+                                            }
+                                            className="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-sm font-medium transition-colors">
+                                            Add {formatCurrency(item.price)}
+                                        </button>
+                                    )}
+                                </div>
+                            </motion.div>
                         );
                     })}
                 </div>
@@ -93,26 +125,33 @@ export default function PricingCalculator() {
                             Estimated Estimate
                         </h3>
 
-                        {selectedItems.length > 0 ? (
+                        {Object.keys(selectedItems).length > 0 ? (
                             <ul className="space-y-3 mb-6 max-h-[300px] overflow-y-auto custom-scrollbar">
-                                {selectedItems.map((id) => {
-                                    const item = CALCULATOR_ITEMS.find(
-                                        (i) => i.id === id
-                                    );
-                                    if (!item) return null;
-                                    return (
-                                        <li
-                                            key={id}
-                                            className="flex justify-between text-sm">
-                                            <span className="text-foreground/70">
-                                                {item.name}
-                                            </span>
-                                            <span className="text-foreground font-medium">
-                                                {formatCurrency(item.price)}
-                                            </span>
-                                        </li>
-                                    );
-                                })}
+                                {Object.entries(selectedItems).map(
+                                    ([id, quantity]) => {
+                                        const item = CALCULATOR_ITEMS.find(
+                                            (i) => i.id === id
+                                        );
+                                        if (!item) return null;
+                                        return (
+                                            <li
+                                                key={id}
+                                                className="flex justify-between text-sm">
+                                                <span className="text-foreground/70">
+                                                    {item.name}{" "}
+                                                    <span className="text-xs opacity-50 ml-1">
+                                                        x{quantity}
+                                                    </span>
+                                                </span>
+                                                <span className="text-foreground font-medium">
+                                                    {formatCurrency(
+                                                        item.price * quantity
+                                                    )}
+                                                </span>
+                                            </li>
+                                        );
+                                    }
+                                )}
                             </ul>
                         ) : (
                             <p className="text-foreground/40 text-sm mb-6 italic">
@@ -136,17 +175,19 @@ export default function PricingCalculator() {
 
                             <button
                                 onClick={() => {
-                                    const itemsList = selectedItems
-                                        .map((id) => {
+                                    const itemsList = Object.entries(
+                                        selectedItems
+                                    )
+                                        .map(([id, quantity]) => {
                                             const item = CALCULATOR_ITEMS.find(
                                                 (i) => i.id === id
                                             );
                                             return item
                                                 ? `- ${
                                                       item.name
-                                                  } (${formatCurrency(
-                                                      item.price
-                                                  )})`
+                                                  } (x${quantity}) - ${formatCurrency(
+                                                      item.price * quantity
+                                                  )}`
                                                 : "";
                                         })
                                         .join("\n");
@@ -159,14 +200,16 @@ export default function PricingCalculator() {
                                         )}`
                                     );
                                 }}
-                                disabled={selectedItems.length === 0}
+                                disabled={
+                                    Object.keys(selectedItems).length === 0
+                                }
                                 className="w-full cursor-target cursor-none py-4 bg-linear-to-r from-blue-500 to-purple-600 rounded-xl font-bold text-white hover:opacity-90 transition-opacity">
                                 Request Formal Quote
                             </button>
 
-                            {selectedItems.length > 0 && (
+                            {Object.keys(selectedItems).length > 0 && (
                                 <button
-                                    onClick={() => setSelectedItems([])}
+                                    onClick={() => setSelectedItems({})}
                                     className="w-full mt-3 py-2 text-sm text-red-400 hover:text-red-300 flex items-center justify-center gap-2">
                                     <FaTrash size={12} /> Clear Selection
                                 </button>

@@ -125,7 +125,7 @@ export async function DELETE(request: NextRequest) {
         await dbConnect();
 
         let testimonialsToDelete;
-        if (deleteAll) testimonialsToDelete = await Testimonial.find({});
+        if (deleteAll) testimonialsToDelete = await Testimonial.find();
         else
             testimonialsToDelete = await Testimonial.find({
                 _id: { $in: ids },

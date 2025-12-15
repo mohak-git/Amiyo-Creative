@@ -130,7 +130,7 @@ const ContactForm = () => {
                                 type="tel"
                                 {...register("phone")}
                                 className="3xl:text-lg cursor-none cursor-target w-full pl-12 pr-4 py-3 bg-gray-900/50 border border-gray-700 rounded-xl text-white placeholder:text-sm sm:placeholder:text-base"
-                                placeholder="Your Phone Number(with country code)"
+                                placeholder="Your Phone Number"
                             />
                         </div>
                     </motion.div>

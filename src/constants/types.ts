@@ -128,3 +128,12 @@ export interface UploadImageResponse {
     url: string;
     public_id: string;
 }
+
+export interface Logo {
+    _id: string;
+    title: string;
+    logo: string;
+    logoPublicId: string;
+    createdAt: string;
+    updatedAt: string;
+}

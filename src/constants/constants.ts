@@ -2,6 +2,7 @@ import {
     AgencyServicesProps,
     APIResponse,
     GalleryItem,
+    Logo,
     PricingDataProps,
     Project,
     ServicesCardProps,
@@ -46,6 +47,7 @@ export const AdminNavItems = [
     { name: "Projects", href: "/admin/projects", icon: FaProjectDiagram },
     { name: "Enquiries", href: "/admin/enquiries", icon: FaEnvelope },
     { name: "Testimonials", href: "/admin/testimonials", icon: FaQuoteRight },
+    { name: "Logos", href: "/admin/logos", icon: FaPalette },
 ];
 
 export const hexToRgb = (hex: string): [number, number, number] => {
@@ -86,71 +88,110 @@ export const HomeAboutValues: ValueItem[] = [
     { label: "Team Members", value: 30 },
 ];
 
-export const Companies: { title: string; imageLink: string }[] = [
+export const Companies: Logo[] = [
     {
+        _id: "1",
         title: "Spotify",
-        imageLink:
-            "https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg",
+        logoPublicId: "",
+        createdAt: "",
+        updatedAt: "",
     },
     {
+        _id: "2",
         title: "Microsoft",
-        imageLink:
-            "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg",
+        logoPublicId: "",
+        createdAt: "",
+        updatedAt: "",
     },
     {
+        _id: "3",
         title: "Google",
-        imageLink:
-            "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg",
+        logoPublicId: "",
+        createdAt: "",
+        updatedAt: "",
     },
     {
+        _id: "4",
         title: "Apple",
-        imageLink:
-            "https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg",
+        logoPublicId: "",
+        createdAt: "",
+        updatedAt: "",
     },
     {
+        _id: "5",
         title: "Amazon",
-        imageLink:
-            "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
+        logoPublicId: "",
+        createdAt: "",
+        updatedAt: "",
     },
     {
+        _id: "6",
         title: "Tesla",
-        imageLink:
-            "https://upload.wikimedia.org/wikipedia/commons/b/bd/Tesla_Motors.svg",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/b/bd/Tesla_Motors.svg",
+        logoPublicId: "",
+        createdAt: "",
+        updatedAt: "",
     },
     {
+        _id: "7",
         title: "Twitter",
-        imageLink:
-            "https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg",
+        logoPublicId: "",
+        createdAt: "",
+        updatedAt: "",
     },
     {
+        _id: "8",
         title: "Netflix",
-        imageLink:
-            "https://upload.wikimedia.org/wikipedia/commons/7/75/Netflix_icon.svg",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/7/75/Netflix_icon.svg",
+        logoPublicId: "",
+        createdAt: "",
+        updatedAt: "",
     },
     {
+        _id: "9",
         title: "IBM",
-        imageLink:
-            "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
+        logoPublicId: "",
+        createdAt: "",
+        updatedAt: "",
     },
     {
+        _id: "10",
         title: "LinkedIn",
-        imageLink:
-            "https://upload.wikimedia.org/wikipedia/commons/8/81/LinkedIn_icon.svg",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/8/81/LinkedIn_icon.svg",
+        logoPublicId: "",
+        createdAt: "",
+        updatedAt: "",
     },
     {
+        _id: "11",
         title: "Uber",
-        imageLink:
-            "https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png",
+        logoPublicId: "",
+        createdAt: "",
+        updatedAt: "",
     },
     {
+        _id: "12",
         title: "Airbnb",
-        imageLink:
-            "https://upload.wikimedia.org/wikipedia/commons/6/69/Airbnb_Logo_Bélo.svg",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/6/69/Airbnb_Logo_Bélo.svg",
+        logoPublicId: "",
+        createdAt: "",
+        updatedAt: "",
     },
     {
+        _id: "13",
         title: "PayPal",
-        imageLink:
-            "https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg",
+        logoPublicId: "",
+        createdAt: "",
+        updatedAt: "",
     },
 ];
 

@@ -1,8 +1,7 @@
-import { Project } from "@/lib/db/models/Project";
+import { Logo } from "@/lib/db/models/Logo";
 import dbConnect from "@/lib/db/mongoose";
 import { parseObjectId } from "@/lib/db/util";
 import { verifyToken } from "@/lib/utils/auth";
-import { projectSchema } from "@/lib/utils/validation";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
@@ -25,23 +24,23 @@ export async function GET(
             );
 
         await dbConnect();
-        const project = await Project.findById(objectId);
+        const logo = await Logo.findById(objectId);
 
-        if (!project)
+        if (!logo)
             return NextResponse.json(
-                { success: false, data: null, message: "Project not found" },
+                { success: false, data: null, message: "Logo not found" },
                 { status: 404 }
             );
 
         return NextResponse.json({
             success: true,
-            data: project,
-            message: "Project fetched successfully",
+            data: logo,
+            message: "Logo fetched successfully",
         });
     } catch (error) {
         console.error(error);
         return NextResponse.json(
-            { success: false, data: null, message: "Failed to fetch project" },
+            { success: false, data: null, message: "Failed to fetch logo" },
             { status: 500 }
         );
     }
@@ -74,21 +73,21 @@ export async function DELETE(
             );
 
         await dbConnect();
-        const project = await Project.findById(objectId);
+        const logo = await Logo.findById(objectId);
 
-        if (!project)
+        if (!logo)
             return NextResponse.json(
-                { success: false, data: null, message: "Project not found" },
+                { success: false, data: null, message: "Logo not found" },
                 { status: 404 }
             );
 
-        if (project.coverImagePublicId) {
+        if (logo.logoPublicId) {
             const deleteImageRes = await fetch(
                 `${process.env.APP_URL}/api/upload`,
                 {
                     method: "DELETE",
                     body: JSON.stringify({
-                        public_id: project.coverImagePublicId,
+                        public_id: logo.logoPublicId,
                     }),
                     headers: {
                         "Content-Type": "application/json",
@@ -108,17 +107,17 @@ export async function DELETE(
                 );
         }
 
-        await Project.findByIdAndDelete(objectId);
+        await Logo.findByIdAndDelete(objectId);
 
         return NextResponse.json({
             success: true,
             data: null,
-            message: "Project deleted successfully",
+            message: "Logo deleted successfully",
         });
     } catch (error) {
         console.error(error);
         return NextResponse.json(
-            { success: false, data: null, message: "Failed to delete project" },
+            { success: false, data: null, message: "Failed to delete logo" },
             { status: 500 }
         );
     }
@@ -151,35 +150,36 @@ export async function PUT(
             );
 
         await dbConnect();
-        const existingProject = await Project.findById(objectId);
+        const existingLogo = await Logo.findById(objectId);
 
-        if (!existingProject)
+        if (!existingLogo)
             return NextResponse.json(
-                { success: false, data: null, message: "Project not found" },
+                { success: false, data: null, message: "Logo not found" },
                 { status: 404 }
             );
 
-        const body = await request.json();
-        const parsed = projectSchema.safeParse(body);
+        const { title, logo, logoPublicId } = await request.json();
 
-        if (!parsed.success)
+        if (!title || !logo || !logoPublicId)
             return NextResponse.json(
-                { success: false, data: null, message: "Invalid data" },
+                {
+                    success: false,
+                    data: null,
+                    message: "Title, logo and logoPublicId are required",
+                },
                 { status: 400 }
             );
 
-        const { coverImage, coverImagePublicId } = parsed.data;
-
         if (
-            coverImage !== existingProject.coverImage &&
-            coverImagePublicId !== existingProject.coverImagePublicId
+            logo !== existingLogo.logo &&
+            logoPublicId !== existingLogo.logoPublicId
         ) {
             const deleteImageRes = await fetch(
                 `${process.env.APP_URL}/api/upload`,
                 {
                     method: "DELETE",
                     body: JSON.stringify({
-                        public_id: existingProject.coverImagePublicId,
+                        public_id: existingLogo.logoPublicId,
                     }),
                     headers: {
                         "Content-Type": "application/json",
@@ -199,16 +199,16 @@ export async function PUT(
                 );
         }
 
-        const updatedProject = await Project.findByIdAndUpdate(
+        const updatedLogo = await Logo.findByIdAndUpdate(
             objectId,
-            parsed.data,
+            { title, logo, logoPublicId },
             { new: true }
         );
 
         return NextResponse.json({
             success: true,
-            data: updatedProject,
-            message: "Project updated successfully",
+            data: updatedLogo,
+            message: "Logo updated successfully",
         });
     } catch (error) {
         console.error(error);

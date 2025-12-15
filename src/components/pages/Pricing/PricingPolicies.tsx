@@ -59,7 +59,7 @@ export default function PricingPolicies() {
                                 <li
                                     key={i}
                                     className="text-foreground/70 text-sm leading-relaxed flex items-center gap-3">
-                                    <span className="text-blue-500 mt-1">
+                                    <span className="text-blue-500">
                                         <FaCheck />
                                     </span>
                                     {item}
@@ -81,7 +81,7 @@ export default function PricingPolicies() {
                                 <li
                                     key={i}
                                     className="text-foreground/70 text-sm leading-relaxed flex items-center gap-3">
-                                    <span className="text-red-500 mt-1">
+                                    <span className="text-red-500">
                                         <FaExclamation />
                                     </span>
                                     {item}
@@ -103,7 +103,7 @@ export default function PricingPolicies() {
                                 <li
                                     key={i}
                                     className="text-foreground/70 text-sm leading-relaxed flex items-center gap-3">
-                                    <span className="text-green-500 mt-1">
+                                    <span className="text-green-500">
                                         <FaRupeeSign />
                                     </span>
                                     {item}
