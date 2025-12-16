@@ -3,13 +3,19 @@
 import { RatingStars } from "@/components/elements/Smol";
 import { Testimonial } from "@/constants/types";
 import { useTestimonials } from "@/hooks/useTestimonials";
+import {
+    motion,
+    useAnimationFrame,
+    useMotionValue,
+    useTransform,
+} from "framer-motion";
 import Image from "next/image";
-import { FC, useMemo } from "react";
+import { FC, useMemo, useRef, useState } from "react";
 import { FaQuoteLeft } from "react-icons/fa";
 
 const TestimonialCard: FC<{ t: Testimonial }> = ({ t }) => {
     return (
-        <div className="relative h-fit bg-gray-900/40 backdrop-blur-sm border border-purple-500/20 rounded-2xl p-2 mx-4 max-w-[300px] sm:min-w-[450px] sm:max-w-[500px] 3xl:max-w-[800px] hover:border-purple-400/40 transition-all duration-300">
+        <div className="relative h-fit bg-gray-900/40 sm:backdrop-blur-sm border border-purple-500/20 rounded-2xl p-2 mx-4 w-[85vw] max-w-[300px] sm:w-auto sm:min-w-[450px] sm:max-w-[500px] 3xl:max-w-[800px] hover:border-purple-400/40 transition-all duration-300">
             {/* Glow */}
             <div className="absolute -inset-0.5 bg-linear-to-r from-purple-600/20 to-pink-600/20 rounded-2xl blur opacity-50"></div>
 
@@ -56,7 +62,7 @@ const TestimonialCard: FC<{ t: Testimonial }> = ({ t }) => {
 
 const VideoTestimonialCard: FC<{ t: Testimonial }> = ({ t }) => {
     return (
-        <div className="relative h-fit bg-gray-900/40 backdrop-blur-sm border border-purple-500/20 rounded-2xl p-2 mx-4 max-w-[300px] sm:min-w-[450px] sm:max-w-[500px] 3xl:max-w-[800px] hover:border-purple-400/40 transition-all duration-300">
+        <div className="relative h-fit bg-gray-900/40 sm:backdrop-blur-sm border border-purple-500/20 rounded-2xl p-2 mx-4 w-[85vw] max-w-[300px] sm:w-auto sm:min-w-[450px] sm:max-w-[500px] 3xl:max-w-[800px] hover:border-purple-400/40 transition-all duration-300">
             {/* Glow */}
             <div className="absolute -inset-0.5 bg-linear-to-r from-purple-600/20 to-pink-600/20 rounded-2xl blur opacity-50"></div>
 
@@ -93,13 +99,44 @@ const TestimonialRow = ({
     direction = "left",
     variant,
 }: TestimonialRowProps) => {
+    const baseX = useMotionValue(0);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [isHovered, setIsHovered] = useState(false);
+    const [isDragging, setIsDragging] = useState(false);
+
+    const baseVelocity = 50 / speed;
+    const directionFactor = direction === "left" ? -1 : 1;
+    useAnimationFrame((_, delta) => {
+        if (!isHovered && !isDragging) {
+            const moveBy = baseVelocity * directionFactor * (delta / 1000);
+            baseX.set(baseX.get() + moveBy);
+        }
+    });
+
+    const wrap = (min: number, max: number, v: number) => {
+        const rangeSize = max - min;
+        return ((((v - min) % rangeSize) + rangeSize) % rangeSize) + min;
+    };
+    const x = useTransform(baseX, (v) => `${wrap(-50, 0, v)}%`);
+
     return (
-        <div className="relative overflow-hidden w-full">
-            <div
-                className={`flex w-max items-center justify-center ${
-                    direction === "left" ? "marquee-left" : "marquee-right"
-                }`}
-                style={{ animationDuration: `${speed}s` }}>
+        <div
+            className="relative overflow-hidden w-full"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}>
+            <motion.div
+                ref={containerRef}
+                className="flex w-max items-center justify-center cursor-grab active:cursor-grabbing touch-pan-y"
+                style={{ x }}
+                onPan={(_, info) => {
+                    if (containerRef.current) {
+                        const width = containerRef.current.offsetWidth;
+                        const deltaPercent = (info.delta.x / width) * 100;
+                        baseX.set(baseX.get() + deltaPercent);
+                    }
+                }}
+                onPanStart={() => setIsDragging(true)}
+                onPanEnd={() => setIsDragging(false)}>
                 {testimonials.map((t, i) =>
                     variant === "text" ? (
                         <TestimonialCard key={`a-${i}`} t={t} />
@@ -115,40 +152,10 @@ const TestimonialRow = ({
                         <VideoTestimonialCard key={`b-${i}`} t={t} />
                     )
                 )}
-            </div>
+            </motion.div>
 
             <div className="pointer-events-none absolute top-0 left-0 w-40 h-full bg-linear-to-r from-gray-900 via-gray-900/60 to-transparent z-10"></div>
             <div className="pointer-events-none absolute top-0 right-0 w-40 h-full bg-linear-to-l from-gray-900 via-gray-900/60 to-transparent z-10"></div>
-
-            <style jsx>{`
-                @keyframes scroll-left {
-                    0% {
-                        transform: translateX(0);
-                    }
-                    100% {
-                        transform: translateX(-50%);
-                    }
-                }
-                @keyframes scroll-right {
-                    0% {
-                        transform: translateX(-50%);
-                    }
-                    100% {
-                        transform: translateX(0);
-                    }
-                }
-                .marquee-left {
-                    animation: scroll-left linear infinite;
-                }
-                .marquee-right {
-                    animation: scroll-right linear infinite;
-                }
-
-                .marquee-left:hover,
-                .marquee-right:hover {
-                    animation-play-state: paused;
-                }
-            `}</style>
         </div>
     );
 };

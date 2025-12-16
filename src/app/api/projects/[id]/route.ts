@@ -2,6 +2,7 @@ import { Project } from "@/lib/db/models/Project";
 import dbConnect from "@/lib/db/mongoose";
 import { parseObjectId } from "@/lib/db/util";
 import { verifyToken } from "@/lib/utils/auth";
+import { deleteFromCloudinary } from "@/lib/utils/cloudinary";
 import { projectSchema } from "@/lib/utils/validation";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -83,29 +84,42 @@ export async function DELETE(
             );
 
         if (project.coverImagePublicId) {
-            const deleteImageRes = await fetch(
-                `${process.env.APP_URL}/api/upload`,
-                {
-                    method: "DELETE",
-                    body: JSON.stringify({
-                        public_id: project.coverImagePublicId,
-                    }),
-                    headers: {
-                        "Content-Type": "application/json",
-                        Cookie: request.headers.get("cookie")!,
-                    },
+            try {
+                const deleteImageRes = await deleteFromCloudinary(
+                    project.coverImagePublicId
+                );
+                if (deleteImageRes.result !== "ok") {
+                    console.error(
+                        `Cloudinary delete for ${project.title} result:`,
+                        deleteImageRes
+                    );
+                    return NextResponse.json(
+                        {
+                            success: false,
+                            data: null,
+                            message: `Cloudinary delete for ${
+                                project.title
+                            } failed: ${
+                                deleteImageRes.result || "unknown error"
+                            }`,
+                        },
+                        { status: 500 }
+                    );
                 }
-            );
-
-            if (!deleteImageRes.ok)
+            } catch (err) {
+                console.error(
+                    `Cloudinary delete for ${project.title} error:`,
+                    err
+                );
                 return NextResponse.json(
                     {
                         success: false,
                         data: null,
-                        message: "Failed to delete image from cloudinary",
+                        message: `Failed to delete ${project.title} image from Cloudinary`,
                     },
                     { status: 500 }
                 );
+            }
         }
 
         await Project.findByIdAndDelete(objectId);
@@ -174,29 +188,42 @@ export async function PUT(
             coverImage !== existingProject.coverImage &&
             coverImagePublicId !== existingProject.coverImagePublicId
         ) {
-            const deleteImageRes = await fetch(
-                `${process.env.APP_URL}/api/upload`,
-                {
-                    method: "DELETE",
-                    body: JSON.stringify({
-                        public_id: existingProject.coverImagePublicId,
-                    }),
-                    headers: {
-                        "Content-Type": "application/json",
-                        Cookie: request.headers.get("cookie")!,
-                    },
+            try {
+                const deleteImageRes = await deleteFromCloudinary(
+                    existingProject.coverImagePublicId
+                );
+                if (deleteImageRes.result !== "ok") {
+                    console.error(
+                        `Cloudinary delete for ${existingProject.title} result:`,
+                        deleteImageRes
+                    );
+                    return NextResponse.json(
+                        {
+                            success: false,
+                            data: null,
+                            message: `Cloudinary delete for ${
+                                existingProject.title
+                            } failed: ${
+                                deleteImageRes.result || "unknown error"
+                            }`,
+                        },
+                        { status: 500 }
+                    );
                 }
-            );
-
-            if (!deleteImageRes.ok)
+            } catch (err) {
+                console.error(
+                    `Cloudinary delete for ${existingProject.title} error:`,
+                    err
+                );
                 return NextResponse.json(
                     {
                         success: false,
                         data: null,
-                        message: "Failed to delete image from cloudinary",
+                        message: `Failed to delete ${existingProject.title} image from Cloudinary`,
                     },
                     { status: 500 }
                 );
+            }
         }
 
         const updatedProject = await Project.findByIdAndUpdate(

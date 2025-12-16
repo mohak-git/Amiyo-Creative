@@ -2,6 +2,7 @@ import { Testimonial } from "@/lib/db/models/Testimonial";
 import dbConnect from "@/lib/db/mongoose";
 import { parseObjectId } from "@/lib/db/util";
 import { verifyToken } from "@/lib/utils/auth";
+import { deleteFromCloudinary } from "@/lib/utils/cloudinary";
 import { testimonialSchema } from "@/lib/utils/validation";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -95,24 +96,21 @@ export async function DELETE(
             );
 
         if (!testimonial.isVideo && testimonial.avatarPublicId) {
-            const deleteImageRes = await fetch(
-                `${process.env.APP_URL}/api/upload`,
-                {
-                    method: "DELETE",
-                    body: JSON.stringify({
-                        public_id: testimonial.avatarPublicId,
-                    }),
-                    headers: {
-                        "Content-Type": "application/json",
-                        Cookie: request.headers.get("cookie")!,
-                    },
-                }
-            );
-
-            if (!deleteImageRes.ok)
-                console.error(
-                    `Failed to delete image for testimonial ${testimonial._id}`
+            try {
+                const deleteImageRes = await deleteFromCloudinary(
+                    testimonial.avatarPublicId
                 );
+                if (deleteImageRes.result !== "ok")
+                    console.error(
+                        `Cloudinary delete for ${testimonial._id} result:`,
+                        deleteImageRes
+                    );
+            } catch (err) {
+                console.error(
+                    `Cloudinary delete for ${testimonial._id} error:`,
+                    err
+                );
+            }
         }
 
         await Testimonial.findByIdAndDelete(objectId);
@@ -191,29 +189,42 @@ export async function PUT(
             avatar !== existingTestimonial.avatar &&
             avatarPublicId !== existingTestimonial.avatarPublicId
         ) {
-            const deleteImageRes = await fetch(
-                `${process.env.APP_URL}/api/upload`,
-                {
-                    method: "DELETE",
-                    body: JSON.stringify({
-                        public_id: existingTestimonial.avatarPublicId,
-                    }),
-                    headers: {
-                        "Content-Type": "application/json",
-                        Cookie: request.headers.get("cookie")!,
-                    },
+            try {
+                const deleteImageRes = await deleteFromCloudinary(
+                    existingTestimonial.avatarPublicId
+                );
+                if (deleteImageRes.result !== "ok") {
+                    console.error(
+                        `Cloudinary delete for ${existingTestimonial._id} result:`,
+                        deleteImageRes
+                    );
+                    return NextResponse.json(
+                        {
+                            success: false,
+                            data: null,
+                            message: `Cloudinary delete for ${
+                                existingTestimonial._id
+                            } failed: ${
+                                deleteImageRes.result || "unknown error"
+                            }`,
+                        },
+                        { status: 500 }
+                    );
                 }
-            );
-
-            if (!deleteImageRes.ok)
+            } catch (err) {
+                console.error(
+                    `Cloudinary delete for ${existingTestimonial._id} error:`,
+                    err
+                );
                 return NextResponse.json(
                     {
                         success: false,
                         data: null,
-                        message: "Failed to delete image from cloudinary",
+                        message: `Failed to delete ${existingTestimonial._id} image from Cloudinary`,
                     },
                     { status: 500 }
                 );
+            }
         }
 
         const updatedTestimonial = await Testimonial.findByIdAndUpdate(

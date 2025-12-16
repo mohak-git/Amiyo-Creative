@@ -3,6 +3,7 @@ import { Project } from "@/lib/db/models/Project";
 import { verifyToken } from "@/lib/utils/auth";
 import { projectSchema } from "@/lib/utils/validation";
 import { NextRequest, NextResponse } from "next/server";
+import { deleteFromCloudinary } from "@/lib/utils/cloudinary";
 
 export async function GET() {
     try {
@@ -112,23 +113,21 @@ export async function DELETE(request: NextRequest) {
 
         for (const project of projectsToDelete)
             if (project.coverImagePublicId) {
-                const deleteImageRes = await fetch(
-                    `${process.env.APP_URL}/api/upload`,
-                    {
-                        method: "DELETE",
-                        body: JSON.stringify({
-                            public_id: project.coverImagePublicId,
-                        }),
-                        headers: {
-                            "Content-Type": "application/json",
-                            Cookie: request.headers.get("cookie")!,
-                        },
-                    }
-                );
-                if (!deleteImageRes.ok)
-                    console.error(
-                        `Failed to delete image for project ${project._id}`
+                try {
+                    const deleteImageRes = await deleteFromCloudinary(
+                        project.coverImagePublicId
                     );
+                    if (deleteImageRes.result !== "ok")
+                        console.error(
+                            `Cloudinary delete for ${project.title} result:`,
+                            deleteImageRes
+                        );
+                } catch (err) {
+                    console.error(
+                        `Cloudinary delete for ${project.title} error:`,
+                        err
+                    );
+                }
             }
 
         if (deleteAll) await Project.deleteMany();

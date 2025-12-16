@@ -1,7 +1,7 @@
 "use client";
 
 import Error from "@/components/Error";
-import Loader from "@/components/Loader";
+import { LoadingSpinner } from "@/components/Loader";
 import { Companies } from "@/constants/constants";
 import { useLogos } from "@/hooks/useLogos";
 import { motion } from "framer-motion";
@@ -21,7 +21,7 @@ function MovingLogos() {
         [data]
     );
 
-    if (isLoading) return <Loader />;
+    if (isLoading) return <LoadingSpinner />;
     if (error) return <Error message={error.message} />;
 
     return (
@@ -35,9 +35,9 @@ function MovingLogos() {
                 <div className="pointer-events-none absolute top-0 right-0 w-20 sm:w-60 h-full bg-linear-to-l from-gray-950 via-gray-950/60 to-transparent z-10"></div>
 
                 <div className="scroll-wrapper flex space-x-4 md:space-x-8 lg:space-x-12">
-                    {displayLogos.map((logo) => (
+                    {displayLogos.map((logo, idx) => (
                         <div
-                            key={logo._id}
+                            key={idx}
                             className="flex items-center justify-center w-30 h-12">
                             <Image
                                 src={logo.logo}

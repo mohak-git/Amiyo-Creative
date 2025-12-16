@@ -1,6 +1,7 @@
 import { Logo } from "@/lib/db/models/Logo";
 import dbConnect from "@/lib/db/mongoose";
 import { verifyToken } from "@/lib/utils/auth";
+import { deleteFromCloudinary } from "@/lib/utils/cloudinary";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET() {
@@ -95,24 +96,21 @@ export async function DELETE(request: NextRequest) {
 
         for (const logo of logosToDelete)
             if (logo.logoPublicId) {
-                const deleteImageRes = await fetch(
-                    `${process.env.APP_URL}/api/upload`,
-                    {
-                        method: "DELETE",
-                        body: JSON.stringify({
-                            public_id: logo.logoPublicId,
-                        }),
-                        headers: {
-                            "Content-Type": "application/json",
-                            Cookie: request.headers.get("cookie")!,
-                        },
-                    }
-                );
-
-                if (!deleteImageRes.ok)
-                    console.error(
-                        `Failed to delete image for logo ${logo._id}`
+                try {
+                    const deleteImageRes = await deleteFromCloudinary(
+                        logo.logoPublicId
                     );
+                    if (deleteImageRes.result !== "ok")
+                        console.error(
+                            `Cloudinary delete for ${logo.title} result:`,
+                            deleteImageRes
+                        );
+                } catch (err) {
+                    console.error(
+                        `Cloudinary delete for ${logo.title} error:`,
+                        err
+                    );
+                }
             }
 
         if (deleteAll) await Logo.deleteMany();

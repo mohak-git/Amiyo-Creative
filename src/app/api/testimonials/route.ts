@@ -1,6 +1,7 @@
 import { Testimonial } from "@/lib/db/models/Testimonial";
 import dbConnect from "@/lib/db/mongoose";
 import { verifyToken } from "@/lib/utils/auth";
+import { deleteFromCloudinary } from "@/lib/utils/cloudinary";
 import { testimonialSchema } from "@/lib/utils/validation";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -143,23 +144,21 @@ export async function DELETE(request: NextRequest) {
 
         for (const testimonial of testimonialsToDelete)
             if (!testimonial.isVideo && testimonial.avatarPublicId) {
-                const deleteImageRes = await fetch(
-                    `${process.env.APP_URL}/api/upload`,
-                    {
-                        method: "DELETE",
-                        body: JSON.stringify({
-                            public_id: testimonial.avatarPublicId,
-                        }),
-                        headers: {
-                            "Content-Type": "application/json",
-                            Cookie: request.headers.get("cookie")!,
-                        },
-                    }
-                );
-                if (!deleteImageRes.ok)
-                    console.error(
-                        `Failed to delete image for testimonial ${testimonial._id}`
+                try {
+                    const deleteImageRes = await deleteFromCloudinary(
+                        testimonial.avatarPublicId
                     );
+                    if (deleteImageRes.result !== "ok")
+                        console.error(
+                            `Cloudinary delete for ${testimonial._id} result:`,
+                            deleteImageRes
+                        );
+                } catch (err) {
+                    console.error(
+                        `Cloudinary delete for ${testimonial._id} error:`,
+                        err
+                    );
+                }
             }
 
         if (deleteAll) await Testimonial.deleteMany();

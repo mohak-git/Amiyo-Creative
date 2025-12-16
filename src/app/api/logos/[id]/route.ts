@@ -2,6 +2,7 @@ import { Logo } from "@/lib/db/models/Logo";
 import dbConnect from "@/lib/db/mongoose";
 import { parseObjectId } from "@/lib/db/util";
 import { verifyToken } from "@/lib/utils/auth";
+import { deleteFromCloudinary } from "@/lib/utils/cloudinary";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
@@ -174,29 +175,42 @@ export async function PUT(
             logo !== existingLogo.logo &&
             logoPublicId !== existingLogo.logoPublicId
         ) {
-            const deleteImageRes = await fetch(
-                `${process.env.APP_URL}/api/upload`,
-                {
-                    method: "DELETE",
-                    body: JSON.stringify({
-                        public_id: existingLogo.logoPublicId,
-                    }),
-                    headers: {
-                        "Content-Type": "application/json",
-                        Cookie: request.headers.get("cookie")!,
-                    },
+            try {
+                const deleteImageRes = await deleteFromCloudinary(
+                    existingLogo.logoPublicId
+                );
+                if (deleteImageRes.result !== "ok") {
+                    console.error(
+                        `Cloudinary delete for ${existingLogo.title} result:`,
+                        deleteImageRes
+                    );
+                    return NextResponse.json(
+                        {
+                            success: false,
+                            data: null,
+                            message: `Cloudinary delete for ${
+                                existingLogo.title
+                            } failed: ${
+                                deleteImageRes.result || "unknown error"
+                            }`,
+                        },
+                        { status: 500 }
+                    );
                 }
-            );
-
-            if (!deleteImageRes.ok)
+            } catch (err) {
+                console.error(
+                    `Cloudinary delete for ${existingLogo.title} error:`,
+                    err
+                );
                 return NextResponse.json(
                     {
                         success: false,
                         data: null,
-                        message: "Failed to delete image from cloudinary",
+                        message: `Failed to delete ${existingLogo.title} image from Cloudinary`,
                     },
                     { status: 500 }
                 );
+            }
         }
 
         const updatedLogo = await Logo.findByIdAndUpdate(

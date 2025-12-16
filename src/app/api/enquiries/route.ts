@@ -1,6 +1,7 @@
 import { Enquiry } from "@/lib/db/models/Enquiry";
 import dbConnect from "@/lib/db/mongoose";
 import { verifyToken } from "@/lib/utils/auth";
+import { sendNotifications } from "@/lib/utils/notify";
 import { enquirySchema } from "@/lib/utils/validation";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -55,11 +56,7 @@ export async function POST(request: NextRequest) {
             message,
         });
 
-        void fetch(`${process.env.APP_URL}/api/notify`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name, email, phone, message }),
-        }).catch((err) =>
+        sendNotifications({ name, email, phone, message }).catch((err) =>
             console.error("Failed to trigger notification:", err)
         );
 
