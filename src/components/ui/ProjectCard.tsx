@@ -9,22 +9,34 @@ const ProjectCard: FC<{ project: Project; color: string }> = ({
     project,
     color,
 }) => {
+    const isVideoCategory = project.category === "Video-Production" || project.category === "Video-Editing";
+
     return (
         <li className="w-full h-full">
             <div className="relative aspect-square max-h-72 mx-auto 3xl:max-h-120">
-                <Image
-                    height={5000}
-                    width={5000}
-                    src={project.coverImage}
-                    alt={`${project._id}-cover-image`}
-                    className="w-full h-full object-cover"
-                />
+                {isVideoCategory && project.projectUrl ? (
+                    <iframe
+                        src={project.projectUrl}
+                        className="w-full h-full object-cover"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        title={project.title}
+                    />
+                ) : (
+                    <Image
+                        height={5000}
+                        width={5000}
+                        src={project.coverImage}
+                        alt={`${project._id}-cover-image`}
+                        className="w-full h-full object-cover"
+                    />
+                )}
 
                 <div className="absolute inset-0 w-[100.1%] h-full pointer-events-none">
                     <RoundedPolygon color={color} />
                 </div>
 
-                {project.projectUrl && (
+                {!isVideoCategory && project.projectUrl && (
                     <Link
                         href={project.projectUrl}
                         target="_blank"
