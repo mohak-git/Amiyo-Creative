@@ -54,10 +54,10 @@ export const hexToRgb = (hex: string): [number, number, number] => {
     const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return m
         ? [
-              parseInt(m[1], 16) / 255,
-              parseInt(m[2], 16) / 255,
-              parseInt(m[3], 16) / 255,
-          ]
+            parseInt(m[1], 16) / 255,
+            parseInt(m[2], 16) / 255,
+            parseInt(m[3], 16) / 255,
+        ]
         : [1, 1, 1];
 };
 
@@ -567,37 +567,37 @@ export const AgencyServices: AgencyServicesProps[] = [
         icon: FaCamera,
         label: "Photography",
         service: "Photography",
-        color: "#828DED",
+        color: "#2d1b4e",
     },
     {
         icon: FaPlay,
         label: "Video Production",
         service: "Video-Production",
-        color: "#5E6CE8",
+        color: "#1a2a4e",
     },
     {
         icon: FaPalette,
         label: "Brand Design",
         service: "Brand-Design",
-        color: "#293BE0",
+        color: "#1a3d3d",
     },
     {
         icon: FaCode,
         label: "Web Development",
         service: "Web-Development",
-        color: "#1929B3",
+        color: "#1f3a1f",
     },
     {
         icon: FaEdit,
         label: "Video Editing",
         service: "Video-Editing",
-        color: "#121D7D",
+        color: "#3d1a1a",
     },
     {
         icon: FaFilm,
         label: "CGI & VFX",
         service: "CGI-VFX",
-        color: "#0A1045",
+        color: "#3d2a1a",
     },
 ];
 
