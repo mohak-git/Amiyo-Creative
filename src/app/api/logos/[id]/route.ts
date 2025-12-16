@@ -83,29 +83,42 @@ export async function DELETE(
             );
 
         if (logo.logoPublicId) {
-            const deleteImageRes = await fetch(
-                `${process.env.APP_URL}/api/upload`,
-                {
-                    method: "DELETE",
-                    body: JSON.stringify({
-                        public_id: logo.logoPublicId,
-                    }),
-                    headers: {
-                        "Content-Type": "application/json",
-                        Cookie: request.headers.get("cookie")!,
-                    },
+            try {
+                const deleteImageRes = await deleteFromCloudinary(
+                    logo.logoPublicId
+                );
+                if (deleteImageRes.result !== "ok") {
+                    console.error(
+                        `Cloudinary delete for ${logo.title} result:`,
+                        deleteImageRes
+                    );
+                    return NextResponse.json(
+                        {
+                            success: false,
+                            data: null,
+                            message: `Cloudinary delete for ${
+                                logo.title
+                            } failed: ${
+                                deleteImageRes.result || "unknown error"
+                            }`,
+                        },
+                        { status: 500 }
+                    );
                 }
-            );
-
-            if (!deleteImageRes.ok)
+            } catch (err) {
+                console.error(
+                    `Cloudinary delete for ${logo.title} error:`,
+                    err
+                );
                 return NextResponse.json(
                     {
                         success: false,
                         data: null,
-                        message: "Failed to delete image from cloudinary",
+                        message: `Failed to delete ${logo.title} image from Cloudinary`,
                     },
                     { status: 500 }
                 );
+            }
         }
 
         await Logo.findByIdAndDelete(objectId);
