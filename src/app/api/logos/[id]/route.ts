@@ -165,7 +165,7 @@ export async function PUT(
                 {
                     success: false,
                     data: null,
-                    message: "Title, logo and logoPublicId are required",
+                    message: "title, logo and logoPublicId are required",
                 },
                 { status: 400 }
             );
@@ -213,7 +213,7 @@ export async function PUT(
     } catch (error) {
         console.error(error);
         return NextResponse.json(
-            { success: false, data: null, message: "Failed to update project" },
+            { success: false, data: null, message: "Failed to update logo" },
             { status: 500 }
         );
     }

@@ -83,15 +83,19 @@ export async function DELETE(request: NextRequest) {
 
         const result = await deleteFromCloudinary(public_id);
 
-        if (result.result !== "ok")
+        if (result.result !== "ok") {
+            console.warn("Cloudinary delete result:", result);
             return NextResponse.json(
                 {
                     success: false,
                     data: null,
-                    message: "Failed to delete image",
+                    message: `Cloudinary delete failed: ${
+                        result.result || "unknown error"
+                    }`,
                 },
                 { status: 500 }
             );
+        }
 
         return NextResponse.json(
             {
@@ -102,12 +106,12 @@ export async function DELETE(request: NextRequest) {
             { status: 200 }
         );
     } catch (error) {
-        console.error("Upload error:", error);
+        console.error("Cloudinary delete error:", error);
         return NextResponse.json(
             {
                 success: false,
                 data: null,
-                message: "Unexpected error during deletion",
+                message: "Failed to delete image from Cloudinary",
             },
             { status: 500 }
         );
