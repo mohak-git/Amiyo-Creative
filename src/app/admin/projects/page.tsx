@@ -407,16 +407,14 @@ const CreateProjectForm = ({ onClose }: { onClose: () => void }) => {
                             }))
                         }
                         className="w-full p-3 bg-zinc-900 border border-zinc-800 text-white focus:border-white outline-none transition-colors appearance-none">
-                        <option value="Cinematography-and-Videography">
-                            Cinematography & Videography
-                        </option>
                         <option value="Photography">Photography</option>
-                        <option value="Design-and-Branding">
-                            Design & Branding
+                        <option value="Video-Production">
+                            Video Production
                         </option>
-                        <option value="Post-Production">Post Production</option>
-                        <option value="Web-and-Digital">Web & Digital</option>
-                        <option value="Marketing">Marketing</option>
+                        <option value="Video-Editing">Video Editing</option>
+                        <option value="Brand-Design">Brand Design</option>
+                        <option value="Web-Development">Web Development</option>
+                        <option value="CGI-VFX">CGI & VFX</option>
                     </select>
                 </div>
 

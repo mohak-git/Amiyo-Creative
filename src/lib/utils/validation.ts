@@ -3,7 +3,7 @@ import { z } from "zod";
 const projectFields = {
     title: z
         .string()
-        .min(3, "Title must be at least 3 characters")
+        .min(1, "Title must be at least 1 characters")
         .max(100, "Title must be less than 100 characters"),
     coverImage: z.string().min(1, "Cover image URL is required"),
     coverImagePublicId: z.string().min(1, "Cover image public ID is required"),

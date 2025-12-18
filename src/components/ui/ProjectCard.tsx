@@ -1,4 +1,7 @@
-import { RoundedPolygon } from "@/components/elements/BgAssets";
+import {
+    RoundedPolygon,
+    RoundedPolygon2,
+} from "@/components/elements/BgAssets";
 import { Project } from "@/constants/types";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,11 +12,14 @@ const ProjectCard: FC<{ project: Project; color: string }> = ({
     project,
     color,
 }) => {
-    const isVideoCategory = project.category === "Video-Production" || project.category === "Video-Editing";
+    const isVideoCategory =
+        project.category === "Video-Production" ||
+        project.category === "Video-Editing" ||
+        project.category === "CGI-VFX";
 
     return (
         <li className="w-full h-full">
-            <div className="relative aspect-square max-h-72 mx-auto 3xl:max-h-120">
+            <div className="relative aspect-square max-h-72 mx-auto  3xl:max-h-120">
                 {isVideoCategory && project.projectUrl ? (
                     <iframe
                         src={project.projectUrl}
@@ -33,7 +39,11 @@ const ProjectCard: FC<{ project: Project; color: string }> = ({
                 )}
 
                 <div className="absolute inset-0 w-[100.1%] h-full pointer-events-none">
-                    <RoundedPolygon color={color} />
+                    {!isVideoCategory ? (
+                        <RoundedPolygon color={color} />
+                    ) : (
+                        <RoundedPolygon2 color={color} />
+                    )}
                 </div>
 
                 {!isVideoCategory && project.projectUrl && (

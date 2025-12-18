@@ -3,26 +3,22 @@ export const BgWave = ({ inverted }: { inverted: boolean }) => {
         <div
             className={`pointer-events-none absolute inset-0 -z-20 ${
                 inverted ? "rotate-180" : "rotate-y-180"
-            } blur-lg`}
-        >
+            } blur-lg`}>
             <svg
                 className="absolute inset-x-0 -top-40 w-full  opacity-70"
                 xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 1440 320"
-            >
+                viewBox="0 0 1440 320">
                 <path
                     fill="url(#grad1)"
                     fillOpacity="1"
-                    d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,261.3C672,256,768,224,864,192C960,160,1056,128,1152,133.3C1248,139,1344,181,1392,202.7L1440,224L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"
-                ></path>
+                    d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,261.3C672,256,768,224,864,192C960,160,1056,128,1152,133.3C1248,139,1344,181,1392,202.7L1440,224L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
                 <defs>
                     <linearGradient
                         id="grad1"
                         x1="0%"
                         y1="0%"
                         x2="100%"
-                        y2="0%"
-                    >
+                        y2="0%">
                         <stop
                             offset="0%"
                             stopColor="#a855f7"
@@ -50,10 +46,24 @@ export const RoundedPolygon = ({ color }: { color: string }) => {
         <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 100 100"
-            preserveAspectRatio="none"
-        >
+            preserveAspectRatio="none">
             <path
                 d="M0,0 H100 V100 H0 Z M5,0  H45 A5,5 0 0 1 50,5  V15 A5,5 0 0 0 55,20  H95 A5,5 0 0 1 100,25  V75 A5,5 0 0 1 95,80  H85 A5,5 0 0 0 80,85  V95 A5,5 0 0 1 75,100  H5 A5,5 0 0 1 0,95  V5 A5,5 0 0 1 5,0  Z"
+                fill={color}
+                fillRule="evenodd"
+            />
+        </svg>
+    );
+};
+
+export const RoundedPolygon2 = ({ color }: { color: string }) => {
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none">
+            <path
+                d="M0,0 H100 V100 H0 Z M5,0  H45 A5,5 0 0 1 50,5  V15 A5,5 0 0 0 55,20  H95 A5,5 0 0 1 100,25  V95 A5,5 0 0 1 75,100  H5 A5,5 0 0 1 0,95  V5 A5,5 0 0 1 5,0  Z"
                 fill={color}
                 fillRule="evenodd"
             />
