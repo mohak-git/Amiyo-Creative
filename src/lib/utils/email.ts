@@ -352,7 +352,7 @@ export default async function sendEnquiryConfirmationEmail(
 
         const result = await sendEmail({
             to: [{ email: data.email, name: data.name }],
-            subject: "Thank You for Your Enquiry - DigiCraft",
+            subject: "Thank You for Your Enquiry - Amiyo Creative",
             htmlContent: htmlTemplate,
         });
 
