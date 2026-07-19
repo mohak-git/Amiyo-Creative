@@ -201,7 +201,7 @@ export const ServicesData: ServicesCardProps[] = [
         description:
             "Product, model, fashion, e-commerce, lifestyle, events, food, interiors and more.",
         service: "Photography",
-        image: "https://images.unsplash.com/photo-1518930107639-f4538ad82a00",
+        image: "/Photography.webp",
         cta: "Explore Photography",
     },
     {
@@ -209,7 +209,7 @@ export const ServicesData: ServicesCardProps[] = [
         description:
             "Commercials, brand films, product videos, interviews, documentaries, events, weddings — complete production from planning to delivery",
         service: "Video-Production",
-        image: "https://images.unsplash.com/photo-1471341971476-ae15ff5dd4ea",
+        image: "/VideoProduction.webp",
         cta: "View Video Production",
     },
     {
@@ -217,7 +217,7 @@ export const ServicesData: ServicesCardProps[] = [
         description:
             "Reels, shorts, YouTube long-form, cinematic edits, ads, documentaries, corporate films, wedding edits, color grading —we edit every format and every style.",
         service: "Video-Editing",
-        image: "https://images.unsplash.com/photo-1574717025058-2f8737d2e2b7",
+        image: "/VideoEditing.webp",
         cta: "View Video Editing",
     },
     {
@@ -225,7 +225,7 @@ export const ServicesData: ServicesCardProps[] = [
         description:
             "Logo design, brand identity, packaging, marketing creatives, banners, posters, social media kit — complete branding solutions.",
         service: "Brand-Design",
-        image: "https://images.unsplash.com/photo-1621111848501-8d3634f82336",
+        image: "/BrandDesign.webp",
         cta: "View Brand Design",
     },
     {
@@ -233,7 +233,7 @@ export const ServicesData: ServicesCardProps[] = [
         description:
             "Business websites, portfolios, e-commerce, landing pages, custom UI/UX.",
         service: "Web-Development",
-        image: "https://images.unsplash.com/photo-1547658719-da2b51169166",
+        image: "/WebDevelopment.webp",
         cta: "View Web Development",
     },
     {
@@ -241,7 +241,7 @@ export const ServicesData: ServicesCardProps[] = [
         description:
             "3D product rendering, animations, motion graphics, compositing, cinematic VFX — simple to high-end visuals.",
         service: "CGI-VFX",
-        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f",
+        image: "/CGI&VFX.webp",
         cta: "View CGI & VFX",
     },
 ];
@@ -531,32 +531,32 @@ export const VideoTestimonials: VideoTestimonialProps[] = [
 
 export const GalleryItems: GalleryItem[] = [
     {
-        image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773",
+        image: "Creativity.webp",
         heading: "Creativity",
         subheading: "Full creative & production team.",
     },
     {
-        image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c",
+        image: "Expertise.webp",
         heading: "Expertise",
         subheading: "Complete solutions in every service category.",
     },
     {
-        image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f",
+        image: "Availability.webp",
         heading: "Availability",
         subheading: "24/7 availability and support.",
     },
     {
-        image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2",
+        image: "Speed.webp",
         heading: "Speed",
         subheading: "Fast delivery without compromising quality.",
     },
     {
-        image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118",
+        image: "Professionalism.webp",
         heading: "Professionalism",
         subheading: "Clear, professional communication.",
     },
     {
-        image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118",
+        image: "Experience.webp",
         heading: "Experience",
         subheading: "Experience across multiple industries and countries.",
     },

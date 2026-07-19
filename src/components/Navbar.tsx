@@ -40,7 +40,7 @@ const Navbar = () => {
                         className="cursor-none max-w-20 3xl:max-w-36">
                         <Image
                             priority
-                            src={"/logo.png"}
+                            src={"/AmiyoCreative.webp"}
                             alt="logo"
                             width={400}
                             height={400}

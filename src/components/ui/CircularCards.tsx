@@ -702,12 +702,13 @@ export default function CircularGallery({
                     style={{
                         transform: `translate(-50%, -50%) translate(${item.position.x}px, ${item.position.y}px)`,
                         color: textColor,
+                        textShadow: "0 2px 12px rgba(0,0,0,0.8)",
                     }}
                 >
                     <h2 className="text-lg sm:text-xl 3xl:text-3xl font-bold">
                         {item.heading}
                     </h2>
-                    <p className="text-xs sm:text-sm 3xl:text-2xl opacity-70 max-w-60 sm:max-w-80 3xl:max-w-96">
+                    <p className="text-xs sm:text-sm 3xl:text-2xl opacity-85 max-w-60 sm:max-w-80 3xl:max-w-96">
                         {item.subheading}
                     </p>
                 </div>

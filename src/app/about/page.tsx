@@ -136,7 +136,7 @@ const AboutPage: FC = () => {
                         <div className="absolute inset-0 border-2 border-purple-500/30 rounded-full" />
                         <div className="relative w-4/5 aspect-square mx-auto rounded-3xl bg-linear-to-br from-slate-800/40 to-purple-900/20 backdrop-blur-xl border border-purple-500/20 overflow-hidden">
                             <Image
-                                src="/amiyo.jpg"
+                                src="/AmiyoPanda.webp"
                                 alt="amiyo-image"
                                 fill
                                 className="object-cover object-center"
@@ -209,7 +209,7 @@ const AboutPage: FC = () => {
                         <div className="relative bg-linear-to-br from-slate-800/60 to-purple-900/30 backdrop-blur-xl border border-purple-500/20 rounded-3xl overflow-hidden">
                             <div className="flex items-center space-x-4 px-6 py-4  border-b border-slate-700/50">
                                 <Image
-                                    src={"/amiyo.jpg"}
+                                    src={"/AmiyoPanda.webp"}
                                     alt="amiyo-image"
                                     width={120}
                                     height={120}

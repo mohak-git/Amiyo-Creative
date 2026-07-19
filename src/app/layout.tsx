@@ -26,7 +26,7 @@ export const metadata: Metadata = {
         siteName: "AMIYO CREATIVE",
         images: [
             {
-                url: "/logo.png",
+                url: "/AmiyoCreative.webp",
                 width: 1200,
                 height: 630,
                 alt: "AMIYO CREATIVE Logo",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
         title: "Amiyo Creative | Full-Service Creative Production Studio",
         description:
             "Welcome to AMIYO CREATIVE. Search AMIYO for the best creative services.",
-        images: ["/logo.png"],
+        images: ["/AmiyoCreative.webp"],
     },
     icons: {
         icon: "/favicon.ico?v=1",

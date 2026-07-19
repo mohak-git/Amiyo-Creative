@@ -154,7 +154,7 @@ const Footer = () => {
                                 className="h-10 w-24 3xl:h-14 3xl:w-36 mr-3 cursor-none cursor-target"
                             >
                                 <Image
-                                    src="/logo.png"
+                                    src="/AmiyoCreative.webp"
                                     width={40}
                                     height={40}
                                     alt="Amiyo Creative Logo"

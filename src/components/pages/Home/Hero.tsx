@@ -195,7 +195,7 @@ const Hero: React.FC = () => {
                         {/* Model/Image */}
                         {isMobile ? (
                             <Image
-                                src="/logo.png"
+                                src="/AmiyoCreative.webp"
                                 alt="Creative Visuals"
                                 className="rounded-2xl w-full md:max-w-86 md:pr-6 h-full max-h-36 object-cover aspect-video"
                                 width={50}
