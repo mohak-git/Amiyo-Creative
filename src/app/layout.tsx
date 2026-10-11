@@ -41,9 +41,9 @@ export const metadata: Metadata = {
         images: ["/AmiyoCreative.webp"],
     },
     icons: {
-        icon: "/favicon.ico?v=1",
-        shortcut: "/favicon.ico?v=1",
-        apple: "/favicon.ico?v=1",
+        icon: "/favicon.ico?v=2",
+        shortcut: "/favicon.ico?v=2",
+        apple: "/favicon.ico?v=2",
     },
 };
 
